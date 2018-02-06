@@ -5,14 +5,28 @@
   
 
   
-  <title>菜鸟程序员</title>
+  <title>Swift之Alamofire网络请求、取消请求 | 菜鸟程序员</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="菜鸟程序员">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="前言Alamofire是一个使用Swift开发的网络请求库，其开发团队是AFNetworking的原团队。它语法简洁,采用链式编程的思想，使用起来是相当的舒服。本质是基于NSURLSession进行封装。接下开我们就进入实战，开始学习Alamofire的使用。本篇主要简介Alamofire的基础使用，如果您对Alamofire的封装库Moya也感兴趣可移步Moya+ RxSwift+HandyJS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift之Alamofire网络请求、取消请求">
+<meta property="og:url" content="http://yoursite.com/2018/02/06/Swift之Alamofire网络请求、取消请求/index.html">
 <meta property="og:site_name" content="菜鸟程序员">
+<meta property="og:description" content="前言Alamofire是一个使用Swift开发的网络请求库，其开发团队是AFNetworking的原团队。它语法简洁,采用链式编程的思想，使用起来是相当的舒服。本质是基于NSURLSession进行封装。接下开我们就进入实战，开始学习Alamofire的使用。本篇主要简介Alamofire的基础使用，如果您对Alamofire的封装库Moya也感兴趣可移步Moya+ RxSwift+HandyJS">
+<meta property="og:image" content="http://img.blog.csdn.net/20170819225618003?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbHZjaGVucWlhbmdf/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170819225326051?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbHZjaGVucWlhbmdf/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170819230316482?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbHZjaGVucWlhbmdf/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170819231158918?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbHZjaGVucWlhbmdf/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170819232647337?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbHZjaGVucWlhbmdf/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170819233345706?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbHZjaGVucWlhbmdf/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170819233407296?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbHZjaGVucWlhbmdf/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170819234106587?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbHZjaGVucWlhbmdf/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="http://img.blog.csdn.net/20170820111501268?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbHZjaGVucWlhbmdf/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2018-02-06T02:16:08.521Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="菜鸟程序员">
+<meta name="twitter:title" content="Swift之Alamofire网络请求、取消请求">
+<meta name="twitter:description" content="前言Alamofire是一个使用Swift开发的网络请求库，其开发团队是AFNetworking的原团队。它语法简洁,采用链式编程的思想，使用起来是相当的舒服。本质是基于NSURLSession进行封装。接下开我们就进入实战，开始学习Alamofire的使用。本篇主要简介Alamofire的基础使用，如果您对Alamofire的封装库Moya也感兴趣可移步Moya+ RxSwift+HandyJS">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20170819225618003?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbHZjaGVucWlhbmdf/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
   
     <link rel="alternate" href="/atom.xml" title="菜鸟程序员" type="application/atom+xml">
   
@@ -59,9 +73,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-Swift之Alamofire网络请求、取消请求" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Swift之Alamofire网络请求、取消请求" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/02/06/Swift之Alamofire网络请求、取消请求/" class="article-date">
   <time datetime="2018-02-06T02:15:08.000Z" itemprop="datePublished">2018-02-06</time>
@@ -74,8 +86,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/02/06/Swift之Alamofire网络请求、取消请求/">Swift之Alamofire网络请求、取消请求</a>
+    <h1 class="article-title" itemprop="name">
+      Swift之Alamofire网络请求、取消请求
     </h1>
   
 
@@ -114,11 +126,9 @@
     </footer>
   </div>
   
-</article>
-
-
+    
   
-
+</article>
 
 </section>
         
