@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next mist use-motion" lang="zh-Hans">
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -102,7 +102,7 @@
 <meta property="og:image" content="http://img.blog.csdn.net/20180206182352482?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbHZjaGVucWlhbmdf/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20180206182540514?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbHZjaGVucWlhbmdf/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 <meta property="og:image" content="http://img.blog.csdn.net/20180206184305066?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbHZjaGVucWlhbmdf/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2018-02-06T11:08:21.048Z">
+<meta property="og:updated_time" content="2018-02-06T11:35:04.864Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo + Git pages 免费搭建个人博客详解">
 <meta name="twitter:description" content="前言经常看到别人搭建自己的博客，本文就基于Hexo和Git 搭建一个属于自己的博客。">
@@ -114,9 +114,9 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Mist',
+    scheme: 'Pisces',
     version: '5.1.4',
-    sidebar: {"position":"left","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"right","display":"always","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
@@ -161,7 +161,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -373,17 +373,18 @@
 <h3 id="填写仓库的信息"><a href="#填写仓库的信息" class="headerlink" title="填写仓库的信息"></a>填写仓库的信息</h3><p><img src="http://img.blog.csdn.net/20180206172735836?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbHZjaGVucWlhbmdf/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
 <h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><h6 id="首先需要在电脑中安装Node-js和git"><a href="#首先需要在电脑中安装Node-js和git" class="headerlink" title="首先需要在电脑中安装Node.js和git:"></a>首先需要在电脑中安装Node.js和git:</h6><ul>
 <li>node:直接下载安装 <a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">Node.js</a></li>
-<li>git:<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137396287703354d8c6c01c904c7d9ff056ae23da865a000" target="_blank" rel="noopener">安装教程</a><h6 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h6></li>
+<li>git:<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137396287703354d8c6c01c904c7d9ff056ae23da865a000" target="_blank" rel="noopener">安装教程</a></li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo npm install -g hexo</span><br></pre></td></tr></table></figure>
-<p>######初始化hexo<br>cd 到博客文件夹<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /Users/BruceLv/GithubBlog/hexo</span><br></pre></td></tr></table></figure></p>
+<h6 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo npm install -g hexo</span><br></pre></td></tr></table></figure>
+<h6 id="初始化hexo"><a href="#初始化hexo" class="headerlink" title="初始化hexo"></a>初始化hexo</h6><p>cd 到博客文件夹<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /Users/BruceLv/GithubBlog/hexo</span><br></pre></td></tr></table></figure></p>
 <p>初始化<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure></p>
 <p>初始化目录结构</p>
 <p><img src="http://img.blog.csdn.net/20180206174041333?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbHZjaGVucWlhbmdf/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h3 id="启动-Hexo"><a href="#启动-Hexo" class="headerlink" title="启动 Hexo"></a>启动 Hexo</h3><p>开启本地服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure></p>
+<h3 id="启动-Hexo"><a href="#启动-Hexo" class="headerlink" title="启动 Hexo"></a>启动 Hexo</h3><h6 id="开启本地服务"><a href="#开启本地服务" class="headerlink" title="开启本地服务"></a>开启本地服务</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
 <p><img src="http://img.blog.csdn.net/20180206174411291?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbHZjaGVucWlhbmdf/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h3 id="配置Hexo"><a href="#配置Hexo" class="headerlink" title="配置Hexo"></a>配置Hexo</h3><p>打开_config.yml,修改配置如下：<br><img src="http://img.blog.csdn.net/20180206175312252?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbHZjaGVucWlhbmdf/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"><br>修改deploy<br><img src="http://img.blog.csdn.net/20180206175327309?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbHZjaGVucWlhbmdf/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>repository的值 对应此处的值<br><img src="http://img.blog.csdn.net/20180206175711224?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbHZjaGVucWlhbmdf/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h3 id="配置Hexo"><a href="#配置Hexo" class="headerlink" title="配置Hexo"></a>配置Hexo</h3><h6 id="打开-config-yml-修改配置如下："><a href="#打开-config-yml-修改配置如下：" class="headerlink" title="打开_config.yml,修改配置如下："></a>打开_config.yml,修改配置如下：</h6><p><img src="http://img.blog.csdn.net/20180206175312252?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbHZjaGVucWlhbmdf/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h6 id="修改deploy"><a href="#修改deploy" class="headerlink" title="修改deploy"></a>修改deploy</h6><p><img src="http://img.blog.csdn.net/20180206175327309?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbHZjaGVucWlhbmdf/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h6 id="repository的值-对应此处的值"><a href="#repository的值-对应此处的值" class="headerlink" title="repository的值 对应此处的值"></a>repository的值 对应此处的值</h6><p><img src="http://img.blog.csdn.net/20180206175711224?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbHZjaGVucWlhbmdf/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">type: git</span><br><span class="line">repository: https://github.com/lvchenqiang/lvchenqiang.github.io</span><br><span class="line">branch: master</span><br></pre></td></tr></table></figure>
 <h3 id="生成静态页面"><a href="#生成静态页面" class="headerlink" title="生成静态页面"></a>生成静态页面</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">// 或者</span><br><span class="line">hexo generate</span><br></pre></td></tr></table></figure>
 <p><img src="http://img.blog.csdn.net/20180206180029034?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbHZjaGVucWlhbmdf/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
@@ -617,7 +618,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建一个github仓库"><span class="nav-number">2.</span> <span class="nav-text">创建一个github仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#填写仓库的信息"><span class="nav-number">3.</span> <span class="nav-text">填写仓库的信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Hexo"><span class="nav-number">4.</span> <span class="nav-text">安装Hexo</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#首先需要在电脑中安装Node-js和git"><span class="nav-number">4.0.0.1.</span> <span class="nav-text">首先需要在电脑中安装Node.js和git:</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#安装hexo"><span class="nav-number">4.0.0.2.</span> <span class="nav-text">安装hexo</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动-Hexo"><span class="nav-number">5.</span> <span class="nav-text">启动 Hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置Hexo"><span class="nav-number">6.</span> <span class="nav-text">配置Hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成静态页面"><span class="nav-number">7.</span> <span class="nav-text">生成静态页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上传到github"><span class="nav-number">8.</span> <span class="nav-text">上传到github</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写新的文章"><span class="nav-number">9.</span> <span class="nav-text">编写新的文章</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#cd-到-博客的文件夹"><span class="nav-number">9.0.0.1.</span> <span class="nav-text">cd 到 博客的文件夹</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#新建文档"><span class="nav-number">9.0.0.2.</span> <span class="nav-text">新建文档</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#编辑文档"><span class="nav-number">9.0.0.3.</span> <span class="nav-text">编辑文档</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写新的页面"><span class="nav-number">10.</span> <span class="nav-text">编写新的页面</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#新建菜单-标签页面"><span class="nav-number">10.0.0.1.</span> <span class="nav-text">新建菜单 标签页面</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#分类、关于"><span class="nav-number">10.0.0.2.</span> <span class="nav-text">分类、关于</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#文章设置-tags和-categories"><span class="nav-number">10.0.0.3.</span> <span class="nav-text">文章设置 tags和 categories</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#主页面的文章列表，文章段落过长"><span class="nav-number">10.0.0.4.</span> <span class="nav-text">主页面的文章列表，文章段落过长</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装主题"><span class="nav-number">11.</span> <span class="nav-text">安装主题</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#sidebar设置"><span class="nav-number">11.0.0.1.</span> <span class="nav-text">sidebar设置</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建一个github仓库"><span class="nav-number">2.</span> <span class="nav-text">创建一个github仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#填写仓库的信息"><span class="nav-number">3.</span> <span class="nav-text">填写仓库的信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Hexo"><span class="nav-number">4.</span> <span class="nav-text">安装Hexo</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#首先需要在电脑中安装Node-js和git"><span class="nav-number">4.0.0.1.</span> <span class="nav-text">首先需要在电脑中安装Node.js和git:</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#安装hexo"><span class="nav-number">4.0.0.2.</span> <span class="nav-text">安装hexo</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#初始化hexo"><span class="nav-number">4.0.0.3.</span> <span class="nav-text">初始化hexo</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动-Hexo"><span class="nav-number">5.</span> <span class="nav-text">启动 Hexo</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#开启本地服务"><span class="nav-number">5.0.0.1.</span> <span class="nav-text">开启本地服务</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置Hexo"><span class="nav-number">6.</span> <span class="nav-text">配置Hexo</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#打开-config-yml-修改配置如下："><span class="nav-number">6.0.0.1.</span> <span class="nav-text">打开_config.yml,修改配置如下：</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#修改deploy"><span class="nav-number">6.0.0.2.</span> <span class="nav-text">修改deploy</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#repository的值-对应此处的值"><span class="nav-number">6.0.0.3.</span> <span class="nav-text">repository的值 对应此处的值</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成静态页面"><span class="nav-number">7.</span> <span class="nav-text">生成静态页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上传到github"><span class="nav-number">8.</span> <span class="nav-text">上传到github</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写新的文章"><span class="nav-number">9.</span> <span class="nav-text">编写新的文章</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#cd-到-博客的文件夹"><span class="nav-number">9.0.0.1.</span> <span class="nav-text">cd 到 博客的文件夹</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#新建文档"><span class="nav-number">9.0.0.2.</span> <span class="nav-text">新建文档</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#编辑文档"><span class="nav-number">9.0.0.3.</span> <span class="nav-text">编辑文档</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写新的页面"><span class="nav-number">10.</span> <span class="nav-text">编写新的页面</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#新建菜单-标签页面"><span class="nav-number">10.0.0.1.</span> <span class="nav-text">新建菜单 标签页面</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#分类、关于"><span class="nav-number">10.0.0.2.</span> <span class="nav-text">分类、关于</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#文章设置-tags和-categories"><span class="nav-number">10.0.0.3.</span> <span class="nav-text">文章设置 tags和 categories</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#主页面的文章列表，文章段落过长"><span class="nav-number">10.0.0.4.</span> <span class="nav-text">主页面的文章列表，文章段落过长</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装主题"><span class="nav-number">11.</span> <span class="nav-text">安装主题</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#sidebar设置"><span class="nav-number">11.0.0.1.</span> <span class="nav-text">sidebar设置</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -655,7 +656,7 @@
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
 
 
 
@@ -754,6 +755,13 @@
 
   
   
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
