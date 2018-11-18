@@ -87,17 +87,17 @@
 <meta property="og:site_name" content="大前端之路">
 <meta property="og:description" content="前两天同事，提了个有点意思的问题，今天突然想起来就整理一下,顺便谈一下自己的理解。下面的这段代码会怎么打印？">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://lvchenqiang.github.io/Snip20181110_10.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/2018/11/13/多线程/Snip20181110_10.png">
 <meta property="og:image" content="https://lvchenqiang.github.io/2018/11/13/多线程/多线程/Snip20181110_11.png">
 <meta property="og:image" content="https://lvchenqiang.github.io/2018/11/13/多线程/多线程/Snip20181110_13.png">
 <meta property="og:image" content="https://lvchenqiang.github.io/2018/11/13/多线程/多线程/Snip20181110_14.png">
 <meta property="og:image" content="https://lvchenqiang.github.io/2018/11/13/多线程/多线程/Snip20181110_15.png">
 <meta property="og:image" content="https://lvchenqiang.github.io/2018/11/13/多线程/多线程/Snip20181110_17.png">
-<meta property="og:updated_time" content="2018-11-18T15:53:45.318Z">
+<meta property="og:updated_time" content="2018-11-18T15:55:59.987Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="多线程">
 <meta name="twitter:description" content="前两天同事，提了个有点意思的问题，今天突然想起来就整理一下,顺便谈一下自己的理解。下面的这段代码会怎么打印？">
-<meta name="twitter:image" content="https://lvchenqiang.github.io/Snip20181110_10.png">
+<meta name="twitter:image" content="https://lvchenqiang.github.io/2018/11/13/多线程/Snip20181110_10.png">
 
 
 
@@ -387,7 +387,7 @@
 <li><p>最后的输出结果是:</p>
 </li>
 </ul>
-<p><img src="/Snip20181110_10.png" alt="在这里插入图片描述"></p>
+<p><img src="Snip20181110_10.png" alt="在这里插入图片描述"></p>
 <h3 id="为什么会是这样的输出或者执行顺序呢？-思考这个问题，我们不妨可以考虑一下几种情况："><a href="#为什么会是这样的输出或者执行顺序呢？-思考这个问题，我们不妨可以考虑一下几种情况：" class="headerlink" title="为什么会是这样的输出或者执行顺序呢？ 思考这个问题，我们不妨可以考虑一下几种情况："></a>为什么会是这样的输出或者执行顺序呢？ 思考这个问题，我们不妨可以考虑一下几种情况：</h3><h4 id="第一种："><a href="#第一种：" class="headerlink" title="第一种："></a>第一种：</h4><h4 id="延时函数，改为在main-queue中调用。"><a href="#延时函数，改为在main-queue中调用。" class="headerlink" title="延时函数，改为在main queue中调用。"></a>延时函数，改为在main queue中调用。</h4><p><img src="多线程/Snip20181110_11.png" alt=""></p>
 <h4 id="第二种情况"><a href="#第二种情况" class="headerlink" title="第二种情况:"></a>第二种情况:</h4><h4 id="在延时函数的调用中，把异步改为同步。"><a href="#在延时函数的调用中，把异步改为同步。" class="headerlink" title="在延时函数的调用中，把异步改为同步。"></a>在延时函数的调用中，把异步改为同步。</h4><p><img src="多线程/Snip20181110_13.png" alt=""></p>
 <h4 id="第三种情况"><a href="#第三种情况" class="headerlink" title="第三种情况:"></a>第三种情况:</h4><h4 id="我们把sleep函数的调用-注释掉。"><a href="#我们把sleep函数的调用-注释掉。" class="headerlink" title="我们把sleep函数的调用 注释掉。"></a>我们把sleep函数的调用 注释掉。</h4><p><img src="多线程/Snip20181110_14.png" alt=""></p>
