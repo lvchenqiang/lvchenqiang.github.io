@@ -87,10 +87,13 @@
 <meta property="og:site_name" content="大前端之路">
 <meta property="og:description" content="熟悉 Objective-C">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-19T14:10:21.392Z">
+<meta property="og:image" content="https://lvchenqiang.github.io/2018/11/19/2/Snip20181104_6.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/2018/11/19/2/Snip20181105_7.png">
+<meta property="og:updated_time" content="2018-11-19T15:32:47.138Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Effective Objective-C 2.0编写高质量iOS与OS X代码的52个有效方法">
 <meta name="twitter:description" content="熟悉 Objective-C">
+<meta name="twitter:image" content="https://lvchenqiang.github.io/2018/11/19/2/Snip20181104_6.png">
 
 
 
@@ -360,14 +363,28 @@
 <p>2、如果无法使用向前声明，我们可以把“该类遵循某协议”移至“class-continuatiion”分类中。如果实在不行的话，可以把协议单独放在一个头文件中，然后将其引入。</p>
 <p>示例: xxxxx.m</p>
 <blockquote>
-<p>@interface ViewController ()<uitableviewdelegate><br>@end</uitableviewdelegate></p>
+<p>@interface ViewController()\<uitableviewdelegate\><br>@end</uitableviewdelegate\></p>
 </blockquote>
 <h4 id="多用字面语法，少用与之等价的方法"><a href="#多用字面语法，少用与之等价的方法" class="headerlink" title="多用字面语法，少用与之等价的方法"></a>多用字面语法，少用与之等价的方法</h4><p>1、应该使用字面量语法来创建字符串、数组、数值、字典。与创建对象的常规方法想必，这么做更加的简明扼要。</p>
 <p>2、应该通过取下标操作访问数组或字典中的键对应的元素。<br>注: 通常用下标获取元素，可能会产生数组越界、或者key不存在的问题，我们可以通过重载subscript等操作来做处理。</p>
 <p>3、用字面量语法创建数组和字典时，若值中有nil，则会抛出异常。因此，务必确保值里不含nil.</p>
 <h4 id="少用类型常量，少用-define-预处理命令"><a href="#少用类型常量，少用-define-预处理命令" class="headerlink" title="少用类型常量，少用#define 预处理命令"></a>少用类型常量，少用#define 预处理命令</h4><p>1、不要使用预处理指令。这样定义处理来的常量不包含类型信息，编译器只是会在编译的时候做简单的查找和替换操作。而且即使有人重新定义了常量值，编译器也不会产生警告信息。<br>2、在实现文件中使用 static const定义 只在编译单元内可见的常量，可以无须为其名称添加前缀。<br>3、在头文件中使用extern 来声明全局常量，并在相关文件中定义其值。这种常量会出现在全局符号表中，需要加上前缀加以区隔。通常使用与之相关的类名做前缀。</p>
 <h4 id="用枚举表示状态、选项、状态码"><a href="#用枚举表示状态、选项、状态码" class="headerlink" title="用枚举表示状态、选项、状态码"></a>用枚举表示状态、选项、状态码</h4><p>1、如果把传递给某个方法的选项表示为枚举类型，而多个选项可以同时使用，那么就将各个选项值定义为2的幂，以便通过按位或操作将其组合起来。<br>2、使用NS_ENUM和NS_OPTIONS宏来定义枚举类型。这样做可以确保枚举的类型是开发者选的底层数据类型，而不是编译器默认的类型。<br>3、在处理枚举的类型的switch语句中不要实现default分支。这样的话，加入新的枚举之后，编译器会提醒开发者，swicth语句未处理所有的枚举。</p>
-<h3 id="对象、消息、运行期"><a href="#对象、消息、运行期" class="headerlink" title="对象、消息、运行期"></a>对象、消息、运行期</h3><h4 id="理解属性这一概念"><a href="#理解属性这一概念" class="headerlink" title="理解属性这一概念"></a>理解属性这一概念</h4><p>1、属性我们可以简单理解为:property = ivar + get + set<br>2、属性的修饰符<br><code>原子性</code> 我们应该使用nonatomic属性，因为atomic属性会严重影响性能。<br><code>读写权限</code> 我们在做读写权限的时候，通常可以再声明文件中，使用readonly。然后在“class-continuation分类”中将其重新定义为读写属性。<br><code>内存管理</code> assign 用于一般基础数据类型<br>strong 表示一种拥有关系，在设置新值的时候会保留新值，并释放旧值，然后再把新值设置上去<br>weak 表示一种非拥有关系，既不保留新值 也不释放旧值，当对象释放时，属性值会置为nil.<br>copy 表示一种拥有关系。设置方法不保留新值，只是将其“拷贝copy”。经常用于此特质来保护其封装性</p>
+<h3 id="对象、消息、运行期"><a href="#对象、消息、运行期" class="headerlink" title="对象、消息、运行期"></a>对象、消息、运行期</h3><h4 id="理解属性这一概念"><a href="#理解属性这一概念" class="headerlink" title="理解属性这一概念"></a>理解属性这一概念</h4><p>1、属性我们可以简单理解为:property = ivar + get + set<br>2、属性的修饰符<br><code>原子性</code> 我们应该使用nonatomic属性，因为atomic属性会严重影响性能。<br><code>读写权限</code> 我们在做读写权限的时候，通常可以再声明文件中，使用readonly。然后在“class-continuation分类”中将其重新定义为读写属性。<br><code>内存管理</code> assign 用于一般基础数据类型<br>strong 表示一种拥有关系，在设置新值的时候会保留新值，并释放旧值，然后再把新值设置上去<br>weak 表示一种非拥有关系，既不保留新值 也不释放旧值，当对象释放时，属性值会置为nil.<br>copy 表示一种拥有关系。设置方法不保留新值，只是将其“拷贝copy”。经常用于此特质来保护其封装性。 </p>
+<h4 id="在对象内部尽量直接访问实例变量"><a href="#在对象内部尽量直接访问实例变量" class="headerlink" title="在对象内部尽量直接访问实例变量"></a>在对象内部尽量直接访问实例变量</h4><p>1、在对象内部读取数据的时候，我们可以直接访问实例变量。在写入数据的时候，我们应通过属性来写。<br>2、在初始化以及dealloc方法中，总是应该通过实例变量来读写数据。<br>3、有时使用惰性初始化技术配置某份数据，这种情况下，需要通过属性来读取数据。</p>
+<h4 id="理解对象的等同性"><a href="#理解对象的等同性" class="headerlink" title="理解对象的等同性"></a>理解对象的等同性</h4><p>1、若想检测对象的等同性，请提供“isEqual:”与hash方法<br>2、相同的对象必须有相同的hash码，但是两个哈希码相同的对象却未必是相同的。<br>3、编写hash方法时，应该使用计算速度快而且哈希码碰撞几率低的算法。</p>
+<h4 id="以类族模式-隐藏实现的细节"><a href="#以类族模式-隐藏实现的细节" class="headerlink" title="以类族模式 隐藏实现的细节"></a>以类族模式 隐藏实现的细节</h4><p>1、类族模式可以把实现细节隐藏在一套简单的公共接口后面<br>2、从类族的公共抽象基类中继承子类时要当心，若有开发文档，则应首先阅读。</p>
+<h4 id="在既有类中使用关联对象存放自定义数据"><a href="#在既有类中使用关联对象存放自定义数据" class="headerlink" title="在既有类中使用关联对象存放自定义数据"></a>在既有类中使用关联对象存放自定义数据</h4><p>1、我们可以通过关联对象机制把两个对象关联起来<br>2、定义关联对象可指定内存管理语义，用以模仿定义属性时所采用的拥有关系与非拥有关系<br>示例:<br><img src="/2018/11/19/2/Snip20181104_6.png" alt=""></p>
+<p>3、只有在其他做法不可行时，才应选用管理对象，因为这种做法通常会引入难于查找的bug.</p>
+<h4 id="理解objc-msgSend作用"><a href="#理解objc-msgSend作用" class="headerlink" title="理解objc_msgSend作用"></a>理解objc_msgSend作用</h4><p>1、在Objective-C中，如果向某个对象传递消息，那就会在运行时使用动态绑定（dynamic binding）机制来决定需要调用的方法。但是到了底层具体实现，却是普通的C语言函数实现的。这个实现的函数就是objc_msgSend,该函数定义如下：</p>
+<blockquote>
+<p>void objc_msgSend(id self, SEL cmd, …)</p>
+</blockquote>
+<p>2、<code>objc_msgSend</code>函数会在接收者所属的类中搜寻其方法列表，如果能找到这个跟选择子名称相同的方法，就跳转到其实现代码，往下执行。若是当前类没找到，那就沿着继承体系继续向上查找，等找到合适方法之后再跳转 ，如果最终还是找不到，那就进入消息转发的流程去进行处理了</p>
+<p>3、<code>objc_msgSend</code>在搜索这块是有做缓存的，每个OC的类都有一块这样的缓存，objc_msgSend会将匹配结果缓存在快速映射表(fast map)中，这样以来这个类一些频繁调用的方法会出现在fast map 中，不用再去一遍一遍的在方法列表中搜索了</p>
+<p>4、在底层处理发送消息的时候，有用到尾调用优化，大概原理就是在函数末尾调用某个不含返回值函数时，编译器会自动的不在栈空间上重新进行分配内存，而是直接释放所有调用函数内部的局部变量，然后直接进入被调用函数的地址</p>
+<p>5、消息调用过程中的其他一些“边界情况”，会由Objective-C运行环境的另一些函数处理。<br><code>objc_msgSend_stret</code> 如果待发送的消息要返回结构体，那么会由此函数处理。 只有CPU的寄存器能够容纳得下消息返回类型时，这个函数才能处理此消息。<br><code>objc_msgSend_fpret</code> 如果消息返回的是浮点数，那么可由此函数处理。<br><code>objc_mesgSendSuper</code> 如果给超类发消息，则会交由此函数处理。</p>
+<h4 id="理解消息转发机制"><a href="#理解消息转发机制" class="headerlink" title="理解消息转发机制"></a>理解消息转发机制</h4><p>1、若对象无法响应某个选择子，则进入消息转发流程<br>示例:<br><img src="/2018/11/19/2/Snip20181105_7.png" alt=""><br>2、通过运行期的动态方法解析功能，我们可以再需要用到某个方法时再将其加入类中</p>
 
       
     </div>
@@ -564,7 +581,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#熟悉-Objective-C"><span class="nav-number">1.</span> <span class="nav-text">熟悉 Objective-C</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Objective-C的起源"><span class="nav-number">1.1.</span> <span class="nav-text">Objective-C的起源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在类的头文件中尽量减少引用其他头文件"><span class="nav-number">1.2.</span> <span class="nav-text">在类的头文件中尽量减少引用其他头文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多用字面语法，少用与之等价的方法"><span class="nav-number">1.3.</span> <span class="nav-text">多用字面语法，少用与之等价的方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#少用类型常量，少用-define-预处理命令"><span class="nav-number">1.4.</span> <span class="nav-text">少用类型常量，少用#define 预处理命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用枚举表示状态、选项、状态码"><span class="nav-number">1.5.</span> <span class="nav-text">用枚举表示状态、选项、状态码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象、消息、运行期"><span class="nav-number">2.</span> <span class="nav-text">对象、消息、运行期</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#理解属性这一概念"><span class="nav-number">2.1.</span> <span class="nav-text">理解属性这一概念</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#熟悉-Objective-C"><span class="nav-number">1.</span> <span class="nav-text">熟悉 Objective-C</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Objective-C的起源"><span class="nav-number">1.1.</span> <span class="nav-text">Objective-C的起源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在类的头文件中尽量减少引用其他头文件"><span class="nav-number">1.2.</span> <span class="nav-text">在类的头文件中尽量减少引用其他头文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多用字面语法，少用与之等价的方法"><span class="nav-number">1.3.</span> <span class="nav-text">多用字面语法，少用与之等价的方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#少用类型常量，少用-define-预处理命令"><span class="nav-number">1.4.</span> <span class="nav-text">少用类型常量，少用#define 预处理命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用枚举表示状态、选项、状态码"><span class="nav-number">1.5.</span> <span class="nav-text">用枚举表示状态、选项、状态码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象、消息、运行期"><span class="nav-number">2.</span> <span class="nav-text">对象、消息、运行期</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#理解属性这一概念"><span class="nav-number">2.1.</span> <span class="nav-text">理解属性这一概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在对象内部尽量直接访问实例变量"><span class="nav-number">2.2.</span> <span class="nav-text">在对象内部尽量直接访问实例变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#理解对象的等同性"><span class="nav-number">2.3.</span> <span class="nav-text">理解对象的等同性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#以类族模式-隐藏实现的细节"><span class="nav-number">2.4.</span> <span class="nav-text">以类族模式 隐藏实现的细节</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在既有类中使用关联对象存放自定义数据"><span class="nav-number">2.5.</span> <span class="nav-text">在既有类中使用关联对象存放自定义数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#理解objc-msgSend作用"><span class="nav-number">2.6.</span> <span class="nav-text">理解objc_msgSend作用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#理解消息转发机制"><span class="nav-number">2.7.</span> <span class="nav-text">理解消息转发机制</span></a></li></ol></li></ol></div>
             
 
           </div>
