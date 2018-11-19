@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="Effective Objective-C 2.0编写高质量iOS与OS X代码的52个有效方法">
+<meta name="description" content="熟悉 Objective-C">
 <meta name="keywords" content="笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Effective Objective-C 2.0编写高质量iOS与OS X代码的52个有效方法">
 <meta property="og:url" content="https://lvchenqiang.github.io/2018/11/19/2/index.html">
 <meta property="og:site_name" content="大前端之路">
-<meta property="og:description" content="Effective Objective-C 2.0编写高质量iOS与OS X代码的52个有效方法">
+<meta property="og:description" content="熟悉 Objective-C">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-19T12:56:25.887Z">
+<meta property="og:updated_time" content="2018-11-19T14:10:21.392Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Effective Objective-C 2.0编写高质量iOS与OS X代码的52个有效方法">
-<meta name="twitter:description" content="Effective Objective-C 2.0编写高质量iOS与OS X代码的52个有效方法">
+<meta name="twitter:description" content="熟悉 Objective-C">
 
 
 
@@ -350,9 +350,25 @@
       
 
       
-        <h3 id="Effective-Objective-C-2-0编写高质量iOS与OS-X代码的52个有效方法"><a href="#Effective-Objective-C-2-0编写高质量iOS与OS-X代码的52个有效方法" class="headerlink" title="Effective Objective-C 2.0编写高质量iOS与OS X代码的52个有效方法"></a>Effective Objective-C 2.0编写高质量iOS与OS X代码的52个有效方法</h3><a id="more"></a>
-<h3 id="熟悉-Objective-C"><a href="#熟悉-Objective-C" class="headerlink" title="熟悉 Objective-C"></a>熟悉 Objective-C</h3><h4 id="Objective-C的起源"><a href="#Objective-C的起源" class="headerlink" title="Objective-C的起源"></a>Objective-C的起源</h4><p>1、Objective-C从Smalltalk语言是从Smalltalk语言演化而来，Smalltalk是消息语言的鼻祖。<br>2、Objective-C的重要工作都由“运行期组件”而非编译器完成,所以Objective-C的面向对象的特性所需的全部数据结构以及函数都在运行期组件里面。<br>3、Objective-C使用动态绑定的消息结构，也就是说在运行时才会检查对象的类型。接收消息之后，究竟应执行何种代码，由运行期环境决定而非编译器。</p>
-<h4 id="在类的头文件中尽量减少引用其他头文件"><a href="#在类的头文件中尽量减少引用其他头文件" class="headerlink" title="在类的头文件中尽量减少引用其他头文件"></a>在类的头文件中尽量减少引用其他头文件</h4>
+        <h3 id="熟悉-Objective-C"><a href="#熟悉-Objective-C" class="headerlink" title="熟悉 Objective-C"></a>熟悉 Objective-C</h3><a id="more"></a>
+<h4 id="Objective-C的起源"><a href="#Objective-C的起源" class="headerlink" title="Objective-C的起源"></a>Objective-C的起源</h4><p>1、Objective-C从Smalltalk语言是从Smalltalk语言演化而来，Smalltalk是消息语言的鼻祖。<br>2、Objective-C的重要工作都由“运行期组件”而非编译器完成,所以Objective-C的面向对象的特性所需的全部数据结构以及函数都在运行期组件里面。<br>3、Objective-C使用动态绑定的消息结构，也就是说在运行时才会检查对象的类型。接收消息之后，究竟应执行何种代码，由运行期环境决定而非编译器。<br>示例:</p>
+<blockquote>
+<p>NSString *obj = [[NSData alloc] init]</p>
+</blockquote>
+<p>在编译时 obj是NSString类型，运行时是NSData。</p>
+<h4 id="在类的头文件中尽量减少引用其他头文件"><a href="#在类的头文件中尽量减少引用其他头文件" class="headerlink" title="在类的头文件中尽量减少引用其他头文件"></a>在类的头文件中尽量减少引用其他头文件</h4><p>1、如果需要引用一个类文件时，只是需要使用类名，不需要知道其中细节，可以用@class xx.h，这样做的好处会减少一定的编译时间。如果是用的#import全部导入的话，会出现a.h import了b.h,当c.h 又import a.h时，把b.h也都导入了，这样做引入了许多根本用不到的东西，而且还增加了编译时间，也有可能造成循环引用。同时也尽量降低了类之间的耦合。</p>
+<p>2、如果无法使用向前声明，我们可以把“该类遵循某协议”移至“class-continuatiion”分类中。如果实在不行的话，可以把协议单独放在一个头文件中，然后将其引入。</p>
+<p>示例: xxxxx.m</p>
+<blockquote>
+<p>@interface ViewController ()<uitableviewdelegate><br>@end</uitableviewdelegate></p>
+</blockquote>
+<h4 id="多用字面语法，少用与之等价的方法"><a href="#多用字面语法，少用与之等价的方法" class="headerlink" title="多用字面语法，少用与之等价的方法"></a>多用字面语法，少用与之等价的方法</h4><p>1、应该使用字面量语法来创建字符串、数组、数值、字典。与创建对象的常规方法想必，这么做更加的简明扼要。</p>
+<p>2、应该通过取下标操作访问数组或字典中的键对应的元素。<br>注: 通常用下标获取元素，可能会产生数组越界、或者key不存在的问题，我们可以通过重载subscript等操作来做处理。</p>
+<p>3、用字面量语法创建数组和字典时，若值中有nil，则会抛出异常。因此，务必确保值里不含nil.</p>
+<h4 id="少用类型常量，少用-define-预处理命令"><a href="#少用类型常量，少用-define-预处理命令" class="headerlink" title="少用类型常量，少用#define 预处理命令"></a>少用类型常量，少用#define 预处理命令</h4><p>1、不要使用预处理指令。这样定义处理来的常量不包含类型信息，编译器只是会在编译的时候做简单的查找和替换操作。而且即使有人重新定义了常量值，编译器也不会产生警告信息。<br>2、在实现文件中使用 static const定义 只在编译单元内可见的常量，可以无须为其名称添加前缀。<br>3、在头文件中使用extern 来声明全局常量，并在相关文件中定义其值。这种常量会出现在全局符号表中，需要加上前缀加以区隔。通常使用与之相关的类名做前缀。</p>
+<h4 id="用枚举表示状态、选项、状态码"><a href="#用枚举表示状态、选项、状态码" class="headerlink" title="用枚举表示状态、选项、状态码"></a>用枚举表示状态、选项、状态码</h4><p>1、如果把传递给某个方法的选项表示为枚举类型，而多个选项可以同时使用，那么就将各个选项值定义为2的幂，以便通过按位或操作将其组合起来。<br>2、使用NS_ENUM和NS_OPTIONS宏来定义枚举类型。这样做可以确保枚举的类型是开发者选的底层数据类型，而不是编译器默认的类型。<br>3、在处理枚举的类型的switch语句中不要实现default分支。这样的话，加入新的枚举之后，编译器会提醒开发者，swicth语句未处理所有的枚举。</p>
+<h3 id="对象、消息、运行期"><a href="#对象、消息、运行期" class="headerlink" title="对象、消息、运行期"></a>对象、消息、运行期</h3><h4 id="理解属性这一概念"><a href="#理解属性这一概念" class="headerlink" title="理解属性这一概念"></a>理解属性这一概念</h4><p>1、属性我们可以简单理解为:property = ivar + get + set<br>2、属性的修饰符<br><code>原子性</code> 我们应该使用nonatomic属性，因为atomic属性会严重影响性能。<br><code>读写权限</code> 我们在做读写权限的时候，通常可以再声明文件中，使用readonly。然后在“class-continuation分类”中将其重新定义为读写属性。<br><code>内存管理</code> assign 用于一般基础数据类型<br>strong 表示一种拥有关系，在设置新值的时候会保留新值，并释放旧值，然后再把新值设置上去<br>weak 表示一种非拥有关系，既不保留新值 也不释放旧值，当对象释放时，属性值会置为nil.<br>copy 表示一种拥有关系。设置方法不保留新值，只是将其“拷贝copy”。经常用于此特质来保护其封装性</p>
+
       
     </div>
     
@@ -548,7 +564,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Effective-Objective-C-2-0编写高质量iOS与OS-X代码的52个有效方法"><span class="nav-number">1.</span> <span class="nav-text">Effective Objective-C 2.0编写高质量iOS与OS X代码的52个有效方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#熟悉-Objective-C"><span class="nav-number">2.</span> <span class="nav-text">熟悉 Objective-C</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Objective-C的起源"><span class="nav-number">2.1.</span> <span class="nav-text">Objective-C的起源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在类的头文件中尽量减少引用其他头文件"><span class="nav-number">2.2.</span> <span class="nav-text">在类的头文件中尽量减少引用其他头文件</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#熟悉-Objective-C"><span class="nav-number">1.</span> <span class="nav-text">熟悉 Objective-C</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Objective-C的起源"><span class="nav-number">1.1.</span> <span class="nav-text">Objective-C的起源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在类的头文件中尽量减少引用其他头文件"><span class="nav-number">1.2.</span> <span class="nav-text">在类的头文件中尽量减少引用其他头文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多用字面语法，少用与之等价的方法"><span class="nav-number">1.3.</span> <span class="nav-text">多用字面语法，少用与之等价的方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#少用类型常量，少用-define-预处理命令"><span class="nav-number">1.4.</span> <span class="nav-text">少用类型常量，少用#define 预处理命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用枚举表示状态、选项、状态码"><span class="nav-number">1.5.</span> <span class="nav-text">用枚举表示状态、选项、状态码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象、消息、运行期"><span class="nav-number">2.</span> <span class="nav-text">对象、消息、运行期</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#理解属性这一概念"><span class="nav-number">2.1.</span> <span class="nav-text">理解属性这一概念</span></a></li></ol></li></ol></div>
             
 
           </div>
