@@ -110,7 +110,8 @@
 <meta property="og:image" content="https://lvchenqiang.github.io/2018/11/22/排序/归并排序演示.gif">
 <meta property="og:image" content="https://lvchenqiang.github.io/2018/11/22/排序/Snip20181124_72.png">
 <meta property="og:image" content="https://lvchenqiang.github.io/2018/11/22/排序/Snip20181124_73.png">
-<meta property="og:updated_time" content="2018-11-24T04:03:40.322Z">
+<meta property="og:image" content="https://lvchenqiang.github.io/2018/11/22/排序/Snip20181124_74.png">
+<meta property="og:updated_time" content="2018-11-24T04:50:41.590Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="算法结构之排序">
 <meta name="twitter:description" content="排序概述概述排序是计算机程序设计中的一种重要操作,它的功能是将一个数据元素(或记录)的任意序列，重新排列成一个按关键字有序的序列。">
@@ -480,7 +481,12 @@
 <h4 id="基数排序"><a href="#基数排序" class="headerlink" title="基数排序"></a>基数排序</h4><p><code>基数排序</code> (Radix Sorting)是和前面所述各类排序方法完全不同的一种排序方法，基数排序是一种借助多关键字进行排序的思想对单逻辑关键字进行排序的方法。属于“分配式排序”（distribution sort），又称“桶子法”（bucket sort）或bin sort，顾名思义，它是透过键值的部份资讯，将要排序的元素分配至某些“桶”中，藉以达到排序的作用.</p>
 <p>基数排序法是属于稳定性的排序，其时间复杂度为O (nlog(r)m)，其中r为所采取的基数，而m为堆数，在某些时候，基数排序法的效率高于其它的稳定性排序法。</p>
 <p>示例:<br><img src="/2018/11/22/排序/Snip20181124_73.png" alt=""></p>
-<h4 id="内部排序方法的比较"><a href="#内部排序方法的比较" class="headerlink" title="内部排序方法的比较"></a>内部排序方法的比较</h4><h3 id="外部排序"><a href="#外部排序" class="headerlink" title="外部排序"></a>外部排序</h3>
+<h4 id="内部排序方法的比较"><a href="#内部排序方法的比较" class="headerlink" title="内部排序方法的比较"></a>内部排序方法的比较</h4><p><img src="/2018/11/22/排序/Snip20181124_74.png" alt=""></p>
+<p>1、从平均时间性能而言，<code>快速排序</code> 最佳，所需的时间最省。但是在最坏的性能不如<code>堆排序</code>和<code>归并排序</code>  后面两者的对比结果是 在n越大的时候，归并排序所需的时间较堆排序省，但是所需的辅助存储量最大</p>
+<p>2、<code>简单排序</code> 即除<code>希尔排序</code>之外的所有<code>插入排序</code>、<code>冒泡选择排序</code>、<code>简单选择排序</code>，在序列的记录基本有序或n值较小的时候，它是最佳的排序方法。 因此，经常将他们与其他的排序方法 如<code>快速排序</code>、<code>归并排序</code>等结合使用</p>
+<p>3、<code>基数排序</code>的时间复杂度也可写成O(d*n), 所以它最适合于n较大而关键字较小的序列。 若关键字也很大，而序列中大多数记录的”最高位关键字“均不同，则亦可先按”最高位关键字“不同将序列分成若干个”小“的序列，而后进行直接插入排序</p>
+<p>4、从方法的稳定性来比较，<code>基数排序</code>是稳定的内排方法，所有的时间复杂度均为O(n2)的<code>简单排序</code>也是稳定的。<code>快速排序</code>、<code>堆排序</code>、<code>希尔排序</code>等时间性能较好的排序方法是不稳定的。</p>
+<h3 id="外部排序"><a href="#外部排序" class="headerlink" title="外部排序"></a>外部排序</h3>
       
     </div>
     
