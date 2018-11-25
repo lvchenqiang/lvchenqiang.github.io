@@ -84,7 +84,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法结构之排序">
 <meta property="og:url" content="https://lvchenqiang.github.io/2018/11/22/排序/index.html">
-<meta property="og:site_name" content="大前端之路">
+<meta property="og:site_name" content="日暮苍山">
 <meta property="og:description" content="排序概述概述排序是计算机程序设计中的一种重要操作,它的功能是将一个数据元素(或记录)的任意序列，重新排列成一个按关键字有序的序列。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://lvchenqiang.github.io/2018/11/22/排序/insert.png">
@@ -106,12 +106,17 @@
 <meta property="og:image" content="https://lvchenqiang.github.io/2018/11/22/排序/Selection-Sort-Animation.gif">
 <meta property="og:image" content="https://lvchenqiang.github.io/2018/11/22/排序/selection.gif">
 <meta property="og:image" content="https://lvchenqiang.github.io/2018/11/22/排序/Snip20181123_69.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/2018/11/22/排序/Snip20181125_75.png">
 <meta property="og:image" content="https://lvchenqiang.github.io/2018/11/22/排序/Snip20181124_71.png">
 <meta property="og:image" content="https://lvchenqiang.github.io/2018/11/22/排序/归并排序演示.gif">
 <meta property="og:image" content="https://lvchenqiang.github.io/2018/11/22/排序/Snip20181124_72.png">
 <meta property="og:image" content="https://lvchenqiang.github.io/2018/11/22/排序/Snip20181124_73.png">
 <meta property="og:image" content="https://lvchenqiang.github.io/2018/11/22/排序/Snip20181124_74.png">
-<meta property="og:updated_time" content="2018-11-24T14:09:46.611Z">
+<meta property="og:image" content="https://lvchenqiang.github.io/2018/11/22/排序/Snip20181125_76.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/2018/11/22/排序/Snip20181125_77.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/2018/11/22/排序/Snip20181125_79.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/2018/11/22/排序/Snip20181126_80.png">
+<meta property="og:updated_time" content="2018-11-25T16:24:28.800Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="算法结构之排序">
 <meta name="twitter:description" content="排序概述概述排序是计算机程序设计中的一种重要操作,它的功能是将一个数据元素(或记录)的任意序列，重新排列成一个按关键字有序的序列。">
@@ -151,7 +156,7 @@
 
 
 
-  <title>算法结构之排序 | 大前端之路</title>
+  <title>算法结构之排序 | 日暮苍山</title>
   
 
 
@@ -179,7 +184,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">大前端之路</span>
+        <span class="site-title">日暮苍山</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -295,7 +300,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="大前端之路">
+      <meta itemprop="name" content="日暮苍山">
     </span>
 
     
@@ -468,6 +473,8 @@
 <li>然后在其中[n/2]个较小者之间在进行比较，如此重复</li>
 <li>最后选出最小的关键字的记录为止</li>
 </ol>
+<p>对于无序表{49，38，65，97，76，13，27，49}创建的完全二叉树,如下图所示；<br><img src="/2018/11/22/排序/Snip20181125_75.png" alt=""></p>
+<p>这是一棵“胜者树”,树中每个非终端结点（除叶子结点之外的其它结点）中的值都表示的是左右孩子相比较后的较小值（谁最小即为胜者)</p>
 <p>由于含有 n 个叶子结点的完全二叉树的深度为，则在树形选择排序中，除了最小关键字外，每选择一个次小关键字仅需进行 次比较，故时间复杂度为 O(n logn)。<br>但是，这种排序方法尚有辅助存储空间较多、和最大值进行多余比较的缺点，所以威洛姆斯在1964年提出了另一种形式的选择排序-<code>堆排序</code></p>
 <h5 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h5><p><code>堆排序</code>（Heap Sort）是指利用堆这种数据结构所设计的一种排序算法。堆是一个近似完全二叉树的结构，并同时满足堆积的性质：即子结点的键值或索引总是小于（或者大于）它的父节点.</p>
 <p> 堆排序方法对记录数较少的文件并不值得提倡，但是对n比较大的文件还是很有效的，因为其运行时间主要消耗在建初始堆和调整建新堆时进行的反复”筛选“</p>
@@ -494,8 +501,69 @@
 <p>由于磁盘的旋转速度很快，约2400~3600转/分，则等待时间最长不超过25毫秒(旋转一圈的时间)。磁盘的传输速率一般在10^5字符/秒和5×10^5字符/秒之间，则在磁盘上读/写信息的时间主要花在寻查时间上(最大的寻查时间为0.1秒)。 </p>
 <p>因此，在磁盘上存放信息时，应将相关的信息放在同一柱面或邻近柱面上，以求在读/写信息时尽量减少磁头来回移动的次数，以避免不必要的寻查时间。</p>
 <h4 id="外部排序的方法"><a href="#外部排序的方法" class="headerlink" title="外部排序的方法"></a>外部排序的方法</h4><p>外部排序基本上由两个相对独立的阶段组成。首先，按可用内存的大小，将外存上含n个记录的文件分成长度为l的子文件或段，依次读入内存并利用有效的内部排序方法对他们进行排序，并将排序后得到的有序子文件重新写入外存，通常称这些有序子文件为归并段或顺串。 然后，对这些归并段进行逐趟归并，是归并段逐渐有小至大，直至得到整个有序文件为止。</p>
-<p>显然，第一阶段的工作在上面的内部排序已经讨论过，接下来主要讨论的就是第二阶段即归并的过程。</p>
-<h5 id="多路平衡归并的实现"><a href="#多路平衡归并的实现" class="headerlink" title="多路平衡归并的实现"></a>多路平衡归并的实现</h5><h5 id="置换-选择排序"><a href="#置换-选择排序" class="headerlink" title="置换-选择排序"></a>置换-选择排序</h5><h5 id="最佳归并树"><a href="#最佳归并树" class="headerlink" title="最佳归并树"></a>最佳归并树</h5><h3 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h3><p><a href="https://github.com/lvchenqiang/python_sort" target="_blank" rel="noopener">代码传送门</a></p>
+<p>显然，第一阶段的工作在上面的内部排序已经讨论过，接下来主要讨论的就是第二阶段即归并的过程。<br>一般情况下，外部排序所需的总的时间 = </p>
+<blockquote>
+<p> 内部排序(产生初始归并段)所需的时间 m*t<sub>IS</sub></p>
+<p> +外存信息的读写时间               d*t<sub>IO</sub></p>
+<p> +内部归并所需的时间                s*ut<sub>mg</sub></p>
+</blockquote>
+<p>其中:t<sub>IS </sub> 是为了得到一个初始归并段进行排序所需要的时间均值;<br>t<sub>IO</sub>是进行一次外存读写时间的均值; ut<sub>mg</sub>是对u个记录进行内部归并所需的时间;m为经过内部排序之后得到的初始化归并段的个数; s为归并的趟数;d为总的读/写次数。<br>而在一般的情况下，对m个初始归并段进行k-路平衡归并时，归并的趟数:</p>
+<p>s = 「 log<sub>k</sub>m」  其中 s 表示归并次数</p>
+<p>从公式上可以判断出，想要达到减少归并次数从而提高算法效率的目的，可以从两个角度实现</p>
+<ol>
+<li>增加 k-路平衡归并中的 k 值</li>
+<li>尽量减少初始归并段的数量 m，即增加每个归并段的容量</li>
+</ol>
+<blockquote>
+<p>其增加 k 值的想法引申出了一种外部排序算法：多路平衡归并算法；增加数量 m 的想法引申出了另一种外部排序算法：置换-选择排序算法。</p>
+</blockquote>
+<h5 id="多路平衡归并"><a href="#多路平衡归并" class="headerlink" title="多路平衡归并"></a>多路平衡归并</h5><p>对于外部排序算法来说，其直接影响算法效率的因素为读写外存的次数，即次数越多，算法效率越低。若想提高算法的效率，即减少算法运行过程中读写外存的次数，可以增加 k –路平衡归并中的 k 值。</p>
+<p>但是经过计算得知，如果毫无限度地增加 k 值，虽然会减少读写外存数据的次数，但会增加内部归并的时间，得不偿失。</p>
+<p>为了避免在增加 k 值的过程中影响内部归并的效率，在进行 k-路归并时可以使用“败者树”来实现，该方法在增加 k 值时不会影响其内部归并的效率</p>
+<h6 id="败者树实现内部归并"><a href="#败者树实现内部归并" class="headerlink" title="败者树实现内部归并"></a>败者树实现内部归并</h6><p>败者树是树形选择排序的一种变形，本身是一棵完全二叉树。</p>
+<blockquote>
+<p>胜者树和败者树的区别就是：胜者树中的非终端结点中存储的是胜利的一方；而败者树中的非终端结点存储的是失败的一方。而在比较过程中，都是拿胜者去比较。</p>
+</blockquote>
+<p><img src="/2018/11/22/排序/Snip20181125_76.png" alt=""></p>
+<p>如上图所示为一棵 5-路归并的败者树，其中 b0—b4 为树的叶子结点，分别为 5 个归并段中存储的记录的关键字。 ls 为一维数组，表示的是非终端结点，其中存储的数值表示第几归并段（例如 b0 为第 0 个归并段）。ls[0] 中存储的为最终的胜者，表示当前第 3 归并段中的关键字最小。</p>
+<p>当最终胜者判断完成后，只需要更新叶子结点 b3 的值，即导入关键字 15，然后让该结点不断同其双亲结点所表示的关键字进行比较，败者留在双亲结点中，胜者继续向上比较。</p>
+<p>例如，叶子结点 15 先同其双亲结点 ls[4] 中表示的 b4 中的 12 进行比较，12 为胜利者，则 ls[4] 改为 15，然后 12 继续同 ls[2] 中表示的 10 做比较，10 为胜者，然后 10 继续同其双亲结点 ls[1] 表示的 b1（关键字 9）作比较，最终 9 为胜者。整个过程如下图所示：</p>
+<p><img src="/2018/11/22/排序/Snip20181125_77.png" alt=""></p>
+<blockquote>
+<p>注意：为了防止在归并过程中某个归并段变为空，处理的办法为：可以在每个归并段最后附加一个关键字为最大值的记录。这样当某一时刻选出的冠军为最大值时，表明 5 个归并段已全部归并完成。（因为只要还有记录，最终的胜者就不可能是附加的最大值）</p>
+</blockquote>
+<p>示例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">##败者树实现内部归并</span><br><span class="line">a0 = [10,15,16]</span><br><span class="line">a1 = [9,18,20]</span><br><span class="line">a2 = [20,22,40]</span><br><span class="line">a3 = [6,15,25]</span><br><span class="line">a4 = [12,37,48]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def merging_sorting(data):  # 生成一个归并序列，把每一路中的元素挨个排入compare数组中</span><br><span class="line">    k = len(data)</span><br><span class="line">    compare = []</span><br><span class="line">    for i in range(0, k):</span><br><span class="line">        compare.append(data[i][0])</span><br><span class="line">        #data[i].remove(data[i][0])</span><br><span class="line">    # print(compare)</span><br><span class="line"></span><br><span class="line">    def adjust(loserTree, dataArray, n, s):  # 败者树的核心代码</span><br><span class="line">        t = int((s + n) / 2)</span><br><span class="line">        while t &gt; 0:  # 从败者树的尾部开始进行比较</span><br><span class="line">            if dataArray[s] &gt; dataArray[loserTree[t]]:  # 和败者结点比较</span><br><span class="line">                s, loserTree[t] = loserTree[t], s  # 如果比某个败者结点大，说明该结点失败了，将s结点存入败者树，把败者树的现在的胜结点拿去和其父节点比较。</span><br><span class="line">            t = int(t/2)</span><br><span class="line">        loserTree[0] = s</span><br><span class="line"></span><br><span class="line">    def createLoserTree(loserTree, dataArray, n):</span><br><span class="line">        for i in range(n):</span><br><span class="line">            loserTree.append(0)</span><br><span class="line">            dataArray.append(i-n)  # 这里是为了生成败者树用的，</span><br><span class="line"></span><br><span class="line">        for i in range(n):</span><br><span class="line">            adjust(loserTree, dataArray, n, n-1-i)</span><br><span class="line"></span><br><span class="line">    loserTree = []</span><br><span class="line">    dataArray = []</span><br><span class="line">    createLoserTree(loserTree, dataArray, k)</span><br><span class="line"></span><br><span class="line">    for i in range(k):</span><br><span class="line">        dataArray[i] = compare[i]  # 将数据替换成待排数据</span><br><span class="line">        adjust(loserTree, dataArray, k, i)  # 此步执行完毕，败者树才完全创建初始化完毕，正式开始排序归并</span><br><span class="line"></span><br><span class="line">    result = []</span><br><span class="line">    while True:</span><br><span class="line">        if data[loserTree[0]][0] &gt; 9999:</span><br><span class="line">            break</span><br><span class="line">        result.append(data[loserTree[0]][0])  # 添加到 result 中，这是我们需要的结果</span><br><span class="line">        data[loserTree[0]].remove(data[loserTree[0]][0])  # 从data 中删除头一个元素</span><br><span class="line">        if data[loserTree[0]] == []:</span><br><span class="line">            data[loserTree[0]].append(10000)</span><br><span class="line">        compare[loserTree[0]] = data[loserTree[0]][0]  # 将下一个元素添加到 compare数组中</span><br><span class="line">        adjust(loserTree, compare, k, loserTree[0])</span><br><span class="line"></span><br><span class="line">    return result</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">print(merging_sorting([a0,a1,a2,a3,a4]))</span><br></pre></td></tr></table></figure>
+<h5 id="置换-选择排序"><a href="#置换-选择排序" class="headerlink" title="置换-选择排序"></a>置换-选择排序</h5><p><code>置换-选择排序</code>是在树形选择排序的基础上得来的，它的特点是:在整个排序(得到所有初始归并段)的过程中，选择最小(或最大)关键字输入、输出交叉或平行进行。</p>
+<p>例如已知初始文件中总共有 24 个记录，假设内存工作区最多可容纳 6 个记录，按照之前的选择排序算法最少也只能分为 4 个初始归并段。而如果使用置换—选择排序，可以实现将 24 个记录分为 3 个初始归并段，如下图所示：</p>
+<p><img src="/2018/11/22/排序/Snip20181125_79.png" alt=""></p>
+<p>置换—选择排序算法的具体操作过程为：</p>
+<ol>
+<li>首先从初始文件中输入 6 个记录到内存工作区中；</li>
+<li>从内存工作区中选出关键字最小的记录，将其记为 MINIMAX 记录；</li>
+<li>然后将 MINIMAX 记录输出到归并段文件中；</li>
+<li>此时内存工作区中还剩余 5 个记录，若初始文件不为空，则从初始文件中输入下一个记录到内存工作区中；</li>
+<li>从内存工作区中的所有比 MINIMAX 值大的记录中选出值最小的关键字的记录，作为新的 MINIMAX 记录；</li>
+<li>重复过程 3—5，直至在内存工作区中选不出新的 MINIMAX 记录为止，由此就得到了一个初始归并段；</li>
+<li>重复 2—6，直至内存工作为空，由此就可以得到全部的初始归并段</li>
+</ol>
+<p>分析:<br>假设输入文件为FI，初始归并段文件为输出文件FO,内存工作区为WA.FO和WA的初始状态为空，并设内存工作区WA的容量可容纳W个记录,则过程如下:</p>
+<p><img src="/2018/11/22/排序/Snip20181126_80.png" alt=""></p>
+<p>示例:<br><a href="http://data.biancheng.net/view/78.html" target="_blank" rel="noopener">代码实现</a></p>
+<h5 id="最佳归并树"><a href="#最佳归并树" class="headerlink" title="最佳归并树"></a>最佳归并树</h5><p>由于置换-选择排序初始归并段的长度不相等，那么归并段的归并顺序会不会对排序的时间有影响？<br>可以这样考虑：</p>
+<ol>
+<li>相同初始归并段数，对于不同的归并顺序，会有相同的归并次数。（归并一次，段数少一）</li>
+<li>当前归并段的长度 = 两个子归并段长度相加。同时，子归并段的长度越长，归并时间越长。</li>
+</ol>
+<blockquote>
+<p>也就是说如果一开始就归并很长的段，由于该段还会在以后的归并中出现，那么消耗的时间就很长了。所以我们应该先归并段长较短的段。</p>
+</blockquote>
+<p>假如有三个初始归并段，段长分别为：1, 2, 3。</p>
+<p>先归并2和3，再归并1和5，所需时间：（2+3）+（2+3+1） = 11 。</p>
+<p>先归并1和2，再归并3和3，所需时间：（1+2）+（1+2+3） = 9。</p>
+<p>所以可以通过构造哈夫曼树的方法得出最佳归并顺序。</p>
+<p><a href="http://data.biancheng.net/view/79.html" target="_blank" rel="noopener">参考链接</a></p>
+<h3 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h3><p><a href="https://github.com/lvchenqiang/python_sort" target="_blank" rel="noopener">代码传送门</a></p>
 
       
     </div>
@@ -716,7 +784,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#排序概述"><span class="nav-number">1.</span> <span class="nav-text">排序概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#概述"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内部排序的分类"><span class="nav-number">1.2.</span> <span class="nav-text">内部排序的分类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内部排序"><span class="nav-number">2.</span> <span class="nav-text">内部排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#插入排序"><span class="nav-number">2.1.</span> <span class="nav-text">插入排序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#直接插入排序"><span class="nav-number">2.1.1.</span> <span class="nav-text">直接插入排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#折半插入排序"><span class="nav-number">2.1.2.</span> <span class="nav-text">折半插入排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-路插入排序"><span class="nav-number">2.1.3.</span> <span class="nav-text">2-路插入排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#表插入排序"><span class="nav-number">2.1.4.</span> <span class="nav-text">表插入排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#希尔排序"><span class="nav-number">2.1.5.</span> <span class="nav-text">希尔排序</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#快速排序"><span class="nav-number">2.2.</span> <span class="nav-text">快速排序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#冒泡排序"><span class="nav-number">2.2.1.</span> <span class="nav-text">冒泡排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#快速排序-1"><span class="nav-number">2.2.2.</span> <span class="nav-text">快速排序</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#选择排序"><span class="nav-number">2.3.</span> <span class="nav-text">选择排序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#简单选择排序"><span class="nav-number">2.3.1.</span> <span class="nav-text">简单选择排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#树形选择排序"><span class="nav-number">2.3.2.</span> <span class="nav-text">树形选择排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#堆排序"><span class="nav-number">2.3.3.</span> <span class="nav-text">堆排序</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#归并排序"><span class="nav-number">2.4.</span> <span class="nav-text">归并排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基数排序"><span class="nav-number">2.5.</span> <span class="nav-text">基数排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内部排序方法的比较"><span class="nav-number">2.6.</span> <span class="nav-text">内部排序方法的比较</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#外部排序"><span class="nav-number">3.</span> <span class="nav-text">外部排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#外部信息的存取"><span class="nav-number">3.1.</span> <span class="nav-text">外部信息的存取</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#磁带信息的读取"><span class="nav-number">3.1.1.</span> <span class="nav-text">磁带信息的读取</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#磁盘信息的存取"><span class="nav-number">3.1.2.</span> <span class="nav-text">磁盘信息的存取</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#外部排序的方法"><span class="nav-number">3.2.</span> <span class="nav-text">外部排序的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#多路平衡归并的实现"><span class="nav-number">3.2.1.</span> <span class="nav-text">多路平衡归并的实现</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#置换-选择排序"><span class="nav-number">3.2.2.</span> <span class="nav-text">置换-选择排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#最佳归并树"><span class="nav-number">3.2.3.</span> <span class="nav-text">最佳归并树</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Code"><span class="nav-number">4.</span> <span class="nav-text">Code</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#排序概述"><span class="nav-number">1.</span> <span class="nav-text">排序概述</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#概述"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内部排序的分类"><span class="nav-number">1.2.</span> <span class="nav-text">内部排序的分类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内部排序"><span class="nav-number">2.</span> <span class="nav-text">内部排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#插入排序"><span class="nav-number">2.1.</span> <span class="nav-text">插入排序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#直接插入排序"><span class="nav-number">2.1.1.</span> <span class="nav-text">直接插入排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#折半插入排序"><span class="nav-number">2.1.2.</span> <span class="nav-text">折半插入排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-路插入排序"><span class="nav-number">2.1.3.</span> <span class="nav-text">2-路插入排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#表插入排序"><span class="nav-number">2.1.4.</span> <span class="nav-text">表插入排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#希尔排序"><span class="nav-number">2.1.5.</span> <span class="nav-text">希尔排序</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#快速排序"><span class="nav-number">2.2.</span> <span class="nav-text">快速排序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#冒泡排序"><span class="nav-number">2.2.1.</span> <span class="nav-text">冒泡排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#快速排序-1"><span class="nav-number">2.2.2.</span> <span class="nav-text">快速排序</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#选择排序"><span class="nav-number">2.3.</span> <span class="nav-text">选择排序</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#简单选择排序"><span class="nav-number">2.3.1.</span> <span class="nav-text">简单选择排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#树形选择排序"><span class="nav-number">2.3.2.</span> <span class="nav-text">树形选择排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#堆排序"><span class="nav-number">2.3.3.</span> <span class="nav-text">堆排序</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#归并排序"><span class="nav-number">2.4.</span> <span class="nav-text">归并排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基数排序"><span class="nav-number">2.5.</span> <span class="nav-text">基数排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#内部排序方法的比较"><span class="nav-number">2.6.</span> <span class="nav-text">内部排序方法的比较</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#外部排序"><span class="nav-number">3.</span> <span class="nav-text">外部排序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#外部信息的存取"><span class="nav-number">3.1.</span> <span class="nav-text">外部信息的存取</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#磁带信息的读取"><span class="nav-number">3.1.1.</span> <span class="nav-text">磁带信息的读取</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#磁盘信息的存取"><span class="nav-number">3.1.2.</span> <span class="nav-text">磁盘信息的存取</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#外部排序的方法"><span class="nav-number">3.2.</span> <span class="nav-text">外部排序的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#多路平衡归并"><span class="nav-number">3.2.1.</span> <span class="nav-text">多路平衡归并</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#败者树实现内部归并"><span class="nav-number">3.2.1.1.</span> <span class="nav-text">败者树实现内部归并</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#置换-选择排序"><span class="nav-number">3.2.2.</span> <span class="nav-text">置换-选择排序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#最佳归并树"><span class="nav-number">3.2.3.</span> <span class="nav-text">最佳归并树</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Code"><span class="nav-number">4.</span> <span class="nav-text">Code</span></a></li></ol></div>
             
 
           </div>
