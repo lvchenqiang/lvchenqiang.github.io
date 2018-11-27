@@ -79,15 +79,18 @@
 
 
 
+<meta name="description" content="什么是自动引用计数自动引用计数(ARC, Automatic Reference Counting)是指内存管理中对引用采取自动计数的技术。">
 <meta name="keywords" content="笔记,内存管理">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS之自动引用计数">
 <meta property="og:url" content="https://lvchenqiang.github.io/2018/12/01/memory/index.html">
 <meta property="og:site_name" content="日暮苍山">
+<meta property="og:description" content="什么是自动引用计数自动引用计数(ARC, Automatic Reference Counting)是指内存管理中对引用采取自动计数的技术。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-27T13:24:51.396Z">
+<meta property="og:updated_time" content="2018-11-27T15:56:46.186Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS之自动引用计数">
+<meta name="twitter:description" content="什么是自动引用计数自动引用计数(ARC, Automatic Reference Counting)是指内存管理中对引用采取自动计数的技术。">
 
 
 
@@ -369,7 +372,10 @@
       
 
       
-        
+        <h3 id="什么是自动引用计数"><a href="#什么是自动引用计数" class="headerlink" title="什么是自动引用计数"></a>什么是自动引用计数</h3><p>自动引用计数(ARC, Automatic Reference Counting)是指内存管理中对引用采取自动计数的技术。</p>
+<a id="more"></a>
+<p>在iOS开发中，主要是通过引用计数来进行内存管理，其中涉及到 MRC(Manual Reference Counting)、ARC以及自动释放池。简单的来说，在iOS5之后 引入了ARC后，开发人员就无需在手动的键入retain或release代码。因为ARC可以大致理解为在MRC的基础上，编译器在合适的地方为开发者键入retain或release代码。所以本篇文章以ARC为主，介绍苹果通过引用计数来进行的内存管理。</p>
+<h3 id="内存管理-引用计数"><a href="#内存管理-引用计数" class="headerlink" title="内存管理/引用计数"></a>内存管理/引用计数</h3><h3 id="ARC-规则"><a href="#ARC-规则" class="headerlink" title="ARC 规则"></a>ARC 规则</h3><h3 id="ARC的实现"><a href="#ARC的实现" class="headerlink" title="ARC的实现"></a>ARC的实现</h3>
       
     </div>
     
@@ -489,8 +495,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -570,6 +585,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是自动引用计数"><span class="nav-number">1.</span> <span class="nav-text">什么是自动引用计数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存管理-引用计数"><span class="nav-number">2.</span> <span class="nav-text">内存管理/引用计数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ARC-规则"><span class="nav-number">3.</span> <span class="nav-text">ARC 规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ARC的实现"><span class="nav-number">4.</span> <span class="nav-text">ARC的实现</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
