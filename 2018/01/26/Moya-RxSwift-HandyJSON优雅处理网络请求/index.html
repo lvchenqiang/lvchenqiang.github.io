@@ -84,7 +84,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Moya+RxSwift+HandyJSON优雅处理网络请求">
 <meta property="og:url" content="https://lvchenqiang.github.io/2018/01/26/Moya-RxSwift-HandyJSON优雅处理网络请求/index.html">
-<meta property="og:site_name" content="日暮苍山">
+<meta property="og:site_name" content="大前端之路-吕陈强">
 <meta property="og:description" content="前言在移动端的开发中，网络请求是必不可少的。之前写过Alamofire的简单使用,但是一般开发中都会对这些第三库封装，然后使用，之前自己封装的demo也是借鉴了一些Moya的设计思路。今天就介绍一下Moya一个帮助你处理网络层的第三方框架。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://lvchenqiang.github.io/2018/01/26/Moya-RxSwift-HandyJSON优雅处理网络请求/20180126180735284">
@@ -128,7 +128,7 @@
 
 
 
-  <title>Moya+RxSwift+HandyJSON优雅处理网络请求 | 日暮苍山</title>
+  <title>Moya+RxSwift+HandyJSON优雅处理网络请求 | 大前端之路-吕陈强</title>
   
 
 
@@ -156,7 +156,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">日暮苍山</span>
+        <span class="site-title">大前端之路-吕陈强</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -272,7 +272,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="日暮苍山">
+      <meta itemprop="name" content="大前端之路-吕陈强">
     </span>
 
     
@@ -342,17 +342,6 @@
           
 
           
-          
-             <span id="/2018/01/26/Moya-RxSwift-HandyJSON优雅处理网络请求/" class="leancloud_visitors" data-flag-title="Moya+RxSwift+HandyJSON优雅处理网络请求">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
           
 
           
@@ -883,113 +872,6 @@
 
 
   
-
-  
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
-  <script>AV.initialize("ob6xEevaCzifOdzvnfIrxSJ7-gzGzoHsz", "ibWrHDRgAsLSxr5UnNH7Tb2n");</script>
-  <script>
-    function showTime(Counter) {
-      var query = new AV.Query(Counter);
-      var entries = [];
-      var $visitors = $(".leancloud_visitors");
-
-      $visitors.each(function () {
-        entries.push( $(this).attr("id").trim() );
-      });
-
-      query.containedIn('url', entries);
-      query.find()
-        .done(function (results) {
-          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
-
-          if (results.length === 0) {
-            $visitors.find(COUNT_CONTAINER_REF).text(0);
-            return;
-          }
-
-          for (var i = 0; i < results.length; i++) {
-            var item = results[i];
-            var url = item.get('url');
-            var time = item.get('time');
-            var element = document.getElementById(url);
-
-            $(element).find(COUNT_CONTAINER_REF).text(time);
-          }
-          for(var i = 0; i < entries.length; i++) {
-            var url = entries[i];
-            var element = document.getElementById(url);
-            var countSpan = $(element).find(COUNT_CONTAINER_REF);
-            if( countSpan.text() == '') {
-              countSpan.text(0);
-            }
-          }
-        })
-        .fail(function (object, error) {
-          console.log("Error: " + error.code + " " + error.message);
-        });
-    }
-
-    function addCount(Counter) {
-      var $visitors = $(".leancloud_visitors");
-      var url = $visitors.attr('id').trim();
-      var title = $visitors.attr('data-flag-title').trim();
-      var query = new AV.Query(Counter);
-
-      query.equalTo("url", url);
-      query.find({
-        success: function(results) {
-          if (results.length > 0) {
-            var counter = results[0];
-            counter.fetchWhenSave(true);
-            counter.increment("time");
-            counter.save(null, {
-              success: function(counter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.get('time'));
-              },
-              error: function(counter, error) {
-                console.log('Failed to save Visitor num, with error message: ' + error.message);
-              }
-            });
-          } else {
-            var newcounter = new Counter();
-            /* Set ACL */
-            var acl = new AV.ACL();
-            acl.setPublicReadAccess(true);
-            acl.setPublicWriteAccess(true);
-            newcounter.setACL(acl);
-            /* End Set ACL */
-            newcounter.set("title", title);
-            newcounter.set("url", url);
-            newcounter.set("time", 1);
-            newcounter.save(null, {
-              success: function(newcounter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
-          }
-        },
-        error: function(error) {
-          console.log('Error:' + error.code + " " + error.message);
-        }
-      });
-    }
-
-    $(function() {
-      var Counter = AV.Object.extend("Counter");
-      if ($('.leancloud_visitors').length == 1) {
-        addCount(Counter);
-      } else if ($('.post-title-link').length > 1) {
-        showTime(Counter);
-      }
-    });
-  </script>
-
-
 
   
 
