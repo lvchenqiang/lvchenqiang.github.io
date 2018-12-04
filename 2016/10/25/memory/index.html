@@ -91,7 +91,8 @@
 <meta property="og:image" content="https://lvchenqiang.github.io/2016/10/25/memory/Snip20181128_82.png">
 <meta property="og:image" content="https://lvchenqiang.github.io/2016/10/25/memory/Snip20181203_83.png">
 <meta property="og:image" content="https://lvchenqiang.github.io/2016/10/25/memory/Snip20181203_85.png">
-<meta property="og:updated_time" content="2018-12-03T15:48:53.330Z">
+<meta property="og:image" content="https://lvchenqiang.github.io/2016/10/25/memory/Snip20181204_86.png">
+<meta property="og:updated_time" content="2018-12-04T15:42:25.447Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS之自动引用计数详解">
 <meta name="twitter:description" content="什么是自动引用计数自动引用计数(ARC, Automatic Reference Counting)是指内存管理中对引用采取自动计数的技术。">
@@ -325,6 +326,17 @@
 
                 
                 
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/BOOK/" itemprop="url" rel="index">
+                    <span itemprop="name">BOOK</span>
+                  </a>
+                </span>
+
+                
+                
               
             </span>
           
@@ -458,7 +470,76 @@
 <li>显示的转换”id”和”void *“</li>
 </ul>
 <h5 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h5><p><img src="/2016/10/25/memory/Snip20181203_85.png" alt=""></p>
-<h3 id="ARC的实现"><a href="#ARC的实现" class="headerlink" title="ARC的实现"></a>ARC的实现</h3><h4 id="strong修饰符"><a href="#strong修饰符" class="headerlink" title="__strong修饰符"></a>__strong修饰符</h4><h4 id="weak修饰符"><a href="#weak修饰符" class="headerlink" title="__weak修饰符"></a>__weak修饰符</h4><h4 id="autoreleasing修饰符"><a href="#autoreleasing修饰符" class="headerlink" title="__autoreleasing修饰符"></a>__autoreleasing修饰符</h4><h4 id="引用计数"><a href="#引用计数" class="headerlink" title="引用计数"></a>引用计数</h4>
+<h3 id="ARC的实现"><a href="#ARC的实现" class="headerlink" title="ARC的实现"></a>ARC的实现</h3><p>苹果的官方说明中称，ARC是”由编译器进行内存管理“的，但实际上只有编译器是无法完全胜任的，在此基础上还需要Objective-C运行时的协助，也就是说，ARC由以下工具、库来实现。</p>
+<ul>
+<li>clang (LLVM 编译器)3.0以上</li>
+<li>objc4 Objective-C运行时库 493.9以上</li>
+</ul>
+<h4 id="strong修饰符"><a href="#strong修饰符" class="headerlink" title="__strong修饰符"></a>__strong修饰符</h4><p>源码1:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line"> id __strong obj = [[NSObject alloc] init];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在编译器选项”-S“的同时运行clang,可取得程序汇编输出。该源代码实际上可转换为调用以下的函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/* 编译器的模拟代码 */</span><br><span class="line">id  obj = objc_msgSend(NSObject,@selector(alloc));</span><br><span class="line"></span><br><span class="line">objc_msgSend(obj,@selector(init));</span><br><span class="line"></span><br><span class="line">objc_release(obj);</span><br></pre></td></tr></table></figure>
+<p>如原源代码所示，2次调用objc_msgSend方法，变量作用域结束时通过objc_release释放对象。虽然ARC有效时不能使用release方法，但由此可以知道编译器自动插入了release。</p>
+<p>源码2:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">id __strong obj = [NSMutableArray array];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>源代码转换如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/* 编译器的模拟代码 */</span><br><span class="line">id obj = objc_msgSend(NSMutableArray,@selector(array));</span><br><span class="line"></span><br><span class="line">objc_retainAutoReleasedReturnValue(obj);</span><br><span class="line"></span><br><span class="line">objc_release(obj);</span><br></pre></td></tr></table></figure>
+<p>objc_retainAutoReleasedReturnValue 函数主要用于优化程序运行。顾名思义，他就是用于自己持有(retain)对象的函数，但它持有的对象为返回注册在autoreleasepool中的对象的方法或函数的返回值。</p>
+<p>这种objc_retainAutoReleasedReturnValue函数式成对的，与之相对的函数是objc_autoreleaseReturnValue.它用于类似array这样类方法等返回对象的实现上。</p>
+<p>例如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">+ (id)array</span><br><span class="line">&#123;</span><br><span class="line">reutrn [[NSMutableArray alloc]init];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>转换如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">id obj = objc_msgSend(NSMutableArray,@selector(alloc));</span><br><span class="line">objc_msgSend(obj,@selector(init))</span><br><span class="line">return  objc_autoreleaseReturnValue(obj);</span><br></pre></td></tr></table></figure>
+<p>objc_autoreleaseReturnValue函数会检查使用该函数的方法或函数调用方的执行命令列表，如果方法或函数的调用方在调用了方法或者函数后紧接着调用了objc_retainAutoReleasedReturnValue()函数，那么就不将返回的对象注册到autoreleasepool中,而是直接传递给方法或函数的调用方。</p>
+<p>objc_retainAutoReleasedReturnValue和objc_retain函数不同，它即便不注册autoreleasepool中而返回对象，也能够正确的获取对象。 通过objc_autoreleaseReturnValue函数和objc_retainAutoReleasedReturnValue函数的协作，可以不将对象注册到autoreleasepool中而直接传递，这一过程达到优化。</p>
+<p><img src="/2016/10/25/memory/Snip20181204_86.png" alt=""></p>
+<h4 id="weak修饰符"><a href="#weak修饰符" class="headerlink" title="__weak修饰符"></a>__weak修饰符</h4><p>__weak修饰符提供了一下的功能:</p>
+<ul>
+<li>若附有__weak修饰符的变量所引用的对象被废弃，则将nil赋值给该变量</li>
+<li>使用附有__weak修饰的变量，即是使用注册到autoreleasepool的对象。</li>
+</ul>
+<p>源码:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">id __weak obj1 = obj;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>假设obj附加__strong修饰符,则转换后源码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">/* 编译器的模拟代码 */</span><br><span class="line">id obj1;</span><br><span class="line"></span><br><span class="line">objc_initWeak(&amp;obj1,obj1)</span><br><span class="line"></span><br><span class="line">objc_destroyWeak(&amp;obj1);</span><br></pre></td></tr></table></figure>
+<p>通过objc_initWeak函数初始化附有 __weak修饰符的变量，在变量作用域结束时会调用objc_destroyWeak 函数释放该变量。</p>
+<p>objc_initWeak函数将附有__weak修饰符的变量初始化为0后，会讲赋值的对象作为参数调用objc_storeWeak函数。<br>所以上面的源代码与下列源代码相同。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/* 编译器的模拟代码 */</span><br><span class="line">id obj1;</span><br><span class="line"></span><br><span class="line">obj1 = 0;</span><br><span class="line"></span><br><span class="line">objc_storeWeak(&amp;obj1,obj)</span><br><span class="line"></span><br><span class="line">objc_storeWeak(&amp;obj1, 0)</span><br></pre></td></tr></table></figure>
+<p>objc_storeWeak函数把第二参数的赋值对象的地址作为键值，将第一参数的附有__weak修饰的变量的地址注册到weak表中。如果第二参数为0，则把变量的地址从weak表中删除。</p>
+<p>释放对象时,废弃谁都不持有的对象的同时,对象将通过objc_release函数释放。</p>
+<ol>
+<li>objc_release</li>
+<li>因为引用计数为0所以执行dealloc</li>
+<li>_objc_rootDealloc</li>
+<li>object_dispose</li>
+<li>objc_destructInstance</li>
+<li>objc_clear_deallpcating</li>
+</ol>
+<p>对象废弃时调用的objc_clear_deallpcating函数的动作如下:</p>
+<ol>
+<li>从weak表中获取废弃对象的地址为键值的记录</li>
+<li>将包含在记录中的所有附有 __weak修饰符变量的地址，赋值为nil.</li>
+<li>从weak表中删除该记录</li>
+<li>从引用计数表中删除废弃对象的地址为键值的记录</li>
+</ol>
+<p>从上面的步骤，前面说的如果附有<strong>weak修饰符的变量所引用的对象被废弃，则将nil赋值该变量这一功能即被实现。由此可知，如果大量的使用</strong>weak 修饰符的变量，则会消耗相应的CPU资源。良策就是只在避免循环引用时使用__weak修饰符。</p>
+<p>在iOS4和OS X Snow Leopard 中是不能使用 <strong>weak修饰符，而有时在其他环境下也不能使用。实际上存在着不支持</strong>weak修饰的类。</p>
+<p>例如: NSMachPort 类就是不支持__weak修饰的类。这些类重写了retain/release并实现该类独自的引用计数机制。</p>
+<p>不支持<strong>weak修饰的类，其类声明中附加了”\</strong>attribute__((objc_arc_weak_refence_unavailable))“ 这一属性，同时定义了NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE.</p>
+<p>实际上还有一种情况下也不能使用__weak修饰符<br>就是当allowWeakReference/retainWeakreference实例方法 返回NO的情况。<br>这写方法的声明如下:</p>
+<blockquote>
+<p>- (BOOL) allowWeakReference;</p>
+<p>- (BOOL) retainWeakreference;</p>
+</blockquote>
+<h4 id="autoreleasing修饰符"><a href="#autoreleasing修饰符" class="headerlink" title="__autoreleasing修饰符"></a>__autoreleasing修饰符</h4><p>将对象赋值给所有__autoreleasing修饰符的变量等同于ARC无效时调用对象的autorelease方法。源码:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@autoreleasepool &#123;</span><br><span class="line">  id __autoreleasing obj = [[NSObject alloc] init];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>变换如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/* 编译器的模拟代码 */</span><br><span class="line">id  pool = objc_autoreleasePoolPush()</span><br><span class="line"></span><br><span class="line">id obj = objc_msgSend(NSObject,@selector(alloc))</span><br><span class="line"></span><br><span class="line">objc_msgSend(obj, @selector(init));</span><br><span class="line"></span><br><span class="line">objc_autorelease(obj);</span><br><span class="line"></span><br><span class="line">objc_autoreleasePoolPop(pool);</span><br></pre></td></tr></table></figure>
+<p>显然这与苹果的autorelease实现中的说明 完全相同。</p>
+<h4 id="引用计数"><a href="#引用计数" class="headerlink" title="引用计数"></a>引用计数</h4><p>获取引用计数数值的函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">uintptr_t _objc_rootRetainCount(id obj)</span><br></pre></td></tr></table></figure>
+<p>在使用_objc_rootRetainCount函数的时候，实际上我们并不能完全相信该函数取得的数值。对于已释放的对象以及不正确的对象地址，有时也返回”1“.另外，在多线程中使用对象的引用计数数值，因为存有竟态条件的问题，所以取得的数值不一定完全可信。</p>
+
       
     </div>
     
@@ -514,8 +595,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/08/19/Swift之Alamofire网络请求、取消请求/" rel="prev" title="Swift之Alamofire网络请求、取消请求">
-                Swift之Alamofire网络请求、取消请求 <i class="fa fa-chevron-right"></i>
+              <a href="/2016/11/19/2/" rel="prev" title="Effective Objective-C 2.0编写高质量iOS与OS X代码的52个有效方法">
+                Effective Objective-C 2.0编写高质量iOS与OS X代码的52个有效方法 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -618,7 +699,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
