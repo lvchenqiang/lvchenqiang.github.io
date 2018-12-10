@@ -88,7 +88,7 @@
 <meta property="og:description" content="Block 概要Block 是C语言的扩充功能。用一句话表示这个扩充功能，就是带有自动变量的匿名函数。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://lvchenqiang.github.io/2016/11/06/Block/Snip20181209_101.png">
-<meta property="og:updated_time" content="2018-12-10T15:32:20.809Z">
+<meta property="og:updated_time" content="2018-12-10T15:34:50.094Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Block 详解">
 <meta name="twitter:description" content="Block 概要Block 是C语言的扩充功能。用一句话表示这个扩充功能，就是带有自动变量的匿名函数。">
@@ -670,7 +670,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[blk_on_heap retain];</span><br></pre></td></tr></table></figure>
 <p>上诉源代码中，虽然对赋值给<code>blk_on_stack</code> 的栈上的Block调用了retain实例方法，但是实际上对此代码不起任何作用，因此还是推荐使用copy实例方法持有 Block.</p>
 <p>由于Block是C语言的扩展，所以我们使用了<code>_Block_copy</code>和<code>_Block_release</code>函数管理Block的内存。</p>
-<p>在ARC,无效的时候，我们可以使用<strong>block来解决循环引用的问题，因为此时当Block从栈复制到堆时，若Block使用的变量为附有</strong>block修饰符的id类型或者对象类型的自动变量，则不会retain.否则会执行retain.</p>
+<p>在ARC,无效的时候，我们可以使用<code>__block</code>来解决循环引用的问题，因为此时当Block从栈复制到堆时，若Block使用的变量为附有<code>__block</code>修饰符的id类型或者对象类型的自动变量，则不会retain.否则会执行retain.</p>
 
       
     </div>
