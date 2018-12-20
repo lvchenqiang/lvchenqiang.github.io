@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="笔记,GCD,多线程," />
 
 
 
@@ -79,18 +79,19 @@
 
 
 
-<meta name="description" content="tags:  笔记 GCD 多线程categories: BOOK  GCD 概要什么是GCD在iOS 中多线程的实现方案一般为pthread、NSThread、GCD、NSOperation。Grand Central Dispatch(GCD)是异步执行任务的技术之一。GCD充分的利用了系统的内核资源，并自动管理线程的生命周期。 在开发中，GCD通常可以以非常简洁的方式，实现比较复杂的多线程编">
+<meta name="description" content="GCD 概要什么是GCD在iOS 中多线程的实现方案一般为pthread、NSThread、GCD、NSOperation。Grand Central Dispatch(GCD)是异步执行任务的技术之一。GCD充分的利用了系统的内核资源，并自动管理线程的生命周期。 在开发中，GCD通常可以以非常简洁的方式，实现比较复杂的多线程编程。">
+<meta name="keywords" content="笔记,GCD,多线程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="GCD详解">
 <meta property="og:url" content="https://lvchenqiang.github.io/2016/12/20/GCD详解/index.html">
 <meta property="og:site_name" content="大前端之路">
-<meta property="og:description" content="tags:  笔记 GCD 多线程categories: BOOK  GCD 概要什么是GCD在iOS 中多线程的实现方案一般为pthread、NSThread、GCD、NSOperation。Grand Central Dispatch(GCD)是异步执行任务的技术之一。GCD充分的利用了系统的内核资源，并自动管理线程的生命周期。 在开发中，GCD通常可以以非常简洁的方式，实现比较复杂的多线程编">
+<meta property="og:description" content="GCD 概要什么是GCD在iOS 中多线程的实现方案一般为pthread、NSThread、GCD、NSOperation。Grand Central Dispatch(GCD)是异步执行任务的技术之一。GCD充分的利用了系统的内核资源，并自动管理线程的生命周期。 在开发中，GCD通常可以以非常简洁的方式，实现比较复杂的多线程编程。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://lvchenqiang.github.io/2016/12/20/GCD详解/Snip20181220_5.png">
-<meta property="og:updated_time" content="2018-12-20T15:07:13.773Z">
+<meta property="og:updated_time" content="2018-12-20T15:10:38.480Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GCD详解">
-<meta name="twitter:description" content="tags:  笔记 GCD 多线程categories: BOOK  GCD 概要什么是GCD在iOS 中多线程的实现方案一般为pthread、NSThread、GCD、NSOperation。Grand Central Dispatch(GCD)是异步执行任务的技术之一。GCD充分的利用了系统的内核资源，并自动管理线程的生命周期。 在开发中，GCD通常可以以非常简洁的方式，实现比较复杂的多线程编">
+<meta name="twitter:description" content="GCD 概要什么是GCD在iOS 中多线程的实现方案一般为pthread、NSThread、GCD、NSOperation。Grand Central Dispatch(GCD)是异步执行任务的技术之一。GCD充分的利用了系统的内核资源，并自动管理线程的生命周期。 在开发中，GCD通常可以以非常简洁的方式，实现比较复杂的多线程编程。">
 <meta name="twitter:image" content="https://lvchenqiang.github.io/2016/12/20/GCD详解/Snip20181220_5.png">
 
 
@@ -302,6 +303,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/BOOK/" itemprop="url" rel="index">
+                    <span itemprop="name">BOOK</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -340,14 +363,7 @@
       
 
       
-        <p>tags:</p>
-<ul>
-<li>笔记</li>
-<li>GCD</li>
-<li>多线程<br>categories:</li>
-<li>BOOK</li>
-</ul>
-<h3 id="GCD-概要"><a href="#GCD-概要" class="headerlink" title="GCD 概要"></a>GCD 概要</h3><h4 id="什么是GCD"><a href="#什么是GCD" class="headerlink" title="什么是GCD"></a>什么是GCD</h4><p>在iOS 中多线程的实现方案一般为pthread、NSThread、GCD、NSOperation。Grand Central Dispatch(GCD)是异步执行任务的技术之一。GCD充分的利用了系统的内核资源，并自动管理线程的生命周期。</p>
+        <h3 id="GCD-概要"><a href="#GCD-概要" class="headerlink" title="GCD 概要"></a>GCD 概要</h3><h4 id="什么是GCD"><a href="#什么是GCD" class="headerlink" title="什么是GCD"></a>什么是GCD</h4><p>在iOS 中多线程的实现方案一般为pthread、NSThread、GCD、NSOperation。Grand Central Dispatch(GCD)是异步执行任务的技术之一。GCD充分的利用了系统的内核资源，并自动管理线程的生命周期。</p>
 <p>在开发中，GCD通常可以以非常简洁的方式，实现比较复杂的多线程编程。<br><a id="more"></a></p>
 <h4 id="多线程编程"><a href="#多线程编程" class="headerlink" title="多线程编程"></a>多线程编程</h4><p>线程，亦可被称为 轻量级进程(Lightweight Process,LWP),是程序执行流的最小单元。一个标准的线程有线程id、当前指令指针(PC)、寄存器集合和堆栈组成。一个进程有一个到多个线程组成，各个线程之间共享程序的内存空间(包括代码段、数据段、堆等)以及一些进程级的资源(如打开文件和信号)。</p>
 <p>一个经典的线程与进程的关系如图:<br><img src="/2016/12/20/GCD详解/Snip20181220_5.png" alt=""></p>
@@ -399,6 +415,16 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/笔记/" rel="tag"># 笔记</a>
+          
+            <a href="/tags/GCD/" rel="tag"># GCD</a>
+          
+            <a href="/tags/多线程/" rel="tag"># 多线程</a>
+          
+        </div>
       
 
       
