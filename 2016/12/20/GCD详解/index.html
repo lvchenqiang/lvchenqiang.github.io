@@ -88,7 +88,7 @@
 <meta property="og:description" content="GCD 概要什么是GCD在iOS 中多线程的实现方案一般为pthread、NSThread、GCD、NSOperation。Grand Central Dispatch(GCD)是异步执行任务的技术之一。GCD充分的利用了系统的内核资源，并自动管理线程的生命周期。 在开发中，GCD通常可以以非常简洁的方式，实现比较复杂的多线程编程。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://lvchenqiang.github.io/2016/12/20/GCD详解/Snip20181220_5.png">
-<meta property="og:updated_time" content="2018-12-21T16:49:37.900Z">
+<meta property="og:updated_time" content="2018-12-22T02:42:34.658Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GCD详解">
 <meta name="twitter:description" content="GCD 概要什么是GCD在iOS 中多线程的实现方案一般为pthread、NSThread、GCD、NSOperation。Grand Central Dispatch(GCD)是异步执行任务的技术之一。GCD充分的利用了系统的内核资源，并自动管理线程的生命周期。 在开发中，GCD通常可以以非常简洁的方式，实现比较复杂的多线程编程。">
@@ -492,7 +492,65 @@
 <blockquote>
 <p>推荐使用<code>dispatch_group_notify</code>函数，因为通过这个函数可以直接设置最后任务所被追加的队列，使用起来相对比较方便。</p>
 </blockquote>
-<h4 id="dispatch-barrier-async"><a href="#dispatch-barrier-async" class="headerlink" title="dispatch_barrier_async"></a><code>dispatch_barrier_async</code></h4><h4 id="dispatch-sync"><a href="#dispatch-sync" class="headerlink" title="dispatch_sync"></a><code>dispatch_sync</code></h4><h4 id="dispatch-apply"><a href="#dispatch-apply" class="headerlink" title="dispatch_apply"></a><code>dispatch_apply</code></h4><h4 id="dispatch-suspend-dispatch-resume"><a href="#dispatch-suspend-dispatch-resume" class="headerlink" title="dispatch_suspend/dispatch_resume"></a><code>dispatch_suspend</code>/<code>dispatch_resume</code></h4><h4 id="Dispatch-Semaphore"><a href="#Dispatch-Semaphore" class="headerlink" title="Dispatch Semaphore"></a><code>Dispatch Semaphore</code></h4><h4 id="dispatch-once"><a href="#dispatch-once" class="headerlink" title="dispatch_once"></a><code>dispatch_once</code></h4><h4 id="Dispatch-I-O"><a href="#Dispatch-I-O" class="headerlink" title="Dispatch I/O"></a><code>Dispatch I/O</code></h4><h3 id="GCD的实现"><a href="#GCD的实现" class="headerlink" title="GCD的实现"></a>GCD的实现</h3><h4 id="Dispatch-Queue-1"><a href="#Dispatch-Queue-1" class="headerlink" title="Dispatch Queue"></a><code>Dispatch Queue</code></h4><h4 id="Dispatch-Source"><a href="#Dispatch-Source" class="headerlink" title="Dispatch Source"></a><code>Dispatch Source</code></h4>
+<h4 id="dispatch-barrier-async"><a href="#dispatch-barrier-async" class="headerlink" title="dispatch_barrier_async"></a><code>dispatch_barrier_async</code></h4><p>关于解决数据竞争的方法：读取处理是可以并发的，但是写入处理却是不允许并发执行的。<br>所以合理的方案是这样的：</p>
+<ol>
+<li>读取处理追加到concurrent dispatch queue中</li>
+<li>写入处理在任何一个读取处理没有执行的状态下，追加到serial dispatch queue中（也就是说，在写入处理结束之前，读取处理不可执行</li>
+</ol>
+<p>代码示例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">- (void)dispatch_barrier</span><br><span class="line">&#123;</span><br><span class="line">    dispatch_queue_t queue = dispatch_queue_create(&quot;com.queue.ForBarrier&quot;, DISPATCH_QUEUE_CONCURRENT);</span><br><span class="line">    </span><br><span class="line">    dispatch_async(queue, ^&#123;</span><br><span class="line">        NSLog(@&quot;读操作0&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    dispatch_async(queue, ^&#123;</span><br><span class="line">        NSLog(@&quot;读操作1&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    dispatch_async(queue, ^&#123;</span><br><span class="line">        NSLog(@&quot;读操作2&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    dispatch_async(queue, ^&#123;</span><br><span class="line">        NSLog(@&quot;读操作3&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    dispatch_barrier_async(queue, ^&#123;</span><br><span class="line">        NSLog(@&quot;写操作&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    dispatch_async(queue, ^&#123;</span><br><span class="line">        NSLog(@&quot;读操作4&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    dispatch_async(queue, ^&#123;</span><br><span class="line">        NSLog(@&quot;读操作5&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    dispatch_async(queue, ^&#123;</span><br><span class="line">        NSLog(@&quot;读操作6&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    dispatch_async(queue, ^&#123;</span><br><span class="line">        NSLog(@&quot;读操作7&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">GCDDemo[31647:1090277] 读操作1</span><br><span class="line">GCDDemo[31647:1090274] 读操作0</span><br><span class="line">GCDDemo[31647:1090275] 读操作2</span><br><span class="line">GCDDemo[31647:1090276] 读操作3</span><br><span class="line">GCDDemo[31647:1090276] 写操作</span><br><span class="line">GCDDemo[31647:1090276] 读操作4</span><br><span class="line">GCDDemo[31647:1090274] 读操作5</span><br><span class="line">GCDDemo[31647:1090277] 读操作6</span><br><span class="line">GCDDemo[31647:1090282] 读操作7</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>dispatch_barrier_async</code>函数会等待追加到<code>Concurrent Dispatch Queue</code>上的并行处理全部结束之后，再将制定的处理追加到该<code>Concurrent Dispatch Queue</code>中。然后由<code>dispatch_barrier_async</code>函数追加的处理执行完毕后，<code>Concurrent Dispatch Queue</code>才恢复为一般的动作，即追加到该<code>Concurrent Dispatch Queue</code>的处理又开始并发执行。</p>
+</blockquote>
+<p>使用<code>Concurrent Dispatch Queue</code> 和 <code>dispatch_barrier_async</code> 函数可以实现高效率的数据库访问和文件访问</p>
+<h4 id="dispatch-sync"><a href="#dispatch-sync" class="headerlink" title="dispatch_sync"></a><code>dispatch_sync</code></h4><p>上面的所有例子都使用的是异步函数，有异步就一定会有同步，那么现在就来区分一下同步和异步函数的区别：</p>
+<ul>
+<li><code>dispatch_async</code>：异步函数，这个函数会立即返回，不做任何等待，它所指定的block“非同步地”追加到指定的队列中</li>
+<li><code>dispatch_sync</code>：同步函数，这个函数不会立即返回，它会一直等待追加到特定队列中的制定block完成工作后才返回，所以它的目的（也是效果）是阻塞当前线程</li>
+</ul>
+<p>代码示例:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- (void)dispatch_sync_1</span><br><span class="line">&#123;</span><br><span class="line">    //同步处理</span><br><span class="line">    NSLog(@&quot;%@&quot;,[NSThread currentThread]);</span><br><span class="line">    NSLog(@&quot;同步处理开始&quot;);</span><br><span class="line">    </span><br><span class="line">    __block NSInteger num = 0;</span><br><span class="line">    dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);</span><br><span class="line">    dispatch_sync(queue, ^&#123;</span><br><span class="line">        //模仿耗时操作</span><br><span class="line">        for (NSInteger i = 0; i&lt; 10000; i ++) &#123;</span><br><span class="line">            num++;</span><br><span class="line">        &#125;</span><br><span class="line">        NSLog(@&quot;%@&quot;,[NSThread currentThread]);</span><br><span class="line">        NSLog(@&quot;同步处理完毕&quot;);</span><br><span class="line">    &#125;);</span><br><span class="line">    NSLog(@&quot;%ld&quot;,num);</span><br><span class="line">    NSLog(@&quot;%@&quot;,[NSThread currentThread]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">GCDDemo[31811:1097403] &lt;NSThread: 0x6000020f9780&gt;&#123;number = 1, name = main&#125;</span><br><span class="line">GCDDemo[31811:1097403] 同步处理开始</span><br><span class="line">GCDDemo[31811:1097403] &lt;NSThread: 0x6000020f9780&gt;&#123;number = 1, name = main&#125;</span><br><span class="line">GCDDemo[31811:1097403] 同步处理完毕</span><br><span class="line">GCDDemo[31811:1097403] 10000</span><br><span class="line">GCDDemo[31811:1097403] &lt;NSThread: 0x6000020f9780&gt;&#123;number = 1, name = main&#125;</span><br></pre></td></tr></table></figure>
+<p>到这里，我们已经了解到了同步(<code>dispatch_sync</code>)、异步(<code>dispatch_async</code>)、串行(<code>Serial Dispatch Queue</code>)、并行(<code>Concurrent Dispatch Queue</code>)这些概念术语，下面就就综合解释一下:</p>
+<p>同步和异步决定了要不要开启新的线程:</p>
+<ul>
+<li>同步：在当前线程中执行任务，不具备开启新线程的能力</li>
+<li>异步：在新的线程中执行任务，具备开启新线程的能力</li>
+</ul>
+<p>并发和串行决定了任务的执行方式</p>
+<ul>
+<li>并发：多个任务并发（同时）执行</li>
+<li>串行：一个任务执行完毕后，再执行下一个任务</li>
+</ul>
+<p>即如下所示:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>全局并发队列</th>
+<th>手动创建的串行队列</th>
+<th>主队列</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>同步(<code>dispatch_sync</code>)</td>
+<td>没有开启新线程 串行执行任务</td>
+<td>没有开启新线程 串行执行任务</td>
+<td>没有开启新线程 串行执行任务</td>
+</tr>
+<tr>
+<td>异步(<code>dispatch_async</code>)</td>
+<td>开启新线程 并行执行任务</td>
+<td>开启新线程 串行执行任务</td>
+<td>没有开启新线程 串行执行任务</td>
+</tr>
+</tbody>
+</table>
+<h4 id="dispatch-apply"><a href="#dispatch-apply" class="headerlink" title="dispatch_apply"></a><code>dispatch_apply</code></h4><h4 id="dispatch-suspend-dispatch-resume"><a href="#dispatch-suspend-dispatch-resume" class="headerlink" title="dispatch_suspend/dispatch_resume"></a><code>dispatch_suspend</code>/<code>dispatch_resume</code></h4><h4 id="Dispatch-Semaphore"><a href="#Dispatch-Semaphore" class="headerlink" title="Dispatch Semaphore"></a><code>Dispatch Semaphore</code></h4><h4 id="dispatch-once"><a href="#dispatch-once" class="headerlink" title="dispatch_once"></a><code>dispatch_once</code></h4><h4 id="Dispatch-I-O"><a href="#Dispatch-I-O" class="headerlink" title="Dispatch I/O"></a><code>Dispatch I/O</code></h4><h3 id="GCD的实现"><a href="#GCD的实现" class="headerlink" title="GCD的实现"></a>GCD的实现</h3><h4 id="Dispatch-Queue-1"><a href="#Dispatch-Queue-1" class="headerlink" title="Dispatch Queue"></a><code>Dispatch Queue</code></h4><h4 id="Dispatch-Source"><a href="#Dispatch-Source" class="headerlink" title="Dispatch Source"></a><code>Dispatch Source</code></h4>
       
     </div>
     
