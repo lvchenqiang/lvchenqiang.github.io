@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="起源问题来自于掘金的一篇文章《一道值得思考的iOS面试题》，之前看了作者的思路，有一些有部分的出入,刚好现在有时间了，遂整理一下思路。 问题12345678910111213141516171819202122232425@interface Spark : NSObject @property(nonatomic,copy) NSString *name; @end@implementation">
+<meta name="description" content="起源问题来自于掘金的一篇文章《一道值得思考的iOS面试题》，之前看了作者的思路，理解上有一部分的出入,而且自己在验证中又发现了一些问题,刚好现在有时间了，遂整理一下思路。">
 <meta name="keywords" content="面试题">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一道值得思考的iOS面试题">
 <meta property="og:url" content="https://lvchenqiang.github.io/2019/01/09/stackpointer/index.html">
 <meta property="og:site_name" content="大前端之路">
-<meta property="og:description" content="起源问题来自于掘金的一篇文章《一道值得思考的iOS面试题》，之前看了作者的思路，有一些有部分的出入,刚好现在有时间了，遂整理一下思路。 问题12345678910111213141516171819202122232425@interface Spark : NSObject @property(nonatomic,copy) NSString *name; @end@implementation">
+<meta property="og:description" content="起源问题来自于掘金的一篇文章《一道值得思考的iOS面试题》，之前看了作者的思路，理解上有一部分的出入,而且自己在验证中又发现了一些问题,刚好现在有时间了，遂整理一下思路。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://lvchenqiang.github.io/2019/01/09/stackpointer/Snip20190109_8.png">
 <meta property="og:image" content="https://lvchenqiang.github.io/2019/01/09/stackpointer/Snip20190109_9.png">
@@ -101,10 +101,10 @@
 <meta property="og:image" content="https://lvchenqiang.github.io/2019/01/09/stackpointer/Snip20190110_26.png">
 <meta property="og:image" content="https://lvchenqiang.github.io/2019/01/09/stackpointer/Snip20190110_27.png">
 <meta property="og:image" content="https://lvchenqiang.github.io/2019/01/09/stackpointer/Snip20190111_28.png">
-<meta property="og:updated_time" content="2019-01-10T16:37:19.236Z">
+<meta property="og:updated_time" content="2019-01-10T16:41:28.724Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一道值得思考的iOS面试题">
-<meta name="twitter:description" content="起源问题来自于掘金的一篇文章《一道值得思考的iOS面试题》，之前看了作者的思路，有一些有部分的出入,刚好现在有时间了，遂整理一下思路。 问题12345678910111213141516171819202122232425@interface Spark : NSObject @property(nonatomic,copy) NSString *name; @end@implementation">
+<meta name="twitter:description" content="起源问题来自于掘金的一篇文章《一道值得思考的iOS面试题》，之前看了作者的思路，理解上有一部分的出入,而且自己在验证中又发现了一些问题,刚好现在有时间了，遂整理一下思路。">
 <meta name="twitter:image" content="https://lvchenqiang.github.io/2019/01/09/stackpointer/Snip20190109_8.png">
 
 
@@ -376,7 +376,8 @@
       
 
       
-        <h3 id="起源"><a href="#起源" class="headerlink" title="起源"></a>起源</h3><p>问题来自于掘金的一篇文章<a href="https://juejin.im/post/5c00f560e51d45160c471440" target="_blank" rel="noopener">《一道值得思考的iOS面试题》</a>，之前看了作者的思路，有一些有部分的出入,刚好现在有时间了，遂整理一下思路。</p>
+        <h3 id="起源"><a href="#起源" class="headerlink" title="起源"></a>起源</h3><p>问题来自于掘金的一篇文章<a href="https://juejin.im/post/5c00f560e51d45160c471440" target="_blank" rel="noopener">《一道值得思考的iOS面试题》</a>，之前看了作者的思路，理解上有一部分的出入,而且自己在验证中又发现了一些问题,刚好现在有时间了，遂整理一下思路。</p>
+<a id="more"></a>
 <h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">@interface Spark : NSObject </span><br><span class="line"></span><br><span class="line">@property(nonatomic,copy) NSString *name; </span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation Spark</span><br><span class="line"></span><br><span class="line">- (void)speak &#123;</span><br><span class="line">    NSLog(@&quot;My name is:%@&quot;,self.name); </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@end</span><br><span class="line"></span><br><span class="line">@implementation ViewController</span><br><span class="line"></span><br><span class="line">- (void)viewDidLoad &#123;</span><br><span class="line">    [super viewDidLoad];</span><br><span class="line">    </span><br><span class="line">    id cls = [Spark class];</span><br><span class="line">    </span><br><span class="line">    void *obj = &amp;cls;</span><br><span class="line">    </span><br><span class="line">    [(__bridge id)obj speak];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>问题:上述代码运行起来会:<code>Complie error?|Runtime crash?|NSLog ?</code></p>
 <h3 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h3><h4 id="思路分析"><a href="#思路分析" class="headerlink" title="思路分析"></a>思路分析</h4><p>当时第一眼看到这个问题,感觉是会有问题。但是运行一下，发现正常输出：<br><img src="/2019/01/09/stackpointer/Snip20190109_8.png" alt=""></p>
