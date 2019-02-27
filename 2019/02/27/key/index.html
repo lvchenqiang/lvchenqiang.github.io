@@ -79,20 +79,20 @@
 
 
 
-<meta name="description" content="同一设备同时使用不同ssk key日常开发中，我们经常遇到同设备对应不同git地址，配置不同的ssh key的问题。 生成A仓库需要的key1ssh-keygen -t rsa -C “email@funplus.com” -f ~/.ssh/ares_rsa 生成ssh key同时都会生成一个私钥和一个公钥，用于非对称加密。我们需要在对应仓库设置的key都是公钥，也就是.pub结尾的文件内容 复">
+<meta name="description" content="同一设备同时使用不同ssk key日常开发中，我们经常遇到同设备对应不同git地址，配置不同的ssh key的问题。">
 <meta name="keywords" content="工具">
 <meta property="og:type" content="article">
 <meta property="og:title" content="key">
 <meta property="og:url" content="https://lvchenqiang.github.io/2019/02/27/key/index.html">
 <meta property="og:site_name" content="大前端之路">
-<meta property="og:description" content="同一设备同时使用不同ssk key日常开发中，我们经常遇到同设备对应不同git地址，配置不同的ssh key的问题。 生成A仓库需要的key1ssh-keygen -t rsa -C “email@funplus.com” -f ~/.ssh/ares_rsa 生成ssh key同时都会生成一个私钥和一个公钥，用于非对称加密。我们需要在对应仓库设置的key都是公钥，也就是.pub结尾的文件内容 复">
+<meta property="og:description" content="同一设备同时使用不同ssk key日常开发中，我们经常遇到同设备对应不同git地址，配置不同的ssh key的问题。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/02/27/key/Snip20190227_21.png">
 <meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/02/27/key/Snip20190227_22.png">
-<meta property="og:updated_time" content="2019-02-27T15:28:46.996Z">
+<meta property="og:updated_time" content="2019-02-27T15:35:48.082Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="key">
-<meta name="twitter:description" content="同一设备同时使用不同ssk key日常开发中，我们经常遇到同设备对应不同git地址，配置不同的ssh key的问题。 生成A仓库需要的key1ssh-keygen -t rsa -C “email@funplus.com” -f ~/.ssh/ares_rsa 生成ssh key同时都会生成一个私钥和一个公钥，用于非对称加密。我们需要在对应仓库设置的key都是公钥，也就是.pub结尾的文件内容 复">
+<meta name="twitter:description" content="同一设备同时使用不同ssk key日常开发中，我们经常遇到同设备对应不同git地址，配置不同的ssh key的问题。">
 <meta name="twitter:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/02/27/key/Snip20190227_21.png">
 
 
@@ -364,6 +364,7 @@
 
       
         <h3 id="同一设备同时使用不同ssk-key"><a href="#同一设备同时使用不同ssk-key" class="headerlink" title="同一设备同时使用不同ssk key"></a>同一设备同时使用不同ssk key</h3><p>日常开发中，我们经常遇到同设备对应不同git地址，配置不同的ssh key的问题。</p>
+<a id="more"></a>
 <h4 id="生成A仓库需要的key"><a href="#生成A仓库需要的key" class="headerlink" title="生成A仓库需要的key"></a>生成A仓库需要的key</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C “email@funplus.com” -f ~/.ssh/ares_rsa</span><br></pre></td></tr></table></figure>
 <p>生成ssh key同时都会生成一个私钥和一个公钥，用于非对称加密。我们需要在对应仓库设置的key都是公钥，也就是.pub结尾的文件内容</p>
 <h4 id="复制仓库设置对应的公钥"><a href="#复制仓库设置对应的公钥" class="headerlink" title="复制仓库设置对应的公钥"></a>复制仓库设置对应的公钥</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pbcopy &lt; ~/.ssh/ares_rsa.pub</span><br></pre></td></tr></table></figure>
