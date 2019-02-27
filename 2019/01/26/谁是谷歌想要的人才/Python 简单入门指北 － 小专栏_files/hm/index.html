@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="lvchenqiang.github.io/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="lvchenqiang.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="lvchenqiang.github.io/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="lvchenqiang.github.io/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="lvchenqiang.github.io/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="lvchenqiang.github.io/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="lvchenqiang.github.io/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="(function(){var h={},mt={},c={id:&quot;e7fbc901596776745c59d839ad5b5ef7&quot;,dm:[&quot;xiaozhuanlan.com&quot;],js:&quot;tongji.baidu.com/hm-web/js/&quot;,etrk:[],icon:&apos;&apos;,ctrk:false,align:-1,nv:-1,vdur:1800000,age:31536000000,rec:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大前端之路">
+<meta property="og:url" content="https://lvchenqiang.github.io/2019/01/26/谁是谷歌想要的人才/Python 简单入门指北 － 小专栏_files/hm/index.html">
+<meta property="og:site_name" content="大前端之路">
+<meta property="og:description" content="(function(){var h={},mt={},c={id:&quot;e7fbc901596776745c59d839ad5b5ef7&quot;,dm:[&quot;xiaozhuanlan.com&quot;],js:&quot;tongji.baidu.com/hm-web/js/&quot;,etrk:[],icon:&apos;&apos;,ctrk:false,align:-1,nv:-1,vdur:1800000,age:31536000000,rec:">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-01-25T16:03:09.550Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="大前端之路">
+<meta name="twitter:description" content="(function(){var h={},mt={},c={id:&quot;e7fbc901596776745c59d839ad5b5ef7&quot;,dm:[&quot;xiaozhuanlan.com&quot;],js:&quot;tongji.baidu.com/hm-web/js/&quot;,etrk:[],icon:&apos;&apos;,ctrk:false,align:-1,nv:-1,vdur:1800000,age:31536000000,rec:">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: 'lvchenqiang.github.io/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://lvchenqiang.github.io/2019/01/26/谁是谷歌想要的人才/Python 简单入门指北 － 小专栏_files/hm/">
+
+
+
+
+
+  <title> | 大前端之路</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="lvchenqiang.github.io/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">大前端之路</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="lvchenqiang.github.io/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="lvchenqiang.github.io/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="lvchenqiang.github.io/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="lvchenqiang.github.io/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="lvchenqiang.github.io/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://lvchenqiang.github.iolvchenqiang.github.io/2019/01/26/谁是谷歌想要的人才/Python 简单入门指北 － 小专栏_files/hm/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micah">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="lvchenqiang.github.io/image/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="大前端之路">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-26T00:03:09+08:00">
+                2019-01-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="lvchenqiang.github.io/2019/01/26/谁是谷歌想要的人才/Python 简单入门指北 － 小专栏_files/hm/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/01/26/谁是谷歌想要的人才/Python 简单入门指北 － 小专栏_files/hm/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        (function(){var h={},mt={},c={id:"e7fbc901596776745c59d839ad5b5ef7",dm:["xiaozhuanlan.com"],js:"tongji.baidu.com/hm-web/js/",etrk:[],icon:'',ctrk:false,align:-1,nv:-1,vdur:1800000,age:31536000000,rec:0,rp:[],trust:0,vcard:0,qiao:0,lxb:0,kbtrk:0,pt:0,aet:'',conv:0,med:0,cvcc:'',cvcf:[],apps:''};var r=void 0,s=!0,t=null,u=!1;mt.cookie={};mt.cookie.set=function(b,a,d){var f;d.V&&(f=new Date,f.setTime(f.getTime()+d.V));document.cookie=b+"="+a+(d.domain?"; domain="+d.domain:"")+(d.path?"; path="+d.path:"")+(f?"; expires="+f.toGMTString():"")+(d.Ib?"; secure":"")};mt.cookie.get=function(b){return(b=RegExp("(^| )"+b+"=([^;]*)(;|$)").exec(document.cookie))?b[2]:t};mt.lang={};mt.lang.d=function(b,a){return"[object "+a+"]"==={}.toString.call(b)};
+mt.lang.ta=function(b){return mt.lang.d(b,"Number")&&isFinite(b)};mt.lang.aa=function(){return mt.lang.d(c.aet,"String")};mt.lang.j=function(b){return b.replace?b.replace(/'/g,"'0").replace(/\*/g,"'1").replace(/!/g,"'2"):b};mt.lang.trim=function(b){return b.replace(/^\s+|\s+$/g,"")};mt.lang.C=function(b,a){var d=u;if(b==t||!mt.lang.d(b,"Array")||a===r)return d;if(Array.prototype.indexOf)d=-1!==b.indexOf(a);else for(var f=0;f<b.length;f++)if(b[f]===a){d=s;break}return d};="" (function(){var="" b="mt.lang;mt.e={};mt.e.Na=function(a){return" document.getelementbyid(a)};mt.e.z="function(a,d){var" g;for(;a.parentnode!="t;){for(var" l="0,n=0,p=a.parentNode.childNodes.length,e=0;e<p;e++){var" k="a.parentNode.childNodes[e];if(k.nodeName===a.nodeName&&(l++,k===a&&(n=l),0<n&&1<l))break}if((p=" "!="=a.id)&&d){b.unshift(" #"+encodeuricomponent(a.id));break}else""="" p&&(p="#" +encodeuricomponent(a.id),p="0<b.length?p+" "="">"+b.join(">"):p,g.push(p)),b.unshift(encodeURIComponent(String(a.nodeName).toLowerCase())+
+(1<l?"["+n+"]":""));a=a.parentnode}g.push(b.join(">"));return g};mt.e.Ta=function(a){return(a=mt.e.Z(a,s))&&a.length?String(a[0]):""};mt.e.Db=function(a){return mt.e.Z(a,u)};mt.e.Bb=function(a,b){for(b=b.toUpperCase();(a=a.parentNode)&&1==a.nodeType;)if(a.tagName==b)return a;return t};mt.e.Oa=function(a){return 9===a.nodeType?a:a.ownerDocument||a.document};mt.e.Cb=function(a){var b={top:0,left:0};if(!a)return b;var f=mt.e.Oa(a).documentElement;"undefined"!==typeof a.getBoundingClientRect&&(b=a.getBoundingClientRect());
+return{top:b.top+(window.pageYOffset||f.scrollTop)-(f.clientTop||0),left:b.left+(window.pageXOffset||f.scrollLeft)-(f.clientLeft||0)}};mt.e.getAttribute=function(a,b){var f=a.getAttribute&&a.getAttribute(b)||t;if(!f&&a.attributes&&a.attributes.length)for(var g=a.attributes,l=g.length,n=0;n<l;n++)g[n].nodename===b&&(f=g[n].nodevalue);return 10="" f};mt.e.j="function(a){var" b="document" ;a.tagname!="=r&&(b=a.tagName);return" b.tolowercase()};mt.e.va="function(a){var" d="" ;a.textcontent?d="b.trim(a.textContent):" a.innertext&&(d="b.trim(a.innerText));d&&(d=d.replace(/\s+/g," "="" ").substring(0,255));return="" d};mt.e.pa="function(a){var" string(a).substring(0,255)};(function(){(mt.e.gb="function(){function" a(){if(!a.m){a.m="s;for(var" b(){try{document.documentelement.doscroll("left")}catch(f){settimeout(b,="" 1);return}a()}var="" f="u,g=[],l;document.addEventListener?l=function(){document.removeEventListener(" domcontentloaded",l,u);a()}:document.attachevent&&(l="function(){" complete"="==document.readyState&&(document.detachEvent("onreadystatechange",l),a())});(function(){if(!f)if(f=s,"complete"===document.readyState)a.M=s;else""" if(document.addeventlistener)document.addeventlistener("domcontentloaded",l,u),window.addeventlistener("load",a,u);else="" if(document.attachevent){document.attachevent("onreadystatechange",="" l);window.attachevent("onload",a);var="" g="u;try{g=window.frameElement==t}catch(p){}document.documentElement.doScroll&&g&&b()}})();return" function(b){a.m?b():g.push(b)}}()).m="u})();return" mt.e})();mt.event="{};mt.event.c=function(b,a,d){b.attachEvent?b.attachEvent(" on"+a,function(a){d.call(b,a)}):b.addeventlistener&&b.addeventlistener(a,d,u)};mt.event.preventdefault="function(b){b.preventDefault?b.preventDefault():b.returnValue=u};" (function(){var="" (\d+\.\d+)="" i.test(navigator.useragent);mt.g.cb="/msie" i.test(navigator.useragent)?document.documentmode||+regexp.$1:r;mt.g.cookieenabled="navigator.cookieEnabled;mt.g.javaEnabled=navigator.javaEnabled();mt.g.language=navigator.language||navigator.browserLanguage||navigator.systemLanguage||navigator.userLanguage||" ";mt.g.ib="(window.screen.width||0)+" x"+(window.screen.height||0);mt.g.colordepth="window.screen.colorDepth||0;mt.g.K=function(){var""" a;="" a="a||document;return" parseint(window.pageyoffset||a.documentelement.scrolltop||a.body&&a.body.scrolltop||0,10)};mt.g.b="function(){var" parseint(window.innerheight||a.documentelement.clientheight||a.body&&a.body.clientheight||0,10)};mt.g.orientation="0;(function(){function" a(){var="" mt.g})();="" mt.l="{};mt.l.parse=function(){return(new" function('return="" ("="" +="" source="" ")'))()};="" mt.l.stringify="function(){function" b(a){="" ["\\\x00-\x1f]="" .test(a)&&(a="a.replace(/[" \\\x00-\x1f]="" g,function(a){var"="" b;b="a.charCodeAt();return" \\u00"+math.floor(b="" 16).tostring(16)+(b%16).tostring(16)}));return'"'+a+'"'}function"="" a(a){return="">a?"0"+a:a}var d={"\b":"\\b","\t":"\\t","\n":"\\n","\f":"\\f","\r":"\\r",'"':'\\"',"\\":"\\\\"};return function(d){switch(typeof d){case "undefined":return"undefined";case "number":return isFinite(d)?String(d):"null";case "string":return b(d);case "boolean":return String(d);
+default:if(d===t)return"null";if(d instanceof Array){var g=["["],l=d.length,n,p,e;for(p=0;p<l;p++)switch(e=d[p],typeof e){case="" "undefined":case="" "function":case="" "unknown":break;default:n&&g.push(","),g.push(mt.l.stringify(e)),n="1}g.push(" ]");return"="" g.join("")}if(d="" instanceof="" date)return'"'+d.getfullyear()+"-"+a(d.getmonth()+1)+"-"+a(d.getdate())+"t"+a(d.gethours())+":"+a(d.getminutes())+":"+a(d.getseconds())+'"';n="[" {"];p="mt.l.stringify;for(l" "="" in="" d)if(object.prototype.hasownproperty.call(d,l))switch(e="d[l],typeof" "unknown":case="" "function":break;default:g&&n.push(","),g="1,n.push(p(l)+" :"+p(e))}n.push("}");return"="" n.join("")}}}();mt.localstorage="{};mt.localStorage.P=function(){if(!mt.localStorage.i)try{mt.localStorage.i=document.createElement(" input"),mt.localstorage.i.type="hidden" ,mt.localstorage.i.style.display="none" ,mt.localstorage.i.addbehavior("#default#userdata"),document.getelementsbytagname("head")[0].appendchild(mt.localstorage.i)}catch(b){return"="" u}return="" s};="" mt.localstorage.set="function(b,a,d){var" f="new" date;f.settime(f.gettime()+d||31536e6);try{window.localstorage?(a="f.getTime()+" |"+a,window.localstorage.setitem(b,a)):mt.localstorage.p()&&(mt.localstorage.i.expires="f.toUTCString(),mt.localStorage.i.load(document.location.hostname),mt.localStorage.i.setAttribute(b,a),mt.localStorage.i.save(document.location.hostname))}catch(g){}};" mt.localstorage.get="function(b){if(window.localStorage){if(b=window.localStorage.getItem(b)){var" a="b.indexOf(" |"),d="b.substring(0,a)-0;if(d&&d">(new Date).getTime())return b.substring(a+1)}}else if(mt.localStorage.P())try{return mt.localStorage.i.load(document.location.hostname),mt.localStorage.i.getAttribute(b)}catch(f){}return t};
+mt.localStorage.remove=function(b){if(window.localStorage)window.localStorage.removeItem(b);else if(mt.localStorage.P())try{mt.localStorage.i.load(document.location.hostname),mt.localStorage.i.removeAttribute(b),mt.localStorage.i.save(document.location.hostname)}catch(a){}};mt.sessionStorage={};mt.sessionStorage.set=function(b,a){if(window.sessionStorage)try{window.sessionStorage.setItem(b,a)}catch(d){}};
+mt.sessionStorage.get=function(b){return window.sessionStorage?window.sessionStorage.getItem(b):t};mt.sessionStorage.remove=function(b){window.sessionStorage&&window.sessionStorage.removeItem(b)};mt.xa={};mt.xa.log=function(b,a){var d=new Image,f="mini_tangram_log_"+Math.floor(2147483648*Math.random()).toString(36);window[f]=d;d.onload=d.onerror=d.onabort=function(){d.onload=d.onerror=d.onabort=t;d=window[f]=t;a&&a(b)};d.src=b};mt.ha={};
+mt.ha.Wa=function(){var b="";if(navigator.plugins&&navigator.mimeTypes.length){var a=navigator.plugins["Shockwave Flash"];a&&a.description&&(b=a.description.replace(/^.*\s+(\S+)\s+\S+$/,"$1"))}else if(window.ActiveXObject)try{if(a=new ActiveXObject("ShockwaveFlash.ShockwaveFlash"))(b=a.GetVariable("$version"))&&(b=b.replace(/^.*\s+(\d+),(\d+).*$/,"$1.$2"))}catch(d){}return b};
+mt.ha.Ab=function(b,a,d,f,g){return'<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" id="'+b+'" width="'+d+'" height="'+f+'"><param name="movie" value="'+a+'"><param name="flashvars" value="'+(g||" ")+'"=""><param name="allowscriptaccess" value="always"><embed type="application/x-shockwave-flash" name="'+b+'" width="'+d+'" height="'+f+'" src="'+a+'" flashvars="'+(g||" ")+'"="" allowscriptaccess="always"></object>'};mt.url={};
+mt.url.k=function(b,a){var d=b.match(RegExp("(^|&|\\?|#)("+a+")=([^&#]*)(&|$|#)",""));return d?d[3]:t};mt.url.Eb=function(b){return(b=b.match(/^(https?:)\/\//))?b[1]:t};mt.url.Ra=function(b){return(b=b.match(/^(https?:\/\/)?([^\/\?#]*)/))?b[2].replace(/.*@/,""):t};mt.url.Y=function(b){return(b=mt.url.Ra(b))?b.replace(/:\d+$/,""):b};mt.url.Z=function(b){return(b=b.match(/^(https?:\/\/)?[^\/]*(.*)/))?b[2].replace(/[\?#].*/,"").replace(/^$/,"/"):t};
+(function(){function b(){for(var a=u,b=document.getElementsByTagName("script"),f=b.length,f=100<f?100:f,g=0;g<f;g++){var l="b[g].src;if(l&&0===l.indexOf(" https:="" hm.baidu.com="" h")){a="s;break}}return" "="" a}return="" h.ma="b})();var" a="h.Ma;" h.p="{Fb:" http:="" tongji.baidu.com="" hm-web="" welcome="" ico",wa:"hm.baidu.com="" hm.gif",ca:"tongji.baidu.com",$a:"hmmd",ab:"hmpl",ub:"utm_medium",za:"hmkw",wb:"utm_term",xa:"hmci",tb:"utm_content",bb:"hmsr",vb:"utm_source",ya:"hmcu",rb:"utm_campaign",w:0,m:math.round(+new"="" date="" 1e3),z:math.round(+new="" 1e3)%65535,protocol:"https:"="==document.location.protocol?" https:":"http:",ca:a()||"https:"="==document.location.protocol?" https:":"http:",gb:0,yb:6e5,fb:6e5,hb:5e3,zb:5,t:1024,xb:1,da:2147483647,ya:"kb""="" cc="" cf="" ci="" ck="" cl="" cm="" cp="" cu="" cw="" ds="" vl="" ep="" et="" fl="" ja="" ln="" lo="" lt="" rnd="" si="" su="" v="" cv="" lv="" api="" sn="" ct="" u="" tt".split("="" "),="" d:s,na:["a","input","button"],ea:{id:"data-hm-id",s:"data-hm-class",ka:"data-hm-xpath",content:"data-hm-content",o:"data-hm-tag",link:"data-hm-link"},ma:"data-hm-enabled",la:"data-hm-disabled"};(function(){var="" b="{r:{},c:function(a,b){this.r[a]=this.r[a]||[];this.r[a].push(b)},I:function(a,b){this.r[a]=this.r[a]||[];for(var" f="this.r[a].length,g=0;g<f;g++)this.r[a][g](b)}};return" h.a="b})();" (function(){function="" b(b,f){var="" g="document.createElement(" script");g.charset="utf-8" ;a.d(f,"function")&&(g.readystate?g.onreadystatechange="function(){if(" loaded"="==g.readyState||"complete"===g.readyState)g.onreadystatechange=t,f()}:g.onload=function(){f()});g.src=b;var""" h.load="b})();" (function(){var="" date,p="[],e={oa:function(){return" function(k){if(h.a&&h.a.d&&c.aet&&c.aet.length){var="" d="k.target||k.srcElement;if(d){var" m="h.a.na,q=a.getAttribute(d,g.ma)!=t?s:u;if(a.getAttribute(d,g.la)==t)if(q)e.Q(e.X(d,k));else{var" for(;d.parentnode!="t;){var" q="d.parentNode,f=a.J(q),v=" a"="==f&&b.C(m," a")?s:u,f="button" =="=f&&b.C(m,"button")?s:u,l=a.getAttribute(q,g.ma)!=t?s:u;if(a.getAttribute(q,""" g.la)="=t&&(v||f||l)){e.Q(e.X(q,k));break}d=d.parentNode}}}}}},X:function(k,d){var" document.body.scrolltop):d.pagey:"touchend"="==d.type&&(d.ea&&b.d(d.ea.changedTouches," array")&&d.ea.changedtouches.length)&&(q="d.ea.changedTouches[0].pageY);m.qb=q;return" m},q:function(a){var="" date-(h.a.s!="=r?h.a.s:n),d(a.id),d(a.S),d(a.O),d(a.ka),d(a.link),d(a.content),a.type,a.qb].join(" *");e.r(d);b.c(["a"],a.o)&&b.d(this.g(),"function")&&this.g()()},r:function(a){a.length"="">g.T||(encodeURIComponent(p.join("!")+a).length>g.T&&(e.H(p.join("!")),p=[]),p.push(a))},H:function(a){h.a.b.et=
+5;h.a.b.ep=a;h.a.h()},G:function(){return function(){p&&p.length&&(e.H(p.join("!")),p=[])}}};b.aa()&&""!==c.aet&&l.c("pv-b",function(){d.c(document,"click",e.oa());"ontouchend"in document&&d.c(window,"touchend",e.oa());d.c(window,"unload",e.G())});return e})();
+(function(){var b=mt.event,a=mt.g,d=h.p,f=h.A,g=+new Date,l=[],n=t,p={Ia:function(){return function(){h.a&&(h.a.D&&c.aet&&c.aet.length)&&(window.clearTimeout(n),n=window.setTimeout(function(){p.Aa(a.K()+a.B())},150))}},Aa:function(a){p.R([+new Date-(h.a.s!==r?h.a.s:g),a].join("*"))},R:function(a){if(encodeURIComponent(l.join("!")+a).length>d.T||5<l.length)p.h(l.join("!")),l=[];l.push(a)},h:function(b){h.a.b.et=6;h.a.b.vh=a.b();h.a.b.ep=b;h.a.h()},g:function(){return function(){l&&l.length&&(p.h(l.join("!")),="" l="[])}}};mt.lang.aa()&&" "!="=c.aet&&f.c(" pv-b",function(){b.c(window,"scroll",p.ia());b.c(window,"unload",p.g())});return""="" p})();="" (function(){function="" b(){return="" function(){h.a.b.nv="0;h.a.b.st=4;h.a.b.et=3;h.a.b.ep=h.U.Sa()+" ,"+h.u.qa();h.a.h()}}function"="" a(){cleartimeout(z);var="" b;v&&(b="visible" =="document[v]);y&&(b=!document[y]);p=" undefined"="=typeof" "="" b?s:b;if((!n||!e)&&p&&k)x="s,m=+new" date;else="" if(n&&e&&(!p||!k))x="u,q+=+new" date-m;n="p;e=k;z=setTimeout(a,100)}function" d(a){var="" k="document,b=" ";if(a"="" in="" k)b="a;else" for(var="" m="[" webkit","ms","moz","o"],d="0;d<m.length;d++){var" q="m[d]+a.charAt(0).toUpperCase()+a.slice(1);if(q" k){b="q;break}}return" b}function="" f(b){if(!("focus"="=b.type||" blur"="=b.type)||!(b.target&&b.target!=window))k=" focus"="=b.type||"focusin"==b.type?s:u,a()}var""" g="mt.event,l=h.A,n=s,p=s,e=s,k=s,w=+new" date,m="w,q=0,x=s,v=d(" visibilitystate"),y="d(" hidden"),z;a();(function(){var""="" b="v.replace(/[vV]isibilityState/," visibilitychange");g.c(document,b,a);g.c(window,"pageshow",a);g.c(window,"pagehide",a);"object"="=typeof" document.onfocusin?(g.c(document,"focusin",f),g.c(document,"focusout",f)):(g.c(window,"focus",f),="" g.c(window,"blur",f))})();h.u="{Sa:function(){return+new" date-w},qa:function(){return="" x?+new="" date-m+q:q}};l.c("pv-b",function(){g.c(window,"unload",b())});return="" h.u})();="" (function(){var="" h.a){var="" f="h.a.W();d([a.protocol," datax.baidu.com="" x.js?si=",c.id," &dm=",encodeURIComponent(f)].join(" "),g)}},pb:function(a){if(b.d(a,"string")||b.d(a,"number"))window._dxt="window._dxt||[],window._dxt.push([" _setuserid",a])}};return""="" h.ga="f})();" b(a,b,m,d){if(!(a="==r||b===r||d===r)){if(" *");a="String(a).split("!");for(var""" e,f="u,g=0;g<a.length;g++)if(e=a[g].split(" *"),string(b)="==e[0]){e[1]=m;e[2]=d;a[g]=e.join(" *");f="s;break}f||a.push([b,m,d].join("*"));return""" a.join("!")}}function="" a(b){for(var="" e="" b)if({}.hasownproperty.call(b,e)){var="" d="mt.lang,f=mt.l,g=mt.g,l=h.p,n=h.A,p=h.Ga,e={F:[],N:0,ua:u,o:{ia:" ",page:""},init:function(){e.f=" 0;n.c(" pv-b",function(){e.ha();e.ka()});n.c("pv-d",function(){e.la();e.o.page="" });n.c("stag-b",function(){h.a.b.api="e.f||e.N?e.f+" _"+e.n:"";h.a.b.ct="[decodeURIComponent(h.a.getData(" hm_ct_"+c.id)||""),e.o.ia,e.o.page].join("!")});n.c("stag-d",function(){h.a.b.api="0;e.f=0;e.N=0})},Ha:function(){var""" a="window._hmt||[];if(!a||d.d(a," array"))window._hmt="{id:c.id,cmd:{},push:function(){for(var" k[0]&&(1<k.length&&="" ^[0-9a-f]{32}$="" .test(k[1]))&&(k="k[1],a.id=k,a.cmd[k]=a.cmd[k]||[]))}}},window._hmt.cmd[c.id]=[],window._hmt.push.apply(window._hmt,a)},Ka:function(){var" d.d(e[b],"function"))e[b](a)},_setaccount:function(a){1<a.length&&="" .test(a[1])&&(e.f|="1)},_setAutoPageview:function(a){if(1<a.length&&(a=a[1],u===a||s===a))e.f|=2,h.a.qa=a},_trackPageview:function(a){if(1<a.length&&a[1].charAt&&" d;h.a.s="+new" date}},_trackevent:function(a){2<a.length&&(e.f|="8,h.a.b.nv=0,h.a.b.st=4,h.a.b.et=4,h.a.b.ep=d.j(a[1])+" *"+d.j(a[2])+(a[3]?"*"+d.j(a[3]):"")+(a[4]?"*"+d.j(a[4]):""),h.a.h())},_setcustomvar:function(a){if(!(4"="">a.length)){var b=a[1],m=a[4]||3;if(0<b&&6>b&&0<m&&4>m){e.N++;for(var q=(h.a.b.cv||"*").split("!"),f=q.length;f<b-1;f++)q.push("*");q[b-1]=m+"*"+d.j(a[2])+"*"+d.j(a[3]);h.a.b.cv=q.join("!");a=h.a.b.cv.replace( [^1](\*[^!]*){2}="" g,"*").replace(="" ((^|!)\*)+$="" g,"");""!="=a?h.a.setData(" hm_cv_"+"="" c.id,encodeuricomponent(a),c.age):h.a.hb("hm_cv_"+c.id)}}},_setusertag:function(a){if(!(3="">a.length)){var e=d.j(a[1]);a=d.j(a[2]);if(e!==r&&a!==r){var m=decodeURIComponent(h.a.getData("Hm_ct_"+c.id)||""),m=b(m,e,1,a);h.a.setData("Hm_ct_"+c.id,encodeURIComponent(m),c.age)}}},_setVisitTag:function(a){if(!(3>a.length)){var f=d.j(a[1]);a=d.j(a[2]);if(f!==r&&a!==r){var m=e.o.ia,m=b(m,f,2,a);e.o.ia=m}}},_setPageTag:function(a){if(!(3>a.length)){var f=d.j(a[1]);a=d.j(a[2]);if(f!==r&&a!==r){var m=e.o.page,
+m=b(m,f,3,a);e.o.page=m}}},_setReferrerOverride:function(a){1<a.length&&(h.a.b.su=a[1].charat&&" 512="" "="==a[1].charAt(0)?l.protocol+" "+window.location.host+a[1]:a[1],e.ua="s)},_trackOrder:function(b){b=b[1];d.d(b," object")&&(a(b),e.f|="16,h.a.b.nv=0,h.a.b.st=4,h.a.b.et=94,h.a.b.ep=f.stringify(b),h.a.h())},_trackMobConv:function(a){if(a={webim:1,tel:2,map:3,sms:4,callback:5,share:6}[a[1]])e.f|=32,h.a.b.et=93,h.a.b.ep=a,h.a.h()},_trackRTPageview:function(b){b=b[1];d.d(b,"Object")&&(a(b),b=f.stringify(b),""">=encodeURIComponent(b).length&&(e.f|=64,h.a.b.rt=b))},_trackRTEvent:function(b){b=b[1];if(d.d(b,"Object")){a(b);b=encodeURIComponent(f.stringify(b));var g=function(a){var b=h.a.b.rt;e.f|=128;h.a.b.et=90;h.a.b.rt=a;h.a.h();h.a.b.rt=b},m=b.length;if(900>=m)g.call(this,b);else for(var m=Math.ceil(m/900),q="block|"+Math.round(Math.random()*l.da).toString(16)+"|"+m+"|",n=[],v=0;v<m;v++)n.push(v),n.push(b.substring(900*v,900*v+900)),g.call(this,q+n.join("|")),n=[]}},_setuserid:function(a){a=a[1];p.eb(); 0="==a.indexOf(b)},L:function(b){for(var" p.pb(a)},_setautotracking:function(a){if(1<a.length&&(a="a[1],u===a||s===a))h.a.ra=a},_setAutoEventTracking:function(a){if(1<a.length&&(a=a[1],u===a||s===a))h.a.D=a}};e.init();h.Da=e;return" h.da})();="" (function(){function="" b(){"undefined"="==typeof" window["_bdhm_loaded_"+c.id]&&(window["_bdhm_loaded_"+c.id]="s,this.b={},this.ra=this.qa=s,this.D=k.D,this.na=g.aa()&&0<c.aet.length?c.aet.split(" ,"):"",this.$="u,this.init())}var" "="" a="mt.url,d=mt.xa,f=mt.ha,g=mt.lang,l=mt.cookie,n=mt.g,p=mt.localStorage,e=mt.sessionStorage,k=h.p,w=h.A;b.prototype={ba:function(a,b){a=" ."+a.replace(="" :\d+="" ,"");b="." +b.replace(="" ,"");var"="" d="a.indexOf(b);return-1<d&&d+b.length===a.length},va:function(a,b){a=a.replace(/^https?:\/\//," "");return="" s}else{var="" e="a.Y(b);if(e&&this.ba(e,c.dm[d]))return" s}return="" u},w:function(){for(var="" c.dm[b].replace(="" (:\d+)?[\="" \?#].*="" ,"");return="" a},pa:function(){for(var="" d.replace(="" ^[^\="" ]+(\="" .*)="" ,"$1")+="" "}return"="" "},ua:function(){if(!document.referrer)return="" k.m-k.w="">c.vdur?1:4;var b=u;this.L(document.referrer)&&this.L(document.location.href)?b=s:(b=a.Y(document.referrer),b=this.ba(b||"",document.location.hostname));return b?k.m-k.w>c.vdur?1:4:3},getData:function(a){try{return l.get(a)||e.get(a)||p.get(a)}catch(b){}},setData:function(a,b,d){try{l.set(a,b,{domain:this.W(),path:this.pa(),V:d}),d?p.set(a,b,d):e.set(a,b)}catch(f){}},hb:function(a){try{l.set(a,"",{domain:this.W(),path:this.pa(),V:-1}),
+e.remove(a),p.remove(a)}catch(b){}},nb:function(){var a,b,d,e,f;k.w=this.getData("Hm_lpvt_"+c.id)||0;13===k.w.length&&(k.w=Math.round(k.w/1E3));b=this.Ua();a=4!==b?1:0;if(d=this.getData("Hm_lvt_"+c.id)){e=d.split(",");for(f=e.length-1;0<=f;f--)13===e[f].length&&(e[f]=""+math.round(e[f] 1e3));for(;2592e3<k.m-e[0];)e.shift();f="4">e.length?2:3;for(1===a&&e.push(k.m);4<e.length;)e.shift();d=e.join(",");e=e[e.length-1]}else 0="==this.b.nv?this.lb():this.ga(" .*"),h.a="this,this.Fa(),w.I(" pv-b"),this.jb()}catch(a){var""="" d="k.m,e=" ",f="1;this.setData(" hm_lvt_"+c.id,d,c.age);this.setdata("hm_lpvt_"+c.id,""="" k.m);d="k.m===this.getData(" hm_lpvt_"+c.id)?"1":"0";if(0="==c.nv&&this.L(document.location.href)&&(" "="==document.referrer||this.L(document.referrer)))a=0,b=4;this.b.nv=a;this.b.st=b;this.b.cc=d;this.b.lt=e;this.b.lv=f},mb:function(){for(var""" a="[],b=this.b.et,d=+new" date,e="0,f=k.ya.length;e<f;e++){var" g="k.ya[e],l=this.b[g];" undefined"!="=typeof" l&&""!="=l&&(" tt"!="=g||" tt"="==g&&0===b)&&(("ct"!==g||"ct"===g&&0===b)&&("kb"!==g||"kb"===g&&3===b))&&a.push(g+"="+encodeURIComponent(l))}switch(b){case""" 0:a.push("sn="+
+k.z);this.b.rt&&a.push(" rt="+encodeURIComponent(this.b.rt));break;case 3:a.push(" sn="+k.z);break;case 5:a.push(" _lpt="+this.s);a.push(" _ct="+d);break;case 6:a.push(" &")},ob:function(){this.nb();this.b.si="c.id;this.b.su=document.referrer;this.b.ds=n.ib;this.b.cl=n.colorDepth+" -bit";this.b.ln="String(n.language).toLowerCase();this.b.ja=n.javaEnabled?" 1:0;this.b.ck="n.cookieEnabled?1:0;this.b.lo=" number"="==typeof" _bdhm_top?1:0;this.b.fl="f.Wa();this.b.v=" 1.2.38";this.b.cv="decodeURIComponent(this.getData(" hm_cv_"+c.id)||"");this.b.tt="document.title||"";this.b.vl=n.K()+n.B();var""" b="document.location.href;this.b.cm=a.k(b,k.$a)||" ";this.b.cp="a.k(b,k.ab)||a.k(b,k.ub)||" ";this.b.cw="a.k(b,k.Za)||a.k(b,k.wb)||"";this.b.ci=a.k(b,k.Xa)||a.k(b,k.tb)||"";this.b.cf=a.k(b,k.bb)||a.k(b,k.vb)||"";this.b.cu=a.k(b,k.Ya)||a.k(b,k.rb)||""},init:function(){try{this.ob(),""" a(){w.i("pv-d")}this.qa?(this.$="s,this.b.et=0,this.b.ep=" ",this.b.vl="n.K()+n.B(),this.h(a)):a();this.s=+new" date},h:function(a){if(this.ra){var="" w.i("stag-b");var="" e="k.ca+" "+k.wa+"?"+b.mb();w.i("stag-d");b.ba(e);d.log(e,function(d){b.ga(d);g.d(a,"function")&&a.call(b)})}},fa:function(){var"="" "+c.js+f+".js?"+this.b.rnd),f="document.getElementsByTagName(" script")[0],f.parentnode.insertbefore(b,f))},ba:function(a){var"="" "").replace(="" ,$="" ,""))?e.set("hm_unsent_"+c.id,b):e.remove("hm_unsent_"+c.id))},lb:function(){var="" new="" b})();="" (function(){var="" h.a){h.a.b.kb="a.ta(h.a.b.kb)?h.a.b.kb:0;var" f="function(){h.a.b.et=85;h.a.b.ep=h.a.b.kb;h.a.h()};b.c(document," keyup",function(){h.a.b.kb++});b.c(window,"unload",function(){f()});setinterval(f,d.fb)}})();var"="" h.a){var="" b;b="d(" navigation");var"="" b.start};h.a.b.et="87;h.a.b.ep=a.stringify(b);h.a.h()};b.c(window," load",function(){settimeout(f,500)})}}catch(g){}})();"="" h.a&&(c.med||(!b.sa||7<b.cb)&&c.cvcc)){var="" g,l,n,p,e="function(a){if(a.item){for(var" d}return[].slice.call(a)},k="function(a,b){for(var" in="" a)if(a.hasownproperty(d)&&b.call(a,d,a[d])="==u)return" u},w="function(b,d){var" k="d.getAttribute(" href"),l="d.getAttribute(" onclick")?""+d.getattribute("onclick"):t,m="d.getAttribute("id")||"";n.test(k)?(e.sn="mediate",""" e.snv="k):a.d(l," string")&&n.test(l)&&(e.sn="wrap" ,e.snv="l);e.id=m}h.a.b.et=86;h.a.b.ep=f.stringify(e);h.a.h();for(e=+new" date;400="">=+new Date-e;);};if(c.med)l="/zoosnet",g="swt",n=/swt|zixun|call|chat|zoos|business|talk|kefu|openkf|online|\/LR\/Chatpre\.aspx/i,p={click:function(){for(var a=[],b=e(document.getElementsByTagName("a")),b=[].concat.apply(b,e(document.getElementsByTagName("area"))),b=[].concat.apply(b,e(document.getElementsByTagName("img"))),d,f,g=0,k=b.length;g</e.length;)e.shift();d=e.join(",");e=e[e.length-1]}else></=f;f--)13===e[f].length&&(e[f]=""+math.round(e[f]></m;v++)n.push(v),n.push(b.substring(900*v,900*v+900)),g.call(this,q+n.join("|")),n=[]}},_setuserid:function(a){a=a[1];p.eb();></a.length&&(h.a.b.su=a[1].charat&&"></b-1;f++)q.push("*");q[b-1]=m+"*"+d.j(a[2])+"*"+d.j(a[3]);h.a.b.cv=q.join("!");a=h.a.b.cv.replace(></m&&4></b&&6></l.length)p.h(l.join("!")),l=[];l.push(a)},h:function(b){h.a.b.et=6;h.a.b.vh=a.b();h.a.b.ep=b;h.a.h()},g:function(){return></f?100:f,g=0;g<f;g++){var></l;p++)switch(e=d[p],typeof></l;n++)g[n].nodename===b&&(f=g[n].nodevalue);return></l?"["+n+"]":""));a=a.parentnode}g.push(b.join("></b.length;f++)if(b[f]===a){d=s;break}return>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Micah
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://lvchenqiang.github.io/2019/01/26/谁是谷歌想要的人才/Python 简单入门指北 － 小专栏_files/hm/" title="">https://lvchenqiang.github.io/2019/01/26/谁是谷歌想要的人才/Python 简单入门指北 － 小专栏_files/hm/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="lvchenqiang.github.io/2019/01/26/谁是谷歌想要的人才/Python 简单入门指北 － 小专栏_files/base-2b98779741767449024e9452dec1c559566c0fc6b0b91903e25fd401bd554e60/" rel="next" title="">
+                <i class="fa fa-chevron-left"></i> 
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="lvchenqiang.github.io/2019/01/26/谁是谷歌想要的人才/Python 简单入门指北 － 小专栏_files/analytics/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="lvchenqiang.github.io/image/avatar.png" alt="Micah">
+            
+              <p class="site-author-name" itemprop="name">Micah</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="lvchenqiang.github.io/archives/">
+              
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="lvchenqiang.github.io/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="lvchenqiang.github.io/tags/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/lvchenqiang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://blog.csdn.net/lvchenqiang_" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-csdn"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Micah</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="lvchenqiang.github.io/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="lvchenqiang.github.io/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="lvchenqiang.github.io/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="lvchenqiang.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="lvchenqiang.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="lvchenqiang.github.io/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="lvchenqiang.github.io/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="lvchenqiang.github.io/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="lvchenqiang.github.io/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="lvchenqiang.github.io/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="lvchenqiang.github.io/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="lvchenqiang.github.io/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="lvchenqiang.github.io/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="lvchenqiang.github.io/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://Micah.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://lvchenqiang.github.io/2019/01/26/谁是谷歌想要的人才/Python 简单入门指北 － 小专栏_files/hm/';
+          this.page.identifier = '2019/01/26/谁是谷歌想要的人才/Python 简单入门指北 － 小专栏_files/hm/';
+          this.page.title = '';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Micah.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'ob6xEevaCzifOdzvnfIrxSJ7-gzGzoHsz',
+        appKey: 'ibWrHDRgAsLSxr5UnNH7Tb2n',
+        placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
