@@ -79,13 +79,13 @@
 
 
 
-<meta name="description" content="什么是LLVM?LLVM概述 LLVM 命名最早源自于底层虚拟机（Low Level Virtual Machine）的缩写,由于命名带来的混乱，目前LLVM就是该项目的全称。 LLVM 核心库提供了与编译器相关的支持，可以作为多种语言编译器的后台来使用。能够进行程序语言的编译期优化、链接优化、在线编译优化、代码生成。 LLVM的项目是一个模块化和可重复使用的编译器和工具技术的集合。 美国计算机协">
+<meta name="description" content="什么是LLVM?LLVM概述 LLVM 命名最早源自于底层虚拟机（Low Level Virtual Machine）的缩写,由于命名带来的混乱，目前LLVM就是该项目的全称。 LLVM 核心库提供了与编译器相关的支持，可以作为多种语言编译器的后台来使用。能够进行程序语言的编译期优化、链接优化、在线编译优化、代码生成。 LLVM的项目是一个模块化和可重复使用的编译器和工具技术的集合。">
 <meta name="keywords" content="工具">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Clang&#x2F;LLVM 从入门到实践">
 <meta property="og:url" content="https://lvchenqiang.github.io/2019/02/01/Clang-LLVM/index.html">
 <meta property="og:site_name" content="大前端之路">
-<meta property="og:description" content="什么是LLVM?LLVM概述 LLVM 命名最早源自于底层虚拟机（Low Level Virtual Machine）的缩写,由于命名带来的混乱，目前LLVM就是该项目的全称。 LLVM 核心库提供了与编译器相关的支持，可以作为多种语言编译器的后台来使用。能够进行程序语言的编译期优化、链接优化、在线编译优化、代码生成。 LLVM的项目是一个模块化和可重复使用的编译器和工具技术的集合。 美国计算机协">
+<meta property="og:description" content="什么是LLVM?LLVM概述 LLVM 命名最早源自于底层虚拟机（Low Level Virtual Machine）的缩写,由于命名带来的混乱，目前LLVM就是该项目的全称。 LLVM 核心库提供了与编译器相关的支持，可以作为多种语言编译器的后台来使用。能够进行程序语言的编译期优化、链接优化、在线编译优化、代码生成。 LLVM的项目是一个模块化和可重复使用的编译器和工具技术的集合。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/02/01/Clang-LLVM/传统架构.jpg">
 <meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/02/01/Clang-LLVM/llvm架构.png">
@@ -110,10 +110,10 @@
 <meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_18.png">
 <meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_19.png">
 <meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_20.png">
-<meta property="og:updated_time" content="2019-02-27T14:16:02.775Z">
+<meta property="og:updated_time" content="2019-02-27T14:55:08.799Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Clang&#x2F;LLVM 从入门到实践">
-<meta name="twitter:description" content="什么是LLVM?LLVM概述 LLVM 命名最早源自于底层虚拟机（Low Level Virtual Machine）的缩写,由于命名带来的混乱，目前LLVM就是该项目的全称。 LLVM 核心库提供了与编译器相关的支持，可以作为多种语言编译器的后台来使用。能够进行程序语言的编译期优化、链接优化、在线编译优化、代码生成。 LLVM的项目是一个模块化和可重复使用的编译器和工具技术的集合。 美国计算机协">
+<meta name="twitter:description" content="什么是LLVM?LLVM概述 LLVM 命名最早源自于底层虚拟机（Low Level Virtual Machine）的缩写,由于命名带来的混乱，目前LLVM就是该项目的全称。 LLVM 核心库提供了与编译器相关的支持，可以作为多种语言编译器的后台来使用。能够进行程序语言的编译期优化、链接优化、在线编译优化、代码生成。 LLVM的项目是一个模块化和可重复使用的编译器和工具技术的集合。">
 <meta name="twitter:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/02/01/Clang-LLVM/传统架构.jpg">
 
 
@@ -388,6 +388,9 @@
 <li>LLVM 命名最早源自于底层虚拟机（Low Level Virtual Machine）的缩写,由于命名带来的混乱，目前LLVM就是该项目的全称。</li>
 <li>LLVM 核心库提供了与编译器相关的支持，可以作为多种语言编译器的后台来使用。能够进行程序语言的编译期优化、链接优化、在线编译优化、代码生成。</li>
 <li>LLVM的项目是一个模块化和可重复使用的编译器和工具技术的集合。</li>
+</ol>
+<a id="more"></a>
+<ol>
 <li>美国计算机协会 (ACM) 将其2012 年软件系统奖项颁给了LLVM，之前曾经获得此奖项的软件和技术包括:Java、Apache、 Mosaic、the World Wide Web、Smalltalk、UNIX、Eclipse等等</li>
 </ol>
 <h4 id="LLVM架构"><a href="#LLVM架构" class="headerlink" title="LLVM架构"></a>LLVM架构</h4><h5 id="传统的架构"><a href="#传统的架构" class="headerlink" title="传统的架构"></a>传统的架构</h5><p><img src="/lvchenqiang.github.io/2019/02/01/Clang-LLVM/传统架构.jpg" alt=""></p>
