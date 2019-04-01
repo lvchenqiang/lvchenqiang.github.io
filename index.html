@@ -360,153 +360,20 @@
 
       
         
-          
-            <h3 id="开篇"><a href="#开篇" class="headerlink" title="开篇"></a>开篇</h3><h4 id="编程语言的发展"><a href="#编程语言的发展" class="headerlink" title="编程语言的发展"></a>编程语言的发展</h4><ul>
+          <h3 id="开篇"><a href="#开篇" class="headerlink" title="开篇"></a>开篇</h3><h4 id="编程语言的发展"><a href="#编程语言的发展" class="headerlink" title="编程语言的发展"></a>编程语言的发展</h4><ul>
 <li>机器语言<br>由0和1组成</li>
 <li><p>汇编语言(Assembly Language)<br>用符号代替了0和1，比机器语言便于阅读和记忆</p>
 </li>
 <li><p>高级语言<br>C\C++\Java\Swift等，更接近人类自然语言</p>
 </li>
 </ul>
-<p><strong>操作：将寄存器BX的内容送入寄存器AX</strong></p>
-<ul>
-<li>机器语言：1000100111011000</li>
-<li>汇编语言：mov ax, bx</li>
-<li>高级语言：ax = bx;</li>
-</ul>
-<p><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190331_36.png" alt=""></p>
-<h4 id="汇编语言的特点"><a href="#汇编语言的特点" class="headerlink" title="汇编语言的特点"></a>汇编语言的特点</h4><ul>
-<li><p>可以直接访问、控制各种硬件设备，比如存储器、CPU等，能最大限度地发挥硬件的功能</p>
-</li>
-<li><p>汇编指令是机器指令的助记符,同机器指令一一对应。每一种CPU都有自己的机器指令集\汇编指令集，所以汇编语言不具备可移植性</p>
-</li>
-<li><p>知识点过多，开发者需要对CPU等硬件结构有所了解，不易于编写、调试、维护</p>
-</li>
-<li><p>不区分大小写，比如mov和MOV是一样的</p>
-</li>
-</ul>
-<h4 id="汇编语言-VS-高级语言"><a href="#汇编语言-VS-高级语言" class="headerlink" title="汇编语言 VS 高级语言"></a>汇编语言 VS 高级语言</h4><ul>
-<li>采用高级语言C++和汇编语言编写同一个功能<br>将a+b的结果赋值给c，然后在屏幕上打印c的结果</li>
-</ul>
-<p><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190331_37.png" alt=""></p>
-<h4 id="汇编语言的用途（为什么要学习汇编语言？）"><a href="#汇编语言的用途（为什么要学习汇编语言？）" class="headerlink" title="汇编语言的用途（为什么要学习汇编语言？）"></a>汇编语言的用途（为什么要学习汇编语言？）</h4><ul>
-<li><p>编写驱动程序、操作系统（比如Linux内核的某些关键部分）</p>
-</li>
-<li><p>对性能要求极高的程序或者代码片段，可与高级语言混合使用（内联汇编）</p>
-</li>
-<li><p>软件安全<br>病毒分析与防治<br>逆向\加壳\脱壳\破解\外挂\免杀\加密解密\漏洞\黑客</p>
-</li>
-<li><p>是理解整个计算机系统的最佳起点和最有效途径</p>
-</li>
-<li><p>为编写高效代码打下基础</p>
-</li>
-<li><p>弄清代码的本质<br>sizeof<br>++a + ++a + ++a<br>switch和if的效率究竟谁高？为什么？<br>……<br>很多理论和说法是扯淡</p>
-</li>
-</ul>
-<h4 id="汇编语言的种类"><a href="#汇编语言的种类" class="headerlink" title="汇编语言的种类"></a>汇编语言的种类</h4><p><strong>目前讨论比较多的汇编语言有</strong></p>
-<ul>
-<li>8086汇编（8086处理器是16bit的CPU）</li>
-<li>Win32汇编</li>
-<li>Win64汇编</li>
-<li>AT&amp;T汇编（Mac、iOS模拟器）</li>
-<li>ARM汇编（嵌入式、iOS设备）</li>
-<li>……</li>
-</ul>
-<p><strong>入门建议先从学些8086汇编开始</strong><br>结构简洁、经典<br>参考书籍：王爽《汇编语言》</p>
-<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><ol>
-<li><p><strong>要想学好汇编语言，首先要对CPU等硬件结构有一定的了解</strong></p>
-</li>
-<li><p><strong>软件\程序的执行过程</strong></p>
-</li>
-<li><p><strong>最为关键的是需要了解CPU和内存</strong></p>
-</li>
-<li><p><strong>在学习汇编语言过程中，遇到的绝大部分指令都是跟内存、CPU有关的</strong></p>
-</li>
-</ol>
-<p><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190331_38.png" alt=""></p>
-<h3 id="基于8086汇编学习"><a href="#基于8086汇编学习" class="headerlink" title="基于8086汇编学习"></a>基于8086汇编学习</h3><h4 id="总线"><a href="#总线" class="headerlink" title="总线"></a>总线</h4><ul>
-<li><p>每一个CPU芯片都有许多管脚，这些管脚和总线相连，CPU通过总线跟外部器件进行交互</p>
-</li>
-<li><p>总线：一根根导线的集合</p>
-</li>
-</ul>
-<p><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190331_39.png" alt=""></p>
-<h5 id="CPU从内存的3号单元读取数据"><a href="#CPU从内存的3号单元读取数据" class="headerlink" title="CPU从内存的3号单元读取数据"></a>CPU从内存的3号单元读取数据</h5><p><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190331_40.png" alt=""></p>
-<h5 id="总线-1"><a href="#总线-1" class="headerlink" title="总线"></a>总线</h5><p><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190331_41.png" alt=""></p>
-<h5 id="数据总线"><a href="#数据总线" class="headerlink" title="数据总线"></a>数据总线</h5><p><strong>8088的数据总线宽度是8，8086的数据总线宽度是16，分别向内存中写入89D8H</strong></p>
-<p><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190331_42.png" alt=""></p>
-<h5 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h5><p><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190331_43.png" alt=""></p>
-<h4 id="内存"><a href="#内存" class="headerlink" title="内存"></a>内存</h4><h5 id="存储器连接"><a href="#存储器连接" class="headerlink" title="存储器连接"></a>存储器连接</h5><p><strong>各类存储器的逻辑连接情况</strong></p>
-<p><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190331_44.png" alt=""></p>
-<h5 id="内存概述"><a href="#内存概述" class="headerlink" title="内存概述"></a>内存概述</h5><p><strong>所有的内存单元都有唯一的地址，叫做物理地址</strong></p>
-<p><strong>各类存储器的物理地址情况</strong></p>
-<ol>
-<li><p>内存地址空间的大小受CPU地址总线宽度的限制。8086的地址总线宽度为20，可以定位_2<em>20</em>个不同的内存单元（内存地址范围0x00000~0xFFFFF），所以8086的内存空间大小为1MB</p>
-</li>
-<li><p>0x00000~0x9FFFF：主存储器。可读可写</p>
-</li>
-<li><p>0xA0000~0xBFFFF：向显存中写入数据，这些数据会被显卡输出到显示器。可读可写</p>
-</li>
-<li><p>0xC0000~0xFFFFF：存储各种硬件\系统信息。只读</p>
-</li>
-</ol>
-<div style="float:left;border:solid 1px 000;margin:2px;"><span><span> <img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190330_45.png" width="200" height="260"> </span></span></div>
-
-
-
-<p><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190331_45.png" alt=""></p>
-<h4 id="8086的寻址方式"><a href="#8086的寻址方式" class="headerlink" title="8086的寻址方式"></a>8086的寻址方式</h4><h5 id="什么是寻址"><a href="#什么是寻址" class="headerlink" title="什么是寻址"></a>什么是寻址</h5><ul>
-<li><p>CPU访问内存单元时，要给出内存单元的地址</p>
-</li>
-<li><p>8086有20位地址总线，可以传送20位的地址，1M的寻址能力</p>
-</li>
-<li><p>但它又是16位结构的CPU，它内部能够一次性处理、传输、暂时存储的地址为16位。如果将地址从内部简单地发出，那么它只能送出16位的地址，表现出来的寻址能力只有64KB</p>
-</li>
-</ul>
-<p><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190331_46.png" alt=""></p>
-<h5 id="寻址方式"><a href="#寻址方式" class="headerlink" title="寻址方式"></a>寻址方式</h5><p><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190331_47.png" alt=""></p>
-<h5 id="寻址计算"><a href="#寻址计算" class="headerlink" title="寻址计算"></a>寻址计算</h5><p><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190331_48.png" alt=""></p>
-<h5 id="内部的分段管理"><a href="#内部的分段管理" class="headerlink" title="内部的分段管理"></a>内部的分段管理</h5><p><strong>8086是用“起始地址（段地址×16） + 偏移地址 = 物理地址”的方式给出物理地址</strong></p>
-<p><strong>为了开发方便，我们可以采取分段的方法来管理内存，比如：</strong></p>
-<ol>
-<li><p>地址10000H~100FFH的内存单元组成一个段，该段的起始地址为10000H，段地址为1000H，大小为100H</p>
-</li>
-<li><p>地址10000H~1007FH、10080H~100FFH的内存单元组成2个段，它们的起始地址为：10000H和10080H，段地址为1000H和1008H，大小都为80H</p>
-</li>
-</ol>
-<p><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190331_49.png" alt=""></p>
-<p><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190331_50.png" alt=""></p>
-<h4 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h4><h5 id="CPU的典型构成"><a href="#CPU的典型构成" class="headerlink" title="CPU的典型构成"></a>CPU的典型构成</h5><p><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190331_51.png" alt=""></p>
-<p><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190331_52.png" alt=""></p>
-<h5 id="通用寄存器"><a href="#通用寄存器" class="headerlink" title="通用寄存器"></a>通用寄存器</h5><p><strong>AX、BX、CX、DX这4个寄存器通常用来存放一般性的数据，称为通用寄存器（有时也有特定用途）</strong></p>
-<p><strong>通常，CPU会先将内存中的数据存储到通用寄存器中，然后再对通用寄存器中的数据进行运算</strong></p>
-<p><strong>假设内存中有块红色内存空间的值是3，现在想把它的值加1，并将结果存储到蓝色内存空间</strong></p>
-<ol>
-<li>CPU首先会将红色内存空间的值放到AX寄存器中：mov ax,红色内存空间</li>
-<li>然后让AX寄存器与1相加：add ax,1</li>
-<li>最后将值赋值给内存空间：mov 蓝色内存空间,ax</li>
-</ol>
-<p><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190331_53.png" alt=""></p>
-<p><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190331_55.png" alt=""></p>
-<h6 id="高、低位寄存器（高8位、低8位）"><a href="#高、低位寄存器（高8位、低8位）" class="headerlink" title="高、低位寄存器（高8位、低8位）"></a>高、低位寄存器（高8位、低8位）</h6><p><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/register_01.png" alt=""></p>
-<h6 id="字节与字"><a href="#字节与字" class="headerlink" title="字节与字"></a>字节与字</h6><p><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190331_56.png" alt=""></p>
-<h5 id="段寄存器"><a href="#段寄存器" class="headerlink" title="段寄存器"></a>段寄存器</h5><p><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190331_57.png" alt=""></p>
-<h4 id="CS和IP"><a href="#CS和IP" class="headerlink" title="CS和IP"></a>CS和IP</h4><p><strong>CPU任意时刻执行需要将CS:IP指向的指令作为下一条需要执行的指令。</strong></p>
-<p><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190331_58.png" alt=""></p>
-<h5 id="指令的执行过程"><a href="#指令的执行过程" class="headerlink" title="指令的执行过程"></a>指令的执行过程</h5><p>(1)计算寻址:<br><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190331_60.png" alt=""><br>(2)地址输送输出控制电路<br><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190331_61.png" alt=""><br>(3)物理地址送上地址总线<br><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190331_62.png" alt=""><br>(4)获取存放的机器指令<br><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190331_63.png" alt=""><br>(5)机器指令送入指令缓存器<br><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190331_64.png" alt=""><br>(6)IP值自动增加,准备读取下一个指令<br><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190331_65.png" alt=""><br>(7)执行刚获取的指令<br><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190331_66.png" alt=""><br>(8)读取下一个指令<br><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190331_68.png" alt=""><br>(9)读取的指令放入缓冲器,IP值自动增加<br><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190331_69.png" alt=""><br>(10)执行指令<br><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190331_70.png" alt=""></p>
-<p>……</p>
-<p><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190331_72.png" alt=""></p>
-<h6 id="指令和数据"><a href="#指令和数据" class="headerlink" title="指令和数据"></a>指令和数据</h6><p><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190331_73.png" alt=""></p>
-<h4 id="jmp指令"><a href="#jmp指令" class="headerlink" title="jmp指令"></a>jmp指令</h4><p><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190331_74.png" alt=""></p>
-<h5 id="jmp指令执行本质"><a href="#jmp指令执行本质" class="headerlink" title="jmp指令执行本质"></a>jmp指令执行本质</h5><p><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190331_75.png" alt=""></p>
-<h5 id="jmp指令练习"><a href="#jmp指令练习" class="headerlink" title="jmp指令练习"></a>jmp指令练习</h5><p><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190331_76.png" alt=""></p>
-<p><strong>用目前所学过的汇编指令，计算2的4次方（最多使用4条指令）</strong><br><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190331_77.png" alt=""></p>
-<h4 id="DS和-address"><a href="#DS和-address" class="headerlink" title="DS和[address]"></a>DS和[address]</h4><p><img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190331_78.png" alt=""></p>
-<p> <strong>写几条指令,将al中的数据送入内存单元10000H中</strong></p>
-<p> <img src="/lvchenqiang.github.io/2019/03/31/汇编简介/Snip20190401_79.png" alt=""></p>
-<h3 id="学习资料"><a href="#学习资料" class="headerlink" title="学习资料"></a>学习资料</h3><p>链接:<code>https://pan.baidu.com/s/1HzesoJDZQxcUAGNhtst6eg</code><br>密码:df5i</p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/lvchenqiang.github.io/2019/03/31/汇编简介/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
