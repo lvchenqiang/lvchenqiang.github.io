@@ -83,17 +83,17 @@
 <meta name="keywords" content="工具">
 <meta property="og:type" content="article">
 <meta property="og:title" content="配置不同ssh key">
-<meta property="og:url" content="https://lvchenqiang.github.io/2019/02/27/key/index.html">
+<meta property="og:url" content="https:/2019/02/27/key/index.html">
 <meta property="og:site_name" content="大前端之路">
 <meta property="og:description" content="同一设备同时使用不同ssk key日常开发中，我们经常遇到同设备对应不同git地址，配置不同的ssh key的问题。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/02/27/key/Snip20190227_21.png">
-<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/02/27/key/Snip20190227_22.png">
+<meta property="og:image" content="https:/lvchenqiang.github.io/27/key/Snip20190227_21.png">
+<meta property="og:image" content="https:/lvchenqiang.github.io/27/key/Snip20190227_22.png">
 <meta property="og:updated_time" content="2019-04-17T09:46:24.036Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="配置不同ssh key">
 <meta name="twitter:description" content="同一设备同时使用不同ssk key日常开发中，我们经常遇到同设备对应不同git地址，配置不同的ssh key的问题。">
-<meta name="twitter:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/02/27/key/Snip20190227_21.png">
+<meta name="twitter:image" content="https:/lvchenqiang.github.io/27/key/Snip20190227_21.png">
 
 
 
@@ -123,7 +123,7 @@
 
 
 
-  <link rel="canonical" href="https://lvchenqiang.github.io/2019/02/27/key/">
+  <link rel="canonical" href="https:/2019/02/27/key/">
 
 
 
@@ -264,7 +264,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/02/27/key/">
+    <link itemprop="mainEntityOfPage" href="https:/lvchenqiang.github.io/2019/02/27/key/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Micah">
@@ -370,13 +370,13 @@
 <h4 id="复制仓库设置对应的公钥"><a href="#复制仓库设置对应的公钥" class="headerlink" title="复制仓库设置对应的公钥"></a>复制仓库设置对应的公钥</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pbcopy &lt; ~/.ssh/ares_rsa.pub</span><br></pre></td></tr></table></figure>
 <p>直接粘贴于git仓库对应的key位置</p>
 <h4 id="查看-ssh目录"><a href="#查看-ssh目录" class="headerlink" title="查看.ssh目录"></a>查看.ssh目录</h4><p><code>ls ~/.ssh/，理论上此时应该会存在这些文件</code></p>
-<p><img src="/lvchenqiang.github.io/2019/02/27/key/Snip20190227_21.png" alt=""></p>
+<p><img src="/lvchenqiang.github.io/27/key/Snip20190227_21.png" alt=""></p>
 <h4 id="把私钥添加到系统"><a href="#把私钥添加到系统" class="headerlink" title="把私钥添加到系统"></a>把私钥添加到系统</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ssh-add ~/.ssh/ares_rsa</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">-D：删除ssh-agent中的所有密钥. </span><br><span class="line">-d：从ssh-agent中的删除密钥 </span><br><span class="line">-e pkcs11：删除PKCS#11共享库pkcs1提供的钥匙。 </span><br><span class="line">-s pkcs11：添加PKCS#11共享库pkcs1提供的钥匙。 </span><br><span class="line">-L：显示ssh-agent中的公钥 </span><br><span class="line">-l：显示ssh-agent中的密钥 </span><br><span class="line">-t life：对加载的密钥设置超时时间，超时ssh-agent将自动卸载密钥 </span><br><span class="line">-X：对ssh-agent进行解锁 </span><br><span class="line">-x：对ssh-agent进行加锁</span><br></pre></td></tr></table></figure>
 <p>ssh-add 这个命令不是用来永久性的记住你所使用的私钥的。实际上，它的作用只是把你指定的私钥添加到 ssh-agent 所管理的一个 session 当中。而 ssh-agent 是一个用于存储私钥的临时性的 session 服务，也就是说当你重启之后，ssh-agent 服务也就重置了。</p>
 <h4 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h4><p>进入~/.ssh目录下</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd ~/.ssh</span><br><span class="line">touch config</span><br><span class="line">open config</span><br></pre></td></tr></table></figure>
 <p>打开文件编辑，添加如下内容，相应的host、hostName、key替换成自己需要的</p>
-<p><img src="/lvchenqiang.github.io/2019/02/27/key/Snip20190227_22.png" alt=""></p>
+<p><img src="/lvchenqiang.github.io/27/key/Snip20190227_22.png" alt=""></p>
 <h4 id="测试连接"><a href="#测试连接" class="headerlink" title="测试连接"></a>测试连接</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
 <h3 id="Keychain管理秘钥"><a href="#Keychain管理秘钥" class="headerlink" title="Keychain管理秘钥"></a>Keychain管理秘钥</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-add -K [path/to/your/ssh-key]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">eg: ssh-add -K ~/.ssh/github_rsa</span><br></pre></td></tr></table></figure>
 <p>Mac 系统内置了一个 Keychain 的服务及其管理程序，可以方便的帮你管理各种秘钥，其中包括 ssh 秘钥。ssh-add 默认将制定的秘钥添加在当前运行的 ssh-agent 服务中，但是你可以改变这个默认行为让它添加到 keychain 服务中，让 Mac 来帮你记住、管理并保障这些秘钥的安全性。</p>
@@ -400,7 +400,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://lvchenqiang.github.io/2019/02/27/key/" title="配置不同ssh key">https://lvchenqiang.github.io/2019/02/27/key/</a>
+    <a href="https:/2019/02/27/key/" title="配置不同ssh key">https:/2019/02/27/key/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -777,7 +777,7 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'https://lvchenqiang.github.io/2019/02/27/key/';
+          this.page.url = 'https:/2019/02/27/key/';
           this.page.identifier = '2019/02/27/key/';
           this.page.title = '配置不同ssh key';
         };

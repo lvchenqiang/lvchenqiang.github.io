@@ -83,18 +83,18 @@
 <meta name="keywords" content="笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Runloop详解">
-<meta property="og:url" content="https://lvchenqiang.github.io/2017/02/26/Runloop详解/index.html">
+<meta property="og:url" content="https:/2017/02/26/Runloop详解/index.html">
 <meta property="og:site_name" content="大前端之路">
 <meta property="og:description" content="RunLoop 的概念从字面的意思来看，RunLoop就是运行的循环。一般来说，一个线程一次只能执行一个任务，任务完成后线程就会自动退出。当我们需要采用一种方式来让线程能够不断地处理任务，并不退出,我们就有了RunLoop.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2017/02/26/Runloop详解/RunLoop_0.png">
-<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2017/02/26/Runloop详解/RunLoop_1.png">
-<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2017/02/26/Runloop详解/RunLoop_2.png">
+<meta property="og:image" content="https:/lvchenqiang.github.io/26/Runloop详解/RunLoop_0.png">
+<meta property="og:image" content="https:/lvchenqiang.github.io/26/Runloop详解/RunLoop_1.png">
+<meta property="og:image" content="https:/lvchenqiang.github.io/26/Runloop详解/RunLoop_2.png">
 <meta property="og:updated_time" content="2019-01-24T13:25:39.329Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Runloop详解">
 <meta name="twitter:description" content="RunLoop 的概念从字面的意思来看，RunLoop就是运行的循环。一般来说，一个线程一次只能执行一个任务，任务完成后线程就会自动退出。当我们需要采用一种方式来让线程能够不断地处理任务，并不退出,我们就有了RunLoop.">
-<meta name="twitter:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2017/02/26/Runloop详解/RunLoop_0.png">
+<meta name="twitter:image" content="https:/lvchenqiang.github.io/26/Runloop详解/RunLoop_0.png">
 
 
 
@@ -124,7 +124,7 @@
 
 
 
-  <link rel="canonical" href="https://lvchenqiang.github.io/2017/02/26/Runloop详解/">
+  <link rel="canonical" href="https:/2017/02/26/Runloop详解/">
 
 
 
@@ -265,7 +265,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://lvchenqiang.github.io/lvchenqiang.github.io/2017/02/26/Runloop详解/">
+    <link itemprop="mainEntityOfPage" href="https:/lvchenqiang.github.io/2017/02/26/Runloop详解/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Micah">
@@ -385,7 +385,7 @@
 <p><code>CFRunLoopTimerRef</code>:就是 RunLoop 模型图中提到的定时源</p>
 <p><code>CFRunLoopObserverRef</code>:观察者，能够监听 RunLoop 的状态改变</p>
 <p>其中 CFRunLoopModeRef 类并没有对外暴露，只是通过 CFRunLoopRef 的接口进行了封装。他们的关系如下:</p>
-<p><img src="/lvchenqiang.github.io/2017/02/26/Runloop详解/RunLoop_0.png" alt=""></p>
+<p><img src="/lvchenqiang.github.io/26/Runloop详解/RunLoop_0.png" alt=""></p>
 <p>一个 RunLoop 包含若干个 Mode，每个 Mode 又包含若干个 Source/Timer/Observer。每次调用 RunLoop 的主函数时，只能指定其中一个 Mode，这个Mode被称作 CurrentMode。如果需要切换 Mode，只能退出 Loop，再重新指定一个 Mode 进入。这样做主要是为了分隔开不同组的 Source/Timer/Observer，让其互不影响.</p>
 <h4 id="CFRunLoopSourceRef"><a href="#CFRunLoopSourceRef" class="headerlink" title="CFRunLoopSourceRef"></a>CFRunLoopSourceRef</h4><p>CFRunLoopSourceRef 是事件产生的地方。Source有两个版本：Source0 和 Source1。</p>
 <ul>
@@ -436,7 +436,7 @@
 <p>事实上，开发者自己也可以创建 private mode 来实现一些功能，比如这个 post 里的例子：<a href="https://forums.developer.apple.com/message/187122#187122。这篇文档列举了一些公开的" target="_blank" rel="noopener">https://forums.developer.apple.com/message/187122#187122。这篇文档列举了一些公开的</a> mode：<a href="http://iphonedevwiki.net/index.php/CFRunLoop。" target="_blank" rel="noopener">http://iphonedevwiki.net/index.php/CFRunLoop。</a></p>
 <p>你可以在<a href="http://iphonedevwiki.net/index.php/CFRunLoop" target="_blank" rel="noopener">这里</a>看到更多的苹果内部的 Mode，但那些 Mode 在开发中就很难遇到了。</p>
 <h3 id="RunLoop-的内部逻辑"><a href="#RunLoop-的内部逻辑" class="headerlink" title="RunLoop 的内部逻辑"></a>RunLoop 的内部逻辑</h3><p>RunLoop 内部的逻辑大致如下:</p>
-<p><img src="/lvchenqiang.github.io/2017/02/26/Runloop详解/RunLoop_1.png" alt=""></p>
+<p><img src="/lvchenqiang.github.io/26/Runloop详解/RunLoop_1.png" alt=""></p>
 <p>这里将 performTask 和 callout_to_observer 用不同的颜色加以了区分，从图中可以直观的看到 5 种 performTask 和 6 种  callout_to_observer 是在一次 loop 里如何分布的。</p>
 <h4 id="Poll"><a href="#Poll" class="headerlink" title="Poll"></a>Poll</h4><p>每次 loop 如果处理了 source0 任务，那么 poll 值会为 true，直接的影响是不会 DoObservers-BeforeWaiting 和 DoObservers-AfterWaiting，也就是说 runloop 会直接进入睡眠，而且不会告知 BeforeWaiting 和 AfterWaiting 这两个 activity。所以你看，有些情况下，可能 runloop 经过了几个 loop，但你注册的 observer 却不会收到 callback。</p>
 <h4 id="两次-mach-msg"><a href="#两次-mach-msg" class="headerlink" title="两次 mach_msg"></a>两次 mach_msg</h4><p>其实一次 loop 里有两次调用 mach_msg，有一次没有标记出来，是发生在 DoSource0 之后，会主动去读取和 mainQueue 相关的 msg 队列，这不过这个 mach_msg 调用是不会进入睡眠的，因为 timeout 值传入的是 0，如果读到了消息，就直接 goto 到 DoMainQueue 的代码，这种设计应该是为了保障 dispatch 到 main queue 的代码总是有较高的机会得以运行。</p>
@@ -472,7 +472,7 @@
 <p>下面主要介绍下 NSURLConnection 的工作过程。</p>
 <p>通常使用 NSURLConnection 时，你会传入一个 Delegate，当调用了 [connection start] 后，这个 Delegate 就会不停收到事件回调。实际上，start 这个函数的内部会会获取 CurrentRunLoop，然后在其中的 DefaultMode 添加了4个 Source0 (即需要手动触发的Source)。CFMultiplexerSource 是负责各种 Delegate 回调的，CFHTTPCookieStorage 是处理各种 Cookie 的。</p>
 <p>当开始网络传输时，我们可以看到 NSURLConnection 创建了两个新线程：com.apple.NSURLConnectionLoader 和 com.apple.CFSocket.private。其中 CFSocket 线程是处理底层 socket 连接的。NSURLConnectionLoader 这个线程内部会使用 RunLoop 来接收底层 socket 的事件，并通过之前添加的 Source0 通知到上层的 Delegate。</p>
-<p><img src="/lvchenqiang.github.io/2017/02/26/Runloop详解/RunLoop_2.png" alt=""></p>
+<p><img src="/lvchenqiang.github.io/26/Runloop详解/RunLoop_2.png" alt=""></p>
 <p>NSURLConnectionLoader 中的 RunLoop 通过一些基于 mach port 的 Source 接收来自底层 CFSocket 的通知。当收到通知后，其会在合适的时机向 CFMultiplexerSource 等 Source0 发送通知，同时唤醒 Delegate 线程的 RunLoop 来让其处理这些通知。CFMultiplexerSource 会在 Delegate 线程的 RunLoop 对 Delegate 执行实际的回调.</p>
 <h3 id="RunLoop-的实际应用举例"><a href="#RunLoop-的实际应用举例" class="headerlink" title="RunLoop 的实际应用举例"></a>RunLoop 的实际应用举例</h3><p>对 runloop 的运用也可以大致分为两类，一是开发者通过 runloop 执行自己的任务，比如 mainQueue，timer 等。另一类就是通过 runloop 观测分析主线程的运行状态。这两类运用的大部分有用信息都在 CoreFoundation/CFRunloop.h 的头文件里。</p>
 <p>####AFNetworking<br>AFURLConnectionOperation 这个类是基于 NSURLConnection 构建的，其希望能在后台线程接收 Delegate 回调。为此 AFNetworking 单独创建了一个线程，并在这个线程中启动了一个 RunLoop</p>
@@ -511,7 +511,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://lvchenqiang.github.io/2017/02/26/Runloop详解/" title="Runloop详解">https://lvchenqiang.github.io/2017/02/26/Runloop详解/</a>
+    <a href="https:/2017/02/26/Runloop详解/" title="Runloop详解">https:/2017/02/26/Runloop详解/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -888,7 +888,7 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'https://lvchenqiang.github.io/2017/02/26/Runloop详解/';
+          this.page.url = 'https:/2017/02/26/Runloop详解/';
           this.page.identifier = '2017/02/26/Runloop详解/';
           this.page.title = 'Runloop详解';
         };
