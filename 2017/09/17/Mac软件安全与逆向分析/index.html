@@ -91,7 +91,7 @@
 <meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2017/09/17/Mac软件安全与逆向分析/Snip20190518_17.png">
 <meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2017/09/17/Mac软件安全与逆向分析/Snip20190518_19.png">
 <meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2017/09/17/Mac软件安全与逆向分析/Snip20190518_18.png">
-<meta property="og:updated_time" content="2019-05-18T04:05:17.762Z">
+<meta property="og:updated_time" content="2019-05-18T07:59:00.175Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac软件安全与逆向分析">
 <meta name="twitter:description" content="Mac软件安全与逆向分析iOS开发中的逆向与安全是经常会提及的事情,本文主要是整理摘选《Mac软件安全与逆向分析》相关涉及到的知识。">
@@ -384,7 +384,53 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> cd `brew --prefix`</span><br><span class="line"><span class="meta">$</span> rm -rf Cellar</span><br><span class="line"><span class="meta">$</span> brew prune</span><br><span class="line"><span class="meta">$</span> rm `git ls-files`</span><br><span class="line"><span class="meta">$</span> rm -r Library/Homebrew Library/Aliases Library/Formula Library/Contributions</span><br><span class="line"><span class="meta">$</span> rm -rf .git</span><br><span class="line"><span class="meta">$</span> rm -rf ~/Library/Caches/Homebrew</span><br></pre></td></tr></table></figure>
 <p>具体的不在介绍,网上相关资料很全。</p>
 <p>如果觉得命令行管理软件不太方便,可以尝试基于Homebrew移植的GUI版本,<a href="https://cakebrew.com" target="_blank" rel="noopener">CakeBrew</a>.</p>
-
+<h3 id="系统安全架构"><a href="#系统安全架构" class="headerlink" title="系统安全架构"></a>系统安全架构</h3><h4 id="架构概述"><a href="#架构概述" class="headerlink" title="架构概述"></a>架构概述</h4><p>针对于非开发人员的分层方式:</p>
+<p><strong>User Experience</strong>:用户体验层,包括DashBoard、Spotlight、Dock、输入法、屏幕保护、语音、位置地图等</p>
+<p><strong>Application Framework</strong>:应用框架层,包括Cocoa,用于OS X系统上应用程序的开发。</p>
+<p><strong>Graphics and Media</strong>:图形和媒体层.包括核心框架、OpenAL、OpenGL、Quartz、SceneKit、SpriteKit等。</p>
+<p><strong>Darwin</strong>:系统核心层 包括系统内核以及shell环境。</p>
+<blockquote>
+<p><strong>Darwin</strong>(达尔文)是苹果公司开发的基于UNIX实现,它集成了UNIX上一些传统的特性，比如shell环境、目录结构、文件权限等。</p>
+</blockquote>
+<p>在macOS开发文档中,展示了另一种针对开发人员的分层方式</p>
+<p><strong>Cocoa Layer</strong>:Cocoa框架层.包括了用于开发界面程序的框架集合</p>
+<p><strong>Foundation Layer</strong>:基础框架层。 提供了程序开发时使用到的基础数据类型、数值处理、网络/文件IO、日期等方方面面的接口。可以说,开发可视的Mac App基本离不开它。</p>
+<p><strong>Media Layer</strong>:媒体层. 提供了图像、声音、视频、动画、游戏开发需要的接口。</p>
+<p><strong>Core Service Layer</strong>:核心服务层。 提供了系统安全、底层、内部数据访问以及存储的接口。如AddressBook、CoreData等。CoreFoundation框架属于这一层。</p>
+<p><strong>Core OS Layer</strong>: 核心系统层 包括加速器、蓝牙、异常处理、网络扩展、系统配置等框架</p>
+<p><strong>kernel&amp;Drive Layer</strong>:内核与驱动层。 包括开发设备驱动程序与内核扩展所需的一些框架。</p>
+<h4 id="系统调用"><a href="#系统调用" class="headerlink" title="系统调用"></a>系统调用</h4><p>在UNIX架构的系统中,应用程序无法直接访问系统底层硬件资源，所有的操作最终通过系统调用来进行访问。</p>
+<p>系统调用属于内核暴露出的系统调用接口,传统的UNIX定义了一套完整的POSIX调用规范。</p>
+<p>macOS系统实现了POSIX标准,并且扩展了部分内容—加入了Mach Trap(Mach 陷阱),取名为xnu.xnu内核是开源的，地址是:<a href="https://opensource.apple.com/source/xnu/" target="_blank" rel="noopener">https://opensource.apple.com/source/xnu/</a></p>
+<h4 id="进程间通信"><a href="#进程间通信" class="headerlink" title="进程间通信"></a>进程间通信</h4><p>负责进程间通信(IPC)是内核要做的一项重要的工作。传统的UNIX系统都支持通过socket、管道、消息队列、通知、共享内存等方式进行进程间通信。</p>
+<p>macOS除了支持上诉通信方式外，还支持一些特殊的通信方式:</p>
+<p><strong>Mach端口</strong>:这是一种底层的进程间通信方式,依赖于OSX内核提供的API. </p>
+<ul>
+<li>消息发送方调用 mach_msg_send()发送消息，消息参数中需要制定要发送的端口号、消息的内容以及类型。</li>
+<li>消息接受方调用mach_msg_receive()来接收指定端口的消息。</li>
+<li>在上层中,Core Foundation框架提供的CFMachPort以及 Foundation框架提供的NSMachPort堆Mach端口进行封装，以便开发者进行简单的调用。</li>
+</ul>
+<p><strong>分布式通知</strong>:使用消息发布、订阅对自身通知中心实例进行管理。</p>
+<ul>
+<li>接收通知的进程在通知中心中注册一个观察者，随后被观察的进程发出通知，观察者可以收到通知并作出响应</li>
+<li>这种机制类似于安卓系统的广播组件，另外，发送分布式通知非常耗系统资源，如果应用程序间需要频繁的进行通信，最好选择别的方式。</li>
+</ul>
+<p><strong>NSConnection</strong>:这是一种比较方便的进程间通信方式。 </p>
+<ul>
+<li>负责接收处理数据的进程注册一个特定名字的NSConnection</li>
+<li>发送数据方使用NSConnection类的rootProxyForConnection-WithRegisterredName()方法找到注册的观察者类，然后通过performSelector()调用该类的数据处理方法。这种通信方式的运作完全得益于Objective-C运行库的工作机制。</li>
+</ul>
+<p><strong>XPC</strong>:XPC是另一种广泛使用的进程间通信方式,macOS系统本身也大量的使用了该技术</p>
+<ul>
+<li>使用XPC的一大好处是将App拆分成多个进程,实现代码逻辑的解耦合，使用XPC方式很容易开发出插件式应用程序。</li>
+<li>使用XPC的方式与前面的通信方式不同，需要重新为每个功能模块创建一个新的XPC Service,它本质上是一个Bundle包，以.xpc结尾的模块形式存在，存放于XPCServices目录下,最终一起打包到程序包或框架中。</li>
+</ul>
+<h4 id="安全框架"><a href="#安全框架" class="headerlink" title="安全框架"></a>安全框架</h4><p>安全框架,顾明思义就是提供安全接口的框架。它是系统安全的基础设施，为整个系统提供强有力的安全防护。</p>
+<p>新版本的安全框架位于系统的/System/Library/Frameworks/Security.framework目录下，它提供全新的加密算法库(CommonCrypto)、私密内容存储方式(Keychain)和安全的网络通信库。</p>
+<h5 id="CommonCrypto"><a href="#CommonCrypto" class="headerlink" title="CommonCrypto"></a>CommonCrypto</h5><p>早期的macOS系统的加解密算法库依赖于OpenSSL，该库近年来颇受安全研究人员关注，大大小小的漏洞层出不穷，CommonCrypto库的问世很大程度上就是为了在加密基础设施上将它替代。</p>
+<p>CommonCrypto将常用到的数字摘要算法和对称加密、非对称加密算法，通过SecTransform提供统一的API调用接口,用苹果公司的话说，这是一个更安全、性能更高、对多线程支持更好的库。</p>
+<h5 id="Keychain"><a href="#Keychain" class="headerlink" title="Keychain"></a>Keychain</h5><p>安全框架引入了另一种技术-Keychain(钥匙串)。它允许开发者使用系统内置的密钥存储服务来存储一些私密信息,比如密码，密钥、证书等。这些信息会被加密存储到设备中，keychain里保存的信息不会因为APP被删除而丢失，在用户重新安装APP后依然有效，数据依然还在。</p>
+<h5 id="安全传输"><a href="#安全传输" class="headerlink" title="安全传输"></a>安全传输</h5>
       
     </div>
     
@@ -604,7 +650,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mac软件安全与逆向分析"><span class="nav-number">1.</span> <span class="nav-text">Mac软件安全与逆向分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何分析MacOS软件"><span class="nav-number">1.1.</span> <span class="nav-text">如何分析MacOS软件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装Clang"><span class="nav-number">1.1.1.</span> <span class="nav-text">安装Clang</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HT-Editor"><span class="nav-number">1.1.2.</span> <span class="nav-text">HT Editor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Homebrew"><span class="nav-number">1.1.3.</span> <span class="nav-text">Homebrew</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mac软件安全与逆向分析"><span class="nav-number">1.</span> <span class="nav-text">Mac软件安全与逆向分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何分析MacOS软件"><span class="nav-number">1.1.</span> <span class="nav-text">如何分析MacOS软件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装Clang"><span class="nav-number">1.1.1.</span> <span class="nav-text">安装Clang</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HT-Editor"><span class="nav-number">1.1.2.</span> <span class="nav-text">HT Editor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Homebrew"><span class="nav-number">1.1.3.</span> <span class="nav-text">Homebrew</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统安全架构"><span class="nav-number">1.2.</span> <span class="nav-text">系统安全架构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#架构概述"><span class="nav-number">1.2.1.</span> <span class="nav-text">架构概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#系统调用"><span class="nav-number">1.2.2.</span> <span class="nav-text">系统调用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程间通信"><span class="nav-number">1.2.3.</span> <span class="nav-text">进程间通信</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安全框架"><span class="nav-number">1.2.4.</span> <span class="nav-text">安全框架</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#CommonCrypto"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">CommonCrypto</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Keychain"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">Keychain</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#安全传输"><span class="nav-number">1.2.4.3.</span> <span class="nav-text">安全传输</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
