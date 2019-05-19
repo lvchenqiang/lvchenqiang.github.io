@@ -91,7 +91,7 @@
 <meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2017/09/17/Mac软件安全与逆向分析/Snip20190518_17.png">
 <meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2017/09/17/Mac软件安全与逆向分析/Snip20190518_19.png">
 <meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2017/09/17/Mac软件安全与逆向分析/Snip20190518_18.png">
-<meta property="og:updated_time" content="2019-05-18T07:59:00.175Z">
+<meta property="og:updated_time" content="2019-05-19T04:13:33.116Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac软件安全与逆向分析">
 <meta name="twitter:description" content="Mac软件安全与逆向分析iOS开发中的逆向与安全是经常会提及的事情,本文主要是整理摘选《Mac软件安全与逆向分析》相关涉及到的知识。">
@@ -430,7 +430,59 @@
 <h5 id="CommonCrypto"><a href="#CommonCrypto" class="headerlink" title="CommonCrypto"></a>CommonCrypto</h5><p>早期的macOS系统的加解密算法库依赖于OpenSSL，该库近年来颇受安全研究人员关注，大大小小的漏洞层出不穷，CommonCrypto库的问世很大程度上就是为了在加密基础设施上将它替代。</p>
 <p>CommonCrypto将常用到的数字摘要算法和对称加密、非对称加密算法，通过SecTransform提供统一的API调用接口,用苹果公司的话说，这是一个更安全、性能更高、对多线程支持更好的库。</p>
 <h5 id="Keychain"><a href="#Keychain" class="headerlink" title="Keychain"></a>Keychain</h5><p>安全框架引入了另一种技术-Keychain(钥匙串)。它允许开发者使用系统内置的密钥存储服务来存储一些私密信息,比如密码，密钥、证书等。这些信息会被加密存储到设备中，keychain里保存的信息不会因为APP被删除而丢失，在用户重新安装APP后依然有效，数据依然还在。</p>
-<h5 id="安全传输"><a href="#安全传输" class="headerlink" title="安全传输"></a>安全传输</h5>
+<h5 id="安全传输"><a href="#安全传输" class="headerlink" title="安全传输"></a>安全传输</h5><p>在网络中传输隐私数据时,一定要使用安全传输方式，这就确保了数据在传输过程中不被窃取和监听。</p>
+<p>苹果引入了一项隐私保护功能ATS(APP Transport Security),它是苹果在推进网络通信安全中的一项重要措施。</p>
+<p>苹果的安全框架中实现了HTTPS传输数据依赖网络数据传输协议SSL(Secure Sockets Layer)与TLS(Transport Layer Security).<br>安全传输层比较底层，位于网络库之下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">graph BT</span><br><span class="line"></span><br><span class="line">A[Socket :BSD Socket API] --&gt; B[SSLContextRef  :Secure Transport]</span><br><span class="line">B --&gt; C[CFHTTPMessage :CFNetwork]</span><br><span class="line">C --&gt; D[Safari :Application]</span><br></pre></td></tr></table></figure>
+<p>应用程序使用如下步骤进行安全传输。<br><strong>预备会话</strong></p>
+<ol>
+<li>调用SSLNewContext()或SSLCreateContext()创建一个加密会话上下文</li>
+<li>调用SSLSetIOFuncs()设置SSLWrite()为IO写方法，SSLRead()为IO读方法</li>
+<li>使用CFNetwork、BSD Socket或Open Transport创建一个连接，然后调用SSLSetConnection()为连接指定第一步创建的加密会话上下文</li>
+<li>调用SSLSetPeerDomainName()指定端口域名</li>
+</ol>
+<p><strong>开始会话</strong></p>
+<ol>
+<li>调用SSLHandhake()执行SSL的握手与连接</li>
+</ol>
+<p><strong>操作会话</strong></p>
+<ol>
+<li>安全会话成功建立后,就可以传输数据了。可以调用SSLWrite()向服务器写数据,或者调用SSLRead()从服务器读取数据</li>
+</ol>
+<p><strong>结束会话</strong></p>
+<ol>
+<li>通信结束后，可调用SSLClose结束安全会话</li>
+<li>关闭连接并释放连接引用</li>
+<li>如果连接是使用SSLNewContext()创建的，调用SSLDisposeContext()来销毁安全连接上下文。如果是调用SSLCreateContext(),则调用CFRealease()来释放连接。</li>
+<li>如果调用了SSLGetPeerCertificates()获取过任何证书的话，需要调用CFRelease()释放证书引用对象。</li>
+</ol>
+<h4 id="系统安全机制"><a href="#系统安全机制" class="headerlink" title="系统安全机制"></a>系统安全机制</h4><p>苹果系统并非一个开放的系统,它的安全很大的程度上来源于技术的不公开性。</p>
+<h5 id="File-Vault2"><a href="#File-Vault2" class="headerlink" title="File Vault2"></a>File Vault2</h5><p>File Vault2是MacOS系统中使用的一种磁盘加密技术。 新版本的File Vault2通过AES对称加密算法使用128位的密钥对整个磁盘进行加密。加密后的文件以加密的形式存在于磁盘中</p>
+<p>未开启磁盘加密的电脑，可以手动打开。通过System Perference(系统偏好设置) -&gt; Security &amp; Privacy(安全与隐私)进行管理。</p>
+<p>对于File Vault2加密技术的攻击，已知有三种：<br><strong>旁路攻击</strong>:</p>
+<ul>
+<li>这种攻击方式针对的主体不是磁盘加密，而是操作系统。</li>
+<li>macdestroyer程序会在运行期间向系统中添加一个名为fde_locked_user的用户，并生成一个长度为32的随机密码，然后将该用户添加到具有解锁磁盘权限的用户组，接下来删除掉系统中所有的其他用户，只保留新添加的用户，最后关闭计算机</li>
+<li>这样做的后果是，下次启动电脑后，用户就再也无法进入系统，磁盘的数据再也无法访问</li>
+</ul>
+<p><strong>内存攻击</strong>:</p>
+<ul>
+<li>启用File Vault2加密即使的系统,会将磁盘解密用到的MasterKey(主密钥)存放在系统内核的一块只读区域中，研究人员使用安全测试框架对虚拟机中安装的macOS系统进行分析发现，内核空间中加密密钥书中存于特定的内存区域，可以在内存中直接搜索到密钥。</li>
+</ul>
+<p><strong>物理攻击</strong>:</p>
+<ul>
+<li>这种攻击称为DMA(Direct Memory Access)攻击,前提是攻击人员能物理接触到硬件设备</li>
+</ul>
+<h5 id="代码签名"><a href="#代码签名" class="headerlink" title="代码签名"></a>代码签名</h5><p>代码签名是对软件完整性检查、软件作者身份识别的技术，它是macOS系统上大多数安全特性得以有效实施的基础。</p>
+<p>签名的过程使用命令行工具codesign完成，除了二进制应用签名外,codesign还可以对动态库、脚本、以及macOS软件包中的所有资源进行签名。</p>
+<p><strong>手动进行签名</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ codesign -s &apos;xxxxxx@qq.com&apos; xxx.app</span><br></pre></td></tr></table></figure></p>
+<p><strong>使用adhoc签名</strong> (只需要指定参数-s参数为’-‘):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ codesign -f &apos;-&apos; xxx.app</span><br></pre></td></tr></table></figure>
+<p><strong>重新签名</strong>(需要加上-f参数)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ codesign -f -s &apos;xxxxxx@qq.com&apos; xxx.app</span><br></pre></td></tr></table></figure>
+<p><strong>查看签名信息</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ codesign -d -vv xxxx.app</span><br></pre></td></tr></table></figure>
+
       
     </div>
     
@@ -650,7 +702,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mac软件安全与逆向分析"><span class="nav-number">1.</span> <span class="nav-text">Mac软件安全与逆向分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何分析MacOS软件"><span class="nav-number">1.1.</span> <span class="nav-text">如何分析MacOS软件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装Clang"><span class="nav-number">1.1.1.</span> <span class="nav-text">安装Clang</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HT-Editor"><span class="nav-number">1.1.2.</span> <span class="nav-text">HT Editor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Homebrew"><span class="nav-number">1.1.3.</span> <span class="nav-text">Homebrew</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统安全架构"><span class="nav-number">1.2.</span> <span class="nav-text">系统安全架构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#架构概述"><span class="nav-number">1.2.1.</span> <span class="nav-text">架构概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#系统调用"><span class="nav-number">1.2.2.</span> <span class="nav-text">系统调用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程间通信"><span class="nav-number">1.2.3.</span> <span class="nav-text">进程间通信</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安全框架"><span class="nav-number">1.2.4.</span> <span class="nav-text">安全框架</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#CommonCrypto"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">CommonCrypto</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Keychain"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">Keychain</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#安全传输"><span class="nav-number">1.2.4.3.</span> <span class="nav-text">安全传输</span></a></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mac软件安全与逆向分析"><span class="nav-number">1.</span> <span class="nav-text">Mac软件安全与逆向分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何分析MacOS软件"><span class="nav-number">1.1.</span> <span class="nav-text">如何分析MacOS软件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装Clang"><span class="nav-number">1.1.1.</span> <span class="nav-text">安装Clang</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HT-Editor"><span class="nav-number">1.1.2.</span> <span class="nav-text">HT Editor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Homebrew"><span class="nav-number">1.1.3.</span> <span class="nav-text">Homebrew</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统安全架构"><span class="nav-number">1.2.</span> <span class="nav-text">系统安全架构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#架构概述"><span class="nav-number">1.2.1.</span> <span class="nav-text">架构概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#系统调用"><span class="nav-number">1.2.2.</span> <span class="nav-text">系统调用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#进程间通信"><span class="nav-number">1.2.3.</span> <span class="nav-text">进程间通信</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安全框架"><span class="nav-number">1.2.4.</span> <span class="nav-text">安全框架</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#CommonCrypto"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">CommonCrypto</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Keychain"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">Keychain</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#安全传输"><span class="nav-number">1.2.4.3.</span> <span class="nav-text">安全传输</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#系统安全机制"><span class="nav-number">1.2.5.</span> <span class="nav-text">系统安全机制</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#File-Vault2"><span class="nav-number">1.2.5.1.</span> <span class="nav-text">File Vault2</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#代码签名"><span class="nav-number">1.2.5.2.</span> <span class="nav-text">代码签名</span></a></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>
