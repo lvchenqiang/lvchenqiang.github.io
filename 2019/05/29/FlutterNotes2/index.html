@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lvchenqiang.github.io/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lvchenqiang.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/lvchenqiang.github.io/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/lvchenqiang.github.io/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/lvchenqiang.github.io/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/lvchenqiang.github.io/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/lvchenqiang.github.io/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="笔记,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="本文将介绍Flutter开发相关的内容。">
+<meta name="keywords" content="笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flutter进阶之开发">
+<meta property="og:url" content="https://lvchenqiang.github.io/2019/05/29/FlutterNotes2/index.html">
+<meta property="og:site_name" content="大前端之路">
+<meta property="og:description" content="本文将介绍Flutter开发相关的内容。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/05/29/FlutterNotes2/Snip20190529_20.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/05/29/FlutterNotes2/Snip20190529_21.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/05/29/FlutterNotes2/Snip20190529_22.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/05/29/FlutterNotes2/Snip20190529_23.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/05/29/FlutterNotes2/Snip20190529_24.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/05/29/FlutterNotes2/Snip20190529_25.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/05/29/FlutterNotes2/Snip20190529_26.png">
+<meta property="og:updated_time" content="2019-05-29T13:52:59.386Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Flutter进阶之开发">
+<meta name="twitter:description" content="本文将介绍Flutter开发相关的内容。">
+<meta name="twitter:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/05/29/FlutterNotes2/Snip20190529_20.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/lvchenqiang.github.io/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://lvchenqiang.github.io/2019/05/29/FlutterNotes2/">
+
+
+
+
+
+  <title>Flutter进阶之开发 | 大前端之路</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/lvchenqiang.github.io/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">大前端之路</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/lvchenqiang.github.io/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/lvchenqiang.github.io/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/lvchenqiang.github.io/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/lvchenqiang.github.io/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/lvchenqiang.github.io/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/05/29/FlutterNotes2/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micah">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/lvchenqiang.github.io/image/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="大前端之路">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Flutter进阶之开发</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-29T21:48:03+08:00">
+                2019-05-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/lvchenqiang.github.io/categories/Flutter/" itemprop="url" rel="index">
+                    <span itemprop="name">Flutter</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/lvchenqiang.github.io/2019/05/29/FlutterNotes2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/29/FlutterNotes2/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文将介绍Flutter开发相关的内容。</p>
+<a id="more"></a>
+<h4 id="Flutter-工程类型介绍"><a href="#Flutter-工程类型介绍" class="headerlink" title="Flutter 工程类型介绍"></a>Flutter 工程类型介绍</h4><h5 id="Flutter-Application"><a href="#Flutter-Application" class="headerlink" title="Flutter Application"></a>Flutter Application</h5><p>如果想让 Flutter 直接运行在 Android 或 iOS 上给用户使用，就用 Application 类型。</p>
+<h5 id="Flutter-Plugin"><a href="#Flutter-Plugin" class="headerlink" title="Flutter Plugin"></a>Flutter Plugin</h5><p>如果你想让 Flutter 调用 Android 或 iOS 的 API，并想将这个功能封装其起来供第三方使用，那么就用 Plugin 类型。</p>
+<p><code>Plugin</code> 是 Flutter 的一个插件包，例如，在 Android 上有播放音乐的功能，为了在 Flutter 中使用，就可以使用 Plugin 的模式：播放音乐的功能在 Android 上用 Java 实现，然后 Flutter 的代码通过 PlatformChannel 使用 Android 的播放音乐的功能，这就是一个完整的插件包，提供了播放音乐的功能。其他 Flutter APP 想要使用播放音乐的功能，就可以依赖这个插件包。</p>
+<p>Flutter 想要使用 Android 或 iOS 的功能，都可以使用 Plugin 的模式。</p>
+<h5 id="Flutter-Package"><a href="#Flutter-Package" class="headerlink" title="Flutter Package"></a>Flutter Package</h5><p>Flutter Package 是纯 Dart 模块，只能实现 Flutter 的相关功能，例如实现一个 Widget，然后给第三方使用</p>
+<h5 id="Flutter-Module"><a href="#Flutter-Module" class="headerlink" title="Flutter Module"></a>Flutter Module</h5><p>如果要将 Flutter 添加到 Android APP 或 iOS APP 中，实现 Flutter 和 Native 的混合开发，就使用 Module 类型。</p>
+<p>Flutter 的混合开发模式就采用的这种类型，在 Android 上打包成 aar，在 iOS 上打包成 Framework，可以很方便的集成进原有的 Native 工程里，实现 Flutter 和 Native 的混合开发</p>
+<h5 id="Plugin-和-Package"><a href="#Plugin-和-Package" class="headerlink" title="Plugin 和 Package"></a>Plugin 和 Package</h5><p>Flutter 的 Plugin 和 Package 可以用于组件化开发.<br>可以在 <a href="https://pub.dev/" target="_blank" rel="noopener">pub.dartlang.org/</a> 网站上看到所有的 Flutter 库。</p>
+<p>或者在国内镜像 <a href="https://pub.flutter-io.cn/flutter/packages" target="_blank" rel="noopener">pub.flutter-io.cn/</a> 上查看 Flutter 库.</p>
+<h4 id="创建应用"><a href="#创建应用" class="headerlink" title="创建应用"></a>创建应用</h4><h5 id="创建-Flutter-项目"><a href="#创建-Flutter-项目" class="headerlink" title="创建 Flutter 项目"></a>创建 Flutter 项目</h5><p>在 VS Code 中，点击 View &gt; Command Palette…，或者快捷键 Shift+cmd+P(MacOS) /Ctrl+Shift+P(Windows、Linux)，打开命令面板,输入 Flutter</p>
+<p>会出现下图:<br><img src="/lvchenqiang.github.io/2019/05/29/FlutterNotes2/Snip20190529_20.png" alt=""></p>
+<p>选择 Flutter: New Project,会弹出如下的框：<br><img src="/lvchenqiang.github.io/2019/05/29/FlutterNotes2/Snip20190529_21.png" alt=""></p>
+<p>然你输入 Flutter 工程的名字，你可以自己起一个，例如： hello_world。输入 Flutter 工程的名字后，回车，会弹出如下的框：<br><img src="/lvchenqiang.github.io/2019/05/29/FlutterNotes2/Snip20190529_22.png" alt=""></p>
+<p>选择好工程的路径，点击右下角的 <code>Select a folder to create the project in</code>，第一个 Flutter APP 就创建完成了，创建完的 Flutter APP 里有默认实现的代码。</p>
+<p>这里相比 Android Studio 少了设置 Android 包名的步骤，所以用 VS Code 创建的 Flutter APP 的 Android 包名用的是默认的.</p>
+<blockquote>
+<p>VS Code 实质是一款代码编辑器，如果你用过 Sublime 的话，应该就很熟悉，最重要的是记住命令面板 的快捷键：Shift+cmd+P(MacOS) /Ctrl+Shift+P(Windows、Linux)，很多功能需要在命令面板中使用。</p>
+</blockquote>
+<h5 id="运行-Flutter-APP"><a href="#运行-Flutter-APP" class="headerlink" title="运行 Flutter APP"></a>运行 Flutter APP</h5><p>创建完 Flutter APP 的工程后，工程里面有默认的实现，我们可以直接运行 Flutter APP，但在运行 Flutter APP 之前，首先要打开模拟器，或者连接真机</p>
+<p><strong>打开 Android/iOS 模拟器</strong></p>
+<p>在 VS Code 的底部工具栏里会看到如下图：<br><img src="/lvchenqiang.github.io/2019/05/29/FlutterNotes2/Snip20190529_23.png" alt=""></p>
+<p>点击红框内的 <code>No Devices</code> ，会看到如下图：<br><img src="/lvchenqiang.github.io/2019/05/29/FlutterNotes2/Snip20190529_24.png" alt=""></p>
+<p> 选择一个，打开模拟器。</p>
+<p>在 MacOS 上，可以选择 iOS 模拟器，也可以选择 Android 模拟器。 在 Windows 和 Linux 上，只能选择 Android 模拟器。</p>
+<h5 id="Hot-Reload"><a href="#Hot-Reload" class="headerlink" title="Hot Reload"></a>Hot Reload</h5><p>使用快捷键 ctrl+s（Windows、Linux）或者 cmd+s（MacOS），这个快捷键其实是保存代码，但是可以触发 Hot Reload.</p>
+<p><strong>VS Code 的 Hot Reload 按钮：</strong><br><img src="/lvchenqiang.github.io/2019/05/29/FlutterNotes2/Snip20190529_25.png" alt=""></p>
+<p><strong>使用 Hot Reload 的步骤</strong>:</p>
+<ul>
+<li><p>连接真机或虚拟机，运行 Flutter APP，且必须以 Debug 模式启动。因为只有 Debug 模式才能使用 Hot Reload</p>
+</li>
+<li><p>修改 Flutter APP 工程里的 Dart 代码，但并不是所有 Dart 代码的修改都可以使用 Hot Reload，有一些情况下 Hot Reload 并不能生效，只能使用 Hot Restart（重新启动）</p>
+</li>
+<li><p>然后使用快捷键 ctrl+s（Windows、Linux）或者 cmd+s（MacOS），或者点击 Hot Reload 的按钮。就完成了 Hot Reload 的操作，Hot Reload 成功后，会在 Debug Consol 中看到输出如下类似的消息</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Reloaded 1 of 419 libraries in 1,165ms.</span><br></pre></td></tr></table></figure>
+<p><img src="/lvchenqiang.github.io/2019/05/29/FlutterNotes2/Snip20190529_26.png" alt=""></p>
+<p><strong>Hot Reload 的工作原理</strong>:</p>
+<p>Hot Reload 只能在 Debug 模式下使用，是因为 Debug 模式下，Flutter 采用的是 JIT 动态编译，代码是运行在 Dart VM 上，JIT 将 Dart 编译成可以运行在 Dart VM 上的 Dart Kernel，Dart Kernel 可以动态更新，所以就实现了代码的实时更新功能.</p>
+<p>当调用 Hot Reload 时:</p>
+<ol>
+<li>首先会扫描代码，找到上次编译之后有变化的 Dart 代码</li>
+<li>在将这些变化的 Dart 代码转化为增量的 Dart Kernel 文件</li>
+<li>将增量的 Dart Kernel 文件发送到正在移动设备上运行的 Dart VM</li>
+<li>Dart VM 会将发来的增量 Dart Kernel 文件和原有的 Dart Kernel 文件合并，然后重新加载全新的 Dart Kernel</li>
+<li>这个时候，虽然重新加载了 Dart Kernel，却不会重新执行代码，而是通知 Flutter Framework 重建 Widget</li>
+</ol>
+<p>所以 Flutter 的 Hot Reload 并不会重新执行一遍代码，而是触发 Flutter 重新绘制，并且会保留 Flutter 之前的状态，所以 Hot Reload 也被称为有状态的热重载.</p>
+<p><strong>不能使用 Hot Reload 的场景</strong>：</p>
+<ol>
+<li><p>代码出现编译错误的不能使用 Hot Reload</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">当代码更改引入编译错误时，肯定不能使用 Hot Reload。</span><br><span class="line"></span><br><span class="line">所以要先解决编译错误，在使用 Hot Reload</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>代码更改会影响 APP 状态的不能使用 Hot Reload</p>
+<p> 如果你的代码更改会影响 APP 的状态，使得代码更改之后的状态和代码更改之前的状态不一样，那么 Hot Reload 就不会生效，例如：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyWidget</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> GestureDetector(onTap: () =&gt; <span class="built_in">print</span>(<span class="string">'T'</span>));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p> 这段代码，运行 App 之后，将 StatelessWidget 改为 StatefulWidget：</p>
+ <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">MyWidget</span> <span class="keyword">extends</span> <span class="title">StatefulWidget</span> </span>&#123;</span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  State&lt;MyWidget&gt; createState() =&gt; MyWidgetState();</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyWidgetState</span> <span class="keyword">extends</span> <span class="title">State</span>&lt;<span class="title">MyWidget</span>&gt; </span>&#123; <span class="comment">/*...*/</span> &#125;</span><br></pre></td></tr></table></figure>
+<p>  因为 Hot Reload 会保留状态，在代码更改之前，<code>MyWidget</code> 是 <code>StatelessWidget</code> ，将 <code>StatelessWidget</code> 改为 <code>StatefulWidget</code> ，如果 Hot Reload 成功，那么 MyWidget 会变成 StatefulWidget ，与它之前的状态就会不兼容的，所以 Hot Reload 是不会成功的</p>
+<ol>
+<li><p>全局变量（ global variables）和静态字段（static fields）的更改不能使用 Hot Reload</p>
+<p> 在 Flutter 中，全局变量和静态字段被视为状态，因此在 Hot Reload 期间不会重新初始化</p>
+</li>
+</ol>
+<ol>
+<li><p><code>main()</code>方法里的更改不能使用 Hot Reload<br>因为 <code>main()</code> 方法不会因重建窗口小部件树而重新执行，所以更改 <code>main()</code> 方法里的代码，不会在 Hot Reload 之后看到效果 </p>
+</li>
+<li><p>枚举类型更改为常规的类或者常规的类变为枚举类型也不能使用 HotReload</p>
+</li>
+<li><p>修改通用类型声明也不能使用 HotReload</p>
+</li>
+</ol>
+<p><strong>Hot Reload VS Hot Restart</strong></p>
+<p>针对上面不能使用 Hot Reload 的情况，就需要使用 Hot Restart。</p>
+<p>Hot Restart 可以完全重启您的应用程序，但却不用结束调试会话</p>
+<h4 id="Widget"><a href="#Widget" class="headerlink" title="Widget"></a>Widget</h4><p>要进行 Flutter 的开发，一定离不开 Widget，Widget 是 Flutter 的基础。</p>
+<h5 id="什么是Widget"><a href="#什么是Widget" class="headerlink" title="什么是Widget"></a>什么是Widget</h5><p>在Flutter中，Widget的功能是“描述一个UI元素的配置数据”，它就是说，Widget其实并不是表示最终绘制在设备屏幕上的显示元素，而只是显示元素的一个配置数据。实际上，Flutter中真正代表屏幕上显示元素的类是Element，也就是说Widget只是描述Element的一个配置.</p>
+<p>Widget只是UI元素的一个配置数据，并且一个Widget可以对应多个Element，这是因为同一个Widget对象可以被添加到UI树的不同部分，而真正渲染时，UI树的每一个Element节点都会对应一个Widget对象。</p>
+<p>总结一下:</p>
+<ul>
+<li>Widget实际上就是Element的配置数据，Widget树实际上是一个配置树，而真正的UI渲染树是由Element构成；不过，由于Element是通过Widget生成，所以它们之间有对应关系，所以在大多数场景，我们可以宽泛地认为Widget树就是指UI控件树或UI渲染树</li>
+<li>一个Widget对象可以对应多个Element对象。这很好理解，根据同一份配置（Widget），可以创建多个实例（Element）</li>
+</ul>
+<p>主要声明:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@immutable</span></span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Widget</span> <span class="keyword">extends</span> <span class="title">DiagnosticableTree</span> </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> Widget(&#123; <span class="keyword">this</span>.key &#125;);</span><br><span class="line">  <span class="keyword">final</span> Key key;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@protected</span></span><br><span class="line">  <span class="built_in">Element</span> createElement();</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  <span class="built_in">String</span> toStringShort() &#123;</span><br><span class="line">    <span class="keyword">return</span> key == <span class="keyword">null</span> ? <span class="string">'$runtimeType'</span> : <span class="string">'$runtimeType-$key'</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  <span class="keyword">void</span> debugFillProperties(DiagnosticPropertiesBuilder properties) &#123;</span><br><span class="line">    <span class="keyword">super</span>.debugFillProperties(properties);</span><br><span class="line">    properties.defaultDiagnosticsTreeStyle = DiagnosticsTreeStyle.dense;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">static</span> <span class="built_in">bool</span> canUpdate(Widget oldWidget, Widget newWidget) &#123;</span><br><span class="line">    <span class="keyword">return</span> oldWidget.runtimeType == newWidget.runtimeType</span><br><span class="line">        &amp;&amp; oldWidget.key == newWidget.key;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>Widget</code>类继承自DiagnosticableTree，DiagnosticableTree即“诊断树”，主要作用是提供调试信息</li>
+<li><code>Key:</code> 这个key属性类似于React/Vue中的key，主要的作用是决定是否在下一次build时复用旧的widget，决定的条件在canUpdate()方法中</li>
+<li><code>createElement()</code>：正如前文所述“一个Widget可以对应多个Element”；Flutter Framework在构建UI树时，会先调用此方法生成对应节点的Element对象。此方法是Flutter Framework隐式调用的，在我们开发过程中基本不会调用到</li>
+<li><code>debugFillProperties(...)</code> 复写父类的方法，主要是设置诊断树的一些特性</li>
+<li><code>canUpdate(...)</code>是一个静态方法，它主要用于在Widget树重新build时复用旧的widget，其实具体来说，应该是：是否用新的Widget对象去更新旧UI树上所对应的Element对象的配置；通过其源码我们可以看到，只要newWidget与oldWidget的runtimeType和key同时相等时就会用newWidget去更新Element对象的配置，否则就会创建新的Element</li>
+</ul>
+<p>在 Flutter 中，根Widget 只能是以下三个：</p>
+<ul>
+<li>WidgetsApp:WidgetsApp 是可以自定义风格的 根Widget</li>
+<li>MaterialApp:MaterialApp 是在 WidgetsApp 上添加了很多 material-design 的功能，是 Material Design 风格的 根Widget</li>
+<li>CupertinoApp:CupertinoApp 也是基于 WidgetsApp 实现的 iOS 风格的 根Widget</li>
+</ul>
+<h5 id="Widget-的标识符：Key"><a href="#Widget-的标识符：Key" class="headerlink" title="Widget 的标识符：Key"></a>Widget 的标识符：Key</h5><p>因为 Flutter 采用的是 react-style 的框架，每次刷新 UI 的时候，都会重新构建新的 Widget树，然后和之前的 Widget树 进行对比，计算出变化的部分，这个计算过程叫做 diff，在 diff 过程中，如果能提前知道哪些 Widget 没有变化，无疑会提高 diff 的性能，这时候就需要使用到标识符.</p>
+<p>为了在 diff 过程中，知道 Widget 有没有变化，就需要给 Widget 添加一个唯一的标识符，然后在 Widget树 的 diff 过程中，查看刷新前后的 Widget树 有没有相同标识符的 Widget，如果标识符相同，则说明 Widget 没有变化，否则说明 Widget 有变化。</p>
+<p>假设 UI 刷新前，Widget树 是 A，在 A 里有一个标识符为 a 的 Widget,在 UI 刷新后，重建的 Widget树 是 B，如果 B 里还有标识符为 a 的 Widget，则说明这个 Widget 没变，但是如果 B 里没有标识符为 a 的 Widget，那么说明这个 Widget 发生了变化</p>
+<h5 id="Flutter-中如何在-diff-过程中判断哪些-Widget-没有变化"><a href="#Flutter-中如何在-diff-过程中判断哪些-Widget-没有变化" class="headerlink" title="Flutter 中如何在 diff 过程中判断哪些 Widget 没有变化"></a>Flutter 中如何在 diff 过程中判断哪些 Widget 没有变化</h5><p>Flutter 在 diff 过程中判断哪些 Widget 没有变化，稍微有些复杂，有两种情况:</p>
+<ul>
+<li>默认情况下（ Widget 没有设置 Key）</li>
+</ul>
+<p>  当没有给 Widget 设置 Key 时，Flutter 会根据 Widget 的 runtimeType 和显示顺序是否相同来判断 Widget 是否有变化。</p>
+<pre><code>runtimeType 是 Widget 的类型，例如 Text 和 RaisedButton 就是不同的类型。
+</code></pre><ul>
+<li>Widget 有 Key<br>当给 Widget 设置了 Key 时，Flutter 是根据 Key 和 runtimeType 是否相同来判断 Widget 是否有变化</li>
+</ul>
+<blockquote>
+<p>一般情况下我们不需要使用 Key，但是当页面比较复杂时，就需要使用 Key 去提升渲染性能</p>
+</blockquote>
+<h5 id="Widget-的分类：StatelessWidget-和-StatefulWidge"><a href="#Widget-的分类：StatelessWidget-和-StatefulWidge" class="headerlink" title="Widget 的分类：StatelessWidget 和 StatefulWidge"></a>Widget 的分类：StatelessWidget 和 StatefulWidge</h5><ul>
+<li>StatefulWidget:StatefulWidget 是 UI 可以变化的 Widget，创建完后 UI 还可以在更改。</li>
+<li>StatelessWidget:StatelessWidget 是 UI 不可以变化的 Widget，创建完后 UI 就不可以在更改</li>
+</ul>
+<h5 id="StatefulWidget-及-State"><a href="#StatefulWidget-及-State" class="headerlink" title="StatefulWidget 及 State"></a>StatefulWidget 及 State</h5><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">'package:flutter/material.dart'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> main() =&gt; runApp(MyApp(<span class="string">"Hello World"</span>));</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyApp</span> <span class="keyword">extends</span> <span class="title">StatefulWidget</span> </span>&#123;</span><br><span class="line">  <span class="comment">// This widget is the root of your application.</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">String</span> content;</span><br><span class="line"></span><br><span class="line">  MyApp(<span class="keyword">this</span>.content);</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  State&lt;StatefulWidget&gt; createState() &#123;</span><br><span class="line">    <span class="comment">// <span class="doctag">TODO:</span> implement createState</span></span><br><span class="line">    <span class="keyword">return</span> MyAppState();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyAppState</span> <span class="keyword">extends</span> <span class="title">State</span>&lt;<span class="title">MyApp</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">bool</span> isShowText =<span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">void</span> increment()&#123;</span><br><span class="line">    setState(() &#123;</span><br><span class="line">      widget.content += <span class="string">"d"</span>;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> MaterialApp(</span><br><span class="line">        title: <span class="string">'Flutter Demo'</span>,</span><br><span class="line">        theme: ThemeData(</span><br><span class="line">          primarySwatch: Colors.blue,</span><br><span class="line">        ),</span><br><span class="line">        home: Scaffold(</span><br><span class="line">          appBar: AppBar(title: Text(<span class="string">"Widget -- StatefulWidget及State"</span>),),</span><br><span class="line">          body: Center(</span><br><span class="line">              child: GestureDetector(</span><br><span class="line">                child: isShowText? Text(widget.content) :<span class="keyword">null</span>,</span><br><span class="line">                onTap: increment,</span><br><span class="line">              )</span><br><span class="line">          ),</span><br><span class="line">        )</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里的 MyApp 就是一个 StatefulWidget，当点击 Hello World 的文本框，内容会变.</p>
+<p>从上面的代码可以看到实现 StatefulWidget，需要两部分组成：</p>
+<ol>
+<li>StatefulWidget</li>
+<li>State</li>
+</ol>
+<p><strong>1. StatefulWidget</strong><br>StatefulWidget 实现步骤：</p>
+<ul>
+<li>首先继承 StatefulWidget</li>
+<li>实现 createState() 的方法，返回一个 State</li>
+</ul>
+<p>StatefulWidget的功能:</p>
+<ul>
+<li>StatefulWidget 的主要功能就是创建 State</li>
+</ul>
+<p><strong>2. State</strong><br>State 即是状态<br>State 的实现步骤:</p>
+<ul>
+<li>首先继承 State，State 的泛型类型是上面定义的 Widget 的类型</li>
+<li>实现 <code>build()</code>的方法，返回一个 Widget</li>
+<li>需要更改数据，刷新 UI 的话，调用 setState()</li>
+</ul>
+<p><strong>State 的定义</strong></p>
+<p>State 用到了泛型，它的定义是这样子的:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">State&lt;T <span class="keyword">extends</span> StatefulWidget&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>State 的功能</strong></p>
+<ul>
+<li>build() —— 创建 Widget,State 的 build() 函数创建 Widget，用于显示 UI</li>
+<li>setState() —— 刷新 UI<br>调用 setState() 方法，在 setState() 里更改数据的值，然后 setState() 会触发 State 的 build() 方法，引起强制重建 Widget，重建 Widget 的时候会重新绑定数据， 而这时数据已经发生变化，从而达到刷新 UI 的目的.</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setState() 可以刷新UI的原理是，setState() 会触发 StatefulWidget 强制重建，重建的时候会重新创建 Widget 和绑定数据，从而实现了刷新 UI。所以只要 MyApp 是 StatefulWidget，那么它的子类在 setState() 的作用下都可以被强制刷新</span><br></pre></td></tr></table></figure>
+<p><strong>State的成员变量</strong><br>text</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Micah
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://lvchenqiang.github.io/2019/05/29/FlutterNotes2/" title="Flutter进阶之开发">https://lvchenqiang.github.io/2019/05/29/FlutterNotes2/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/lvchenqiang.github.io/tags/笔记/" rel="tag"># 笔记</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/lvchenqiang.github.io/2019/05/15/FlutterNotes/" rel="next" title="Flutter进阶值简介">
+                <i class="fa fa-chevron-left"></i> Flutter进阶值简介
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/lvchenqiang.github.io/image/avatar.png" alt="Micah">
+            
+              <p class="site-author-name" itemprop="name">Micah</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/lvchenqiang.github.io/archives/">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/lvchenqiang.github.io/categories/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/lvchenqiang.github.io/tags/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/lvchenqiang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://blog.csdn.net/lvchenqiang_" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-csdn"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Flutter-工程类型介绍"><span class="nav-number">1.</span> <span class="nav-text">Flutter 工程类型介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Flutter-Application"><span class="nav-number">1.1.</span> <span class="nav-text">Flutter Application</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Flutter-Plugin"><span class="nav-number">1.2.</span> <span class="nav-text">Flutter Plugin</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Flutter-Package"><span class="nav-number">1.3.</span> <span class="nav-text">Flutter Package</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Flutter-Module"><span class="nav-number">1.4.</span> <span class="nav-text">Flutter Module</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Plugin-和-Package"><span class="nav-number">1.5.</span> <span class="nav-text">Plugin 和 Package</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建应用"><span class="nav-number">2.</span> <span class="nav-text">创建应用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#创建-Flutter-项目"><span class="nav-number">2.1.</span> <span class="nav-text">创建 Flutter 项目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#运行-Flutter-APP"><span class="nav-number">2.2.</span> <span class="nav-text">运行 Flutter APP</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Hot-Reload"><span class="nav-number">2.3.</span> <span class="nav-text">Hot Reload</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Widget"><span class="nav-number">3.</span> <span class="nav-text">Widget</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#什么是Widget"><span class="nav-number">3.1.</span> <span class="nav-text">什么是Widget</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Widget-的标识符：Key"><span class="nav-number">3.2.</span> <span class="nav-text">Widget 的标识符：Key</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Flutter-中如何在-diff-过程中判断哪些-Widget-没有变化"><span class="nav-number">3.3.</span> <span class="nav-text">Flutter 中如何在 diff 过程中判断哪些 Widget 没有变化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Widget-的分类：StatelessWidget-和-StatefulWidge"><span class="nav-number">3.4.</span> <span class="nav-text">Widget 的分类：StatelessWidget 和 StatefulWidge</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#StatefulWidget-及-State"><span class="nav-number">3.5.</span> <span class="nav-text">StatefulWidget 及 State</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Micah</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/lvchenqiang.github.io/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/lvchenqiang.github.io/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/lvchenqiang.github.io/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/lvchenqiang.github.io/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/lvchenqiang.github.io/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/lvchenqiang.github.io/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/lvchenqiang.github.io/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://Micah.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://lvchenqiang.github.io/2019/05/29/FlutterNotes2/';
+          this.page.identifier = '2019/05/29/FlutterNotes2/';
+          this.page.title = 'Flutter进阶之开发';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Micah.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'ob6xEevaCzifOdzvnfIrxSJ7-gzGzoHsz',
+        appKey: 'ibWrHDRgAsLSxr5UnNH7Tb2n',
+        placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
