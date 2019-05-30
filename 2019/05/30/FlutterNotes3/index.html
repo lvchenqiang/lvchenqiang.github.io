@@ -79,15 +79,18 @@
 
 
 
+<meta name="description" content="Widget详解我们知道Flutter中几乎所有的对象都是一个Widget，与原生开发中“控件”不同的是，Flutter中的widget的概念更广泛，它不仅可以表示UI元素，也可以表示一些功能性的组件如：用于手势检测的 GestureDetector widget、用于应用主题数据传递的Theme等等。">
 <meta name="keywords" content="笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Flutter进阶之Widget详解">
 <meta property="og:url" content="https://lvchenqiang.github.io/2019/05/30/FlutterNotes3/index.html">
 <meta property="og:site_name" content="大前端之路">
+<meta property="og:description" content="Widget详解我们知道Flutter中几乎所有的对象都是一个Widget，与原生开发中“控件”不同的是，Flutter中的widget的概念更广泛，它不仅可以表示UI元素，也可以表示一些功能性的组件如：用于手势检测的 GestureDetector widget、用于应用主题数据传递的Theme等等。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-30T01:14:46.979Z">
+<meta property="og:updated_time" content="2019-05-30T10:26:46.542Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Flutter进阶之Widget详解">
+<meta name="twitter:description" content="Widget详解我们知道Flutter中几乎所有的对象都是一个Widget，与原生开发中“控件”不同的是，Flutter中的widget的概念更广泛，它不仅可以表示UI元素，也可以表示一些功能性的组件如：用于手势检测的 GestureDetector widget、用于应用主题数据传递的Theme等等。">
 
 
 
@@ -357,7 +360,513 @@
       
 
       
-        
+        <h2 id="Widget详解"><a href="#Widget详解" class="headerlink" title="Widget详解"></a>Widget详解</h2><p>我们知道Flutter中几乎所有的对象都是一个Widget，与原生开发中“控件”不同的是，Flutter中的widget的概念更广泛，它不仅可以表示UI元素，也可以表示一些功能性的组件如：用于手势检测的 GestureDetector widget、用于应用主题数据传递的Theme等等。</p>
+<a id="more"></a>
+<h3 id="Everything-is-a-Widget"><a href="#Everything-is-a-Widget" class="headerlink" title="Everything is a Widget"></a>Everything is a Widget</h3><p>在 Android 中，UI 显示的容器是 Activity，iOS 显示 UI 的容器是 ViewController，在 Flutter 中，这些都是 Widget 的功能，Widget 不仅是 View，也是 Flutter UI 的容器，而且布局也是使用的 Widget，监听点击事件也是 Widget，实现动画也是用 Widget，设置 Padding 也是用 Widget，设置透明度也是用 Widget，所以说 Everything is a Widget.</p>
+<h3 id="组合大于继承"><a href="#组合大于继承" class="headerlink" title="组合大于继承"></a>组合大于继承</h3><p>在 Android 中，要想实现自定义的 View 时，都是实现一个 View 的子类，或者继承已有的 View。iOS 也是同样的，要想实现自定义的 View 时，要么实现一个 UIView 的子类，或者继承已有的 View。</p>
+<p>但在 Flutter 中，要实现一个自定义的 Widget，最好通过组合其他 Widget 来实现，而不是用继承。</p>
+<p>因为在 Flutter 中，Widget 组合大于继承.</p>
+<h3 id="Widget-是-UI-的配置信息"><a href="#Widget-是-UI-的配置信息" class="headerlink" title="Widget 是 UI 的配置信息"></a>Widget 是 UI 的配置信息</h3><p>Flutter 的 UI 渲染采用的是 <code>react-style</code> 的框架，所以 Widget 并不会直接用于渲染，而只是 <code>UI 的配置信息</code>.</p>
+<h3 id="Widget-是-一次性的"><a href="#Widget-是-一次性的" class="headerlink" title="Widget 是 一次性的"></a>Widget 是 一次性的</h3><p>当 Flutter App 启动时，会 build 一个 Widget 树，然后读取 Widget 树的配置去渲染 UI，当你想要改变 UI 时，并不能通过更改 Widget 的值来刷新 UI，而是通过更改状态，触发 build ，重新新建一个全新的 Widget 树，通过和原来的 Widget 树进行对比，来刷新 UI，所以每次刷新 UI，Widget 都会重建，所以 Widget 是 <code>一次性的</code></p>
+<h3 id="Widget-是-不可变的"><a href="#Widget-是-不可变的" class="headerlink" title="Widget 是 不可变的"></a>Widget 是 不可变的</h3><p>根据 Flutter UI 的渲染过程，会首先建立一个 Widget 树，而且这个 Widget 树只会创建一次，当状态发生变化时，不是更改原来的 Widget，而是重新创建，所以 Widget 是 <code>不可变的</code></p>
+<h3 id="Widget-是-轻量的"><a href="#Widget-是-轻量的" class="headerlink" title="Widget 是 轻量的"></a>Widget 是 轻量的</h3><p>如果要改变 UI ，就调用方法重新 build 一个 Widget 树，虽然 Widget 树重新创建了，但是并不会引起 UI 的全部刷新，而是会对比前后 Widget 树变化的部分，只刷新变的部分，因此即使 Widget 随便创建消耗，也不会影响性能，所以 Widget 是 <code>轻量的</code></p>
+<h3 id="使用-Widget-的步骤"><a href="#使用-Widget-的步骤" class="headerlink" title="使用 Widget 的步骤"></a>使用 Widget 的步骤</h3><p>所以使用 Widget 我们要遵照以下三个步骤:</p>
+<ul>
+<li>先找到 Widget 的构造函数</li>
+<li>看构造函数的哪些参数是必选的，哪些参数是可选的，必选的参数必须要赋值，可选的根据需要来赋值</li>
+<li>为了更灵活的使用 Widget，需要知道 Widget 每个参数的作用和使用方法</li>
+</ul>
+<h2 id="基础-Widget"><a href="#基础-Widget" class="headerlink" title="基础 Widget"></a>基础 Widget</h2><h3 id="文本框"><a href="#文本框" class="headerlink" title="文本框"></a>文本框</h3><h4 id="Text"><a href="#Text" class="headerlink" title="Text"></a>Text</h4><p>Text用于显示简单样式文本，它包含一些控制文本显示样式的一些属性，一个简单的例子如下</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Text(<span class="string">"Hello world"</span>,</span><br><span class="line">  textAlign: TextAlign.center,</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">Text(<span class="string">"Hello world! I'm Jack. "</span>*<span class="number">4</span>,</span><br><span class="line">  maxLines: <span class="number">1</span>,</span><br><span class="line">  overflow: TextOverflow.ellipsis,</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">Text(<span class="string">"Hello world"</span>,</span><br><span class="line">  textScaleFactor: <span class="number">1.5</span>,</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p><strong>Text 的必选参数：data</strong></p>
+<ul>
+<li>Text 的内容 data 是必选参数。</li>
+</ul>
+<p><strong>Text 可选参数里经常用到的参数：TextStyle</strong></p>
+<ul>
+<li>TextStyle 是 Text 里经常要用到的参数，用来定义 Text 显示的样式，如 颜色、大小、背景灯</li>
+</ul>
+<h5 id="TextStyle-的构造参数及参数说明"><a href="#TextStyle-的构造参数及参数说明" class="headerlink" title="TextStyle 的构造参数及参数说明"></a><strong>TextStyle 的构造参数及参数说明</strong></h5><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TextStyle</span> <span class="keyword">extends</span> <span class="title">Diagnosticable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> TextStyle(&#123;</span><br><span class="line">    <span class="keyword">this</span>.inherit = <span class="keyword">true</span>, </span><br><span class="line">    <span class="keyword">this</span>.color,</span><br><span class="line">    <span class="keyword">this</span>.fontSize,</span><br><span class="line">    <span class="keyword">this</span>.fontWeight,</span><br><span class="line">    <span class="keyword">this</span>.fontStyle,</span><br><span class="line">    <span class="keyword">this</span>.letterSpacing,</span><br><span class="line">    <span class="keyword">this</span>.wordSpacing,</span><br><span class="line">    <span class="keyword">this</span>.textBaseline,</span><br><span class="line">    <span class="keyword">this</span>.height,</span><br><span class="line">    <span class="keyword">this</span>.locale,</span><br><span class="line">    <span class="keyword">this</span>.foreground,</span><br><span class="line">    <span class="keyword">this</span>.background,</span><br><span class="line">    <span class="keyword">this</span>.shadows,</span><br><span class="line">    <span class="keyword">this</span>.decoration,</span><br><span class="line">    <span class="keyword">this</span>.decorationColor,</span><br><span class="line">    <span class="keyword">this</span>.decorationStyle,</span><br><span class="line">    <span class="keyword">this</span>.debugLabel,</span><br><span class="line">    <span class="built_in">String</span> fontFamily,</span><br><span class="line">    <span class="built_in">List</span>&lt;<span class="built_in">String</span>&gt; fontFamilyFallback,</span><br><span class="line">    <span class="built_in">String</span> package,</span><br><span class="line">  &#125;) : fontFamily = package == <span class="keyword">null</span> ? fontFamily : <span class="string">'packages/$package/$fontFamily'</span>,</span><br><span class="line">       _fontFamilyFallback = fontFamilyFallback,</span><br><span class="line">       _package = package,</span><br><span class="line">       <span class="keyword">assert</span>(inherit != <span class="keyword">null</span>),</span><br><span class="line">       <span class="keyword">assert</span>(color == <span class="keyword">null</span> || foreground == <span class="keyword">null</span>, _kColorForegroundWarning);</span><br><span class="line">       </span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数名字</th>
+<th>参数类型</th>
+<th>意义</th>
+<th>必选 or 可选</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>inherit</td>
+<td>bool</td>
+<td>是否继承父 Text 的样式默认为 true,如果为false，且样式没有设置具体的值，则采用默认值：白色、字体大小 10px、sans-serif 字体</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>color</td>
+<td>Color</td>
+<td>文字的颜色</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>fontSize</td>
+<td>double</td>
+<td>文字的大小</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>fontWeight</td>
+<td>FontWeight</td>
+<td>字体粗细</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>fontStyle</td>
+<td>FontStyle</td>
+<td>是否在字体中倾斜字形</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>letterSpacing</td>
+<td>double</td>
+<td>字母之间的间隔</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>wordSpacing</td>
+<td>double</td>
+<td>单词之间的间隔</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>textBaseline</td>
+<td>TextBaseline</td>
+<td>用于对齐文本的水平线</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>height</td>
+<td>double</td>
+<td>文本的高度 但它并不是一个绝对值，而是一个因子，具体的行高等于fontSize*height</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>locale</td>
+<td>Locale</td>
+<td>用于选择用户语言和格式设置首选项的标识符</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>foreground</td>
+<td>Paint</td>
+<td>文本的前景色</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>background</td>
+<td>Paint</td>
+<td>文本的背景色</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>shadows</td>
+<td>List&lt; ui.Shadow&gt;</td>
+<td>在文本下方绘制阴影</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>decoration</td>
+<td>TextDecoration</td>
+<td>文本的线条</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>decorationColor</td>
+<td>Color</td>
+<td>TextDecoration 线条的颜色</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>decorationStyle</td>
+<td>TextDecorationStyle</td>
+<td>TextDecoration 线条的样式</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>debugLabel</td>
+<td>String</td>
+<td>文本样式的描述 无实际用处</td>
+<td>可读</td>
+</tr>
+<tr>
+<td>fontFamily</td>
+<td>String</td>
+<td>用于设置使用哪种自定义字体</td>
+<td>可读</td>
+</tr>
+</tbody>
+</table>
+<p>可以看到 TextStyle 只有可选参数，没有必选参数<br><strong>TextDecoration：文本的线条</strong><br>文本的线条，包含四种</p>
+<ul>
+<li>TextDecoration.underline：下划线</li>
+<li>TextDecoration.overline：上划线</li>
+<li>TextDecoration.lineThrough：中划线</li>
+<li>TextDecoration.none：不划线</li>
+</ul>
+<p><strong>decorationStyle：文本线条的种类</strong><br>文本线条的种类，包含有五中：</p>
+<ul>
+<li>TextDecorationStyle.solid：实线</li>
+<li>TextDecorationStyle.double：两条线</li>
+<li>TextDecorationStyle.dotted：点虚线</li>
+<li>TextDecorationStyle.dashed：间隔虚线（比点要长</li>
+<li>TextDecorationStyle.wave：波浪线</li>
+</ul>
+<h5 id="Text-其他参数说明"><a href="#Text-其他参数说明" class="headerlink" title="Text 其他参数说明"></a>Text 其他参数说明</h5><p>我们可以在 Text 的构造函数里找到 Text 的所有参数，下面是 Text 构造函数：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Text</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> Text(<span class="keyword">this</span>.data, &#123;</span><br><span class="line">    Key key,</span><br><span class="line">    <span class="keyword">this</span>.style,</span><br><span class="line">    <span class="keyword">this</span>.strutStyle,</span><br><span class="line">    <span class="keyword">this</span>.textAlign,</span><br><span class="line">    <span class="keyword">this</span>.textDirection,</span><br><span class="line">    <span class="keyword">this</span>.locale,</span><br><span class="line">    <span class="keyword">this</span>.softWrap,</span><br><span class="line">    <span class="keyword">this</span>.overflow,</span><br><span class="line">    <span class="keyword">this</span>.textScaleFactor,</span><br><span class="line">    <span class="keyword">this</span>.maxLines,</span><br><span class="line">    <span class="keyword">this</span>.semanticsLabel,</span><br><span class="line">  &#125;) : <span class="keyword">assert</span>(data != <span class="keyword">null</span>),</span><br><span class="line">       textSpan = <span class="keyword">null</span>,</span><br><span class="line">       <span class="keyword">super</span>(key: key);</span><br><span class="line">    </span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数名字</th>
+<th>参数类型</th>
+<th>意义</th>
+<th>必选or可选</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>data</td>
+<td>String</td>
+<td>要显示的文字</td>
+<td>必选</td>
+</tr>
+<tr>
+<td>key</td>
+<td>Key</td>
+<td>Widget 的标识</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>style</td>
+<td>TextStyle</td>
+<td>文本样式</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>strutStyle</td>
+<td>StrutStyle</td>
+<td>设置每行的最小行高</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>textAlign</td>
+<td>TextAlign</td>
+<td>文本的对齐方式</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>textDirection</td>
+<td>TextDirection</td>
+<td>文字方向</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>locale</td>
+<td>Locale</td>
+<td>用于选择用户语言和格式设置首选项的标识符</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>softWrap</td>
+<td>bool</td>
+<td>是否支持软换行符如果是 false 的话，这个文本只有一行，水平方向是无限的</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>overflow</td>
+<td>TextOverflow</td>
+<td>文本的截断方式</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>textScaleFactor</td>
+<td>double</td>
+<td>代表文本相对于当前字体大小的缩放因子默认值为1.0</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>maxLines</td>
+<td>int</td>
+<td>显示的最大行数</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>semanticsLabel</td>
+<td>String</td>
+<td>给文本加上一个语义标签 没有实际用处</td>
+<td>可选</td>
+</tr>
+</tbody>
+</table>
+<p>从构造函数里也可以看到只有 data 是必选参数，其余都是可选参数.</p>
+<p><code>textAlign</code>：文本的对齐方式</p>
+<ul>
+<li>TextAlign.left：左对齐</li>
+<li>TextAlign.right：右对齐</li>
+<li>TextAlign.center：居中对齐</li>
+<li>TextAlign.start：从文字开始的那个方向对齐，如果文字方向从左到右，就左对齐，否则是右对齐</li>
+<li>TextAlign.end：从文字开始的相反方向对齐，如果文字方向从左到右，就右对齐，否则是左对齐</li>
+<li>TextAlign.justify</li>
+</ul>
+<p> <code>textDirection</code>：文字方向</p>
+<ul>
+<li>TextDirection.ltr：文字方向从左到右</li>
+<li>TextDirection.rtl：文字方向从右到左</li>
+</ul>
+<p><code>overflow：</code>文本的截断方式</p>
+<ul>
+<li>TextOverflow.ellipsis：多余文本截断后以省略符“…”表示</li>
+<li>TextOverflow.clip：剪切多余文本，多余文本不显示</li>
+<li>TextOverflow.fade：将多余的文本设为透明</li>
+</ul>
+<h5 id="Text-的命名构造函数：Text-rich"><a href="#Text-的命名构造函数：Text-rich" class="headerlink" title="Text 的命名构造函数：Text.rich()"></a>Text 的命名构造函数：Text.rich()</h5><p>Text 除了默认的构造函数外，还有命名构造函数：Text.rich()，Text.rich() 的定义为：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// Creates a text widget with a [TextSpan].</span></span><br><span class="line">  <span class="keyword">const</span> Text.rich(<span class="keyword">this</span>.textSpan, &#123;</span><br><span class="line">    Key key,</span><br><span class="line">    <span class="keyword">this</span>.style,</span><br><span class="line">    <span class="keyword">this</span>.strutStyle,</span><br><span class="line">    <span class="keyword">this</span>.textAlign,</span><br><span class="line">    <span class="keyword">this</span>.textDirection,</span><br><span class="line">    <span class="keyword">this</span>.locale,</span><br><span class="line">    <span class="keyword">this</span>.softWrap,</span><br><span class="line">    <span class="keyword">this</span>.overflow,</span><br><span class="line">    <span class="keyword">this</span>.textScaleFactor,</span><br><span class="line">    <span class="keyword">this</span>.maxLines,</span><br><span class="line">    <span class="keyword">this</span>.semanticsLabel,</span><br><span class="line">  &#125;)</span><br></pre></td></tr></table></figure>
+<p><code>Text.rich()</code> 需要传入 TextSpan，可以显示多种样式的 text，具体使用可以查看下面介绍的 RichText，使用方法是一样的</p>
+<h4 id="RichText"><a href="#RichText" class="headerlink" title="RichText"></a>RichText</h4><p>一个富文本 Text，可以显示多种样式的 text.</p>
+<h5 id="RichText-快速上手"><a href="#RichText-快速上手" class="headerlink" title="RichText 快速上手"></a>RichText 快速上手</h5><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">RichText(</span><br><span class="line">    text: TextSpan(children: [</span><br><span class="line">      TextSpan(text: <span class="string">"Hello"</span>, style: TextStyle(color: Colors.blue)),</span><br><span class="line">      TextSpan(text: <span class="string">"Flutter"</span>, style: TextStyle(color: Colors.red))</span><br><span class="line">    ]),</span><br><span class="line">  )</span><br></pre></td></tr></table></figure>
+<p>把 RichText 使用 TextSpan 放到一个页面的完整 Demo 如下:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">'package:flutter/material.dart'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">void</span> main() =&gt; runApp(RichTextWidget());</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RichTextWidget</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> MaterialApp(</span><br><span class="line">      title: <span class="string">"Flutter Demo"</span>,</span><br><span class="line">      theme: ThemeData(</span><br><span class="line">        primaryColor: Colors.blue,</span><br><span class="line">      ),</span><br><span class="line">      home: Scaffold(</span><br><span class="line">          appBar: AppBar(title: Text(<span class="string">"Flutter UI基础Widget -- 文本"</span>)),</span><br><span class="line">          body: RichText(</span><br><span class="line">            text: TextSpan(children: [</span><br><span class="line">              TextSpan(text: <span class="string">"Hello"</span>, style: TextStyle(color: Colors.blue)),</span><br><span class="line">              TextSpan(text: <span class="string">"Flutter"</span>, style: TextStyle(color: Colors.red))</span><br><span class="line">            ]),</span><br><span class="line">          )),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="TextSpan-的构造函数及参数说明"><a href="#TextSpan-的构造函数及参数说明" class="headerlink" title="TextSpan 的构造函数及参数说明"></a>TextSpan 的构造函数及参数说明</h5><p>TextSpan 的构造函数如下：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TextSpan</span> <span class="keyword">extends</span> <span class="title">DiagnosticableTree</span> </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> TextSpan(&#123;</span><br><span class="line">    <span class="keyword">this</span>.style,</span><br><span class="line">    <span class="keyword">this</span>.text,</span><br><span class="line">    <span class="keyword">this</span>.children,</span><br><span class="line">    <span class="keyword">this</span>.recognizer,</span><br><span class="line">  &#125;);</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数名字</th>
+<th>参数类型</th>
+<th>意义</th>
+<th>必选or可选</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>style</td>
+<td>TextStyle</td>
+<td>文本样式</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>text</td>
+<td>String</td>
+<td>要显示的文字</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>children</td>
+<td>List&lt; TextSpan&gt;</td>
+<td>子 TextSpan</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>recognizer</td>
+<td>GestureRecognizer</td>
+<td>一个手势识别器，它将接收到达此文本范围的事件</td>
+<td>可选</td>
+</tr>
+</tbody>
+</table>
+<h5 id="RichText-其余参数说明"><a href="#RichText-其余参数说明" class="headerlink" title="RichText 其余参数说明"></a>RichText 其余参数说明</h5><p>RichText 的构造函数</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">RichText</span> <span class="keyword">extends</span> <span class="title">LeafRenderObjectWidget</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> RichText(&#123;</span><br><span class="line">    Key key,</span><br><span class="line">    <span class="meta">@required</span> <span class="keyword">this</span>.text,</span><br><span class="line">    <span class="keyword">this</span>.textAlign = TextAlign.start,</span><br><span class="line">    <span class="keyword">this</span>.textDirection,</span><br><span class="line">    <span class="keyword">this</span>.softWrap = <span class="keyword">true</span>,</span><br><span class="line">    <span class="keyword">this</span>.overflow = TextOverflow.clip,</span><br><span class="line">    <span class="keyword">this</span>.textScaleFactor = <span class="number">1.0</span>,</span><br><span class="line">    <span class="keyword">this</span>.maxLines,</span><br><span class="line">    <span class="keyword">this</span>.locale,</span><br><span class="line">    <span class="keyword">this</span>.strutStyle,</span><br><span class="line">  &#125;) : <span class="keyword">assert</span>(text != <span class="keyword">null</span>),</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数名字</th>
+<th>参数类型</th>
+<th>意义</th>
+<th>必选 or 可选</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>key</td>
+<td>Key</td>
+<td>Widget 的标识</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>text</td>
+<td>TextSpan</td>
+<td>文字片段</td>
+<td>必选</td>
+</tr>
+<tr>
+<td>textDirection</td>
+<td>TextDirection</td>
+<td>文字方向</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>textAlign</td>
+<td>TextAlign</td>
+<td>文本的对齐方式</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>textScaleFactor</td>
+<td>double</td>
+<td>代表文本相对于当前字体大小的缩放因子</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>strutStyle</td>
+<td>StrutStyle</td>
+<td>设置每行的最小行高</td>
+<td>可选</td>
+</tr>
+<tr>
+<td>maxLines</td>
+<td>int</td>
+<td>显示的最大行数</td>
+<td>可选</td>
+</tr>
+</tbody>
+</table>
+<p>从红也可以看到 RichText 的必选参数是 text，text 的类型是 TextSpan，除了 text 参数, RichText 的大部分参数和 Text 一样.</p>
+<h5 id="Flutter-使用自定义字体"><a href="#Flutter-使用自定义字体" class="headerlink" title="Flutter 使用自定义字体"></a>Flutter 使用自定义字体</h5><p>可以在 Flutter 中使用不同的字体。例如，我们可能会使用设计人员创建的自定义字体，或者其它第三方的字体，如 Google Fonts 中的字体。本节将介绍如何为 Flutter 应用配置字体，并在渲染文本时使用它们.</p>
+<p>在 Flutter中 使用字体分两步完成:</p>
+<ul>
+<li>首先在 pubspec.yaml 中声明它们，以确保它们会打包到应用程序中</li>
+<li>然后通过 TextStyle 属性使用字体</li>
+</ul>
+<h5 id="在-pubspec-yaml-中声明"><a href="#在-pubspec-yaml-中声明" class="headerlink" title="在 pubspec.yaml 中声明"></a>在 pubspec.yaml 中声明</h5><p>要将字体打文件打包到应用中，和使用其它资源一样，要先在 pubspec.yaml 中声明它。然后将字体文件复制到在 pubspec.yaml 中指定的位置。如:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">flutter:</span><br><span class="line">  fonts:</span><br><span class="line">    - family: Raleway</span><br><span class="line">      fonts:</span><br><span class="line">        - asset: assets/fonts/Raleway-Regular.ttf</span><br><span class="line">        - asset: assets/fonts/Raleway-Medium.ttf</span><br><span class="line">          weight: <span class="number">500</span></span><br><span class="line">        - asset: assets/fonts/Raleway-SemiBold.ttf</span><br><span class="line">          weight: <span class="number">600</span></span><br><span class="line">    - family: AbrilFatface</span><br><span class="line">      fonts:</span><br><span class="line">        - asset: assets/fonts/abrilfatface/AbrilFatface-Regular.ttf</span><br></pre></td></tr></table></figure>
+<p><strong>使用字体</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 声明文本样式</span><br><span class="line">const textStyle = const TextStyle(</span><br><span class="line">  fontFamily: &apos;Raleway&apos;,</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">// 使用文本样式</span><br><span class="line">var buttonText = const Text(</span><br><span class="line">  &quot;Use the font for this text&quot;,</span><br><span class="line">  style: textStyle,</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h3 id="图片及ICON"><a href="#图片及ICON" class="headerlink" title="图片及ICON"></a>图片及ICON</h3><p>Flutter中，我们可以通过Image来加载并显示图片，Image的数据源可以是asset、文件、内存以及网络。</p>
+<h4 id="ImageProvider"><a href="#ImageProvider" class="headerlink" title="ImageProvider"></a>ImageProvider</h4><p><code>ImageProvider</code> 是一个抽象类，主要定义了图片数据获取的接口<code>load()</code>，从不同的数据源获取图片需要实现不同的<code>ImageProvider</code> ，如<code>AssetImage</code>是实现了从<code>Asset</code>中加载图片的<code>ImageProvider</code>，而<code>NetworkImage</code>实现了从网络加载图片的<code>ImageProvider</code>.</p>
+<h4 id="Image"><a href="#Image" class="headerlink" title="Image"></a>Image</h4><p><code>Image</code> widget有一个必选的<code>image</code>参数，它对应一个<code>ImageProvider</code>。下面我们分别演示一下如何从asset和网络加载图片</p>
+<h5 id="从asset中加载图片"><a href="#从asset中加载图片" class="headerlink" title="从asset中加载图片"></a>从asset中加载图片</h5><ul>
+<li>在工程根目录下创建一个images目录，并将图片avatar.png拷贝到该目录</li>
+<li><p>在<code>pubspec.yaml</code>中的flutter部分添加如下内容</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">assets:</span><br><span class="line">    - images/avatar.png</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li>加载该图片</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Image(</span><br><span class="line">  image: AssetImage(<span class="string">"images/avatar.png"</span>),</span><br><span class="line">  width: <span class="number">100.0</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>Image也提供了一个快捷的构造函数Image.asset用于从asset中加载、显示图片：</p>
+ <figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Image.asset(<span class="string">"images/avatar.png"</span>,</span><br><span class="line">  width: <span class="number">100.0</span>,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h5 id="从网络加载图片"><a href="#从网络加载图片" class="headerlink" title="从网络加载图片"></a>从网络加载图片</h5><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Image(</span><br><span class="line">  image: NetworkImage(</span><br><span class="line">      <span class="string">"https://avatars2.githubusercontent.com/u/20411648?s=460&amp;v=4"</span>),</span><br><span class="line">  width: <span class="number">100.0</span>,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>Image也提供了一个快捷的构造函数Image.network用于从网络加载、显示图片：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Image.network(</span><br><span class="line">  <span class="string">"https://avatars2.githubusercontent.com/u/20411648?s=460&amp;v=4"</span>,</span><br><span class="line">  width: <span class="number">100.0</span>,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h5 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h5><p><code>Image</code>在显示图片时定义了一系列参数，通过这些参数我们可以控制图片的显示外观、大小、混合效果等。我们看一下Image的主要参数:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> Image(&#123;</span><br><span class="line">  ...</span><br><span class="line">  <span class="keyword">this</span>.width, <span class="comment">//图片的宽</span></span><br><span class="line">  <span class="keyword">this</span>.height, <span class="comment">//图片高度</span></span><br><span class="line">  <span class="keyword">this</span>.color, <span class="comment">//图片的混合色值</span></span><br><span class="line">  <span class="keyword">this</span>.colorBlendMode, <span class="comment">//混合模式</span></span><br><span class="line">  <span class="keyword">this</span>.fit,<span class="comment">//缩放模式</span></span><br><span class="line">  <span class="keyword">this</span>.alignment = Alignment.center, <span class="comment">//对齐方式</span></span><br><span class="line">  <span class="keyword">this</span>.repeat = ImageRepeat.noRepeat, <span class="comment">//重复方式</span></span><br><span class="line">  ...</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>width、height：用于设置图片的宽、高，当不指定宽高时，图片会根据当前父容器的限制，尽可能的显示其原始大小，如果只设置width、height的其中一个，那么另一个属性默认会按比例缩放，但可以通过下面介绍的fit属性来指定适应规则。</li>
+<li><p>fit：该属性用于在图片的显示空间和图片本身大小不同时指定图片的适应模式。适应模式是在BoxFit中定义，它是一个枚举类型，有如下值</p>
+<ul>
+<li>fill：会拉伸填充满显示空间，图片本身长宽比会发生变化，图片会变形</li>
+<li>cover：会按图片的长宽比放大后居中填满显示空间，图片不会变形，超出显示空间部分会被剪裁</li>
+<li>contain：这是图片的默认适应规则，图片会在保证图片本身长宽比不变的情况下缩放以适应当前显示空间，图片不会变形</li>
+<li>fitWidth：图片的宽度会缩放到显示空间的宽度，高度会按比例缩放，然后居中显示，图片不会变形，超出显示空间部分会被剪裁</li>
+<li>fitHeight：图片的高度会缩放到显示空间的高度，宽度会按比例缩放，然后居中显示，图片不会变形，超出显示空间部分会被剪裁</li>
+<li>none：图片没有适应策略，会在显示空间内显示图片，如果图片比显示空间大，则显示空间只会显示图片中间部分。</li>
+</ul>
+</li>
+<li><p>color和 colorBlendMode： ：在图片绘制时可以对每一个像素进行颜色混合处理，color指定混合色，而colorBlendMode指定混合模式</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  Image(</span><br><span class="line">  image: AssetImage(<span class="string">"images/avatar.png"</span>),</span><br><span class="line">  width: <span class="number">100.0</span>,</span><br><span class="line">  color: Colors.blue,</span><br><span class="line">  colorBlendMode: BlendMode.difference,</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>repeat：当图片本身大小小于显示空间时，指定图片的重复规则。简单示例如下</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"> Image(</span><br><span class="line">  image: AssetImage(<span class="string">"images/avatar.png"</span>),</span><br><span class="line">  width: <span class="number">100.0</span>,</span><br><span class="line">  height: <span class="number">200.0</span>,</span><br><span class="line">  repeat: ImageRepeat.repeatY ,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="输入框和表单"><a href="#输入框和表单" class="headerlink" title="输入框和表单"></a>输入框和表单</h3><p>Material widget库中提供了丰富的输入框及表单Widget</p>
+<h4 id="TextField"><a href="#TextField" class="headerlink" title="TextField"></a>TextField</h4><p>TextField用于文本输入，它提供了很多属性，我们先简单介绍一下主要属性的作用，然后通过几个示例来演示一下关键属性的用法.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">const TextField(&#123;</span><br><span class="line">  ...</span><br><span class="line">  TextEditingController controller, </span><br><span class="line">  FocusNode focusNode,</span><br><span class="line">  InputDecoration decoration = const InputDecoration(),</span><br><span class="line">  TextInputType keyboardType,</span><br><span class="line">  TextInputAction textInputAction,</span><br><span class="line">  TextStyle style,</span><br><span class="line">  TextAlign textAlign = TextAlign.start,</span><br><span class="line">  bool autofocus = false,</span><br><span class="line">  bool obscureText = false,</span><br><span class="line">  int maxLines = 1,</span><br><span class="line">  int maxLength,</span><br><span class="line">  bool maxLengthEnforced = true,</span><br><span class="line">  ValueChanged&lt;String&gt; onChanged,</span><br><span class="line">  VoidCallback onEditingComplete,</span><br><span class="line">  ValueChanged&lt;String&gt; onSubmitted,</span><br><span class="line">  List&lt;TextInputFormatter&gt; inputFormatters,</span><br><span class="line">  bool enabled,</span><br><span class="line">  this.cursorWidth = 2.0,</span><br><span class="line">  this.cursorRadius,</span><br><span class="line">  this.cursorColor,</span><br><span class="line">  ...</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>controller：编辑框的控制器，通过它可以设置/获取编辑框的内容、选择编辑内容、监听编辑文本改变事件。大多数情况下我们都需要显式提供一个controller来与文本框交互。如果没有提供controller，则TextField内部会自动创建一个</li>
+<li>focusNode：用于控制TextField是否占有当前键盘的输入焦点。它是我们和键盘交互的一个handle</li>
+<li>InputDecoration：用于控制TextField的外观显示，如提示文本、背景颜色、边框等</li>
+<li>keyboardType：用于设置该输入框默认的键盘输入</li>
+<li>textInputAction：键盘动作按钮图标(即回车键位图标)，它是一个枚举值，有多个可选值，全部的取值列表读者可以查看API文档</li>
+<li>style：正在编辑的文本样式。</li>
+<li>textAlign: 输入框内编辑文本在水平方向的对齐方式</li>
+<li>autofocus: 是否自动获取焦点</li>
+<li>obscureText：是否隐藏正在编辑的文本，如用于输入密码的场景等，文本内容会用“•”替换</li>
+<li>maxLines：输入框的最大行数，默认为1；如果为null，则无行数限制</li>
+<li>maxLength和maxLengthEnforced ：maxLength代表输入框文本的最大长度，设置后输入框右下角会显示输入的文本计数。maxLengthEnforced决定当输入文本长度超过maxLength时是否阻止输入，为true时会阻止输入，为false时不会阻止输入但输入框会变红</li>
+<li>onChange：输入框内容改变时的回调函数；注：内容改变事件也可以通过controller来监听</li>
+<li>onEditingComplete和onSubmitted：这两个回调都是在输入框输入完成时触发，比如按了键盘的完成键（对号图标）或搜索键（🔍图标）。不同的是两个回调签名不同，onSubmitted回调是ValueChanged<string>类型，它接收当前输入内容做为参数，而onEditingComplete不接收参数</string></li>
+<li>inputFormatters：用于指定输入格式；当用户输入内容改变时，会根据指定的格式来校验</li>
+<li>enable：如果为false，则输入框会被禁用，禁用状态不接收输入和事件，同时显示禁用态样式（在其decoration中定义）</li>
+<li>cursorWidth、cursorRadius和cursorColor：这三个属性是用于自定义输入框光标宽度、圆角和颜色的。</li>
+</ul>
+<p>示例：登录输入框</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">Column(</span><br><span class="line">        children: &lt;Widget&gt;[</span><br><span class="line">          TextField(</span><br><span class="line">            autofocus: <span class="keyword">true</span>,</span><br><span class="line">            decoration: InputDecoration(</span><br><span class="line">                labelText: <span class="string">"用户名"</span>,</span><br><span class="line">                hintText: <span class="string">"用户名或邮箱"</span>,</span><br><span class="line">                prefixIcon: Icon(Icons.person)</span><br><span class="line">            ),</span><br><span class="line">          ),</span><br><span class="line">          TextField(</span><br><span class="line">            decoration: InputDecoration(</span><br><span class="line">                labelText: <span class="string">"密码"</span>,</span><br><span class="line">                hintText: <span class="string">"您的登录密码"</span>,</span><br><span class="line">                prefixIcon: Icon(Icons.lock)</span><br><span class="line">            ),</span><br><span class="line">            obscureText: <span class="keyword">true</span>,</span><br><span class="line">          ),</span><br><span class="line">        ],</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h5 id="获取输入内容"><a href="#获取输入内容" class="headerlink" title="获取输入内容"></a>获取输入内容</h5><p>获取输入内容有两种方式：</p>
+<ul>
+<li>定义两个变量，用于保存用户名和密码，然后在onChange触发时，各自保存一下输入内容</li>
+<li>通过controller直接获取</li>
+</ul>
+<p>第一种方式比较简单，不在举例，我们来重点看一下第二种方式，我们以用户名输入框举例：<br>定义一个controller：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//定义一个controller</span></span><br><span class="line">TextEditingController _unameController=<span class="keyword">new</span> TextEditingController();</span><br></pre></td></tr></table></figure>
+<p> 然后设置输入框controller：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">TextField(</span><br><span class="line">    autofocus: <span class="keyword">true</span>,</span><br><span class="line">    controller: _unameController, <span class="comment">//设置controller</span></span><br><span class="line">    ...</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>通过controller获取输入框内容</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(_unameController.text)</span><br></pre></td></tr></table></figure>
+<h5 id="监听文本变化"><a href="#监听文本变化" class="headerlink" title="监听文本变化"></a>监听文本变化</h5><p>设置onChange回调，如:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">TextField(</span><br><span class="line">    autofocus: <span class="keyword">true</span>,</span><br><span class="line">    onChanged: (v) &#123;</span><br><span class="line">      <span class="built_in">print</span>(<span class="string">"onChange: $v"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>通过controller监听，如：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@override</span></span><br><span class="line"><span class="keyword">void</span> initState() &#123;</span><br><span class="line">  <span class="comment">//监听输入改变  </span></span><br><span class="line">  _unameController.addListener(()&#123;</span><br><span class="line">    <span class="built_in">print</span>(_unameController.text);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>两种方式相比，onChanged是专门用于监听文本变化，而controller的功能却多一些，除了能监听文本变化外，它还可以设置默认值、选择文本，下面我们看一个例子：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">TextEditingController _selectionController = <span class="keyword">new</span> TextEditingController();</span><br><span class="line"><span class="comment">// 设置默认值，并从第三个字符开始选中后面的字符</span></span><br><span class="line"></span><br><span class="line">_selectionController.text=<span class="string">"hello world!"</span>;</span><br><span class="line">_selectionController.selection=TextSelection(</span><br><span class="line">    baseOffset: <span class="number">2</span>,</span><br><span class="line">    extentOffset: _selectionController.text.length</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">TextField(</span><br><span class="line">  controller: _selectionController,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<h5 id="控制焦点"><a href="#控制焦点" class="headerlink" title="控制焦点"></a>控制焦点</h5><p>焦点可以通过FocusNode和FocusScopeNode来控制，默认情况下，焦点由FocusScope来管理，它代表焦点控制范围，可以在这个范围内可以通过FocusScopeNode在输入框之间移动焦点、设置默认焦点等。我们可以通过FocusScope.of(context) 来获取widget树中默认的FocusScopeNode。下面看一个示例，在此示例中创建两个TextField，第一个自动获取焦点，然后创建两个按钮：</p>
+<ul>
+<li>点击第一个按钮可以将焦点从第一个TextField挪到第二个TextField</li>
+<li>点击第二个按钮可以关闭键盘</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FocusTestRoute</span> <span class="keyword">extends</span> <span class="title">StatefulWidget</span> </span>&#123;</span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  _FocusTestRouteState createState() =&gt; <span class="keyword">new</span> _FocusTestRouteState();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">_FocusTestRouteState</span> <span class="keyword">extends</span> <span class="title">State</span>&lt;<span class="title">FocusTestRoute</span>&gt; </span>&#123;</span><br><span class="line">  FocusNode focusNode1 = <span class="keyword">new</span> FocusNode();</span><br><span class="line">  FocusNode focusNode2 = <span class="keyword">new</span> FocusNode();</span><br><span class="line">  FocusScopeNode focusScopeNode;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> Padding(</span><br><span class="line">      padding: EdgeInsets.all(<span class="number">16.0</span>),</span><br><span class="line">      child: Column(</span><br><span class="line">        children: &lt;Widget&gt;[</span><br><span class="line">          TextField(</span><br><span class="line">            autofocus: <span class="keyword">true</span>, </span><br><span class="line">            focusNode: focusNode1,<span class="comment">//关联focusNode1</span></span><br><span class="line">            decoration: InputDecoration(</span><br><span class="line">                labelText: <span class="string">"input1"</span></span><br><span class="line">            ),</span><br><span class="line">          ),</span><br><span class="line">          TextField(</span><br><span class="line">            focusNode: focusNode2,<span class="comment">//关联focusNode2</span></span><br><span class="line">            decoration: InputDecoration(</span><br><span class="line">                labelText: <span class="string">"input2"</span></span><br><span class="line">            ),</span><br><span class="line">          ),</span><br><span class="line">          Builder(builder: (ctx) &#123;</span><br><span class="line">            <span class="keyword">return</span> Column(</span><br><span class="line">              children: &lt;Widget&gt;[</span><br><span class="line">                RaisedButton(</span><br><span class="line">                  child: Text(<span class="string">"移动焦点"</span>),</span><br><span class="line">                  onPressed: () &#123;</span><br><span class="line">                    <span class="comment">//将焦点从第一个TextField移到第二个TextField</span></span><br><span class="line">                    <span class="comment">// 这是一种写法 FocusScope.of(context).requestFocus(focusNode2);</span></span><br><span class="line">                    <span class="comment">// 这是第二种写法</span></span><br><span class="line">                    <span class="keyword">if</span>(<span class="keyword">null</span> == focusScopeNode)&#123;</span><br><span class="line">                      focusScopeNode = FocusScope.of(context);</span><br><span class="line">                    &#125;</span><br><span class="line">                    focusScopeNode.requestFocus(focusNode2);</span><br><span class="line">                  &#125;,</span><br><span class="line">                ),</span><br><span class="line">                RaisedButton(</span><br><span class="line">                  child: Text(<span class="string">"隐藏键盘"</span>),</span><br><span class="line">                  onPressed: () &#123;</span><br><span class="line">                    <span class="comment">// 当所有编辑框都失去焦点时键盘就会收起  </span></span><br><span class="line">                    focusNode1.unfocus();</span><br><span class="line">                    focusNode2.unfocus();</span><br><span class="line">                  &#125;,</span><br><span class="line">                ),</span><br><span class="line">              ],</span><br><span class="line">            );</span><br><span class="line">          &#125;,</span><br><span class="line">          ),</span><br><span class="line">        ],</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>FocusNode和FocusScopeNode还有一些其它的方法，详情可以查看API文档,</p>
+<p><strong>监听焦点状态改变事件</strong><br>FocusNode继承自ChangeNotifier，通过FocusNode可以监听焦点的改变事件，如：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="comment">// 创建 focusNode   </span></span><br><span class="line">FocusNode focusNode = <span class="keyword">new</span> FocusNode();</span><br><span class="line">...</span><br><span class="line"><span class="comment">// focusNode绑定输入框   </span></span><br><span class="line">TextField(focusNode: focusNode);</span><br><span class="line">...</span><br><span class="line"><span class="comment">// 监听焦点变化    </span></span><br><span class="line">focusNode.addListener(()&#123;</span><br><span class="line">   <span class="built_in">print</span>(focusNode.hasFocus);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>获得焦点时focusNode.hasFocus值为true，失去焦点时为false</p>
+</blockquote>
+<h5 id="自定义样式"><a href="#自定义样式" class="headerlink" title="自定义样式"></a>自定义样式</h5><p>虽然我们可以通过decoration属性来定义输入框样式，但是有一些样式如下划线默认颜色及宽度都是不能直接自定义的:</p>
+<p>是由于TextField在绘制下划线时使用的颜色是主题色里面的hintColor，但提示文本颜色也是用的hintColor， 如果我们直接修改hintColor，那么下划线和提示文本的颜色都会变。值得高兴的是decoration中可以设置hintStyle，它可以覆盖hintColor，并且主题中可以通过inputDecorationTheme来设置输入框默认的decoration。所以我们可以通过主题来自定义，代码如下:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Theme(</span><br><span class="line">  data: Theme.of(context).copyWith(</span><br><span class="line">      hintColor: Colors.grey[<span class="number">200</span>], <span class="comment">//定义下划线颜色</span></span><br><span class="line">      inputDecorationTheme: InputDecorationTheme(</span><br><span class="line">          labelStyle: TextStyle(color: Colors.grey),<span class="comment">//定义label字体样式</span></span><br><span class="line">          hintStyle: TextStyle(color: Colors.grey, fontSize: <span class="number">14.0</span>)<span class="comment">//定义提示文本样式</span></span><br><span class="line">      )</span><br><span class="line">  ),</span><br><span class="line">  child: Column(</span><br><span class="line">    children: &lt;Widget&gt;[</span><br><span class="line">      TextField(</span><br><span class="line">        decoration: InputDecoration(</span><br><span class="line">            labelText: <span class="string">"用户名"</span>,</span><br><span class="line">            hintText: <span class="string">"用户名或邮箱"</span>,</span><br><span class="line">            prefixIcon: Icon(Icons.person)</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">      TextField(</span><br><span class="line">        decoration: InputDecoration(</span><br><span class="line">            prefixIcon: Icon(Icons.lock),</span><br><span class="line">            labelText: <span class="string">"密码"</span>,</span><br><span class="line">            hintText: <span class="string">"您的登录密码"</span>,</span><br><span class="line">            hintStyle: TextStyle(color: Colors.grey, fontSize: <span class="number">13.0</span>)</span><br><span class="line">        ),</span><br><span class="line">        obscureText: <span class="keyword">true</span>,</span><br><span class="line">      )</span><br><span class="line">    ],</span><br><span class="line">  )</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>我们成功的自定义了下划线颜色和提问文字样式，细心的读者可能已经发现，通过这种方式自定义后，输入框在获取焦点时，labelText不会高亮显示了，正如上图中的”用户名”本应该显示蓝色，但现在却显示为灰色，并且我们还是无法定义下划线宽度。另一种灵活的方式是直接隐藏掉TextField本身的下划线，然后通过Container去嵌套定义样式，如:</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Container(</span><br><span class="line">  child: TextField(</span><br><span class="line">    keyboardType: TextInputType.emailAddress,</span><br><span class="line">    decoration: InputDecoration(</span><br><span class="line">        labelText: <span class="string">"Email"</span>,</span><br><span class="line">        hintText: <span class="string">"电子邮件地址"</span>,</span><br><span class="line">        prefixIcon: Icon(Icons.email),</span><br><span class="line">        border: InputBorder.none <span class="comment">//隐藏下划线</span></span><br><span class="line">    )</span><br><span class="line">  ),</span><br><span class="line">  decoration: BoxDecoration(</span><br><span class="line">      <span class="comment">// 下滑线浅灰色，宽度1像素</span></span><br><span class="line">      border: Border(bottom: BorderSide(color: Colors.grey[<span class="number">200</span>], width: <span class="number">1.0</span>))</span><br><span class="line">  ),</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>通过这种widget组合的方式，也可以定义背景圆角等。一般来说，优先通过decoration来自定义样式，如果decoration实现不了，再用widget组合的方式</p>
+</blockquote>
+<h4 id="Form"><a href="#Form" class="headerlink" title="Form"></a>Form</h4><p>实际业务中，在正式向服务器提交数据前，都会对各个输入框数据进行合法性校验，但是对每一个TextField都分别进行校验将会是一件很麻烦的事。还有，如果用户想清除一组TextField的内容，除了一个一个清除有没有什么更好的办法呢？为此，Flutter提供了一个Form widget，它可以对输入框进行分组，然后进行一些统一操作，如输入内容校验、输入框重置以及输入内容保存。</p>
+<h5 id="Form-1"><a href="#Form-1" class="headerlink" title="Form"></a>Form</h5><p>Form继承自StatefulWidget对象，它对应的状态类为FormState。我们先看看Form类的定义：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Form(&#123;</span><br><span class="line">  <span class="meta">@required</span> Widget child,</span><br><span class="line">  <span class="built_in">bool</span> autovalidate = <span class="keyword">false</span>,</span><br><span class="line">  WillPopCallback onWillPop,</span><br><span class="line">  VoidCallback onChanged,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>autovalidate：是否自动校验输入内容；当为true时，每一个子FormField内容发生变化时都会自动校验合法性，并直接显示错误信息。否则，需要通过调用FormState.validate()来手动校验</li>
+<li>onWillPop：决定Form所在的路由是否可以直接返回（如点击返回按钮），该回调返回一个Future对象，如果Future的最终结果是false，则当前路由不会返回；如果为true，则会返回到上一个路由。此属性通常用于拦截返回按钮</li>
+<li>onChanged：Form的任意一个子FormField内容发生变化时会触发此回调</li>
+</ul>
+<h4 id="FormField"><a href="#FormField" class="headerlink" title="FormField"></a>FormField</h4><p>Form的子孙元素必须是FormField类型，FormField是一个抽象类，定义几个属性，FormState内部通过它们来完成操作，FormField部分定义如下：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> FormField(&#123;</span><br><span class="line">  ...</span><br><span class="line">  FormFieldSetter&lt;T&gt; onSaved, <span class="comment">//保存回调</span></span><br><span class="line">  FormFieldValidator&lt;T&gt;  validator, <span class="comment">//验证回调</span></span><br><span class="line">  T initialValue, <span class="comment">//初始值</span></span><br><span class="line">  <span class="built_in">bool</span> autovalidate = <span class="keyword">false</span>, <span class="comment">//是否自动校验。</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>li为了方便使用，Flutter提供了一个TextFormField widget，它继承自FormField类，也是TextField的一个包装类，所以除了FormField定义的属性之外，它还包括TextField的属性.</p>
+<h4 id="FormState"><a href="#FormState" class="headerlink" title="FormState"></a>FormState</h4><p>FormState为Form的State类，可以通过Form.of()或GlobalKey获得。我们可以通过它来对Form的子孙FormField进行统一操作。我们看看其常用的三个方法:</p>
+<ul>
+<li>FormState.validate()：调用此方法后，会调用Form子孙FormField的validate回调，如果有一个校验失败，则返回false，所有校验失败项都会返回用户返回的错误提示</li>
+<li>FormState.save()：调用此方法后，会调用Form子孙FormField的save回调，用于保存表单内容</li>
+<li>FormState.reset()：调用此方法后，会将子孙FormField的内容清空</li>
+</ul>
+<p>示例<br>我们修改一下用户登录的示例,在提交之前校验:</p>
+<ul>
+<li>用户名不能为空，如果为空则提示“用户名不能为空</li>
+<li>密码不能小于6位，如果小于6为则提示“密码不能少于6位”</li>
+</ul>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FormTestRoute</span> <span class="keyword">extends</span> <span class="title">StatefulWidget</span> </span>&#123;</span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  _FormTestRouteState createState() =&gt; <span class="keyword">new</span> _FormTestRouteState();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">_FormTestRouteState</span> <span class="keyword">extends</span> <span class="title">State</span>&lt;<span class="title">FormTestRoute</span>&gt; </span>&#123;</span><br><span class="line">  TextEditingController _unameController = <span class="keyword">new</span> TextEditingController();</span><br><span class="line">  TextEditingController _pwdController = <span class="keyword">new</span> TextEditingController();</span><br><span class="line">  GlobalKey _formKey= <span class="keyword">new</span> GlobalKey&lt;FormState&gt;();</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  Widget build(BuildContext context) &#123;</span><br><span class="line">    <span class="keyword">return</span> Scaffold(</span><br><span class="line">      appBar: AppBar(</span><br><span class="line">        title:Text(<span class="string">"Form Test"</span>),</span><br><span class="line">      ),</span><br><span class="line">      body: Padding(</span><br><span class="line">        padding: <span class="keyword">const</span> EdgeInsets.symmetric(vertical: <span class="number">16.0</span>, horizontal: <span class="number">24.0</span>),</span><br><span class="line">        child: Form(</span><br><span class="line">          key: _formKey, <span class="comment">//设置globalKey，用于后面获取FormState</span></span><br><span class="line">          autovalidate: <span class="keyword">true</span>, <span class="comment">//开启自动校验</span></span><br><span class="line">          child: Column(</span><br><span class="line">            children: &lt;Widget&gt;[</span><br><span class="line">              TextFormField(</span><br><span class="line">                  autofocus: <span class="keyword">true</span>,</span><br><span class="line">                  controller: _unameController,</span><br><span class="line">                  decoration: InputDecoration(</span><br><span class="line">                      labelText: <span class="string">"用户名"</span>,</span><br><span class="line">                      hintText: <span class="string">"用户名或邮箱"</span>,</span><br><span class="line">                      icon: Icon(Icons.person)</span><br><span class="line">                  ),</span><br><span class="line">                  <span class="comment">// 校验用户名</span></span><br><span class="line">                  validator: (v) &#123;</span><br><span class="line">                    <span class="keyword">return</span> v</span><br><span class="line">                        .trim()</span><br><span class="line">                        .length &gt; <span class="number">0</span> ? <span class="keyword">null</span> : <span class="string">"用户名不能为空"</span>;</span><br><span class="line">                  &#125;</span><br><span class="line"></span><br><span class="line">              ),</span><br><span class="line">              TextFormField(</span><br><span class="line">                  controller: _pwdController,</span><br><span class="line">                  decoration: InputDecoration(</span><br><span class="line">                      labelText: <span class="string">"密码"</span>,</span><br><span class="line">                      hintText: <span class="string">"您的登录密码"</span>,</span><br><span class="line">                      icon: Icon(Icons.lock)</span><br><span class="line">                  ),</span><br><span class="line">                  obscureText: <span class="keyword">true</span>,</span><br><span class="line">                  <span class="comment">//校验密码</span></span><br><span class="line">                  validator: (v) &#123;</span><br><span class="line">                    <span class="keyword">return</span> v</span><br><span class="line">                        .trim()</span><br><span class="line">                        .length &gt; <span class="number">5</span> ? <span class="keyword">null</span> : <span class="string">"密码不能少于6位"</span>;</span><br><span class="line">                  &#125;</span><br><span class="line">              ),</span><br><span class="line">              <span class="comment">// 登录按钮</span></span><br><span class="line">              Padding(</span><br><span class="line">                padding: <span class="keyword">const</span> EdgeInsets.only(top: <span class="number">28.0</span>),</span><br><span class="line">                child: Row(</span><br><span class="line">                  children: &lt;Widget&gt;[</span><br><span class="line">                    Expanded(</span><br><span class="line">                      child: RaisedButton(</span><br><span class="line">                        padding: EdgeInsets.all(<span class="number">15.0</span>),</span><br><span class="line">                        child: Text(<span class="string">"登录"</span>),</span><br><span class="line">                        color: Theme</span><br><span class="line">                            .of(context)</span><br><span class="line">                            .primaryColor,</span><br><span class="line">                        textColor: Colors.white,</span><br><span class="line">                        onPressed: () &#123;</span><br><span class="line">                          <span class="comment">//在这里不能通过此方式获取FormState，context不对</span></span><br><span class="line">                          <span class="comment">//print(Form.of(context));</span></span><br><span class="line"></span><br><span class="line">                          <span class="comment">// 通过_formKey.currentState 获取FormState后，</span></span><br><span class="line">                          <span class="comment">// 调用validate()方法校验用户名密码是否合法，校验</span></span><br><span class="line">                          <span class="comment">// 通过后再提交数据。 </span></span><br><span class="line">                          <span class="keyword">if</span>((_formKey.currentState <span class="keyword">as</span> FormState).validate())&#123;</span><br><span class="line">                            <span class="comment">//验证通过提交数据</span></span><br><span class="line">                          &#125;</span><br><span class="line">                        &#125;,</span><br><span class="line">                      ),</span><br><span class="line">                    ),</span><br><span class="line">                  ],</span><br><span class="line">                ),</span><br><span class="line">              )</span><br><span class="line">            ],</span><br><span class="line">          ),</span><br><span class="line">        ),</span><br><span class="line">      ),</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意，登录按钮的onPressed方法中不能通过Form.of(context)来获取，原因是，此处的context为FormTestRoute的context，而Form.of(context)是根据所指定context向根去查找，而FormState是在FormTestRoute的子树中，所以不行。正确的做法是通过Builder来构建登录按钮，Builder会将widget节点的context作为回调参数：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Expanded(</span><br><span class="line"> <span class="comment">// 通过Builder来获取RaisedButton所在widget树的真正context(Element) </span></span><br><span class="line">  child:Builder(builder: (context)&#123;</span><br><span class="line">    <span class="keyword">return</span> RaisedButton(</span><br><span class="line">      ...</span><br><span class="line">      onPressed: () &#123;</span><br><span class="line">        <span class="comment">//由于本widget也是Form的子代widget，所以可以通过下面方式获取FormState  </span></span><br><span class="line">        <span class="keyword">if</span>(Form.of(context).validate())&#123;</span><br><span class="line">          <span class="comment">//验证通过提交数据</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">    );</span><br><span class="line">  &#125;)</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -475,8 +984,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -554,6 +1072,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Widget详解"><span class="nav-number">1.</span> <span class="nav-text">Widget详解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Everything-is-a-Widget"><span class="nav-number">1.1.</span> <span class="nav-text">Everything is a Widget</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组合大于继承"><span class="nav-number">1.2.</span> <span class="nav-text">组合大于继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Widget-是-UI-的配置信息"><span class="nav-number">1.3.</span> <span class="nav-text">Widget 是 UI 的配置信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Widget-是-一次性的"><span class="nav-number">1.4.</span> <span class="nav-text">Widget 是 一次性的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Widget-是-不可变的"><span class="nav-number">1.5.</span> <span class="nav-text">Widget 是 不可变的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Widget-是-轻量的"><span class="nav-number">1.6.</span> <span class="nav-text">Widget 是 轻量的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-Widget-的步骤"><span class="nav-number">1.7.</span> <span class="nav-text">使用 Widget 的步骤</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基础-Widget"><span class="nav-number">2.</span> <span class="nav-text">基础 Widget</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文本框"><span class="nav-number">2.1.</span> <span class="nav-text">文本框</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Text"><span class="nav-number">2.1.1.</span> <span class="nav-text">Text</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#TextStyle-的构造参数及参数说明"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">TextStyle 的构造参数及参数说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Text-其他参数说明"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">Text 其他参数说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Text-的命名构造函数：Text-rich"><span class="nav-number">2.1.1.3.</span> <span class="nav-text">Text 的命名构造函数：Text.rich()</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RichText"><span class="nav-number">2.1.2.</span> <span class="nav-text">RichText</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#RichText-快速上手"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">RichText 快速上手</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#TextSpan-的构造函数及参数说明"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">TextSpan 的构造函数及参数说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#RichText-其余参数说明"><span class="nav-number">2.1.2.3.</span> <span class="nav-text">RichText 其余参数说明</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Flutter-使用自定义字体"><span class="nav-number">2.1.2.4.</span> <span class="nav-text">Flutter 使用自定义字体</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#在-pubspec-yaml-中声明"><span class="nav-number">2.1.2.5.</span> <span class="nav-text">在 pubspec.yaml 中声明</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#图片及ICON"><span class="nav-number">2.2.</span> <span class="nav-text">图片及ICON</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ImageProvider"><span class="nav-number">2.2.1.</span> <span class="nav-text">ImageProvider</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Image"><span class="nav-number">2.2.2.</span> <span class="nav-text">Image</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#从asset中加载图片"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">从asset中加载图片</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#从网络加载图片"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">从网络加载图片</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#参数"><span class="nav-number">2.2.2.3.</span> <span class="nav-text">参数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入框和表单"><span class="nav-number">2.3.</span> <span class="nav-text">输入框和表单</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#TextField"><span class="nav-number">2.3.1.</span> <span class="nav-text">TextField</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#获取输入内容"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">获取输入内容</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#监听文本变化"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">监听文本变化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#控制焦点"><span class="nav-number">2.3.1.3.</span> <span class="nav-text">控制焦点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#自定义样式"><span class="nav-number">2.3.1.4.</span> <span class="nav-text">自定义样式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Form"><span class="nav-number">2.3.2.</span> <span class="nav-text">Form</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Form-1"><span class="nav-number">2.3.2.1.</span> <span class="nav-text">Form</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#FormField"><span class="nav-number">2.3.3.</span> <span class="nav-text">FormField</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#FormState"><span class="nav-number">2.3.4.</span> <span class="nav-text">FormState</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
