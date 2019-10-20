@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="程序员码头">
 <meta property="og:description" content="简介 正则表达式可以是开发中必备的软技能之一, 但是长时间不写又经常会忘记。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-14T01:11:20.662Z">
+<meta property="og:updated_time" content="2019-10-20T08:33:29.087Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="正则表达式">
 <meta name="twitter:description" content="简介 正则表达式可以是开发中必备的软技能之一, 但是长时间不写又经常会忘记。">
@@ -371,98 +371,79 @@
 <tbody>
 <tr>
 <td>\</td>
-<td>将下一个字符标记为一个特殊字符、或一个原义字符、或一个 向后引用、或一个八进制转义符。例如，’n’ 匹配字符 “n”。’\n’ 匹配一个换行符。序列 ‘\‘ 匹配 “\” 而 “(“ 则匹配 “(“。</td>
+<td>将下一个字符标记为一个特殊字符、或一个原义字符、或一个 向后引用、或一个八进制转义符。例如，’n’ 匹配字符 “n”。’\n’ 匹配一个换行符。序列 ‘\‘ 匹配 “\” 而 “(“ 则匹配 “(“</td>
 </tr>
 <tr>
 <td>^</td>
 <td>匹配输入字符串的开始位置。如果设置了 RegExp 对象的 Multiline 属性，^ 也匹配 ‘\n’ 或 ‘\r’ 之后的位置</td>
 </tr>
 <tr>
-<td>$</td>
-<td>匹配输入字符串的结束位置。如果设置了RegExp 对象的 Multiline 属性，$ 也匹配 ‘\n’ 或 ‘\r’ 之前的位置</td>
+<td>&amp;dollar</td>
+<td>匹配输入字符串的结束位置。如果设置了RegExp 对象的 Multiline 属性，$也匹配 ‘\n’ 或 ‘\r’ 之前的位置</td>
 </tr>
 <tr>
 <td>*</td>
-<td>匹配前面的子表达式零次或多次。例如，zo<em> 能匹配 “z” 以及 “zoo”。</em> 等价于{0,}。</td>
+<td>匹配前面的子表达式零次或多次。例如，zo<em> 能匹配 “z” 以及 “zoo”。</em> 等价于{0,}</td>
 </tr>
 <tr>
 <td>+</td>
-<td>匹配前面的子表达式一次或多次。例如，’zo+’ 能匹配 “zo” 以及 “zoo”，但不能匹配 “z”。+ 等价于 {1,}。</td>
+<td>匹配前面的子表达式一次或多次。例如，’zo+’ 能匹配 “zo” 以及 “zoo”，但不能匹配 “z”。+ 等价于 {1,}</td>
 </tr>
 <tr>
 <td>?</td>
-<td>匹配前面的子表达式零次或一次。例如，”do(es)?” 可以匹配 “do” 或 “does” 。? 等价于 {0,1}。</td>
+<td>匹配前面的子表达式零次或一次。例如，”do(es)?” 可以匹配 “do” 或 “does” 。? 等价于 {0,1}</td>
 </tr>
 <tr>
 <td>{n}</td>
-<td>n 是一个非负整数。匹配确定的 n 次。例如，’o{2}’ 不能匹配 “Bob” 中的 ‘o’，但是能匹配 “food” 中的两个 o。</td>
+<td>n 是一个非负整数。匹配确定的 n 次。例如，’o{2}’ 不能匹配 “Bob” 中的 ‘o’，但是能匹配 “food” 中的两个 o</td>
 </tr>
 <tr>
 <td>{n,}</td>
-<td>n 是一个非负整数。至少匹配n 次。例如，’o{2,}’ 不能匹配 “Bob” 中的 ‘o’，但能匹配 “foooood” 中的所有 o。’o{1,}’ 等价于 ‘o+’。’o{0,}’ 则等价于 ‘o*’。</td>
+<td>n 是一个非负整数。至少匹配n 次。例如，’o{2,}’ 不能匹配 “Bob” 中的 ‘o’，但能匹配 “foooood” 中的所有 o。’o{1,}’ 等价于 ‘o+’。’o{0,}’ 则等价于 ‘o*’</td>
 </tr>
 <tr>
 <td>{n,m}</td>
-<td>m 和 n 均为非负整数，其中n &lt;= m。最少匹配 n 次且最多匹配 m 次。例如，”o{1,3}” 将匹配 “fooooood” 中的前三个 o。’o{0,1}’ 等价于 ‘o?’。请注意在逗号和两个数之间不能有空格。</td>
+<td>m 和 n 均为非负整数，其中n &lt;= m。最少匹配 n 次且最多匹配 m 次。例如，”o{1,3}” 将匹配 “fooooood” 中的前三个o。’o{0,1}’ 等价于 ‘o?’。请注意在逗号和两个数之间不能有空格</td>
 </tr>
 <tr>
 <td>?</td>
-<td>当该字符紧跟在任何一个其他限制符 (*, +, ?, {n}, {n,}, {n,m}) 后面时，匹配模式是非贪婪的。非贪婪模式尽可能少的匹配所搜索的字符串，而默认的贪婪模式则尽可能多的匹配所搜索的字符串。例如，对于字符串 “oooo”，’o+?’ 将匹配单个 “o”，而 ‘o+’ 将匹配所有 ‘o’。</td>
+<td>当该字符紧跟在任何一个其他限制符 (*, +, ?, {n}, {n,}, {n,m}) 后面时，匹配模式是非贪婪的。非贪婪模式尽可能少的匹配所搜索的字符串，而默认的贪婪模式则尽可能多的匹配所搜索的字符串。例如，对于字符串 “oooo”，’o+?’ 将匹配单个 “o”，而 ‘o+’ 将匹配所有 ‘o’</td>
 </tr>
 <tr>
 <td>.</td>
-<td>匹配除换行符（\n、\r）之外的任何单个字符。要匹配包括 ‘\n’ 在内的任何字符，请使用像”(.</td>
-<td>\n)”的模式</td>
+<td>匹配除换行符（\n、\r）之外的任何单个字符。要匹配包括 ‘\n’ 在内的任何字符请使用像”(.或\n)”的模式</td>
 </tr>
 <tr>
 <td>(pattern)</td>
-<td>匹配 pattern 并获取这一匹配。所获取的匹配可以从产生的 Matches 集合得到，在VBScript 中使用 SubMatches 集合，在JScript 中则使用 $0…$9 属性。要匹配圆括号字符，请使用 ‘(‘ 或 ‘)‘。</td>
+<td>匹配 pattern 并获取这一匹配。所获取的匹配可以从产生的 Matches 集合得到，在VBScript 中使用 SubMatches 集合，在JScript 中则使用 $0…$9 属性。要匹配圆括号字符，请使用 ‘(‘ 或 ‘)‘</td>
 </tr>
 <tr>
 <td>(?:pattern)</td>
-<td>匹配 pattern 但不获取匹配结果，也就是说这是一个非获取匹配，不进行存储供以后使用。这在使用 “或” 字符 (</td>
-<td>) 来组合一个模式的各个部分是很有用。例如， ‘industr(?:y</td>
-<td>ies) 就是一个比 ‘industry</td>
-<td>industries’ 更简略的表达式</td>
+<td>匹配 pattern 但不获取匹配结果，也就是说这是一个非获取匹配，不进行存储供以后使用。这在使用 “或” 字符  来组合一个模式的各个部分是很有用。例如， ‘industr(?:y或ies) 就是一个比 ‘industry或industries’ 更简略的表达式</td>
 </tr>
 <tr>
 <td>(?=pattern)</td>
-<td>正向肯定预查（look ahead positive assert），在任何匹配pattern的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如，”Windows(?=95</td>
-<td>98</td>
-<td>NT</td>
-<td>2000)”能匹配”Windows2000”中的”Windows”，但不能匹配”Windows3.1”中的”Windows”。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始。</td>
+<td>正向肯定预查（look ahead positive assert），在任何匹配pattern的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如，”Windows(?=95或98或NT或2000)”能匹配”Windows2000”中的”Windows”，但不能匹配”Windows3.1”中的”Windows”。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始</td>
 </tr>
 <tr>
 <td>(?!pattern)</td>
-<td>正向否定预查(negative assert)，在任何不匹配pattern的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如”Windows(?!95</td>
-<td>98</td>
-<td>NT</td>
-<td>2000)”能匹配”Windows3.1”中的”Windows”，但不能匹配”Windows2000”中的”Windows”。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始。</td>
+<td>正向否定预查(negative assert)，在任何不匹配pattern的字符串开始处匹配查找字符串。这是一个非获取匹配，也就是说，该匹配不需要获取供以后使用。例如”Windows(?!95或98或NT或2000)”能匹配”Windows3.1”中的”Windows”，但不能匹配”Windows2000”中的”Windows”。预查不消耗字符，也就是说，在一个匹配发生后，在最后一次匹配之后立即开始下一次匹配的搜索，而不是从包含预查的字符之后开始。</td>
 </tr>
 <tr>
 <td>(?&lt;=pattern)</td>
-<td>反向(look behind)肯定预查，与正向肯定预查类似，只是方向相反。例如，”(?&lt;=95</td>
-<td>98</td>
-<td>NT</td>
-<td>2000)Windows”能匹配”2000Windows”中的”Windows”，但不能匹配”3.1Windows”中的”Windows”。</td>
+<td>反向(look behind)肯定预查，与正向肯定预查类似，只是方向相反。例如，”(?&lt;=95或98或NT或2000)Windows”能匹配”2000Windows”中的”Windows”，但不能匹配”3.1Windows”中的”Windows”</td>
 </tr>
 <tr>
 <td>(?&lt;!pattern)</td>
-<td>反向否定预查，与正向否定预查类似，只是方向相反。例如”(?&lt;!95</td>
-<td>98</td>
-<td>NT</td>
-<td>2000)Windows”能匹配”3.1Windows”中的”Windows”，但不能匹配”2000Windows”中的”Windows”。</td>
+<td>反向否定预查，与正向否定预查类似，只是方向相反。例如”(?&lt;!95或98或NT或2000)Windows”能匹配”3.1Windows”中的”Windows”，但不能匹配”2000Windows”中的”Windows”</td>
 </tr>
 <tr>
-<td>x</td>
-<td>y</td>
-<td>匹配 x 或 y。例如，’z</td>
-<td>food’ 能匹配 “z” 或 “food”。’(z</td>
-<td>f)ood’ 则匹配 “zood” 或 “food”。</td>
+<td>x或y</td>
+<td>匹配 x 或 y。例如，’z\或food’ 能匹配 “z” 或 “food”。’(z\或f)ood’ 则匹配 “zood” 或 “food”</td>
 </tr>
 <tr>
 <td>[xyz]</td>
-<td>字符集合。匹配所包含的任意一个字符。例如， ‘[abc]’ 可以匹配 “plain” 中的 ‘a’。</td>
+<td>字符集合。匹配所包含的任意一个字符。例如， ‘[abc]’ 可以匹配 “plain” 中的 ‘a’</td>
 </tr>
 <tr>
 <td>^xyz]</td>
@@ -583,16 +564,15 @@
 </thead>
 <tbody>
 <tr>
-<td>/\b([a-z]+) \1\b/gi</td>
+<td>\b([a-z]+) \1\b/gi</td>
 <td>一个单词连续出现的位置</td>
 </tr>
 <tr>
-<td>/(\w+):\/\/([^/:]+)(:\d<em>)?([^# ]</em>)/</td>
+<td>(\w+):\/\/([^/:]+)(:\d<em>)?([^# ]</em>)</td>
 <td>将一个URL解析为协议、域、端口及相对路径。</td>
 </tr>
 <tr>
-<td>/^(?:Chapter</td>
-<td>Section) [1-9][0-9]{0,1}$/</td>
+<td>^(?:Chapter或Section) [1-9][0-9]{0,1}$</td>
 <td>定位章节的位置</td>
 </tr>
 <tr>
@@ -608,9 +588,7 @@
 <td>可匹配chapter，而不能匹配aptitude。</td>
 </tr>
 <tr>
-<td>/Windows(?=95</td>
-<td>98</td>
-<td>NT )/</td>
+<td>/Windows(?=95或98或NT )/</td>
 <td>可匹配Windows95或Windows98或WindowsNT，当找到一个匹配后，从Windows后面开始进行下一次的检索匹配</td>
 </tr>
 <tr>
@@ -646,11 +624,7 @@
 <td>域名</td>
 </tr>
 <tr>
-<td>(^\d{15}$)</td>
-<td>(^\d{18}$)</td>
-<td>(^\d{17}(\d</td>
-<td>X</td>
-<td>x)$)</td>
+<td>(^\d{15}$)或(^\d{18}$)或(^\d{17}(\d或X或x)$)</td>
 <td>身份证号(15位、18位数字)，最后一位是校验位，可能为数字或字符X</td>
 </tr>
 <tr>
