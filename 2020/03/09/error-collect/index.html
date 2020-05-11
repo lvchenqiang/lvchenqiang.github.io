@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="程序员码头">
 <meta property="og:description" content="最近折腾电脑环境,突然踩了一堆莫名其妙的坑,记录一下.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-03-09T14:45:34.907Z">
+<meta property="og:updated_time" content="2020-03-10T16:09:01.763Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="踩坑笔记">
 <meta name="twitter:description" content="最近折腾电脑环境,突然踩了一堆莫名其妙的坑,记录一下.">
@@ -343,6 +343,7 @@
 <p><a href="https://blog.csdn.net/alanbreeze/article/details/44171915" target="_blank" rel="noopener">https://blog.csdn.net/alanbreeze/article/details/44171915</a><br><a href="https://stackoverflow.com/questions/60229970/aws-cli-errorrootcode-for-hash-md5-was-not-found" target="_blank" rel="noopener">https://stackoverflow.com/questions/60229970/aws-cli-errorrootcode-for-hash-md5-was-not-found</a></p>
 <p>网上查资料说是openssl的问题,本地 brew install openssl 提示是最新版本,查了一堆资料,折腾不动了</p>
 <p>处理方案: 卸载掉python@2，都2020年了, python3不香嘛</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">由于 openssl 已经升级到 1.1 版本，而 ruby 2.4之前用的版本依然是 openssl 1.0 ，因此 rvm install 会报错，此时需要在本地编译安装 openssl 1.0，然后再安装 ruby，命令是</span><br><span class="line"></span><br><span class="line">$ rvm pkg install openssl</span><br><span class="line">$ rvm install 2.3.1 -C --with-openssl-dir=$HOME/.rvm/usr</span><br></pre></td></tr></table></figure>
 <h3 id="pod-报错"><a href="#pod-报错" class="headerlink" title="pod 报错"></a>pod 报错</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/ruby/2.4.0/x86_64-darwin16/openssl.bundle (LoadError)</span><br><span class="line"></span><br><span class="line">/// 移除rvm</span><br><span class="line">rvm implode</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">/// 重新安装 rvm</span><br><span class="line">\curl -L https://get.rvm.io | bash -s stable --ruby</span><br><span class="line"></span><br><span class="line">/// cocoapods</span><br><span class="line">sudo gem install -n /usr/local/bin cocoapods -v 1.5.3</span><br></pre></td></tr></table></figure>
 <p><a href="https://www.it1352.com/786199.html" target="_blank" rel="noopener">https://www.it1352.com/786199.html</a></p>
 <p><a href="https://www.jianshu.com/p/a703135682a3" target="_blank" rel="noopener">https://www.jianshu.com/p/a703135682a3</a></p>
@@ -394,8 +395,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/lvchenqiang.github.io/2019/10/25/Shell入门指北/" rel="next" title="Shell入门指北">
-                <i class="fa fa-chevron-left"></i> Shell入门指北
+              <a href="/lvchenqiang.github.io/2020/02/10/pod-lint-simulator/" rel="next" title="pod lib lint/repo push不支持模拟器">
+                <i class="fa fa-chevron-left"></i> pod lib lint/repo push不支持模拟器
               </a>
             
           </div>
@@ -491,7 +492,7 @@
               
                 <a href="/lvchenqiang.github.io/archives/">
               
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
