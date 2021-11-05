@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lvchenqiang.github.io/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lvchenqiang.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/lvchenqiang.github.io/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/lvchenqiang.github.io/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/lvchenqiang.github.io/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/lvchenqiang.github.io/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/lvchenqiang.github.io/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="笔记,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="熟悉 Objective-C">
+<meta name="keywords" content="笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Effective Objective-C 2.0编写高质量iOS与OS X代码的52个有效方法">
+<meta property="og:url" content="https://lvchenqiang.github.io/2016/09/15/2/index.html">
+<meta property="og:site_name" content="程序员码头">
+<meta property="og:description" content="熟悉 Objective-C">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2016/09/15/2/Snip20181104_6.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2016/09/15/2/Snip20181105_7.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2016/09/15/2/Snip20181119_21.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2016/09/15/2/Snip20181120_22.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2016/09/15/2/Snip20181120_24.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2016/09/15/2/Snip20181120_26.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2016/09/15/2/Snip20181120_27.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2016/09/15/2/Snip20181120_28.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2016/09/15/2/Snip20181120_32.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2016/09/15/2/Snip20181120_33.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2016/09/15/2/Snip20181121_34.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2016/09/15/2/Snip20181121_35.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2016/09/15/2/Snip20181121_41.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2016/09/15/2/Snip20181121_36.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2016/09/15/2/Snip20181121_37.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2016/09/15/2/Snip20181121_38.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2016/09/15/2/Snip20181121_40.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2016/09/15/2/Snip20181121_42.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2016/09/15/2/Snip20181121_43.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2016/09/15/2/Snip20181121_44.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2016/09/15/2/Snip20181121_45.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2016/09/15/2/Snip20181121_46.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2016/09/15/2/Snip20181121_49.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2016/09/15/2/Snip20181121_50.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2016/09/15/2/Snip20181121_53.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2016/09/15/2/Snip20181121_54.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2016/09/15/2/Snip20181121_55.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2016/09/15/2/Snip20181121_56.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2016/09/15/2/Snip20181121_57.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2016/09/15/2/Snip20181121_58.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2016/09/15/2/Snip20181121_59.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2016/09/15/2/Snip20181121_60.png">
+<meta property="og:updated_time" content="2018-12-06T15:10:12.543Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Effective Objective-C 2.0编写高质量iOS与OS X代码的52个有效方法">
+<meta name="twitter:description" content="熟悉 Objective-C">
+<meta name="twitter:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2016/09/15/2/Snip20181104_6.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/lvchenqiang.github.io/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://lvchenqiang.github.io/2016/09/15/2/">
+
+
+
+
+
+  <title>Effective Objective-C 2.0编写高质量iOS与OS X代码的52个有效方法 | 程序员码头</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/lvchenqiang.github.io/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">程序员码头</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/lvchenqiang.github.io/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/lvchenqiang.github.io/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/lvchenqiang.github.io/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/lvchenqiang.github.io/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/lvchenqiang.github.io/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://lvchenqiang.github.io/lvchenqiang.github.io/2016/09/15/2/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micah">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/lvchenqiang.github.io/image/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="程序员码头">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Effective Objective-C 2.0编写高质量iOS与OS X代码的52个有效方法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-15T20:40:35+08:00">
+                2016-09-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/lvchenqiang.github.io/categories/BOOK/" itemprop="url" rel="index">
+                    <span itemprop="name">BOOK</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/lvchenqiang.github.io/2016/09/15/2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2016/09/15/2/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="熟悉-Objective-C"><a href="#熟悉-Objective-C" class="headerlink" title="熟悉 Objective-C"></a>熟悉 Objective-C</h3><a id="more"></a>
+<h4 id="Objective-C的起源"><a href="#Objective-C的起源" class="headerlink" title="Objective-C的起源"></a>Objective-C的起源</h4><p>1、Objective-C从Smalltalk语言是从Smalltalk语言演化而来，Smalltalk是消息语言的鼻祖。</p>
+<p>2、Objective-C的重要工作都由“运行期组件”而非编译器完成,所以Objective-C的面向对象的特性所需的全部数据结构以及函数都在运行期组件里面。</p>
+<p>3、Objective-C使用动态绑定的消息结构，也就是说在运行时才会检查对象的类型。接收消息之后，究竟应执行何种代码，由运行期环境决定而非编译器。</p>
+<p>示例:</p>
+<blockquote>
+<p>NSString *obj = [[NSData alloc] init]</p>
+</blockquote>
+<p>在编译时 obj是NSString类型，运行时是NSData。</p>
+<h4 id="在类的头文件中尽量减少引用其他头文件"><a href="#在类的头文件中尽量减少引用其他头文件" class="headerlink" title="在类的头文件中尽量减少引用其他头文件"></a>在类的头文件中尽量减少引用其他头文件</h4><p>1、如果需要引用一个类文件时，只是需要使用类名，不需要知道其中细节，可以用@class xx.h，这样做的好处会减少一定的编译时间。如果是用的#import全部导入的话，会出现a.h import了b.h,当c.h 又import a.h时，把b.h也都导入了，这样做引入了许多根本用不到的东西，而且还增加了编译时间，也有可能造成循环引用。同时也尽量降低了类之间的耦合。</p>
+<p>2、如果无法使用向前声明，我们可以把“该类遵循某协议”移至“class-continuatiion”分类中。如果实在不行的话，可以把协议单独放在一个头文件中，然后将其引入。</p>
+<p>示例: xxxxx.m</p>
+<blockquote>
+<p>@interface ViewController()\<uitableviewdelegate></uitableviewdelegate></p>
+<p>@end</p>
+</blockquote>
+<h4 id="多用字面语法，少用与之等价的方法"><a href="#多用字面语法，少用与之等价的方法" class="headerlink" title="多用字面语法，少用与之等价的方法"></a>多用字面语法，少用与之等价的方法</h4><p>1、应该使用字面量语法来创建字符串、数组、数值、字典。与创建对象的常规方法想必，这么做更加的简明扼要。</p>
+<p>2、应该通过取下标操作访问数组或字典中的键对应的元素。<br>注: 通常用下标获取元素，可能会产生数组越界、或者key不存在的问题，我们可以通过重载subscript等操作来做处理。</p>
+<p>3、用字面量语法创建数组和字典时，若值中有nil，则会抛出异常。因此，务必确保值里不含nil.</p>
+<h4 id="少用类型常量，少用-define-预处理命令"><a href="#少用类型常量，少用-define-预处理命令" class="headerlink" title="少用类型常量，少用#define 预处理命令"></a>少用类型常量，少用#define 预处理命令</h4><p>1、不要使用预处理指令。这样定义处理来的常量不包含类型信息，编译器只是会在编译的时候做简单的查找和替换操作。而且即使有人重新定义了常量值，编译器也不会产生警告信息。</p>
+<p>2、在实现文件中使用 static const定义 只在编译单元内可见的常量，可以无须为其名称添加前缀。</p>
+<p>3、在头文件中使用extern 来声明全局常量，并在相关文件中定义其值。这种常量会出现在全局符号表中，需要加上前缀加以区隔。通常使用与之相关的类名做前缀。</p>
+<h4 id="用枚举表示状态、选项、状态码"><a href="#用枚举表示状态、选项、状态码" class="headerlink" title="用枚举表示状态、选项、状态码"></a>用枚举表示状态、选项、状态码</h4><p>1、如果把传递给某个方法的选项表示为枚举类型，而多个选项可以同时使用，那么就将各个选项值定义为2的幂，以便通过按位或操作将其组合起来。<br>2、使用NS_ENUM和NS_OPTIONS宏来定义枚举类型。这样做可以确保枚举的类型是开发者选的底层数据类型，而不是编译器默认的类型。<br>3、在处理枚举的类型的switch语句中不要实现default分支。这样的话，加入新的枚举之后，编译器会提醒开发者，swicth语句未处理所有的枚举。</p>
+<h3 id="对象、消息、运行期"><a href="#对象、消息、运行期" class="headerlink" title="对象、消息、运行期"></a>对象、消息、运行期</h3><h4 id="理解属性这一概念"><a href="#理解属性这一概念" class="headerlink" title="理解属性这一概念"></a>理解属性这一概念</h4><p>1、属性我们可以简单理解为:property = ivar + get + set<br>2、属性的修饰符<br><code>原子性</code> 我们应该使用nonatomic属性，因为atomic属性会严重影响性能。<br><code>读写权限</code> 我们在做读写权限的时候，通常可以再声明文件中，使用readonly。然后在“class-continuation分类”中将其重新定义为读写属性。<br><code>内存管理</code> assign 用于一般基础数据类型<br>strong 表示一种拥有关系，在设置新值的时候会保留新值，并释放旧值，然后再把新值设置上去<br>weak 表示一种非拥有关系，既不保留新值 也不释放旧值，当对象释放时，属性值会置为nil.<br>copy 表示一种拥有关系。设置方法不保留新值，只是将其“拷贝copy”。经常用于此特质来保护其封装性。 </p>
+<h4 id="在对象内部尽量直接访问实例变量"><a href="#在对象内部尽量直接访问实例变量" class="headerlink" title="在对象内部尽量直接访问实例变量"></a>在对象内部尽量直接访问实例变量</h4><p>1、在对象内部读取数据的时候，我们可以直接访问实例变量。在写入数据的时候，我们应通过属性来写。</p>
+<p>2、在初始化以及dealloc方法中，总是应该通过实例变量来读写数据。</p>
+<p>3、有时使用惰性初始化技术配置某份数据，这种情况下，需要通过属性来读取数据。</p>
+<h4 id="理解对象的等同性"><a href="#理解对象的等同性" class="headerlink" title="理解对象的等同性"></a>理解对象的等同性</h4><p>1、若想检测对象的等同性，请提供“isEqual:”与hash方法</p>
+<p>2、相同的对象必须有相同的hash码，但是两个哈希码相同的对象却未必是相同的。</p>
+<p>3、编写hash方法时，应该使用计算速度快而且哈希码碰撞几率低的算法。</p>
+<h4 id="以类族模式-隐藏实现的细节"><a href="#以类族模式-隐藏实现的细节" class="headerlink" title="以类族模式 隐藏实现的细节"></a>以类族模式 隐藏实现的细节</h4><p>1、类族模式可以把实现细节隐藏在一套简单的公共接口后面</p>
+<p>2、从类族的公共抽象基类中继承子类时要当心，若有开发文档，则应首先阅读。</p>
+<h4 id="在既有类中使用关联对象存放自定义数据"><a href="#在既有类中使用关联对象存放自定义数据" class="headerlink" title="在既有类中使用关联对象存放自定义数据"></a>在既有类中使用关联对象存放自定义数据</h4><p>1、我们可以通过关联对象机制把两个对象关联起来</p>
+<p>2、定义关联对象可指定内存管理语义，用以模仿定义属性时所采用的拥有关系与非拥有关系</p>
+<p>示例:<br><img src="/lvchenqiang.github.io/2016/09/15/2/Snip20181104_6.png" alt=""></p>
+<p>3、只有在其他做法不可行时，才应选用管理对象，因为这种做法通常会引入难于查找的bug.</p>
+<h4 id="理解objc-msgSend作用"><a href="#理解objc-msgSend作用" class="headerlink" title="理解objc_msgSend作用"></a>理解objc_msgSend作用</h4><p>1、在Objective-C中，如果向某个对象传递消息，那就会在运行时使用动态绑定（dynamic binding）机制来决定需要调用的方法。但是到了底层具体实现，却是普通的C语言函数实现的。这个实现的函数就是objc_msgSend,该函数定义如下：</p>
+<blockquote>
+<p>void objc_msgSend(id self, SEL cmd, …)</p>
+</blockquote>
+<p>2、<code>objc_msgSend</code>函数会在接收者所属的类中搜寻其方法列表，如果能找到这个跟选择子名称相同的方法，就跳转到其实现代码，往下执行。若是当前类没找到，那就沿着继承体系继续向上查找，等找到合适方法之后再跳转 ，如果最终还是找不到，那就进入消息转发的流程去进行处理了</p>
+<p>3、<code>objc_msgSend</code>在搜索这块是有做缓存的，每个OC的类都有一块这样的缓存，objc_msgSend会将匹配结果缓存在快速映射表(fast map)中，这样以来这个类一些频繁调用的方法会出现在fast map 中，不用再去一遍一遍的在方法列表中搜索了</p>
+<p>4、在底层处理发送消息的时候，有用到尾调用优化，大概原理就是在函数末尾调用某个不含返回值函数时，编译器会自动的不在栈空间上重新进行分配内存，而是直接释放所有调用函数内部的局部变量，然后直接进入被调用函数的地址</p>
+<p>5、消息调用过程中的其他一些“边界情况”，会由Objective-C运行环境的另一些函数处理。<br><code>objc_msgSend_stret</code> 如果待发送的消息要返回结构体，那么会由此函数处理。 只有CPU的寄存器能够容纳得下消息返回类型时，这个函数才能处理此消息。<br><code>objc_msgSend_fpret</code> 如果消息返回的是浮点数，那么可由此函数处理。<br><code>objc_mesgSendSuper</code> 如果给超类发消息，则会交由此函数处理。</p>
+<h4 id="理解消息转发机制"><a href="#理解消息转发机制" class="headerlink" title="理解消息转发机制"></a>理解消息转发机制</h4><p>1、若对象无法响应某个选择子，则进入消息转发流程<br>示例:<br><img src="/lvchenqiang.github.io/2016/09/15/2/Snip20181105_7.png" alt=""><br>2、通过运行期的动态方法解析功能，我们可以再需要用到某个方法时再将其加入类中</p>
+<h4 id="用“方法调配技术”调试“黑盒方法”"><a href="#用“方法调配技术”调试“黑盒方法”" class="headerlink" title="用“方法调配技术”调试“黑盒方法”"></a>用“方法调配技术”调试“黑盒方法”</h4><p>1、在运行期，可以向类中新增或替换选择子所对应的方法的实现。<br>示例:<br><img src="/lvchenqiang.github.io/2016/09/15/2/Snip20181119_21.png" alt=""></p>
+<p>2、一般来说，只有调试程序的时候才需要在运行期间修改方法实现，这种做法不宜滥用。</p>
+<h4 id="理解类对象的用意"><a href="#理解类对象的用意" class="headerlink" title="理解类对象的用意"></a>理解类对象的用意</h4><p>1、每一个实例都有一个指向Class对象的指针，用以表明其类型，而这些Class对象构成了继承体系。<br>实例:<br><img src="/lvchenqiang.github.io/2016/09/15/2/Snip20181120_22.png" alt=""><br><img src="/lvchenqiang.github.io/2016/09/15/2/Snip20181120_24.png" alt=""></p>
+<p>2、如果对象类型无法在编译期确定，那么就应该使用类型信息查询方法来探知</p>
+<p>3、尽量使用类型信息查询来确定对象的类型，而不是直接比较对象，因为某些对象可能实现了消息转发功能。</p>
+<p>示例:<br><img src="/lvchenqiang.github.io/2016/09/15/2/Snip20181120_26.png" alt=""></p>
+<h3 id="接口与API设计"><a href="#接口与API设计" class="headerlink" title="接口与API设计"></a>接口与API设计</h3><h4 id="用前缀避免命名空间的冲突"><a href="#用前缀避免命名空间的冲突" class="headerlink" title="用前缀避免命名空间的冲突"></a>用前缀避免命名空间的冲突</h4><p>1、选择与你公司、应用程序或者二者皆有之关联之名称作为类名的前缀，并在所有的代码中均使用这一前缀</p>
+<p>2、若自己的开发程序中用到了第三方库，则应为其中的名称加上前缀。</p>
+<h4 id="提供全能的初始化方法"><a href="#提供全能的初始化方法" class="headerlink" title="提供全能的初始化方法"></a>提供全能的初始化方法</h4><p>1、在类中提供一个全能初始化方法，并于文档里声明，其他初始化方法均应调用此方法。</p>
+<p>2、如果超类的初始化方法不适用于子类，那么应该覆写这个超类的方法，并在其中抛出异常。</p>
+<h4 id="实现description-方法"><a href="#实现description-方法" class="headerlink" title="实现description 方法"></a>实现description 方法</h4><p>1、实现description方法返回一个有意义的字符串，用以描述实例。</p>
+<p>2、若想要在调试是打印出更加详细的对象描述信息，则应实现debugDescription方法。</p>
+<h4 id="尽量使用不可变对象"><a href="#尽量使用不可变对象" class="headerlink" title="尽量使用不可变对象"></a>尽量使用不可变对象</h4><p>1、尽量创建不可变的对象，如果某属性仅限于内部修改，可在”class-continuation”分类中将有readonly扩展为readwrite属性<br>2、不要把可变的集合公开，而应该提供相应的修改方法。</p>
+<h4 id="使用清晰而协调的命名方式"><a href="#使用清晰而协调的命名方式" class="headerlink" title="使用清晰而协调的命名方式"></a>使用清晰而协调的命名方式</h4><p>1、开发中的命名需要遵循驼峰命名规则，方法名要言简意赅，从左到右读起来像个日常用语的句子最好。<br>2、方法里不要使用缩略后的类型名称，起名要确保风格与自己的代码或者要集成的框架相符合</p>
+<h4 id="私有方法加上前缀"><a href="#私有方法加上前缀" class="headerlink" title="私有方法加上前缀"></a>私有方法加上前缀</h4><p>1、给私有的方法加上前缀，这样可以很容易地将其公共方法区分开。<br>2、不要单用一个下划线做私有方法的前缀，因为这是预留给苹果用的。</p>
+<h4 id="理解Objective-C错误模型"><a href="#理解Objective-C错误模型" class="headerlink" title="理解Objective-C错误模型"></a>理解Objective-C错误模型</h4><p>1、开发中只有发生了可使整个应用程序崩溃的严重错误时，才应该使用异常。<br>2、在错误没有那么严重的情况下，我们可以委托方法来处理错误，也可以放在NSError中，经由“输出参数”返回调用者。</p>
+<h4 id="理解NSCopying协议"><a href="#理解NSCopying协议" class="headerlink" title="理解NSCopying协议"></a>理解NSCopying协议</h4><p>1、若想要令自己所写的对象具有拷贝功能，则需要实现NSCoping协议，如果需要具有可变版本则需要实现NSMutableCopying协议。</p>
+<p>2、复制对象时需决定采用浅拷贝还是深拷贝，一般情况下应该尽量使用浅拷贝。</p>
+<h3 id="协议与分类"><a href="#协议与分类" class="headerlink" title="协议与分类"></a>协议与分类</h3><h4 id="通过委托和数据源协议进行对象通信"><a href="#通过委托和数据源协议进行对象通信" class="headerlink" title="通过委托和数据源协议进行对象通信"></a>通过委托和数据源协议进行对象通信</h4><p>1、委托模式为对象提供了一套接口，使其可由此将相关事件告知其他对象，改变执行顺序。</p>
+<p>2、若有必要，可实现含有位段的结构体，将委托对象是否能够响应相关的协议方法这一信息缓存至其中。</p>
+<h4 id="将类的实现代码分散到便于管理的数个分类之中"><a href="#将类的实现代码分散到便于管理的数个分类之中" class="headerlink" title="将类的实现代码分散到便于管理的数个分类之中"></a>将类的实现代码分散到便于管理的数个分类之中</h4><p>1、使用分类机制把类的实现代码划分成易于管理的小块</p>
+<p>2、将应该视为“私有”的方法归入名叫Private的分类中，以隐藏实现细节。<br>示例:<br><img src="/lvchenqiang.github.io/2016/09/15/2/Snip20181120_27.png" alt=""></p>
+<h4 id="总是为第三方类的分类名称加前缀"><a href="#总是为第三方类的分类名称加前缀" class="headerlink" title="总是为第三方类的分类名称加前缀"></a>总是为第三方类的分类名称加前缀</h4><p>1、向第三方库添加分类时，总应该为其名称加上你专用的前缀</p>
+<p>2、向第三方类添加分类时，总应给其中的方法加上你专用的前缀</p>
+<h4 id="勿在分类中声明属性"><a href="#勿在分类中声明属性" class="headerlink" title="勿在分类中声明属性"></a>勿在分类中声明属性</h4><p>1、尽量在开发中，把封装数据所用的全部属性都定义在主接口里。</p>
+<p>2、在“class-continuation”分类之外的其他分类中，可以定义存取方法，但尽量不要定义属性。</p>
+<h4 id="使用“class-continuation”分类-隐藏实现的细节"><a href="#使用“class-continuation”分类-隐藏实现的细节" class="headerlink" title="使用“class-continuation”分类 隐藏实现的细节"></a>使用“class-continuation”分类 隐藏实现的细节</h4><p>1、通过在“class-continuation分类”，向类中新增实例变量</p>
+<p>2、如果某属性在主接口中声明为“只读”，而类的内部又要设置方法修改此属性，那么就在“class-continuation”中将其扩展为“读写”</p>
+<p>3、把私有方法、私有变量的原型声明在“class-continuation分类”里面</p>
+<p>4、若想使类所遵循的协议不为人知，则可与“class-continuation分类”中声明</p>
+<h4 id="通过协议提供匿名对象"><a href="#通过协议提供匿名对象" class="headerlink" title="通过协议提供匿名对象"></a>通过协议提供匿名对象</h4><p>1、使用匿名对象来隐藏类型名称或类名</p>
+<p>2、如果具体类型不重要，重要的是对象能够响应(定义在协议中)特定方法，那么可使用匿名对象来表示</p>
+<h3 id="内存管理"><a href="#内存管理" class="headerlink" title="内存管理"></a>内存管理</h3><h4 id="理解引用计数"><a href="#理解引用计数" class="headerlink" title="理解引用计数"></a>理解引用计数</h4><p>1、引用计数机制通过递增或者递减的计数器来管理内存。对象创建好之后，其保留引用计数至少为1.</p>
+<p>2、在对象的生命周期中，其余对象通过引用来保留或释放对象。保留与释放操作分别会递增和递减保留计数。<br>示例:<br><img src="/lvchenqiang.github.io/2016/09/15/2/Snip20181120_28.png" alt=""><br>引用计数的核心法则就是:谁创建，谁释放。</p>
+<h4 id="以ARC简化引用计数"><a href="#以ARC简化引用计数" class="headerlink" title="以ARC简化引用计数"></a>以ARC简化引用计数</h4><p>1、ARC只负责管理Objective-C对象的内存。尤其注意：CoreFoundation对象不归ARC管理，开发者必须适时调用CFRetain/CFRelease.</p>
+<p>2、ARC管理对象生命周期的办法就是，在合适的地方插入“保留”及“释放”操作。<br>在ARC环境下，变量的内存管理语义可以通过修饰符指明，而原来则需要手工执行“保留”及“释放”操作。</p>
+<h4 id="在dealloc方法中只释放引用并释放监听"><a href="#在dealloc方法中只释放引用并释放监听" class="headerlink" title="在dealloc方法中只释放引用并释放监听"></a>在dealloc方法中只释放引用并释放监听</h4><p>1、在dealloc方法里，应该做的事情就是释放指向其他对象的引用，并取消之前的订阅”键值观测”或NSNotification等通知，不要做其他事情。</p>
+<p>2、如果对象持有文件描述符等系统资源，那么应该专门编写一个方法来释放此种资源。</p>
+<p>3、执行异步任务的方法不应在dealloc里调用，只能在正常状态下执行的那些方法也不应在dealloc中调用，因为此时的对象已经处于正在回收的状态了。</p>
+<h4 id="编写“异常安全代码”时留意内存管理问题"><a href="#编写“异常安全代码”时留意内存管理问题" class="headerlink" title="编写“异常安全代码”时留意内存管理问题"></a>编写“异常安全代码”时留意内存管理问题</h4><p>1、在捕获异常时，一定要注意将try块内所创立的对象处理干净</p>
+<p>2、在默认情况下，ARC不生成安全处理异常所需的清理代码。开启编译器标志后，可生成这种代码，不过会导致应用程序变大，而且会降低运行效率。</p>
+<h4 id="以弱引用避免保留环"><a href="#以弱引用避免保留环" class="headerlink" title="以弱引用避免保留环"></a>以弱引用避免保留环</h4><p>1、将某些引用设为weak,可避免出现“保留环”</p>
+<p>2、weak引用可以自动清空，也可以不自动清空，这个是随着ARC而引入的新特性，在运行期系统实现。</p>
+<h4 id="以“自动释放池块”-降低内存峰值"><a href="#以“自动释放池块”-降低内存峰值" class="headerlink" title="以“自动释放池块” 降低内存峰值"></a>以“自动释放池块” 降低内存峰值</h4><p>1、自动释放池排布在栈中，对象收到autorelease消息后，系统将其放入最顶端的池中。</p>
+<p>2、合理运用自动释放池，可降低应用程序的峰值</p>
+<p>3、@autoreleasepool这种新式写法能创建出更为轻便的自动释放池</p>
+<h4 id="用“僵尸对象”调试内存管理问题"><a href="#用“僵尸对象”调试内存管理问题" class="headerlink" title="用“僵尸对象”调试内存管理问题"></a>用“僵尸对象”调试内存管理问题</h4><p>1、在系统回收对象的时候，可以不将其真的回收，而是把它转化为僵尸对象。通过环境变量NSZoobieEnabled可开启此功能</p>
+<p>2、系统会修改对象的isa指针，令其指向特殊的僵尸类，从而是该对象变为僵尸对象。僵尸类能够响应所有的选择子，响应方式为：打印一条包含消息内容以及接收者的消息，然后终止应用程序</p>
+<h4 id="不要使用retaincount"><a href="#不要使用retaincount" class="headerlink" title="不要使用retaincount"></a>不要使用retaincount</h4><p>1、对象的保留计数看似有用，实则不然，因为任何给定时间点上的“绝对保留计数”都无法反映对象生命周期的全貌</p>
+<p>2、在苹果引入ARC之后retainCount已经正式废弃，任何时候都不要调用这个retainCount方法来查看引用计数了，因为这个值实际上已经没有准确性了。但是在MRC下还是可以正常使用</p>
+<h3 id="块与大中枢派发"><a href="#块与大中枢派发" class="headerlink" title="块与大中枢派发"></a>块与大中枢派发</h3><h4 id="理解“块”这一概念"><a href="#理解“块”这一概念" class="headerlink" title="理解“块”这一概念"></a>理解“块”这一概念</h4><p>1、块的内部结构<br><img src="/lvchenqiang.github.io/2016/09/15/2/Snip20181120_32.png" alt=""><br>2、块的类型<br><code>NSGlobalBlock</code> 全局块: 这种块运行时无需获取外界任何状态，块所使用的内存区域在编译器就可以完全确定，所以该块声明在全局内存中。如果全局块执行copy会是一个空操作，相当于什么都没做</p>
+<p><code>NSStackBlock</code> 栈块: 栈块保存于栈区，超出变量作用域，栈上的block以及__block变量都会被销毁。</p>
+<p><code>NSMallocBlock</code> 堆块: 堆块内存保存于堆区，在变量作用域结束时不受影响。</p>
+<h4 id="为常用的块类类型创建Typedef"><a href="#为常用的块类类型创建Typedef" class="headerlink" title="为常用的块类类型创建Typedef"></a>为常用的块类类型创建Typedef</h4><p>1、为同一个块签名定义多个类型别名。如果要重构的代码使用了块类型的某个别名，那么只需要修改响应的typedef中的块签名即可</p>
+<p>2、以typedef重新定义块类型，可令块变量用起来更加简单。<br>示例:<br><img src="/lvchenqiang.github.io/2016/09/15/2/Snip20181120_33.png" alt=""></p>
+<h4 id="使用handler块降低代码分散程度"><a href="#使用handler块降低代码分散程度" class="headerlink" title="使用handler块降低代码分散程度"></a>使用handler块降低代码分散程度</h4><p>1、在创建对象时，可以使用内联的handler块将相关业务逻辑一并声明。</p>
+<p>2、在有多个实例需要监控时，如果采用委托模式，那么经常需要根据传入的对象来切换，而使用handler块实现，则可直接将块与相关对象放在一起</p>
+<p>3、设计API时如果用到了handler块，那么可以增加一个对象，使调用者通过此参数来决定应该把块放在哪个对列上执行。</p>
+<h4 id="用块引用所属对象不要出现保留环"><a href="#用块引用所属对象不要出现保留环" class="headerlink" title="用块引用所属对象不要出现保留环"></a>用块引用所属对象不要出现保留环</h4><p>1、如果块所捕获的对象直接或者间接的保留了块本身，那么就会出现保留环的问题</p>
+<p>2、一定要找一个适当的时机解除保留环，而不能把责任推给API的调用者。<br>示例:<br><img src="/lvchenqiang.github.io/2016/09/15/2/Snip20181121_34.png" alt=""><br>调用：<br><img src="/lvchenqiang.github.io/2016/09/15/2/Snip20181121_35.png" alt=""></p>
+<h4 id="多用派发队列，少用同步锁"><a href="#多用派发队列，少用同步锁" class="headerlink" title="多用派发队列，少用同步锁"></a>多用派发队列，少用同步锁</h4><p>1、派发队列可用来表述同步语义(synchronization semantic)，这种做法要比使用@synchronized块和NSLock对象更简单，效率更高</p>
+<p>2、将同步与异步派发相结合。可以实现与普通加锁机制一样的同步行为，而这样却不会阻塞执行异步派发的线程<br>栅栏块介绍:<br><img src="/lvchenqiang.github.io/2016/09/15/2/Snip20181121_41.png" alt=""><br>使用示例:</p>
+<p><img src="/lvchenqiang.github.io/2016/09/15/2/Snip20181121_36.png" alt=""><br>如果设置行为不需要什么返回值，我们可以进一步优化<br><img src="/lvchenqiang.github.io/2016/09/15/2/Snip20181121_37.png" alt=""><br>3、使用同步队列以及栅栏块，可以令同步行为更加的高效。</p>
+<p><img src="/lvchenqiang.github.io/2016/09/15/2/Snip20181121_38.png" alt=""><br><img src="/lvchenqiang.github.io/2016/09/15/2/Snip20181121_40.png" alt=""></p>
+<p>在这个并发的队列中，读取操作用普通的块实现，写入操作用栅栏块实现，读取操作可以并行，但是写入操作必须是单独执行，当然 设置函数我们也可以使用同步的栅栏快。</p>
+<h4 id="多用GCD-少用performSelector系列方法"><a href="#多用GCD-少用performSelector系列方法" class="headerlink" title="多用GCD 少用performSelector系列方法"></a>多用GCD 少用performSelector系列方法</h4><p>1、performSelector系列方法在内存管理方面容易有疏失。它无法确定将要执行的选择子具体是什么，因为ARC编译也就无法插入适当的内存管理方法<br>例如:<br><img src="/lvchenqiang.github.io/2016/09/15/2/Snip20181121_42.png" alt=""><br>上面的编程方式，看起来十分的灵活。但是编译器根本不知道要执行的选择子是什么，这必须要到运行期才能确定，所以编译器就会发出以下警告:<br><img src="/lvchenqiang.github.io/2016/09/15/2/Snip20181121_43.png" alt=""></p>
+<p>原因在于，编译器并不知道将要调用的选择子是什么，因此也不知道方法的签名和返回值，所以也就没法用ARC的内存管理规则来判断返回值是否应该释放</p>
+<p>2、performSelector系列方法所能处理的选择子太过于局限，选择子的返回值类型以及发送给的方法的参数个数都受到限制</p>
+<p>3、如果想把任务放在另一个线程中执行，那么最好不要用performSelector系列方法而是应该把任务封装在块里，然后由大中枢派发机制的相关方法来实现。</p>
+<p>示例:<br><img src="/lvchenqiang.github.io/2016/09/15/2/Snip20181121_44.png" alt=""></p>
+<h4 id="掌握GCD及操作队列的使用时机"><a href="#掌握GCD及操作队列的使用时机" class="headerlink" title="掌握GCD及操作队列的使用时机"></a>掌握GCD及操作队列的使用时机</h4><p>GCD技术确实很棒，但是也有一些局限性，或者说有一些场景并不适合。比如过想取消队列中的某个操作，或者需要后台执行任务。还有一种技术叫<code>NSOperationQueue</code>，其实NSOperationQueue跟GCD有很多相像之处。<code>NSOperationQueue</code>在GCD之前就已经有了，GCD就是在其某些原理上构建的。GCD是C层次的API，而NSOperation是重量级的Objective-C对象。<br>使用NSOperation和NSOperationQueue的优点：</p>
+<p>1、支持取消某个操作：在运行任务前，可以在NSOperation对象上调用cancel方法，用以表明此任务不需要执行。不过已经启动的任务无法取消。GCD队列是无法取消的，GCD是“安排好之后就不管了（fire and forget）”。</p>
+<p>2、支持指定操作间的依赖关系：一个操作可以依赖其他多个操作，例如从服务器下载并处理文件的动作可以用操作来表示，而在处理其他文件之前必须先下载“清单文件”。而后续的下载工作，都要依赖于先下载的清单文件这一操作。这时如果操作队列允许并发执行的话，后续的下载操作就可以在他依赖的下载清单文件操作执行完毕之后开始同时执行。</p>
+<p>3、支持通过KVO监控NSOperation对象的属性：可以通过isCancelled属性来判断任务是否已取消，通过isFinished属性来判断任务是否已经完成等等。</p>
+<p>4、支持指定操作的优先级：操作的优先级表示此操作与队列中其他操作之间的优先关系，优先级搞的操作先执行，优先级低的后执行。GCD的队列也有优先级，不过不是针对整个队列的。</p>
+<p>5、重用NSOperation对象。在开发中你可以使用NSOperation的子类或者自己创建NSOperation对象来保存一些信息，可以在类中定义方法，使得代码能够多次使用。不必重复自己。</p>
+<h4 id="通过Dispatch-Group机制，根据系统资源状况执行任务"><a href="#通过Dispatch-Group机制，根据系统资源状况执行任务" class="headerlink" title="通过Dispatch Group机制，根据系统资源状况执行任务"></a>通过Dispatch Group机制，根据系统资源状况执行任务</h4><p>1、dispatch_group 是GCD的一项特性，能够把任务分组。调用者可以等待这组任务执行完毕，也可以在提供回调函数之后继续往下执行，这组任务完成时，调用者会得到通知。另外通过dispatch group在并发队列上同时执行多项任务的时候，GCD会根据系统资源状态来帮忙调度这些并发执行的任务。<br>示例:</p>
+<p><img src="/lvchenqiang.github.io/2016/09/15/2/Snip20181121_45.png" alt=""></p>
+<p>或者<br><img src="/lvchenqiang.github.io/2016/09/15/2/Snip20181121_46.png" alt=""></p>
+<h4 id="使用dispatch-once-来执行只需运行一次的线程安全代码"><a href="#使用dispatch-once-来执行只需运行一次的线程安全代码" class="headerlink" title="使用dispatch_once 来执行只需运行一次的线程安全代码"></a>使用dispatch_once 来执行只需运行一次的线程安全代码</h4><p>1、在编写一次性安全代码的时候，我们可以使用dispatch_once 函数 这样可以很容易实现这个功能，<br>示例:<br><img src="/lvchenqiang.github.io/2016/09/15/2/Snip20181121_49.png" alt=""></p>
+<h4 id="不要使用-dispatch-get-current-queue"><a href="#不要使用-dispatch-get-current-queue" class="headerlink" title="不要使用 dispatch_get_current_queue"></a>不要使用 dispatch_get_current_queue</h4><p>1、dispatch_get_current_queue 函数的行为常常与开发者所预期的不同，此函数已经废弃，只应做调试之用。</p>
+<p>2、由于GCD是按层级来组织的，所以无法单用某个队列对象来描述”当前队列”这一概念。</p>
+<p>3、dispatch_get_current_queue 函数用于解决由不可以重入的代码所引发的死锁，然后能用此函数解决的问题，通常也可以用”队列特定数据”来解决</p>
+<p>示例: 通过“队列特定数据”解决死锁问题</p>
+<p><img src="/lvchenqiang.github.io/2016/09/15/2/Snip20181121_50.png" alt=""></p>
+<h3 id="系统框架"><a href="#系统框架" class="headerlink" title="系统框架"></a>系统框架</h3><h4 id="熟悉系统框架"><a href="#熟悉系统框架" class="headerlink" title="熟悉系统框架"></a>熟悉系统框架</h4><p>在Objective-C中除了Foundation 与CoreFoundation之外还有很多系统库，其中包括但不限于下面列出的这些：</p>
+<p>1、CFNetwork:此框架提供了C语言级别的网络通信能力，它将BSD socket抽象成了易于使用的网络接口。而Foundation则将该框架里的部分内容封装为Objective-C接口，以便进行网络通信。</p>
+<p>2、CoreAudio:此框架所提供的C语言API可以用来操作设备上的音频硬件。</p>
+<p>3、AVFoundation:此框架所提供的Objective-C对象可用来回访并录制音频及视频，比如能够在UI视图类里播放视频。</p>
+<p>4、CoreData:此框架所提供的Objective-C接口可以将对象放入数据库，将数据持久化。</p>
+<p>5、CoreText:此框架提供的C语言接口可以高效执行文字排版以及渲染操作。</p>
+<p>6、SpriteKit :游戏框架</p>
+<p>7、CoreLocation、MapKit :定位地图相关框架</p>
+<p>8、Address Book框架:需要使用通讯录时才使用该框架</p>
+<p>9、Music Libraries框架:音乐库相关框架</p>
+<p>10、HealthKit框架：健康相关框架</p>
+<p>11、HomeKit框架：为智能化硬件提供的框架</p>
+<p>12、CloudKit : iCloud相关的框架</p>
+<p>13、Passbook、PassKit框架：为了在应用中用户可以很容易的访问他们之前购买的活动门票、旅行车票、优惠券等等提供的框架</p>
+<p>14、StoreKit：苹果应用内部购买</p>
+<p>注:请记住：用纯C语言写成的框架与用Objective-C写成的一样重要，若想成为优秀的Objective-C开发者，应该掌握C语言的核心概念</p>
+<h4 id="多用快枚举，少用for循环"><a href="#多用快枚举，少用for循环" class="headerlink" title="多用快枚举，少用for循环"></a>多用快枚举，少用for循环</h4><p>1、遍历collection中的元素有四种方式，最基本的办法就是for循环，其次是NSEnumerator遍历法，还有快速遍历法（for in），以及块枚举法。块枚举是最新，最先进的方式。</p>
+<p>2、块枚举法是通过GCD来并发执行遍历操作</p>
+<p>3、若提前知道待遍历的collection含有何种对象，则应修改块签名，指出对象的具体类型。</p>
+<p>示例:<br><img src="/lvchenqiang.github.io/2016/09/15/2/Snip20181121_53.png" alt=""></p>
+<p>注：for in 的遍历。实现的机制是继承了<a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/FoundationTypesandCollections/FoundationTypesandCollections.html#//apple_ref/doc/uid/TP40011210-CH7-SW28" target="_blank" rel="noopener">快速枚举</a>的协议的，其执行的效率很高。</p>
+<h4 id="对自定义其内存管理语义的collection-使用无缝桥接"><a href="#对自定义其内存管理语义的collection-使用无缝桥接" class="headerlink" title="对自定义其内存管理语义的collection 使用无缝桥接"></a>对自定义其内存管理语义的collection 使用无缝桥接</h4><p>1、通过无缝桥接技术，可以在定义于Foundation框架中的类和CoreFoundation框架中的C语言数据结构之间来回转换。 下面代码展示了简单的无缝桥接：</p>
+<blockquote>
+<p>NSArray *anNSArray = @[@1, @2, @3, @4, @5];</p>
+<p>CFArrayRef aCFArray = (__bridge CFArrayRef)anNSArray;</p>
+<p>NSLog(@”Size of array = %li”, CFArrayGetCount(aCFArray));</p>
+<p>//Output: Size of array = 5</p>
+</blockquote>
+<p>转换操作中的<code>__bridge</code>告诉ARC如何传力转换所涉及的OC对象，也就是ARC仍然具备这个OC对象的所有权。<code>__bridge_retained</code>与之相反。这里要注意用完了数组要自己释放，使用<code>CFRelease(aCFArray)</code>前面有提到过的</p>
+<h4 id="构建缓存选用NSCache而非NSDictionary"><a href="#构建缓存选用NSCache而非NSDictionary" class="headerlink" title="构建缓存选用NSCache而非NSDictionary"></a>构建缓存选用NSCache而非NSDictionary</h4><p>1、在构建缓存时应该尽量选用NSCache而非NSDictionary，NSCache会在系统资源将要耗尽时自动删减缓存，而使用NSDictionary只能通过系统低内存警告方法去手动处理。此外NSCache还会看情况删减最久未使用的对象，而且是线程安全的。</p>
+<p>2、 将NSPurgeableData与NSCache搭配使用，可实现自动清除数据的功能。</p>
+<h4 id="精简initialize与load的实现代码"><a href="#精简initialize与load的实现代码" class="headerlink" title="精简initialize与load的实现代码"></a>精简initialize与load的实现代码</h4><p>1、在加载阶段，如果类实现了load方法，那么系统会调用它。分类里也可以定义此方法,类的load方法要比在分类中优先调用。与其他方法不同，load方法不参与覆写机制</p>
+<p>2、首次使用某个类之前，系统会向其发送initialize消息。由于此方法遵从普通的覆写规则，所以通常应该在里面判断当前要初始化的是那个类。<br>示例:<br><img src="/lvchenqiang.github.io/2016/09/15/2/Snip20181121_54.png" alt=""><br>在第一次使用EOCSubClass的时候，会打印<br><img src="/lvchenqiang.github.io/2016/09/15/2/Snip20181121_55.png" alt=""></p>
+<p>3、load和initialize方法都应该实现的精简一些，这有助于应用程序的响应能力，也能减少”依赖环“的几率。</p>
+<h4 id="别忘了NSTimer会保留其目标对象"><a href="#别忘了NSTimer会保留其目标对象" class="headerlink" title="别忘了NSTimer会保留其目标对象"></a>别忘了NSTimer会保留其目标对象</h4><p>1、在iOS开发中经常会用到定时器:NSTimer，由于NSTimer会生成指向其使用者的引用，而其使用者如果也引用了NSTimer，那就形成了该死的循环引用</p>
+<p><img src="/lvchenqiang.github.io/2016/09/15/2/Snip20181121_56.png" alt=""></p>
+<p>我们为了解决循环引用的问题可以做以下更改:<br><img src="/lvchenqiang.github.io/2016/09/15/2/Snip20181121_57.png" alt=""></p>
+<p><img src="/lvchenqiang.github.io/2016/09/15/2/Snip20181121_58.png" alt=""></p>
+<p>调用示例</p>
+<p><img src="/lvchenqiang.github.io/2016/09/15/2/Snip20181121_59.png" alt=""><br><img src="/lvchenqiang.github.io/2016/09/15/2/Snip20181121_60.png" alt=""></p>
+<p>2、上面的代码采用了一种有效的写法就是先定义了一个弱引用，令其指向self,然后是块捕获这个引用。<br>其实 NStimer的解决方案还有很多种，但大体的思路皆是如此。例如：YYKit中的解决方案<a href="https://github.com/ibireme/YYKit/blob/master/YYKit/Utility/YYTimer.h" target="_blank" rel="noopener">YYTimer</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Micah
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://lvchenqiang.github.io/2016/09/15/2/" title="Effective Objective-C 2.0编写高质量iOS与OS X代码的52个有效方法">https://lvchenqiang.github.io/2016/09/15/2/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/lvchenqiang.github.io/tags/笔记/" rel="tag"># 笔记</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/lvchenqiang.github.io/2016/10/25/memory/" rel="prev" title="iOS之自动引用计数详解">
+                iOS之自动引用计数详解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/lvchenqiang.github.io/image/avatar.png" alt="Micah">
+            
+              <p class="site-author-name" itemprop="name">Micah</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/lvchenqiang.github.io/archives/">
+              
+                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/lvchenqiang.github.io/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/lvchenqiang.github.io/tags/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/lvchenqiang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://blog.csdn.net/lvchenqiang_" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-csdn"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#熟悉-Objective-C"><span class="nav-number">1.</span> <span class="nav-text">熟悉 Objective-C</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Objective-C的起源"><span class="nav-number">1.1.</span> <span class="nav-text">Objective-C的起源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在类的头文件中尽量减少引用其他头文件"><span class="nav-number">1.2.</span> <span class="nav-text">在类的头文件中尽量减少引用其他头文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多用字面语法，少用与之等价的方法"><span class="nav-number">1.3.</span> <span class="nav-text">多用字面语法，少用与之等价的方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#少用类型常量，少用-define-预处理命令"><span class="nav-number">1.4.</span> <span class="nav-text">少用类型常量，少用#define 预处理命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用枚举表示状态、选项、状态码"><span class="nav-number">1.5.</span> <span class="nav-text">用枚举表示状态、选项、状态码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对象、消息、运行期"><span class="nav-number">2.</span> <span class="nav-text">对象、消息、运行期</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#理解属性这一概念"><span class="nav-number">2.1.</span> <span class="nav-text">理解属性这一概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在对象内部尽量直接访问实例变量"><span class="nav-number">2.2.</span> <span class="nav-text">在对象内部尽量直接访问实例变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#理解对象的等同性"><span class="nav-number">2.3.</span> <span class="nav-text">理解对象的等同性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#以类族模式-隐藏实现的细节"><span class="nav-number">2.4.</span> <span class="nav-text">以类族模式 隐藏实现的细节</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在既有类中使用关联对象存放自定义数据"><span class="nav-number">2.5.</span> <span class="nav-text">在既有类中使用关联对象存放自定义数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#理解objc-msgSend作用"><span class="nav-number">2.6.</span> <span class="nav-text">理解objc_msgSend作用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#理解消息转发机制"><span class="nav-number">2.7.</span> <span class="nav-text">理解消息转发机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用“方法调配技术”调试“黑盒方法”"><span class="nav-number">2.8.</span> <span class="nav-text">用“方法调配技术”调试“黑盒方法”</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#理解类对象的用意"><span class="nav-number">2.9.</span> <span class="nav-text">理解类对象的用意</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口与API设计"><span class="nav-number">3.</span> <span class="nav-text">接口与API设计</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#用前缀避免命名空间的冲突"><span class="nav-number">3.1.</span> <span class="nav-text">用前缀避免命名空间的冲突</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#提供全能的初始化方法"><span class="nav-number">3.2.</span> <span class="nav-text">提供全能的初始化方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实现description-方法"><span class="nav-number">3.3.</span> <span class="nav-text">实现description 方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#尽量使用不可变对象"><span class="nav-number">3.4.</span> <span class="nav-text">尽量使用不可变对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用清晰而协调的命名方式"><span class="nav-number">3.5.</span> <span class="nav-text">使用清晰而协调的命名方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#私有方法加上前缀"><span class="nav-number">3.6.</span> <span class="nav-text">私有方法加上前缀</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#理解Objective-C错误模型"><span class="nav-number">3.7.</span> <span class="nav-text">理解Objective-C错误模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#理解NSCopying协议"><span class="nav-number">3.8.</span> <span class="nav-text">理解NSCopying协议</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#协议与分类"><span class="nav-number">4.</span> <span class="nav-text">协议与分类</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#通过委托和数据源协议进行对象通信"><span class="nav-number">4.1.</span> <span class="nav-text">通过委托和数据源协议进行对象通信</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#将类的实现代码分散到便于管理的数个分类之中"><span class="nav-number">4.2.</span> <span class="nav-text">将类的实现代码分散到便于管理的数个分类之中</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总是为第三方类的分类名称加前缀"><span class="nav-number">4.3.</span> <span class="nav-text">总是为第三方类的分类名称加前缀</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#勿在分类中声明属性"><span class="nav-number">4.4.</span> <span class="nav-text">勿在分类中声明属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用“class-continuation”分类-隐藏实现的细节"><span class="nav-number">4.5.</span> <span class="nav-text">使用“class-continuation”分类 隐藏实现的细节</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通过协议提供匿名对象"><span class="nav-number">4.6.</span> <span class="nav-text">通过协议提供匿名对象</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#内存管理"><span class="nav-number">5.</span> <span class="nav-text">内存管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#理解引用计数"><span class="nav-number">5.1.</span> <span class="nav-text">理解引用计数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#以ARC简化引用计数"><span class="nav-number">5.2.</span> <span class="nav-text">以ARC简化引用计数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#在dealloc方法中只释放引用并释放监听"><span class="nav-number">5.3.</span> <span class="nav-text">在dealloc方法中只释放引用并释放监听</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编写“异常安全代码”时留意内存管理问题"><span class="nav-number">5.4.</span> <span class="nav-text">编写“异常安全代码”时留意内存管理问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#以弱引用避免保留环"><span class="nav-number">5.5.</span> <span class="nav-text">以弱引用避免保留环</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#以“自动释放池块”-降低内存峰值"><span class="nav-number">5.6.</span> <span class="nav-text">以“自动释放池块” 降低内存峰值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用“僵尸对象”调试内存管理问题"><span class="nav-number">5.7.</span> <span class="nav-text">用“僵尸对象”调试内存管理问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不要使用retaincount"><span class="nav-number">5.8.</span> <span class="nav-text">不要使用retaincount</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#块与大中枢派发"><span class="nav-number">6.</span> <span class="nav-text">块与大中枢派发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#理解“块”这一概念"><span class="nav-number">6.1.</span> <span class="nav-text">理解“块”这一概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#为常用的块类类型创建Typedef"><span class="nav-number">6.2.</span> <span class="nav-text">为常用的块类类型创建Typedef</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用handler块降低代码分散程度"><span class="nav-number">6.3.</span> <span class="nav-text">使用handler块降低代码分散程度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用块引用所属对象不要出现保留环"><span class="nav-number">6.4.</span> <span class="nav-text">用块引用所属对象不要出现保留环</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多用派发队列，少用同步锁"><span class="nav-number">6.5.</span> <span class="nav-text">多用派发队列，少用同步锁</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多用GCD-少用performSelector系列方法"><span class="nav-number">6.6.</span> <span class="nav-text">多用GCD 少用performSelector系列方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#掌握GCD及操作队列的使用时机"><span class="nav-number">6.7.</span> <span class="nav-text">掌握GCD及操作队列的使用时机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通过Dispatch-Group机制，根据系统资源状况执行任务"><span class="nav-number">6.8.</span> <span class="nav-text">通过Dispatch Group机制，根据系统资源状况执行任务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用dispatch-once-来执行只需运行一次的线程安全代码"><span class="nav-number">6.9.</span> <span class="nav-text">使用dispatch_once 来执行只需运行一次的线程安全代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不要使用-dispatch-get-current-queue"><span class="nav-number">6.10.</span> <span class="nav-text">不要使用 dispatch_get_current_queue</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#系统框架"><span class="nav-number">7.</span> <span class="nav-text">系统框架</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#熟悉系统框架"><span class="nav-number">7.1.</span> <span class="nav-text">熟悉系统框架</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多用快枚举，少用for循环"><span class="nav-number">7.2.</span> <span class="nav-text">多用快枚举，少用for循环</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对自定义其内存管理语义的collection-使用无缝桥接"><span class="nav-number">7.3.</span> <span class="nav-text">对自定义其内存管理语义的collection 使用无缝桥接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构建缓存选用NSCache而非NSDictionary"><span class="nav-number">7.4.</span> <span class="nav-text">构建缓存选用NSCache而非NSDictionary</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#精简initialize与load的实现代码"><span class="nav-number">7.5.</span> <span class="nav-text">精简initialize与load的实现代码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#别忘了NSTimer会保留其目标对象"><span class="nav-number">7.6.</span> <span class="nav-text">别忘了NSTimer会保留其目标对象</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Micah</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/lvchenqiang.github.io/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/lvchenqiang.github.io/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/lvchenqiang.github.io/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/lvchenqiang.github.io/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/lvchenqiang.github.io/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/lvchenqiang.github.io/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/lvchenqiang.github.io/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://Micah.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://lvchenqiang.github.io/2016/09/15/2/';
+          this.page.identifier = '2016/09/15/2/';
+          this.page.title = 'Effective Objective-C 2.0编写高质量iOS与OS X代码的52个有效方法';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Micah.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'ob6xEevaCzifOdzvnfIrxSJ7-gzGzoHsz',
+        appKey: 'ibWrHDRgAsLSxr5UnNH7Tb2n',
+        placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

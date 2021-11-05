@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lvchenqiang.github.io/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lvchenqiang.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/lvchenqiang.github.io/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/lvchenqiang.github.io/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/lvchenqiang.github.io/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/lvchenqiang.github.io/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/lvchenqiang.github.io/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="笔记,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Shell脚本(shell script)，是一种为shell编写的脚本程序。工作中,经常会使用到Shell脚本编程,本文记录一下学习笔记。">
+<meta name="keywords" content="笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Shell入门指北">
+<meta property="og:url" content="https://lvchenqiang.github.io/2019/10/25/Shell入门指北/index.html">
+<meta property="og:site_name" content="程序员码头">
+<meta property="og:description" content="Shell脚本(shell script)，是一种为shell编写的脚本程序。工作中,经常会使用到Shell脚本编程,本文记录一下学习笔记。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-01T09:41:46.908Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Shell入门指北">
+<meta name="twitter:description" content="Shell脚本(shell script)，是一种为shell编写的脚本程序。工作中,经常会使用到Shell脚本编程,本文记录一下学习笔记。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/lvchenqiang.github.io/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://lvchenqiang.github.io/2019/10/25/Shell入门指北/">
+
+
+
+
+
+  <title>Shell入门指北 | 程序员码头</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/lvchenqiang.github.io/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">程序员码头</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/lvchenqiang.github.io/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/lvchenqiang.github.io/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/lvchenqiang.github.io/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/lvchenqiang.github.io/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/lvchenqiang.github.io/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/10/25/Shell入门指北/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micah">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/lvchenqiang.github.io/image/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="程序员码头">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Shell入门指北</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-25T22:05:58+08:00">
+                2019-10-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/lvchenqiang.github.io/categories/工具/" itemprop="url" rel="index">
+                    <span itemprop="name">工具</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/lvchenqiang.github.io/2019/10/25/Shell入门指北/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/10/25/Shell入门指北/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Shell脚本(shell script)，是一种为shell编写的脚本程序。工作中,经常会使用到Shell脚本编程,本文记录一下学习笔记。</p>
+<a id="more"></a>
+<p> 基础的部分，可参照菜鸟教程,本文不再赘述。</p>
+<h2 id="变量的高级用法"><a href="#变量的高级用法" class="headerlink" title="变量的高级用法"></a>变量的高级用法</h2><h3 id="变量的替换"><a href="#变量的替换" class="headerlink" title="变量的替换"></a>变量的替换</h3><table>
+<thead>
+<tr>
+<th>语法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>${变量名#匹配规则}</td>
+<td>从变量<strong>开头</strong>开始匹配,将符合<strong>最短</strong>的数据删除</td>
+</tr>
+<tr>
+<td>${变量名##匹配规则}</td>
+<td>从变量<strong>开头</strong>开始匹配,将符合<strong>最长</strong>的数据删除</td>
+</tr>
+<tr>
+<td>${变量名%匹配规则}</td>
+<td>从变量<strong>尾部</strong>进行规则匹配,将符合<strong>最短</strong>的数据删除</td>
+</tr>
+<tr>
+<td>${变量名%%匹配规则}</td>
+<td>从变量<strong>尾部</strong>进行规则匹配,将符合<strong>最长</strong>的数据删除</td>
+</tr>
+<tr>
+<td>${变量名/旧字符串/新字符串}</td>
+<td>变量内容符合旧字符串则,则<strong>第一个</strong>旧字符串会被新字符串取代</td>
+</tr>
+<tr>
+<td>${变量名//旧字符串/新字符串}</td>
+<td>变量内容符合旧字符串则,则<strong>全部</strong>旧字符串会被新字符串取代</td>
+</tr>
+</tbody>
+</table>
+<h4 id="example"><a href="#example" class="headerlink" title="example"></a>example</h4><p>匹配删除</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">vv="I love you, do you love me"</span><br><span class="line">echo $vv</span><br><span class="line">// I love you, do you love me</span><br><span class="line"></span><br><span class="line">vv_1=$&#123;vv#*ov&#125;</span><br><span class="line"></span><br><span class="line">echo $vv_1</span><br><span class="line">// e you, do you love me</span><br><span class="line"></span><br><span class="line">vv_2=$&#123;vv##*ov&#125;</span><br><span class="line">echo $vv_2 </span><br><span class="line">// e me</span><br></pre></td></tr></table></figure>
+<p>匹配替换</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">vv="I love you, do you love me"</span><br><span class="line">echo $vv</span><br><span class="line">//I love you, do you love me</span><br><span class="line"></span><br><span class="line">vv_1=$&#123;vv/love/like&#125;</span><br><span class="line">echo $vv_1</span><br><span class="line">// I like you, do you love me</span><br><span class="line"></span><br><span class="line">vv_2=$&#123;vv//love/like&#125;</span><br><span class="line"></span><br><span class="line">echo $vv_2</span><br><span class="line">I like you, do you like me</span><br></pre></td></tr></table></figure>
+<h3 id="变量测试"><a href="#变量测试" class="headerlink" title="变量测试"></a>变量测试</h3><table>
+<thead>
+<tr>
+<th>变量的配置方式</th>
+<th>str没有配置</th>
+<th>str为空字符串</th>
+<th>str已配置且非空</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>var=${str-expr}</td>
+<td>var=expr</td>
+<td>var=</td>
+<td>var=$str</td>
+</tr>
+<tr>
+<td>var=${str:-expr}</td>
+<td>var=expr</td>
+<td>var=expr</td>
+<td>var=$str</td>
+</tr>
+<tr>
+<td>var=${str+expr}</td>
+<td>var=</td>
+<td>var=expr</td>
+<td>var=expr</td>
+</tr>
+<tr>
+<td>var=${str:+expr}</td>
+<td>var=</td>
+<td>var=</td>
+<td>var=expr</td>
+</tr>
+<tr>
+<td>var=${str=expr}</td>
+<td>var=expr</td>
+<td>var=</td>
+<td>var=$str</td>
+</tr>
+<tr>
+<td>var=${str:=expr}</td>
+<td>var=expr</td>
+<td>var=expr</td>
+<td>var=$str</td>
+</tr>
+</tbody>
+</table>
+<h3 id="字符串处理"><a href="#字符串处理" class="headerlink" title="字符串处理"></a>字符串处理</h3><p>计算字符串长度</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">方法一: $&#123;#string&#125;</span><br><span class="line"></span><br><span class="line">vv="I love you, do you love me"</span><br><span class="line">echo $&#123;#vv&#125;</span><br><span class="line">// 26</span><br><span class="line"></span><br><span class="line">// 输出数组元素个数</span><br><span class="line">echo $&#123;#array[@]&#125;</span><br><span class="line"></span><br><span class="line">方法二: expr length "$string"    // string有空格子必须加引号</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// 获取子串在字符串中的索引位置</span><br><span class="line"></span><br><span class="line">expr index $string  $substring</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">string="hello world"</span><br><span class="line">temp=$&#123;string%%wo*&#125;</span><br><span class="line">echo $(($&#123;#temp&#125;+1)) #输出8</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// 获取子串长度</span><br><span class="line">方法： expr  match "$string" substr</span><br></pre></td></tr></table></figure>
+<h3 id="抽取子串"><a href="#抽取子串" class="headerlink" title="抽取子串"></a>抽取子串</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>语法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>方法一</td>
+<td>${string:position}</td>
+<td>从string中的position开始</td>
+</tr>
+<tr>
+<td>方法二</td>
+<td>${string:position:length}</td>
+<td>从position开始,匹配的长度为length</td>
+</tr>
+<tr>
+<td>方法三</td>
+<td>${string: -position}</td>
+<td>从右边开始匹配</td>
+</tr>
+<tr>
+<td>方法四</td>
+<td>${string:(position)}</td>
+<td>从左边开始匹配</td>
+</tr>
+<tr>
+<td>方法五</td>
+<td>expr sunstr $string $position $length</td>
+<td>从position开始,匹配长度为length</td>
+</tr>
+</tbody>
+</table>
+<h4 id="example-1"><a href="#example-1" class="headerlink" title="example"></a>example</h4><p>字符串相关处理<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#</span>！ /bin/bash</span><br><span class="line"></span><br><span class="line">string="Bigdata process framework is Hadoop,Hadoop is an open source project"</span><br><span class="line"></span><br><span class="line">function print_tips </span><br><span class="line">&#123;</span><br><span class="line">    echo "****************"</span><br><span class="line">    echo "(1) 打印string的长度"</span><br><span class="line">    echo "(2) 删除字符串的所有的Hadoop"</span><br><span class="line">    echo "(3) 替换第一个Hadoop为mapreduce"</span><br><span class="line">    echo "(4) 替换全部Hadoop 为Mapreduce"</span><br><span class="line">    echo "****************"</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function len_of_string </span><br><span class="line">&#123;</span><br><span class="line">    echo "$&#123;#string&#125;"</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function del_hadoop </span><br><span class="line">&#123;</span><br><span class="line">    echo "$&#123;string//Hadoop/&#125;"</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function rep_hadoop_mapreduce_first</span><br><span class="line">&#123;</span><br><span class="line">    echo "$&#123;string/Hadoop/Mapreduce&#125;"</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function rep_hadoop_mapreduce_all</span><br><span class="line">&#123;</span><br><span class="line">    echo "$&#123;string//Hadoop/Mapreduce&#125;"</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">while true</span><br><span class="line">do</span><br><span class="line">  echo "【string=$string】"</span><br><span class="line">  echo</span><br><span class="line">  print_tips</span><br><span class="line">  read -p "Pls input you choice(1|2|3|4|q|Q):" choice</span><br><span class="line">   </span><br><span class="line">  case $choice in</span><br><span class="line">        1)</span><br><span class="line">        len_of_string</span><br><span class="line">            ;;</span><br><span class="line"></span><br><span class="line">        2)</span><br><span class="line">        del_hadoop</span><br><span class="line">            ;;</span><br><span class="line"></span><br><span class="line">        3)</span><br><span class="line">        rep_hadoop_mapreduce_first</span><br><span class="line">            ;;</span><br><span class="line"></span><br><span class="line">        4)</span><br><span class="line">        rep_hadoop_mapreduce_all</span><br><span class="line">            ;;     </span><br><span class="line">        q|Q)</span><br><span class="line">        exit</span><br><span class="line">            ;;</span><br><span class="line">        *)</span><br><span class="line">        echo "Error , input only in &#123;1|2|3|4|q|Q&#125;"</span><br><span class="line">        ;;          </span><br><span class="line">    esac           </span><br><span class="line">done</span><br></pre></td></tr></table></figure></p>
+<h3 id="命令替换"><a href="#命令替换" class="headerlink" title="命令替换"></a>命令替换</h3><p>语法格式</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">方法一  `command`</span><br><span class="line">方法二   $(command)</span><br><span class="line"></span><br><span class="line">// 获取所有的用户并输出</span><br><span class="line">cat /etc/passwd | cut -d ":" -f 1</span><br><span class="line"></span><br><span class="line">// 今年是哪一年</span><br><span class="line">echo "This is $(date +%Y) year"</span><br><span class="line">// This is 2019 year</span><br><span class="line"></span><br><span class="line">// 今年还剩多少个星期,这是第几个星期</span><br><span class="line"></span><br><span class="line">echo "This is year have passed $(date +%j) days"</span><br><span class="line">echo "This is year have passed $(($(date +%j))/7) weeks"</span><br><span class="line"></span><br><span class="line">//查看是否存在nginx进程 不存在则开启</span><br><span class="line"></span><br><span class="line">ps -ef | grep nginx</span><br><span class="line"></span><br><span class="line">nginx_process_num = $(ps -ef | grep nginx | grep -v grep | wc -l)</span><br><span class="line"></span><br><span class="line">if [$nginx_process_num -eq 0]; then</span><br><span class="line">    systemctl start nginx</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<h3 id="变量类型"><a href="#变量类型" class="headerlink" title="变量类型"></a>变量类型</h3><p>declare 和 typeset命令等价<br>declare 的命令参数</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-r</td>
+<td>将变量设为只读</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>将变量设为整数</td>
+</tr>
+<tr>
+<td>-a</td>
+<td>将变量定义为数组</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>显示此脚本前定义过得所有函数内容</td>
+</tr>
+<tr>
+<td>-F</td>
+<td>仅显示此脚本定义过的函数名</td>
+</tr>
+<tr>
+<td>-x</td>
+<td>将变量声明为环境变量</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//1 </span><br><span class="line">declar -r var="hello"</span><br><span class="line">var="world" // -bash:var readonly variable</span><br><span class="line"></span><br><span class="line">//2 declare -i #声明变量类型为整型</span><br><span class="line"></span><br><span class="line">num1=2001</span><br><span class="line">num2=$num1+1</span><br><span class="line">echo $num2</span><br></pre></td></tr></table></figure>
+<h3 id="数学运算"><a href="#数学运算" class="headerlink" title="数学运算"></a>数学运算</h3><table>
+<thead>
+<tr>
+<th></th>
+<th>语法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>方法一</td>
+<td>expr $num1 operator $num2</td>
+</tr>
+<tr>
+<td>方法二</td>
+<td>$(($num1 operator $num2))</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">expr $num1 \| $num2</span><br><span class="line">expr $num1 \&amp; $num2</span><br><span class="line">expr $num1 \&lt; $num2</span><br><span class="line">expr $num1 \&lt;= $num2</span><br><span class="line">expr $num1 \&gt; $num2</span><br><span class="line">expr $num1 \&gt;= $num2</span><br><span class="line">expr $num1 = $num2</span><br><span class="line">expr $num1 != $num2</span><br><span class="line">expr $num1 + $num2</span><br><span class="line">expr $num1 - $num2</span><br><span class="line">expr $num1 \* $num2</span><br><span class="line">expr $num1 / $num2</span><br><span class="line">expr $num1 % $num2</span><br><span class="line"></span><br><span class="line">/// 浮点数运算</span><br><span class="line"></span><br><span class="line">echo "scale=3;24.2/39.9" | bc</span><br><span class="line">// 64.1</span><br></pre></td></tr></table></figure>
+<h4 id="ecample"><a href="#ecample" class="headerlink" title="ecample"></a>ecample</h4><p>求前n个整数的和</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>！ /bin/bash</span><br><span class="line"><span class="meta">#</span></span><br><span class="line"></span><br><span class="line">read -p "pls input a positive number:" num</span><br><span class="line">expr $num + 1 &amp;&gt; /dev/null</span><br><span class="line"></span><br><span class="line">if [ $? -eq 0 ]; then </span><br><span class="line">    if [ `expr $num \&gt; 0` -eq 1 ]; then</span><br><span class="line">      sum=0</span><br><span class="line">      for((i=1;i&lt;=$num;i++))</span><br><span class="line">       do</span><br><span class="line">          sum=`expr $sum + $i`</span><br><span class="line">       done</span><br><span class="line">       echo "1+2+3+...+$num = $sum"</span><br><span class="line">    fi</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+<h2 id="函数的高级用法"><a href="#函数的高级用法" class="headerlink" title="函数的高级用法"></a>函数的高级用法</h2><h3 id="函数简介"><a href="#函数简介" class="headerlink" title="函数简介"></a>函数简介</h3><p>nginx守护进程的方法<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">#</span>! bin/bash</span><br><span class="line"><span class="meta">#</span></span><br><span class="line"></span><br><span class="line">this_pid=$$</span><br><span class="line">while true</span><br><span class="line">do</span><br><span class="line">ps -ef | grep nginx | grep -v grep | grep -v $this_pid $&gt; /dev/null</span><br><span class="line">if [ $? -eq 0 ]; then</span><br><span class="line"> echo "Nginx is running well"</span><br><span class="line"> sleep 3</span><br><span class="line">else</span><br><span class="line">echo "Nginx is down, start it"</span><br><span class="line">fi</span><br><span class="line">done</span><br></pre></td></tr></table></figure></p>
+<p>简单计算器的功能</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>! bin\bash</span><br><span class="line"><span class="meta">#</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function calcu </span><br><span class="line">&#123;</span><br><span class="line"> case $2 in</span><br><span class="line">     +)</span><br><span class="line">      echo "`expr $1 + $3`"</span><br><span class="line">        ;;</span><br><span class="line">     -)</span><br><span class="line">     echo "`expr $1 - $3`"</span><br><span class="line">     ;;</span><br><span class="line">     \*)</span><br><span class="line">     echo "`expr $1 \* $3`"</span><br><span class="line">     ;;</span><br><span class="line">     </span><br><span class="line">     \)</span><br><span class="line">     echo "`expr $1 / $3`"</span><br><span class="line">     ;;</span><br><span class="line"> esac</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">calcu $1 $2 $3</span><br></pre></td></tr></table></figure>
+<h3 id="函数返回值"><a href="#函数返回值" class="headerlink" title="函数返回值"></a>函数返回值</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">使用return返回值,只能返回1-255的整数</span><br><span class="line"></span><br><span class="line">使用 echo可以返回任何字符串结果</span><br><span class="line"></span><br><span class="line">local 局部变量</span><br><span class="line">grobal 全局变量</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">. 文件名 引入同目录shell脚本文件</span><br></pre></td></tr></table></figure>
+<h2 id="常用工具"><a href="#常用工具" class="headerlink" title="常用工具"></a>常用工具</h2><h3 id="文件查找之find命令"><a href="#文件查找之find命令" class="headerlink" title="文件查找之find命令"></a>文件查找之find命令</h3><p>语法格式<br>find [路径] [选项] [操作]</p>
+<p>选项参数列表</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-name</td>
+<td>根据文件名查找</td>
+</tr>
+<tr>
+<td>-perm</td>
+<td>根据权限查找</td>
+</tr>
+<tr>
+<td>-prune</td>
+<td>该选项可以排除某些查找目录</td>
+</tr>
+<tr>
+<td>-user</td>
+<td>根据文件属主查找</td>
+</tr>
+<tr>
+<td>-group</td>
+<td>根据文件属组查找</td>
+</tr>
+<tr>
+<td>-mtime -n +n</td>
+<td>根据文件的更改时间查找</td>
+</tr>
+<tr>
+<td>-nogroup</td>
+<td>查找无有效属组的文件</td>
+</tr>
+<tr>
+<td>-nouser</td>
+<td>查找无有效属主的文件</td>
+</tr>
+<tr>
+<td>-type</td>
+<td>按文件类型查找</td>
+</tr>
+<tr>
+<td>-size -n +n</td>
+<td>按文件的大小查找</td>
+</tr>
+<tr>
+<td>-maxdepth n</td>
+<td>最多搜索到n级目录</td>
+</tr>
+<tr>
+<td>-mindepth n</td>
+<td>从几级目录开始搜索</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">常用选项:</span><br><span class="line">-name  查找/user目录下以txt结尾的文件  find  /user -name &apos;*txt&apos;</span><br><span class="line">-iname 查找当前目录下文件名为aa的文件,不区分大小写  find . .iname aa</span><br><span class="line">-user  查找文件属主为hdf的所有文件    find . -user hdf</span><br><span class="line">-group 查找文件属组为yarn的所有文件  find . -group yarn</span><br><span class="line">-type </span><br><span class="line">   f  文件     find . -type f</span><br><span class="line">   d  目录     find . -type d</span><br><span class="line">   c  字符设备文件 find .type c</span><br><span class="line">   b  块设备文件 find  .type b</span><br><span class="line">   l  链接文件  find .type l</span><br><span class="line">   p  管道文件  find .type p</span><br><span class="line">   </span><br><span class="line">   </span><br><span class="line">-size </span><br><span class="line">  -n 大小小于n的文件</span><br><span class="line">  +n 大小大于n的文件</span><br><span class="line">  n 大小等于n的文件</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  查找/user 目录下小于10000字节的文件  find /user  -size -100000c</span><br><span class="line">  查找/user 目录下大于1M的文件         find /user -size +1M   </span><br><span class="line">  </span><br><span class="line">-mtime</span><br><span class="line"></span><br><span class="line">  -n n天以内修改的文件</span><br><span class="line">  +n n天以外修改的文件</span><br><span class="line">  n  正好n天修改的文件</span><br><span class="line">  </span><br><span class="line">  查找/usr目录下5天之内修改且以conf结尾的文件 find /usr -mtime -5 -name &apos;*.conf&apos;</span><br><span class="line">  查找/usr目录下10天之前修改且属主为root的文件  find /usr -mtime +10 -user root</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">-mmin </span><br><span class="line">  -n  n分钟以内修改的文件 </span><br><span class="line">  +n  n分钟以外修改的文件</span><br><span class="line">  </span><br><span class="line">   查找/usr 目录下30分钟之前修改的文件  find /usr -mmin +30</span><br><span class="line">   查找/usr目录下30分钟之内修改的目录  find /usr -mmin -30 -type d</span><br><span class="line">   </span><br><span class="line">   </span><br><span class="line">-mindepth n 表示从n级子目录开始搜索</span><br><span class="line">   在/usr下的3级子目录开始搜索  find /usr -mindepth 3</span><br><span class="line">   </span><br><span class="line">-maxdepth n 表示最多搜索到n级子目录</span><br><span class="line">   在/usr搜索符合条件的文件,但最多搜索到2级子目录  find /usr -maxdepth 3 -name &apos;*.&apos;</span><br></pre></td></tr></table></figure>
+<h4 id="example-2"><a href="#example-2" class="headerlink" title="example"></a>example</h4><p>-print 打印输出</p>
+<p>-exec 对搜索到的文件执行特定的操作,格式-exec ‘command’ {} \</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">搜索/usr下的文件(非目录),文件名以conf结尾,且大于10k，然后将其删除</span><br><span class="line"></span><br><span class="line">find /usr/ -type f -name '*.conf'  -mtime +7 -size +10k -exec rm -f &#123;&#125; \;</span><br><span class="line"></span><br><span class="line">搜索条件和例子1一样 只是不删除，而是复制到/root的目录下</span><br><span class="line">find /usr/ -type f -name '*.conf' -size +10k -exec cp &#123;&#125; /root/ \;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>ok 和exec功能一样, 只是每次操作都会给用户提示</li>
+</ul>
+<p>逻辑运算符<br>-a  与  默认<br>-o 或<br>-not|! 非</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">查找目录下，属主不是hdfs的所有文件</span><br><span class="line">find . -not -user hdfs  |  find . !-user hdfs</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">查找当前目录下 属主属于hdfs 且大小不超过300字节的文件</span><br><span class="line">find . -type f -a -user hdfs -a size +300c</span><br></pre></td></tr></table></figure>
+<h2 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h2><p>过滤器</p>
+<h3 id="语法格式"><a href="#语法格式" class="headerlink" title="语法格式"></a>语法格式</h3><p>第一种形式: grep [optional] [pattern]  [file1, file2…]<br>第二种形式: command | grep [option] [pattern]</p>
+<h3 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h3><table>
+<thead>
+<tr>
+<th>选项</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-v</td>
+<td>不显示匹配行信息</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>搜索时忽略大小写</td>
+</tr>
+<tr>
+<td>-n</td>
+<td>显示行号</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>递归搜索</td>
+</tr>
+<tr>
+<td>-E</td>
+<td>支持扩展正则表达式</td>
+</tr>
+<tr>
+<td>-F</td>
+<td>不按正则表达式匹配,按照字符串字面意思匹配</td>
+</tr>
+<tr>
+<td>-c</td>
+<td>只输出匹配行的数量, 不显示具体的内容</td>
+</tr>
+<tr>
+<td>-w</td>
+<td>匹配整词</td>
+</tr>
+<tr>
+<td>-x</td>
+<td>匹配整行</td>
+</tr>
+<tr>
+<td>-l</td>
+<td>只列出匹配的文件名 不显示具体匹配的内容</td>
+</tr>
+</tbody>
+</table>
+<h3 id="sed"><a href="#sed" class="headerlink" title="sed"></a>sed</h3><p>sed(Stream Editor) 流编辑器。对标准输出或文件逐行进行处理。</p>
+<h4 id="语法格式-1"><a href="#语法格式-1" class="headerlink" title="语法格式"></a>语法格式</h4><p>第一种形式: stdout | sed [option] “pattern command”<br>第二种形式: sed [optional]  “pattern command” file</p>
+<h4 id="sed的选项"><a href="#sed的选项" class="headerlink" title="sed的选项"></a>sed的选项</h4><table>
+<thead>
+<tr>
+<th>选项</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-n</td>
+<td>只打印模式匹配行</td>
+</tr>
+<tr>
+<td>-e</td>
+<td>直接在命令行进行sed编辑, 默认选项</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>编辑动作保存在文件中,执行文件执行</td>
+</tr>
+<tr>
+<td>-r</td>
+<td>支持扩展正则表达式</td>
+</tr>
+<tr>
+<td>-i</td>
+<td>直接修改</td>
+</tr>
+</tbody>
+</table>
+<h4 id="sed的pattern详解"><a href="#sed的pattern详解" class="headerlink" title="sed的pattern详解"></a>sed的pattern详解</h4><table>
+<thead>
+<tr>
+<th>匹配模式</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10command</td>
+<td>匹配到第10行</td>
+</tr>
+<tr>
+<td>10，20command</td>
+<td>匹配从第10行开始,到第20行结束</td>
+</tr>
+<tr>
+<td>10，+5command</td>
+<td>匹配从第10行开始,到第16行结束</td>
+</tr>
+<tr>
+<td>/pattern1/command</td>
+<td>匹配到pattern1的行</td>
+</tr>
+<tr>
+<td>/pattern1/,/pattern2/command</td>
+<td>匹配从pattern1的行开始,到匹配到pattern2的行结束</td>
+</tr>
+<tr>
+<td>10，/pattern1/command</td>
+<td>匹配第10行开始,到匹配到pattern1的行结束</td>
+</tr>
+<tr>
+<td>/pattern1/, 10command</td>
+<td>匹配到pattern的行开始,到匹配第10行匹配结束</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">pattern 用法：</span><br><span class="line">1、 LineNumber          --------直接指定行号</span><br><span class="line">  sed -n "17n"  file    打印file文件的第17行</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">2、StartLine, EndLine   --------指定起始行号和结束行号</span><br><span class="line">  sed -n "10, 20p" file   打印file文件的10到20行</span><br><span class="line">  </span><br><span class="line">3、StartLine,+N        --------指定起始行号,然后后面N行</span><br><span class="line">   sed -n "10,+5p" file  打印file文件中从第10行开始,往后面加5行的所有内容</span><br><span class="line">   </span><br><span class="line">4、/pattern1/        ---------正则表达式匹配的行</span><br><span class="line">sed -n "/^root/p" file  打印file文件中以root开头的行</span><br><span class="line"></span><br><span class="line">5、/pattern/,/pattern2/  --------从匹配到pattern1的行,到匹配到pattern2 的行</span><br><span class="line"></span><br><span class="line"> sed -n "/^ftp/,/^mail/p" file 打印file文件中第一个匹配到ftp开头,以mail开头的行</span><br><span class="line"> </span><br><span class="line"> 6、 LineNumber, /pattern1/  -----从指定行号开始匹配，知道匹配到pattern的行结束</span><br><span class="line"> sed -n "4,/^hdfs/p"  file</span><br></pre></td></tr></table></figure>
+<h4 id="编辑命令"><a href="#编辑命令" class="headerlink" title="编辑命令"></a>编辑命令</h4><table>
+<thead>
+<tr>
+<th>类别</th>
+<th>编辑命令</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>查询</td>
+<td>p</td>
+<td>打印</td>
+</tr>
+<tr>
+<td>增加</td>
+<td>a</td>
+<td>行后追加</td>
+</tr>
+<tr>
+<td>增加</td>
+<td>i</td>
+<td>行前追加</td>
+</tr>
+<tr>
+<td>增加</td>
+<td>r</td>
+<td>外部文件读入,行后追加</td>
+</tr>
+<tr>
+<td>增加</td>
+<td>w</td>
+<td>匹配行写入外部文件</td>
+</tr>
+<tr>
+<td>删除</td>
+<td>d</td>
+<td>删除</td>
+</tr>
+<tr>
+<td>修改</td>
+<td>s/old/new</td>
+<td>将行内第一个old替换为new</td>
+</tr>
+<tr>
+<td>修改</td>
+<td>s/old/new/g</td>
+<td>将行内全部的old替换为new</td>
+</tr>
+<tr>
+<td>修改</td>
+<td>s/old/new/2g</td>
+<td>将行内第二个开始的old全部替换为new</td>
+</tr>
+<tr>
+<td>修改</td>
+<td>s/old/new/ig</td>
+<td>将行内old全部替换为new,忽略大小写</td>
+</tr>
+<tr>
+<td>=</td>
+<td></td>
+<td>显示行号</td>
+</tr>
+</tbody>
+</table>
+<p>反向引用</p>
+<p>&amp;和\1    引用模式匹配到整个串<br>sed “s/1..e/&amp;r/g” file    在file中搜寻以1开头,然后跟两个任意字符，以e结尾的字符串。然后替换在后面加r</p>
+<p>sed “s/(1..e)/\1r/g” file 和上面实现一样的功能,使用\1代表搜寻到的字符串</p>
+<h4 id="查询特定的内容"><a href="#查询特定的内容" class="headerlink" title="查询特定的内容"></a>查询特定的内容</h4><table>
+<thead>
+<tr>
+<th>查询命令</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1p</td>
+<td>打印第一行内容</td>
+</tr>
+<tr>
+<td>1,10p</td>
+<td>打印1行到10行的内容</td>
+</tr>
+<tr>
+<td>1,+5p</td>
+<td>打印1行到6行的内容</td>
+</tr>
+<tr>
+<td>/pattern1/p</td>
+<td>打印每行中匹配到pattern1的行内容</td>
+</tr>
+<tr>
+<td>/pattern1/,/pattern2/p</td>
+<td>打印匹配到pattern1的行直到匹配到pattern2的所有行内容</td>
+</tr>
+<tr>
+<td>/pattern1/,10p</td>
+<td>打印匹配到pattern1的行到10行的所有行内容</td>
+</tr>
+<tr>
+<td>10，/pattern1/p</td>
+<td>打印第10行直到匹配到pattern1的所有行内容</td>
+</tr>
+</tbody>
+</table>
+<h5 id="example-3"><a href="#example-3" class="headerlink" title="example"></a>example</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">1、打印/etc/passwd中第20行的内容</span><br><span class="line">sed -n "20p" /etc/passwd</span><br><span class="line"></span><br><span class="line">2、打印/etc/passwd中从第八行开始，到第15行结束的内容</span><br><span class="line">sed -n "8,15p"  /etc/passwd</span><br><span class="line"></span><br><span class="line">3、打印/etc/passwd中第8行开始,然后+5行结束的内容</span><br><span class="line">sed -n "8,+5p"  /etc/passwd</span><br><span class="line"></span><br><span class="line">4、打印/etc/passwd中开头匹配hdfs字符串的内容</span><br><span class="line">sed -n "/^hdfs/p"  /etc/passwd</span><br><span class="line"></span><br><span class="line">5、打印/etc/passwd中开头为root的行开始,到开头为hdfs的行结束的内容</span><br><span class="line">sed -n "/^root/, /^hdfs/p" /etc/passwd</span><br><span class="line"></span><br><span class="line">6、打印/etc/passwd中第8行开始,到含有/bin/login的内容的行结束内容</span><br><span class="line">sed -n "8, /\/bin\/login/p"  /etc/passwd</span><br><span class="line"></span><br><span class="line">7、打印/etc/passwd中第一个包含/bin/bash内容的行开始,到第5行结束的内容</span><br><span class="line">sed -n "/\/bin\/bash/, 5p" /etc/passwd</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">脚本练习：</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">#</span>! bin/bash</span><br><span class="line"><span class="meta">#</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">FILE_NAME=/root/lesson/5.6/my.cnf</span><br><span class="line"></span><br><span class="line">function get_all_segments </span><br><span class="line">&#123;</span><br><span class="line">    echo  `sed -n '/\[.*\]/p' $FILE_NAME | sed -e 's/\[//g' -e 's/\]//g'` </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">function count_items_in_segment</span><br><span class="line">&#123;</span><br><span class="line">   items=`sed -n "/\[$1\]/, /\[.*\]/p" $FILE_NAME | grep -v "^#"" | grep -v "^$"" | grep -v "\[.*\]"`</span><br><span class="line">   index=0</span><br><span class="line">   for item in  $items</span><br><span class="line">   do</span><br><span class="line">   index=`expr $index + 1`</span><br><span class="line">   done</span><br><span class="line">   echo $index</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">number=0</span><br><span class="line">for segment in `get_all_segments`</span><br><span class="line">do</span><br><span class="line">   number=`expr $number + 1`</span><br><span class="line">   items_count=`count_items_in_segment $segment`</span><br><span class="line">   echo "$number:  $segment   $items_count"</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+<h4 id="删除相应的内容"><a href="#删除相应的内容" class="headerlink" title="删除相应的内容"></a>删除相应的内容</h4><table>
+<thead>
+<tr>
+<th>查询命令</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1d</td>
+<td>删除第一行内容</td>
+</tr>
+<tr>
+<td>1,10d</td>
+<td>删除1行到10行的内容</td>
+</tr>
+<tr>
+<td>1,+5d</td>
+<td>删除1行到6行的内容</td>
+</tr>
+<tr>
+<td>/pattern1/d</td>
+<td>删除每行中匹配到pattern1的行内容</td>
+</tr>
+<tr>
+<td>/pattern1/,/pattern2/d</td>
+<td>删除匹配到pattern1的行直到匹配到pattern2的所有行内容</td>
+</tr>
+<tr>
+<td>/pattern1/,10d</td>
+<td>删除匹配到pattern1的行到10行的所有行内容</td>
+</tr>
+<tr>
+<td>10，/pattern1/d</td>
+<td>删除第10行直到匹配到pattern1的所有行内容</td>
+</tr>
+</tbody>
+</table>
+<h5 id="example-4"><a href="#example-4" class="headerlink" title="example"></a>example</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">删除所有的空行和注释行</span><br><span class="line"></span><br><span class="line">sed -i '/^#d; /^$/d' nginx.conf</span><br><span class="line"></span><br><span class="line">删除#前面的空格</span><br><span class="line"></span><br><span class="line">sed -i '/[:blank:]*#/d' nginx.conf</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">在配置文件中所有不以#开头的行前面添加*符号,注意：以#开头的行不添加</span><br><span class="line">sed -i 's/^[^#]/\*&amp;/g' nginx.conf</span><br></pre></td></tr></table></figure>
+<h4 id="修改文件内容"><a href="#修改文件内容" class="headerlink" title="修改文件内容"></a>修改文件内容</h4><table>
+<thead>
+<tr>
+<th>编辑命令</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1s/old/new/</td>
+<td>替换第一行内容为old为new</td>
+</tr>
+<tr>
+<td>1,10s/old/new/</td>
+<td>替换1行到10行的内容old为new</td>
+</tr>
+<tr>
+<td>1,+5s/old/new/</td>
+<td>替换1行到6行的内容old为new</td>
+</tr>
+<tr>
+<td>/pattern1/s/old/new/</td>
+<td>替换匹配到的pattern1的行内容old为new</td>
+</tr>
+<tr>
+<td>/pattern1/, /pattern2/s/old/new/</td>
+<td>替换匹配到pattern1的行直到匹配到pattern2的所有行内容old为new</td>
+</tr>
+<tr>
+<td>/pattern1/, 10s/old/new/</td>
+<td>替换匹配到pattern1的行到10行的所有行内容old为new</td>
+</tr>
+<tr>
+<td>10,/pattern1/s/old/new/</td>
+<td>替换第10行直到匹配到pattern1的所有行内容old为new</td>
+</tr>
+</tbody>
+</table>
+<h5 id="example-5"><a href="#example-5" class="headerlink" title="example"></a>example</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">1、修改/etc/passwd中第一行中第一个root为ROOT</span><br><span class="line">sed -i '1s/root/ROOT/'  passwd</span><br><span class="line"></span><br><span class="line">2、修改/etc/passwd中第5行到第10行中所有的/sbin/nologin为/bin/bash</span><br><span class="line">sed -i "5,10s/\sbin/\nologin/\/bin/\bash/g" passwd</span><br><span class="line"></span><br><span class="line">3、修改/etc/passwd中匹配到/sbin/nologin的行,将匹配到行中的login改写为LOGIN</span><br><span class="line"></span><br><span class="line">sed -i "/\/sbin\/nologin/s/login/LOGIN/g" passwd</span><br></pre></td></tr></table></figure>
+<h4 id="增加文件内容"><a href="#增加文件内容" class="headerlink" title="增加文件内容"></a>增加文件内容</h4><table>
+<thead>
+<tr>
+<th>用法</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a</td>
+<td>在匹配行后面追加</td>
+</tr>
+<tr>
+<td>i</td>
+<td>在匹配行前面追加</td>
+</tr>
+<tr>
+<td>r</td>
+<td>将文件内容追加到匹配行后面</td>
+</tr>
+<tr>
+<td>w</td>
+<td>将匹配行写入指定文件</td>
+</tr>
+</tbody>
+</table>
+<h5 id="example-6"><a href="#example-6" class="headerlink" title="example"></a>example</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">1 passwd文件第10行后面追加“ADD Line behind”</span><br><span class="line">  sed -i "10a Add Line Behind" passwd</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">  sed -i ""  "10a\ </span><br><span class="line">                Add Line Behind</span><br><span class="line">                "  passwd</span><br><span class="line">                </span><br><span class="line">                </span><br><span class="line">                                </span><br><span class="line">2 passwd文件第10行到第20行,每一行后面都追加“Test Line Behind”</span><br><span class="line">  sed -i '10,20a Test Line Behind' passwd</span><br><span class="line">  </span><br><span class="line">3 passwd文件匹配到/bin/bash的行后面追加“Intest Line For /bin/bash/ Behind”</span><br><span class="line">sed -i "/\/bin\/bash/a Intest Line For /bin/bash/ Behind" passwd</span><br><span class="line"></span><br><span class="line">4 匹配增加多行内容</span><br><span class="line"></span><br><span class="line">sed -i '' "/s.homepage/ &#123;a\ </span><br><span class="line">  version='5.0'\\</span><br><span class="line">  s.ios.vendored_frameworks = \"Vendor/*.framework\"\\</span><br><span class="line">  xcconfig = &#123; 'debug' &#125;</span><br><span class="line">        &#125;" KDLFramework.podspec</span><br><span class="line"></span><br><span class="line">5 passwd文件匹配到yarn开头的行,在匹配行前面追加 “Add line Before”</span><br><span class="line">sed -i '/^yarn/i Add Line Before' passwd </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">6 将/etc/fstab文件的内容追加到passwd文件的第20行后面</span><br><span class="line"></span><br><span class="line"> sed -i "20r /etc/fsttab" passwd</span><br><span class="line"> </span><br><span class="line"> 7 将passwd文件匹配到/bin/bash的行追加到/tmp/sed.txt文件中</span><br><span class="line"> </span><br><span class="line"> sed -i "/\bin\/bash/w /tmp/sed.txt"  passwd</span><br></pre></td></tr></table></figure>
+<h3 id="awk"><a href="#awk" class="headerlink" title="awk"></a>awk</h3>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Micah
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://lvchenqiang.github.io/2019/10/25/Shell入门指北/" title="Shell入门指北">https://lvchenqiang.github.io/2019/10/25/Shell入门指北/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/lvchenqiang.github.io/tags/笔记/" rel="tag"># 笔记</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/lvchenqiang.github.io/2019/09/09/Regular/" rel="next" title="正则表达式">
+                <i class="fa fa-chevron-left"></i> 正则表达式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/lvchenqiang.github.io/2020/02/10/pod-lint-simulator/" rel="prev" title="pod lib lint/repo push不支持模拟器">
+                pod lib lint/repo push不支持模拟器 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/lvchenqiang.github.io/image/avatar.png" alt="Micah">
+            
+              <p class="site-author-name" itemprop="name">Micah</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/lvchenqiang.github.io/archives/">
+              
+                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/lvchenqiang.github.io/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/lvchenqiang.github.io/tags/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/lvchenqiang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://blog.csdn.net/lvchenqiang_" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-csdn"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#变量的高级用法"><span class="nav-number">1.</span> <span class="nav-text">变量的高级用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#变量的替换"><span class="nav-number">1.1.</span> <span class="nav-text">变量的替换</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#example"><span class="nav-number">1.1.1.</span> <span class="nav-text">example</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量测试"><span class="nav-number">1.2.</span> <span class="nav-text">变量测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串处理"><span class="nav-number">1.3.</span> <span class="nav-text">字符串处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#抽取子串"><span class="nav-number">1.4.</span> <span class="nav-text">抽取子串</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#example-1"><span class="nav-number">1.4.1.</span> <span class="nav-text">example</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令替换"><span class="nav-number">1.5.</span> <span class="nav-text">命令替换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量类型"><span class="nav-number">1.6.</span> <span class="nav-text">变量类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数学运算"><span class="nav-number">1.7.</span> <span class="nav-text">数学运算</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ecample"><span class="nav-number">1.7.1.</span> <span class="nav-text">ecample</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数的高级用法"><span class="nav-number">2.</span> <span class="nav-text">函数的高级用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#函数简介"><span class="nav-number">2.1.</span> <span class="nav-text">函数简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数返回值"><span class="nav-number">2.2.</span> <span class="nav-text">函数返回值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用工具"><span class="nav-number">3.</span> <span class="nav-text">常用工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文件查找之find命令"><span class="nav-number">3.1.</span> <span class="nav-text">文件查找之find命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#example-2"><span class="nav-number">3.1.1.</span> <span class="nav-text">example</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#grep"><span class="nav-number">4.</span> <span class="nav-text">grep</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#语法格式"><span class="nav-number">4.1.</span> <span class="nav-text">语法格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数"><span class="nav-number">4.2.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sed"><span class="nav-number">4.3.</span> <span class="nav-text">sed</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#语法格式-1"><span class="nav-number">4.3.1.</span> <span class="nav-text">语法格式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sed的选项"><span class="nav-number">4.3.2.</span> <span class="nav-text">sed的选项</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sed的pattern详解"><span class="nav-number">4.3.3.</span> <span class="nav-text">sed的pattern详解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编辑命令"><span class="nav-number">4.3.4.</span> <span class="nav-text">编辑命令</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查询特定的内容"><span class="nav-number">4.3.5.</span> <span class="nav-text">查询特定的内容</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#example-3"><span class="nav-number">4.3.5.1.</span> <span class="nav-text">example</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除相应的内容"><span class="nav-number">4.3.6.</span> <span class="nav-text">删除相应的内容</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#example-4"><span class="nav-number">4.3.6.1.</span> <span class="nav-text">example</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改文件内容"><span class="nav-number">4.3.7.</span> <span class="nav-text">修改文件内容</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#example-5"><span class="nav-number">4.3.7.1.</span> <span class="nav-text">example</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#增加文件内容"><span class="nav-number">4.3.8.</span> <span class="nav-text">增加文件内容</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#example-6"><span class="nav-number">4.3.8.1.</span> <span class="nav-text">example</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#awk"><span class="nav-number">4.4.</span> <span class="nav-text">awk</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Micah</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/lvchenqiang.github.io/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/lvchenqiang.github.io/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/lvchenqiang.github.io/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/lvchenqiang.github.io/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/lvchenqiang.github.io/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/lvchenqiang.github.io/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/lvchenqiang.github.io/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://Micah.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://lvchenqiang.github.io/2019/10/25/Shell入门指北/';
+          this.page.identifier = '2019/10/25/Shell入门指北/';
+          this.page.title = 'Shell入门指北';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Micah.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'ob6xEevaCzifOdzvnfIrxSJ7-gzGzoHsz',
+        appKey: 'ibWrHDRgAsLSxr5UnNH7Tb2n',
+        placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

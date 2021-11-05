@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lvchenqiang.github.io/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lvchenqiang.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/lvchenqiang.github.io/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/lvchenqiang.github.io/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/lvchenqiang.github.io/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/lvchenqiang.github.io/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/lvchenqiang.github.io/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo,Git pages,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言经常看到别人搭建自己的博客，本文就基于Hexo和Git 搭建一个属于自己的博客。">
+<meta name="keywords" content="Hexo,Git pages">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo + Git pages 免费搭建个人博客详解">
+<meta property="og:url" content="https://lvchenqiang.github.io/2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/index.html">
+<meta property="og:site_name" content="程序员码头">
+<meta property="og:description" content="前言经常看到别人搭建自己的博客，本文就基于Hexo和Git 搭建一个属于自己的博客。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/20180206171633907.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/20180206172735836.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/20180206174041333.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/20180206174411291.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/20180206175312252">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/20180206175327309">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/20180206175711224">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/20180206180029034">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/20180206181229063">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/20180206181709310">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/20180206185225008">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/20180206185051676">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/20180206182352482">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/20180206182540514">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/20180206184305066">
+<meta property="og:updated_time" content="2018-11-26T15:19:05.683Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo + Git pages 免费搭建个人博客详解">
+<meta name="twitter:description" content="前言经常看到别人搭建自己的博客，本文就基于Hexo和Git 搭建一个属于自己的博客。">
+<meta name="twitter:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/20180206171633907.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/lvchenqiang.github.io/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://lvchenqiang.github.io/2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/">
+
+
+
+
+
+  <title>Hexo + Git pages 免费搭建个人博客详解 | 程序员码头</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/lvchenqiang.github.io/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">程序员码头</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/lvchenqiang.github.io/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/lvchenqiang.github.io/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/lvchenqiang.github.io/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/lvchenqiang.github.io/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/lvchenqiang.github.io/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://lvchenqiang.github.io/lvchenqiang.github.io/2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micah">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/lvchenqiang.github.io/image/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="程序员码头">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Hexo + Git pages 免费搭建个人博客详解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-06T19:04:21+08:00">
+                2018-02-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/lvchenqiang.github.io/categories/Hexo/" itemprop="url" rel="index">
+                    <span itemprop="name">Hexo</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/lvchenqiang.github.io/2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>经常看到别人搭建自己的博客，本文就基于Hexo和Git 搭建一个属于自己的博客。<br><a id="more"></a></p>
+<h3 id="创建一个github仓库"><a href="#创建一个github仓库" class="headerlink" title="创建一个github仓库"></a>创建一个github仓库</h3><p><img src="/lvchenqiang.github.io/2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/20180206171633907.png" alt=""></p>
+<h3 id="填写仓库的信息"><a href="#填写仓库的信息" class="headerlink" title="填写仓库的信息"></a>填写仓库的信息</h3><p><img src="/lvchenqiang.github.io/2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/20180206172735836.png" alt="这里写图片描述"></p>
+<h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><h4 id="首先需要在电脑中安装Node-js和git"><a href="#首先需要在电脑中安装Node-js和git" class="headerlink" title="首先需要在电脑中安装Node.js和git:"></a>首先需要在电脑中安装Node.js和git:</h4><ul>
+<li>node:直接下载安装 <a href="https://nodejs.org/en/download/" target="_blank" rel="noopener">Node.js</a></li>
+<li>git:<a href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000/00137396287703354d8c6c01c904c7d9ff056ae23da865a000" target="_blank" rel="noopener">安装教程</a></li>
+</ul>
+<h4 id="安装hexo"><a href="#安装hexo" class="headerlink" title="安装hexo"></a>安装hexo</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo npm install -g hexo</span><br></pre></td></tr></table></figure>
+<h4 id="初始化hexo"><a href="#初始化hexo" class="headerlink" title="初始化hexo"></a>初始化hexo</h4><p>cd 到博客文件夹<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /Users/BruceLv/GithubBlog/hexo</span><br></pre></td></tr></table></figure></p>
+<p>初始化<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure></p>
+<h4 id="初始化目录结构"><a href="#初始化目录结构" class="headerlink" title="初始化目录结构"></a>初始化目录结构</h4><p><img src="/lvchenqiang.github.io/2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/20180206174041333.png" alt="这里写图片描述"></p>
+<h3 id="启动-Hexo"><a href="#启动-Hexo" class="headerlink" title="启动 Hexo"></a>启动 Hexo</h3><h4 id="开启本地服务"><a href="#开启本地服务" class="headerlink" title="开启本地服务"></a>开启本地服务</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+<p><img src="/lvchenqiang.github.io/2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/20180206174411291.png" alt="这里写图片描述"></p>
+<h3 id="配置Hexo"><a href="#配置Hexo" class="headerlink" title="配置Hexo"></a>配置Hexo</h3><h4 id="打开-config-yml-修改配置如下："><a href="#打开-config-yml-修改配置如下：" class="headerlink" title="打开_config.yml,修改配置如下："></a>打开_config.yml,修改配置如下：</h4><p><img src="/lvchenqiang.github.io/2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/20180206175312252" alt="这里写图片描述"></p>
+<h4 id="修改deploy"><a href="#修改deploy" class="headerlink" title="修改deploy"></a>修改deploy</h4><p><img src="/lvchenqiang.github.io/2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/20180206175327309" alt="这里写图片描述"></p>
+<h4 id="repository的值-对应此处的值"><a href="#repository的值-对应此处的值" class="headerlink" title="repository的值 对应此处的值"></a>repository的值 对应此处的值</h4><p><img src="/lvchenqiang.github.io/2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/20180206175711224" alt="这里写图片描述"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">type: git</span><br><span class="line">repository: https://github.com/lvchenqiang/lvchenqiang.github.io</span><br><span class="line">branch: master</span><br></pre></td></tr></table></figure>
+<h3 id="生成静态页面"><a href="#生成静态页面" class="headerlink" title="生成静态页面"></a>生成静态页面</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">// 或者</span><br><span class="line">hexo generate</span><br></pre></td></tr></table></figure>
+<p><img src="/lvchenqiang.github.io/2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/20180206180029034" alt="这里写图片描述"></p>
+<h3 id="上传到github"><a href="#上传到github" class="headerlink" title="上传到github"></a>上传到github</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo deploy</span><br><span class="line">// 或者</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+<p>如果执行后报错</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Deployer not found: github 或者 Deployer not found: git</span><br></pre></td></tr></table></figure>
+<p>则执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+<p>完成后执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+<h3 id="编写新的文章"><a href="#编写新的文章" class="headerlink" title="编写新的文章"></a>编写新的文章</h3><h4 id="cd-到-博客的文件夹"><a href="#cd-到-博客的文件夹" class="headerlink" title="cd 到 博客的文件夹"></a>cd 到 博客的文件夹</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd /Users/BruceLv/GithubBlog/hexo</span><br></pre></td></tr></table></figure>
+<h4 id="新建文档"><a href="#新建文档" class="headerlink" title="新建文档"></a>新建文档</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new &quot;文档名&quot;</span><br></pre></td></tr></table></figure>
+<p>创建的”文档名.md” 会放在source/_posts 下。<br><img src="/lvchenqiang.github.io/2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/20180206181229063" alt="这里写图片描述"></p>
+<h4 id="编辑文档"><a href="#编辑文档" class="headerlink" title="编辑文档"></a>编辑文档</h4><p>推荐一款软件:<a href="http://macdown.uranusjr.com/" target="_blank" rel="noopener">MacDown</a></p>
+<p><img src="/lvchenqiang.github.io/2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/20180206181709310" alt="这里写图片描述"></p>
+<p>文章编辑完成后，我们可以执行下面的命令。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g            //生成静态页面</span><br><span class="line">hexo d             //将文章部署到Github</span><br></pre></td></tr></table></figure>
+<h3 id="编写新的页面"><a href="#编写新的页面" class="headerlink" title="编写新的页面"></a>编写新的页面</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page &quot;页签名称&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="新建菜单-标签页面"><a href="#新建菜单-标签页面" class="headerlink" title="新建菜单 标签页面"></a>新建菜单 标签页面</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">menu:</span><br><span class="line">home: / || home</span><br><span class="line">about: /about/ || user</span><br><span class="line">tags: /tags/ || tags</span><br><span class="line">categories: /categories/ || th</span><br><span class="line">archives: /archives/ || archive</span><br><span class="line">#schedule: /schedule/ || calendar</span><br><span class="line">#sitemap: /sitemap.xml || sitemap</span><br><span class="line">#commonweal: /404/ || heartbeat</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page tags</span><br></pre></td></tr></table></figure>
+<h4 id="分类、关于"><a href="#分类、关于" class="headerlink" title="分类、关于"></a>分类、关于</h4><p>参照创建标签页面</p>
+<h4 id="文章设置-tags和-categories"><a href="#文章设置-tags和-categories" class="headerlink" title="文章设置 tags和 categories"></a>文章设置 tags和 categories</h4><p>打开 tags/index.md 内容输入如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">title: 标签</span><br><span class="line">date: 日期</span><br><span class="line">type: &quot;tags&quot;</span><br><span class="line">comments: false</span><br></pre></td></tr></table></figure></p>
+<p>示例图:<br><img src="/lvchenqiang.github.io/2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/20180206185225008" alt="这里写图片描述"></p>
+<p>打开category/index.md 内容输入如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">title: 分类</span><br><span class="line">date: 日期</span><br><span class="line">type: &quot;categories&quot;</span><br><span class="line">comments: false</span><br></pre></td></tr></table></figure>
+<p>然后在编辑文章的时候 添加一下内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tags:</span><br><span class="line">- better-scroll</span><br><span class="line">- hexo</span><br><span class="line">categories:</span><br><span class="line">- Vue.js</span><br></pre></td></tr></table></figure>
+<p>示例图：<br><img src="/lvchenqiang.github.io/2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/20180206185051676" alt="这里写图片描述"></p>
+<h4 id="主页面的文章列表，文章段落过长"><a href="#主页面的文章列表，文章段落过长" class="headerlink" title="主页面的文章列表，文章段落过长"></a>主页面的文章列表，文章段落过长</h4><p>可能你也会遇到这样的问题，打开主页后，文章是全部显示的，显示首页 冗余。解决方式其实很简单<br>我们在合适的地方加上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--more--&gt;</span><br></pre></td></tr></table></figure>
+<p>文章就会出现 阅读全文的按钮</p>
+<h3 id="安装主题"><a href="#安装主题" class="headerlink" title="安装主题"></a>安装主题</h3><p>安装自己的主题,这里以<a href="http://theme-next.iissnan.com/" target="_blank" rel="noopener">NexT.Mist为例</a>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 将hexo-theme-next这个主题克隆到 ./themes目录下，并修改文件夹名字为next</span><br><span class="line">git clone https://github.com/iissnan/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
+<p>将博客文件夹下_config.yml 里theme的名称 landscape 修改为 next<br><img src="/lvchenqiang.github.io/2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/20180206182352482" alt="这里写图片描述"></p>
+<p>将themes/next/ 下的_config.yml<br><img src="/lvchenqiang.github.io/2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/20180206182540514" alt="这里写图片描述"></p>
+<h4 id="sidebar设置"><a href="#sidebar设置" class="headerlink" title="sidebar设置"></a>sidebar设置</h4><p><img src="/lvchenqiang.github.io/2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/20180206184305066" alt="这里写图片描述"></p>
+<p>更多的个性化设置，可参考 <a href="http://theme-next.iissnan.com/" target="_blank" rel="noopener">NexT文档</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Micah
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://lvchenqiang.github.io/2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/" title="Hexo + Git pages 免费搭建个人博客详解">https://lvchenqiang.github.io/2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/lvchenqiang.github.io/tags/Hexo/" rel="tag"># Hexo</a>
+          
+            <a href="/lvchenqiang.github.io/tags/Git-pages/" rel="tag"># Git pages</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/lvchenqiang.github.io/2018/02/06/Vue2-0-实现滚动视图-头部悬停-侧边索引/" rel="next" title="Vue2.0 实现滚动视图+头部悬停+侧边索引">
+                <i class="fa fa-chevron-left"></i> Vue2.0 实现滚动视图+头部悬停+侧边索引
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/lvchenqiang.github.io/2018/03/24/Python入门指南/" rel="prev" title="Python入门指南">
+                Python入门指南 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/lvchenqiang.github.io/image/avatar.png" alt="Micah">
+            
+              <p class="site-author-name" itemprop="name">Micah</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/lvchenqiang.github.io/archives/">
+              
+                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/lvchenqiang.github.io/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/lvchenqiang.github.io/tags/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/lvchenqiang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://blog.csdn.net/lvchenqiang_" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-csdn"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建一个github仓库"><span class="nav-number">2.</span> <span class="nav-text">创建一个github仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#填写仓库的信息"><span class="nav-number">3.</span> <span class="nav-text">填写仓库的信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Hexo"><span class="nav-number">4.</span> <span class="nav-text">安装Hexo</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#首先需要在电脑中安装Node-js和git"><span class="nav-number">4.1.</span> <span class="nav-text">首先需要在电脑中安装Node.js和git:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#安装hexo"><span class="nav-number">4.2.</span> <span class="nav-text">安装hexo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#初始化hexo"><span class="nav-number">4.3.</span> <span class="nav-text">初始化hexo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#初始化目录结构"><span class="nav-number">4.4.</span> <span class="nav-text">初始化目录结构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启动-Hexo"><span class="nav-number">5.</span> <span class="nav-text">启动 Hexo</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#开启本地服务"><span class="nav-number">5.1.</span> <span class="nav-text">开启本地服务</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置Hexo"><span class="nav-number">6.</span> <span class="nav-text">配置Hexo</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#打开-config-yml-修改配置如下："><span class="nav-number">6.1.</span> <span class="nav-text">打开_config.yml,修改配置如下：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改deploy"><span class="nav-number">6.2.</span> <span class="nav-text">修改deploy</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#repository的值-对应此处的值"><span class="nav-number">6.3.</span> <span class="nav-text">repository的值 对应此处的值</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成静态页面"><span class="nav-number">7.</span> <span class="nav-text">生成静态页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#上传到github"><span class="nav-number">8.</span> <span class="nav-text">上传到github</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写新的文章"><span class="nav-number">9.</span> <span class="nav-text">编写新的文章</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#cd-到-博客的文件夹"><span class="nav-number">9.1.</span> <span class="nav-text">cd 到 博客的文件夹</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#新建文档"><span class="nav-number">9.2.</span> <span class="nav-text">新建文档</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编辑文档"><span class="nav-number">9.3.</span> <span class="nav-text">编辑文档</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编写新的页面"><span class="nav-number">10.</span> <span class="nav-text">编写新的页面</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#新建菜单-标签页面"><span class="nav-number">10.1.</span> <span class="nav-text">新建菜单 标签页面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分类、关于"><span class="nav-number">10.2.</span> <span class="nav-text">分类、关于</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文章设置-tags和-categories"><span class="nav-number">10.3.</span> <span class="nav-text">文章设置 tags和 categories</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#主页面的文章列表，文章段落过长"><span class="nav-number">10.4.</span> <span class="nav-text">主页面的文章列表，文章段落过长</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装主题"><span class="nav-number">11.</span> <span class="nav-text">安装主题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#sidebar设置"><span class="nav-number">11.1.</span> <span class="nav-text">sidebar设置</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Micah</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/lvchenqiang.github.io/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/lvchenqiang.github.io/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/lvchenqiang.github.io/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/lvchenqiang.github.io/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/lvchenqiang.github.io/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/lvchenqiang.github.io/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/lvchenqiang.github.io/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://Micah.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://lvchenqiang.github.io/2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/';
+          this.page.identifier = '2018/02/06/Hexo-Git-pages-免费搭建个人博客详解/';
+          this.page.title = 'Hexo + Git pages 免费搭建个人博客详解';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Micah.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'ob6xEevaCzifOdzvnfIrxSJ7-gzGzoHsz',
+        appKey: 'ibWrHDRgAsLSxr5UnNH7Tb2n',
+        placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

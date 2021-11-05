@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lvchenqiang.github.io/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lvchenqiang.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/lvchenqiang.github.io/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/lvchenqiang.github.io/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/lvchenqiang.github.io/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/lvchenqiang.github.io/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/lvchenqiang.github.io/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="工具,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="什么是LLVM?LLVM概述 LLVM 命名最早源自于底层虚拟机（Low Level Virtual Machine）的缩写,由于命名带来的混乱，目前LLVM就是该项目的全称。 LLVM 核心库提供了与编译器相关的支持，可以作为多种语言编译器的后台来使用。能够进行程序语言的编译期优化、链接优化、在线编译优化、代码生成。 LLVM的项目是一个模块化和可重复使用的编译器和工具技术的集合。">
+<meta name="keywords" content="工具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Clang&#x2F;LLVM 从入门到实践">
+<meta property="og:url" content="https://lvchenqiang.github.io/2019/02/01/Clang-LLVM/index.html">
+<meta property="og:site_name" content="程序员码头">
+<meta property="og:description" content="什么是LLVM?LLVM概述 LLVM 命名最早源自于底层虚拟机（Low Level Virtual Machine）的缩写,由于命名带来的混乱，目前LLVM就是该项目的全称。 LLVM 核心库提供了与编译器相关的支持，可以作为多种语言编译器的后台来使用。能够进行程序语言的编译期优化、链接优化、在线编译优化、代码生成。 LLVM的项目是一个模块化和可重复使用的编译器和工具技术的集合。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/02/01/Clang-LLVM/传统架构.jpg">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/02/01/Clang-LLVM/llvm架构.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/02/01/Clang-LLVM/clangandllvm.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_2.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_3.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_4.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_5.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_6.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/02/01/Clang-LLVM/snip20190226_01.jpeg">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_7.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_8.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_10.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_9.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_11.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_12.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_13.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_14.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_15.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_16.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_17.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_18.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_19.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_20.png">
+<meta property="og:updated_time" content="2020-12-22T07:55:50.388Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Clang&#x2F;LLVM 从入门到实践">
+<meta name="twitter:description" content="什么是LLVM?LLVM概述 LLVM 命名最早源自于底层虚拟机（Low Level Virtual Machine）的缩写,由于命名带来的混乱，目前LLVM就是该项目的全称。 LLVM 核心库提供了与编译器相关的支持，可以作为多种语言编译器的后台来使用。能够进行程序语言的编译期优化、链接优化、在线编译优化、代码生成。 LLVM的项目是一个模块化和可重复使用的编译器和工具技术的集合。">
+<meta name="twitter:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/02/01/Clang-LLVM/传统架构.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/lvchenqiang.github.io/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://lvchenqiang.github.io/2019/02/01/Clang-LLVM/">
+
+
+
+
+
+  <title>Clang/LLVM 从入门到实践 | 程序员码头</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/lvchenqiang.github.io/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">程序员码头</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/lvchenqiang.github.io/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/lvchenqiang.github.io/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/lvchenqiang.github.io/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/lvchenqiang.github.io/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/lvchenqiang.github.io/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/02/01/Clang-LLVM/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micah">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/lvchenqiang.github.io/image/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="程序员码头">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Clang/LLVM 从入门到实践</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-01T16:52:47+08:00">
+                2019-02-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/lvchenqiang.github.io/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/lvchenqiang.github.io/2019/02/01/Clang-LLVM/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/02/01/Clang-LLVM/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="什么是LLVM"><a href="#什么是LLVM" class="headerlink" title="什么是LLVM?"></a><a href="https://llvm.org/" target="_blank" rel="noopener">什么是LLVM</a>?</h3><h4 id="LLVM概述"><a href="#LLVM概述" class="headerlink" title="LLVM概述"></a>LLVM概述</h4><ol>
+<li>LLVM 命名最早源自于底层虚拟机（Low Level Virtual Machine）的缩写,由于命名带来的混乱，目前LLVM就是该项目的全称。</li>
+<li>LLVM 核心库提供了与编译器相关的支持，可以作为多种语言编译器的后台来使用。能够进行程序语言的编译期优化、链接优化、在线编译优化、代码生成。</li>
+<li>LLVM的项目是一个模块化和可重复使用的编译器和工具技术的集合。</li>
+</ol>
+<a id="more"></a>
+<ol>
+<li>美国计算机协会 (ACM) 将其2012 年软件系统奖项颁给了LLVM，之前曾经获得此奖项的软件和技术包括:Java、Apache、 Mosaic、the World Wide Web、Smalltalk、UNIX、Eclipse等等</li>
+</ol>
+<h4 id="LLVM架构"><a href="#LLVM架构" class="headerlink" title="LLVM架构"></a>LLVM架构</h4><h5 id="传统的架构"><a href="#传统的架构" class="headerlink" title="传统的架构"></a>传统的架构</h5><p><img src="/lvchenqiang.github.io/2019/02/01/Clang-LLVM/传统架构.jpg" alt=""></p>
+<p>Frontend:前端<br>主要负责:词法分析、语法分析、语义分析、生成中间代码</p>
+<p>Optimizer:优化器<br>主要负责:中间代码的优化</p>
+<p>Backend:后端<br>主要职责:生成机器码</p>
+<h5 id="LLVM架构-1"><a href="#LLVM架构-1" class="headerlink" title="LLVM架构"></a>LLVM架构</h5><p><img src="/lvchenqiang.github.io/2019/02/01/Clang-LLVM/llvm架构.png" alt=""></p>
+<p>相比传统架构的优势:</p>
+<ul>
+<li>不同的前端后端使用统一的中间代码LLVM Intermediate Representation (LLVM IR)</li>
+<li>如果需要支持一种新的编程语言，那么只需要实现一个新的前端</li>
+<li>如果需要支持一种新的硬件设备，那么只需要实现一个新的后端</li>
+<li>优化阶段是一个通用的阶段，它针对的是统一的LLVM IR，不论是支持新的编程语言，还是支持新的硬件设备，都不需要对优化阶段做修改</li>
+<li>相比之下，GCC的前端和后端没分得太开，前端后端耦合在了一起。所以GCC为了支持一门新的语言，或者为了支持一个新的目标平台，就变得特别困难</li>
+<li>LLVM现在被作为实现各种静态和运行时编译语言的通用基础结构(GCC家族、Java、.NET、Python、Ruby、Scheme、Haskell、D等)</li>
+</ul>
+<h3 id="什么是Clang"><a href="#什么是Clang" class="headerlink" title="什么是Clang?"></a>什么是Clang?</h3><h4 id="Clang概述"><a href="#Clang概述" class="headerlink" title="Clang概述"></a><a href="http://clang.llvm.org/" target="_blank" rel="noopener">Clang概述</a></h4><p>LLVM项目的一个子项目，基于LLVM架构的C/C++/Objective-C编译器前端。</p>
+<p>相比于GCC，Clang具有如下优点：</p>
+<ol>
+<li>编译速度快:在某些平台上，Clang的编译速度显著的快过GCC(Debug模式下编译OC速度比GGC快3倍)</li>
+<li>占用内存小:Clang生成的AST所占用的内存是GCC的五分之一左右</li>
+<li>模块化设计:Clang采用基于库的模块化设计，易于 IDE 集成及其他用途的重用</li>
+<li>诊断信息可读性强:在编译过程中，Clang 创建并保留了大量详细的元数据 (metadata)，有利于调试和错误报告</li>
+<li>设计清晰简单，容易理解，易于扩展增强</li>
+</ol>
+<h4 id="Clang和LLVM的关系"><a href="#Clang和LLVM的关系" class="headerlink" title="Clang和LLVM的关系"></a>Clang和LLVM的关系</h4><p><img src="/lvchenqiang.github.io/2019/02/01/Clang-LLVM/clangandllvm.png" alt=""></p>
+<p>LLVM整体架构，前端用的是Clang，广义的LLVM是指整个LLVM架构，一般狭义的LLVM指的是LLVM后端（包含代码优化和目标代码生成）。</p>
+<p>源代码（c/c++）经过clang–&gt; 中间代码(经过一系列的优化，优化用的是Pass) –&gt; 机器码。</p>
+<h4 id="OC源文件的编译过程"><a href="#OC源文件的编译过程" class="headerlink" title="OC源文件的编译过程"></a>OC源文件的编译过程</h4><p>这里用Xcode创建一个Test项目，然后cd到main.m的当前文件夹上。</p>
+<h5 id="命令行查看编译的过程"><a href="#命令行查看编译的过程" class="headerlink" title="命令行查看编译的过程"></a>命令行查看编译的过程</h5><p><code>命令行查看编译的过程:$ clang -ccc-print-phases main.m</code></p>
+<p><img src="/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_2.png" alt=""><br>过程分析:<br>0.找到main.m文件<br>1.预处理器，处理include、import、宏定义<br>2.编译器编译，编译成ir中间代码<br>3.后端，生成目标代码<br>4.汇编<br>5.链接其他动态库静态库<br>6.编译成适合某个架构的代码</p>
+<h5 id="查看preprocessor-预处理-的结果"><a href="#查看preprocessor-预处理-的结果" class="headerlink" title="查看preprocessor(预处理)的结果"></a>查看preprocessor(预处理)的结果</h5><p><code>查看preprocessor(预处理)的结果:$ clang -E main.m</code></p>
+<p><img src="/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_3.png" alt=""></p>
+<h5 id="词法分析"><a href="#词法分析" class="headerlink" title="词法分析"></a>词法分析</h5><p>词法分析，生成Token: <code>$ clang -fmodules -E -Xclang -dump-tokens main.m</code><br>将代码分成一个个小单元（token）：</p>
+<p><img src="/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_4.png" alt=""></p>
+<p>单元如下:<br><img src="/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_5.png" alt=""></p>
+<p>可以看出，词法分析的时候，将上面的代码拆分一个个token，后面数字表示某一行的第几个字符，例如第一个void，表示第18行第一个字符</p>
+<h5 id="语法树-AST"><a href="#语法树-AST" class="headerlink" title="语法树-AST"></a>语法树-AST</h5><p>语法分析，生成语法树(AST，Abstract Syntax Tree):<br><code>$ clang -fmodules -fsyntax-only -Xclang -ast-dump main.m</code><br>通过语法树，我们能知道这个代码是做什么的。</p>
+<p>还是刚刚的test函数<br>生成语法树如下：</p>
+<p><img src="/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_6.png" alt=""></p>
+<p>在终端敲出的时候，终端很直观的帮我们用颜色区分。我们可以用图形显示如下：</p>
+<p><img src="/lvchenqiang.github.io/2019/02/01/Clang-LLVM/snip20190226_01.jpeg" alt=""></p>
+<h5 id="LLVM-IR"><a href="#LLVM-IR" class="headerlink" title="LLVM IR"></a>LLVM IR</h5><p>LLVM IR有3种表示形式（本质是等价的）:</p>
+<ul>
+<li>text:便于阅读的文本格式，类似于汇编语言，拓展名.ll， $ clang -S -emit-llvm main.m</li>
+<li>memory:内存格式</li>
+<li>bitcode:二进制格式，拓展名.bc， $ clang -c -emit-llvm main.m</li>
+</ul>
+<p>我们以text形式编译查看:</p>
+<p><img src="/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_7.png" alt=""></p>
+<p><a href="https://llvm.org/docs/LangRef.html" target="_blank" rel="noopener">IR基本语法:</a></p>
+<ul>
+<li>注释以分号 ; 开头</li>
+<li>全局标识符以@开头，局部标识符以%开头</li>
+<li>alloca，在当前函数栈帧中分配内存</li>
+<li>i32，32bit，4个字节的意思</li>
+<li>align，内存对齐</li>
+<li>store，写入数据</li>
+<li>load，读取数据</li>
+</ul>
+<h3 id="应用与实践"><a href="#应用与实践" class="headerlink" title="应用与实践"></a>应用与实践</h3><h4 id="下载资源"><a href="#下载资源" class="headerlink" title="下载资源"></a>下载资源</h4><p>下载LLVM:(大小 648.2 M，仅供参考)<br><code>$ git clone https://git.llvm.org/git/llvm.git/</code></p>
+<p>下载clang:(大小 240.6 M, 仅供参考)<br><code>$ cd llvm/tools</code></p>
+<p><code>$ git clone https://git.llvm.org/git/clang.git/</code></p>
+<p>备注：clang是llvm的子项目，但是它们的源码是分开的，我们需要将clang放在llvm/tools目录下。</p>
+<h4 id="源码编译"><a href="#源码编译" class="headerlink" title="源码编译"></a>源码编译</h4><h5 id="源码编译方式一"><a href="#源码编译方式一" class="headerlink" title="源码编译方式一"></a>源码编译方式一</h5><p><a href="https://github.com/llvm/llvm-project" target="_blank" rel="noopener">https://github.com/llvm/llvm-project</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">首先安装cmake和ninja(先安装brew，https://brew.sh/)</span><br><span class="line">$ brew install cmake</span><br><span class="line">$ brew install ninja</span><br><span class="line"></span><br><span class="line">ninja如果安装失败，可以直接从github获取release版放入【/usr/local/bin】中</span><br><span class="line">https://github.com/ninja-build/ninja/releases</span><br><span class="line"></span><br><span class="line">在LLVM源码同级目录下新建一个【llvm_build】目录(最终会在【llvm_build】目录下生成【build.ninja】</span><br><span class="line"></span><br><span class="line">$ cd llvm_build</span><br><span class="line">$ cmake -G Ninja ../llvm -DCMAKE_INSTALL_PREFIX=LLVM的安装路径</span><br><span class="line">放到上级目录的llvm_ninja 中</span><br><span class="line"> cmake -G Ninja ../llvm -DCMAKE_INSTALL_PREFIX=../llvm_release</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">备注：生成build.ninja，就表示编译成功，-DCMAKE_INSTALL_PREFIX 表示编译好的东西放在指定的路径，-D表示参数。 绝对路径:&quot;/user/Desktop/llvm_release&quot;</span><br><span class="line"></span><br><span class="line">更多cmake相关选项，可以参考: https://llvm.org/docs/CMake.html</span><br><span class="line"></span><br><span class="line">接下来依次执行编译、安装指令</span><br><span class="line"></span><br><span class="line">$ ninja</span><br><span class="line">编译完毕后， 【llvm_build】目录大概 21.05 G（这个真的是好大啊）</span><br><span class="line">$ ninja install</span><br><span class="line">安装完毕后，安装目录大概 11.92 G(仅供参考)</span><br><span class="line"></span><br><span class="line">然后到这里我们的编译就完成了。</span><br></pre></td></tr></table></figure>
+<h5 id="源码编译方式二"><a href="#源码编译方式二" class="headerlink" title="源码编译方式二"></a>源码编译方式二</h5><p>通过Xcode编译，生成Xcode项目再进行编译，但是速度很慢(可能需要1个多小时)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">方法如下：</span><br><span class="line"> 在llvm同级目录下新建一个【llvm_xcode】目录</span><br><span class="line">$ cd llvm_xcode</span><br><span class="line">$ cmake -G Xcode ../llvm</span><br></pre></td></tr></table></figure>
+<p><img src="/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_8.png" alt=""></p>
+<p><img src="/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_10.png" alt=""></p>
+<p><img src="/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_9.png" alt=""></p>
+<blockquote>
+<p> <strong>然后选择ALL_BUILD进行编译，此处应有1+小时的休息时间，然后就可以开始插件的编写</strong></p>
+</blockquote>
+<h4 id="clang插件开发-示例"><a href="#clang插件开发-示例" class="headerlink" title="clang插件开发 示例"></a>clang插件开发 示例</h4><h5 id="新建一个插件目录"><a href="#新建一个插件目录" class="headerlink" title="新建一个插件目录"></a>新建一个插件目录</h5><p>在【clang/tools】源码目录下新建一个插件目录，假设叫做【mj-plugin】</p>
+<p><img src="/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_11.png" alt=""></p>
+<h5 id="添加插件"><a href="#添加插件" class="headerlink" title="添加插件"></a>添加插件</h5><p>在【clang/tools/CMakeLists.txt】最后加入内容: add_clang_subdirectory(mj-plugin)，小括号里是插件目录名</p>
+<p><img src="/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_12.png" alt=""></p>
+<h5 id="插件必要文件"><a href="#插件必要文件" class="headerlink" title="插件必要文件"></a>插件必要文件</h5><p>在【mj-plugin】目录下新建一个【CMakeLists.txt】，文件内容是:add_llvm_loadable_module(MJPlugin MJPlugin.cpp)</p>
+<p>MJPlugin是插件名，MJPlugin.cpp是源代码文件</p>
+<p><img src="/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_13.png" alt=""></p>
+<h5 id="编写插件源码"><a href="#编写插件源码" class="headerlink" title="编写插件源码"></a>编写插件源码</h5><p>【MJPlugin.cpp】参考</p>
+<p><img src="/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_14.png" alt=""></p>
+<h5 id="编译插件"><a href="#编译插件" class="headerlink" title="编译插件"></a>编译插件</h5><p>利用cmake生成的Xcode项目来编译插件(第一次编写完插件，需要利用cmake重新生成一下Xcode项目)</p>
+<p>插件源代码在【Sources/Loadable modules】目录下可以找到，这样就可以直接在Xcode里编写插件代码</p>
+<p>选择MJPlugin这个target进行编译，编译完会生成一个动态库文件</p>
+<p><img src="/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_15.png" alt=""></p>
+<h5 id="加载插件"><a href="#加载插件" class="headerlink" title="加载插件"></a>加载插件</h5><p>在Xcode项目中指定加载插件动态库:BuildSettings &gt; OTHER_CFLAGS</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Other C Flags</span><br><span class="line"></span><br><span class="line">-Xclang -load -Xclang 动态库路径 -Xclang -add-plugin -Xclang 插件名称</span><br></pre></td></tr></table></figure>
+<p><img src="/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_16.png" alt=""></p>
+<h5 id="Hack-Xcode"><a href="#Hack-Xcode" class="headerlink" title="Hack Xcode"></a>Hack Xcode</h5><p>首先要对Xcode进行Hack，才能修改默认的编译器<br>下载【XcodeHacking.zip】，解压，修改【HackedClang.xcplugin/Contents/Resources/HackedClang.xcspec】的内容，设<br>置一下自己编译好的clang的路径</p>
+<p><img src="/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_17.png" alt=""></p>
+<p>然后在XcodeHacking目录下进行命令行，将XcodeHacking的内容剪切到Xcode内部</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ sudo mv HackedClang.xcplugin `xcode-select-print-</span><br><span class="line">path`/../PlugIns/Xcode3Core.ideplugin/Contents/SharedSupport/Developer/Library/Xcode/Plug-ins</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$ sudo mv HackedClang.xcplugin  /Applications/Xcode11.3.1.app/Contents/Developer/../PlugIns/Xcode3Core.ideplugin/Contents/SharedSupport/Developer/Library/Xcode/Plug-ins</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sudo mv HackedBuildSystem.xcspec `xcode-select-print- path`/Platforms/iPhoneSimulator.platform/Developer/Library/Xcode/Specifications</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">sudo mv HackedBuildSystem.xcspec /Applications/Xcode11.3.1.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Xcode/Specifications</span><br></pre></td></tr></table></figure>
+<h5 id="修改Xcode的编译器"><a href="#修改Xcode的编译器" class="headerlink" title="修改Xcode的编译器"></a>修改Xcode的编译器</h5><p><img src="/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_18.png" alt=""></p>
+<h5 id="编译项目"><a href="#编译项目" class="headerlink" title="编译项目"></a>编译项目</h5><p>编译项目后，会在编译日志看到MJPlugin插件的打印信息(如果插件更新了，最好先Clean一下项目)</p>
+<p><img src="/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_19.png" alt=""></p>
+<h5 id="更多"><a href="#更多" class="headerlink" title="更多"></a>更多</h5><p>想要实现更复杂的插件功能，就需要利用clang的API针对语法树(AST)进行相应的分析和处理</p>
+<p>关于AST的资料</p>
+<ul>
+<li><a href="https://clang.llvm.org/doxygen/namespaceclang.html" target="_blank" rel="noopener">https://clang.llvm.org/doxygen/namespaceclang.html</a></li>
+<li><a href="https://clang.llvm.org/doxygen/classclang_1_1Decl.html" target="_blank" rel="noopener">https://clang.llvm.org/doxygen/classclang_1_1Decl.html</a></li>
+<li><a href="https://clang.llvm.org/doxygen/classclang_1_1Stmt.html" target="_blank" rel="noopener">https://clang.llvm.org/doxygen/classclang_1_1Stmt.html</a></li>
+</ul>
+<h5 id="提示警告、错误信息"><a href="#提示警告、错误信息" class="headerlink" title="提示警告、错误信息"></a>提示警告、错误信息</h5><p><img src="/lvchenqiang.github.io/2019/02/01/Clang-LLVM/Snip20190227_20.png" alt=""></p>
+<h4 id="应用与实践参考资料"><a href="#应用与实践参考资料" class="headerlink" title="应用与实践参考资料"></a>应用与实践参考资料</h4><ul>
+<li><p>libclang、libTooling<br>官方参考:<a href="https://clang.llvm.org/docs/Tooling.html" target="_blank" rel="noopener">https://clang.llvm.org/docs/Tooling.html</a><br>应用:语法树分析、语言转换等</p>
+</li>
+<li><p>Clang插件开发<br>官方参考<br>1.<a href="https://clang.llvm.org/docs/ClangPlugins.html" target="_blank" rel="noopener">https://clang.llvm.org/docs/ClangPlugins.html</a><br>2.<a href="https://clang.llvm.org/docs/ExternalClangExamples.html" target="_blank" rel="noopener">https://clang.llvm.org/docs/ExternalClangExamples.html</a><br>3.<a href="https://clang.llvm.org/docs/RAVFrontendAction.html" target="_blank" rel="noopener">https://clang.llvm.org/docs/RAVFrontendAction.html</a><br>应用:代码检查(命名规范、代码规范)等</p>
+</li>
+<li><p>Pass开发<br>官方参考:<a href="https://llvm.org/docs/WritingAnLLVMPass.html" target="_blank" rel="noopener">https://llvm.org/docs/WritingAnLLVMPass.html</a><br>应用:代码优化、代码混淆等</p>
+</li>
+<li><p>开发新的编程语言<br>1.<a href="https://llvm-tutorial-cn.readthedocs.io/en/latest/index.html" target="_blank" rel="noopener">https://llvm-tutorial-cn.readthedocs.io/en/latest/index.html</a><br>2.<a href="https://kaleidoscope-llvm-tutorial-zh-cn.readthedocs.io/zh_CN/latest/" target="_blank" rel="noopener">https://kaleidoscope-llvm-tutorial-zh-cn.readthedocs.io/zh_CN/latest/</a></p>
+</li>
+</ul>
+<ul>
+<li>笔记</li>
+</ul>
+<ol>
+<li><p><a href="https://github.com/CYBoys/Blogs/blob/master/LLVM_Clang/LLVM%20%26%20Clang%20%E5%85%A5%E9%97%A8.md" target="_blank" rel="noopener">https://github.com/CYBoys/Blogs/blob/master/LLVM_Clang/LLVM%20%26%20Clang%20%E5%85%A5%E9%97%A8.md</a></p>
+</li>
+<li><p><a href="https://juejin.im/post/5c24d8abe51d452baa77e284" target="_blank" rel="noopener">https://juejin.im/post/5c24d8abe51d452baa77e284</a></p>
+</li>
+<li><p><a href="https://xz.aliyun.com/t/7257" target="_blank" rel="noopener">https://xz.aliyun.com/t/7257</a></p>
+</li>
+<li><p><a href="https://releases.llvm.org/10.0.0/docs/ReleaseNotes.html" target="_blank" rel="noopener">https://releases.llvm.org/10.0.0/docs/ReleaseNotes.html</a></p>
+</li>
+<li><p><a href="https://clang-analyzer.llvm.org/xcode.html" target="_blank" rel="noopener">https://clang-analyzer.llvm.org/xcode.html</a></p>
+</li>
+</ol>
+<p>/// 编译Apple  Open Source</p>
+<ol>
+<li><p><a href="https://www.jianshu.com/p/581ef614a1c5" target="_blank" rel="noopener">https://www.jianshu.com/p/581ef614a1c5</a></p>
+</li>
+<li><p><a href="https://kangwang1988.github.io/" target="_blank" rel="noopener">https://kangwang1988.github.io/</a></p>
+</li>
+<li><a href="http://codemacro.com/2013/02/12/using-clang/" target="_blank" rel="noopener">http://codemacro.com/2013/02/12/using-clang/</a></li>
+</ol>
+<ul>
+<li>推荐书籍<br>1.编译原理<br>2.LLVM Cookbook 中文版</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Micah
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://lvchenqiang.github.io/2019/02/01/Clang-LLVM/" title="Clang/LLVM 从入门到实践">https://lvchenqiang.github.io/2019/02/01/Clang-LLVM/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/lvchenqiang.github.io/tags/工具/" rel="tag"># 工具</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/lvchenqiang.github.io/2019/01/15/韭菜的自我修养/" rel="next" title="韭菜的自我修养">
+                <i class="fa fa-chevron-left"></i> 韭菜的自我修养
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/lvchenqiang.github.io/2019/02/27/ssh_key/" rel="prev" title="配置不同ssh key">
+                配置不同ssh key <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/lvchenqiang.github.io/image/avatar.png" alt="Micah">
+            
+              <p class="site-author-name" itemprop="name">Micah</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/lvchenqiang.github.io/archives/">
+              
+                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/lvchenqiang.github.io/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/lvchenqiang.github.io/tags/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/lvchenqiang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://blog.csdn.net/lvchenqiang_" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-csdn"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是LLVM"><span class="nav-number">1.</span> <span class="nav-text">什么是LLVM?</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#LLVM概述"><span class="nav-number">1.1.</span> <span class="nav-text">LLVM概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LLVM架构"><span class="nav-number">1.2.</span> <span class="nav-text">LLVM架构</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#传统的架构"><span class="nav-number">1.2.1.</span> <span class="nav-text">传统的架构</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#LLVM架构-1"><span class="nav-number">1.2.2.</span> <span class="nav-text">LLVM架构</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是Clang"><span class="nav-number">2.</span> <span class="nav-text">什么是Clang?</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Clang概述"><span class="nav-number">2.1.</span> <span class="nav-text">Clang概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Clang和LLVM的关系"><span class="nav-number">2.2.</span> <span class="nav-text">Clang和LLVM的关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OC源文件的编译过程"><span class="nav-number">2.3.</span> <span class="nav-text">OC源文件的编译过程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#命令行查看编译的过程"><span class="nav-number">2.3.1.</span> <span class="nav-text">命令行查看编译的过程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查看preprocessor-预处理-的结果"><span class="nav-number">2.3.2.</span> <span class="nav-text">查看preprocessor(预处理)的结果</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#词法分析"><span class="nav-number">2.3.3.</span> <span class="nav-text">词法分析</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#语法树-AST"><span class="nav-number">2.3.4.</span> <span class="nav-text">语法树-AST</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#LLVM-IR"><span class="nav-number">2.3.5.</span> <span class="nav-text">LLVM IR</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用与实践"><span class="nav-number">3.</span> <span class="nav-text">应用与实践</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#下载资源"><span class="nav-number">3.1.</span> <span class="nav-text">下载资源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#源码编译"><span class="nav-number">3.2.</span> <span class="nav-text">源码编译</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#源码编译方式一"><span class="nav-number">3.2.1.</span> <span class="nav-text">源码编译方式一</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#源码编译方式二"><span class="nav-number">3.2.2.</span> <span class="nav-text">源码编译方式二</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#clang插件开发-示例"><span class="nav-number">3.3.</span> <span class="nav-text">clang插件开发 示例</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#新建一个插件目录"><span class="nav-number">3.3.1.</span> <span class="nav-text">新建一个插件目录</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#添加插件"><span class="nav-number">3.3.2.</span> <span class="nav-text">添加插件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#插件必要文件"><span class="nav-number">3.3.3.</span> <span class="nav-text">插件必要文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#编写插件源码"><span class="nav-number">3.3.4.</span> <span class="nav-text">编写插件源码</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#编译插件"><span class="nav-number">3.3.5.</span> <span class="nav-text">编译插件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#加载插件"><span class="nav-number">3.3.6.</span> <span class="nav-text">加载插件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Hack-Xcode"><span class="nav-number">3.3.7.</span> <span class="nav-text">Hack Xcode</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#修改Xcode的编译器"><span class="nav-number">3.3.8.</span> <span class="nav-text">修改Xcode的编译器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#编译项目"><span class="nav-number">3.3.9.</span> <span class="nav-text">编译项目</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#更多"><span class="nav-number">3.3.10.</span> <span class="nav-text">更多</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#提示警告、错误信息"><span class="nav-number">3.3.11.</span> <span class="nav-text">提示警告、错误信息</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#应用与实践参考资料"><span class="nav-number">3.4.</span> <span class="nav-text">应用与实践参考资料</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Micah</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/lvchenqiang.github.io/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/lvchenqiang.github.io/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/lvchenqiang.github.io/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/lvchenqiang.github.io/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/lvchenqiang.github.io/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/lvchenqiang.github.io/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/lvchenqiang.github.io/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://Micah.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://lvchenqiang.github.io/2019/02/01/Clang-LLVM/';
+          this.page.identifier = '2019/02/01/Clang-LLVM/';
+          this.page.title = 'Clang/LLVM 从入门到实践';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Micah.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'ob6xEevaCzifOdzvnfIrxSJ7-gzGzoHsz',
+        appKey: 'ibWrHDRgAsLSxr5UnNH7Tb2n',
+        placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

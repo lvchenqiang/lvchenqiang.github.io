@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lvchenqiang.github.io/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lvchenqiang.github.io/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/lvchenqiang.github.io/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/lvchenqiang.github.io/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/lvchenqiang.github.io/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/lvchenqiang.github.io/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/lvchenqiang.github.io/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="工具,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="PrivatePods 制作流程日常开发中，我们经常除了会遇到Cocoapods,也会经常在gitlab上使用自己团队封装的pods。接下来就在Github上介绍制作PrivatePods的流程。">
+<meta name="keywords" content="工具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PrivatePods发布流程">
+<meta property="og:url" content="https://lvchenqiang.github.io/2019/03/21/LYUPrivatePods/index.html">
+<meta property="og:site_name" content="程序员码头">
+<meta property="og:description" content="PrivatePods 制作流程日常开发中，我们经常除了会遇到Cocoapods,也会经常在gitlab上使用自己团队封装的pods。接下来就在Github上介绍制作PrivatePods的流程。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/03/21/LYUPrivatePods/Snip20190321_2.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/03/21/LYUPrivatePods/Snip20190321_3.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/03/21/LYUPrivatePods/Snip20190321_5.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/03/21/LYUPrivatePods/Snip20190321_6.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/03/21/LYUPrivatePods/Snip20190321_7.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/03/21/LYUPrivatePods/Snip20190321_8.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/03/21/LYUPrivatePods/Snip20190321_9.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/03/21/LYUPrivatePods/Snip20190321_10.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/03/21/LYUPrivatePods/Snip20190321_11.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/03/21/LYUPrivatePods/Snip20190321_12.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/03/21/LYUPrivatePods/Snip20190322_13.png">
+<meta property="og:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/03/21/LYUPrivatePods/Snip20190322_14.png">
+<meta property="og:updated_time" content="2019-03-21T16:13:22.823Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PrivatePods发布流程">
+<meta name="twitter:description" content="PrivatePods 制作流程日常开发中，我们经常除了会遇到Cocoapods,也会经常在gitlab上使用自己团队封装的pods。接下来就在Github上介绍制作PrivatePods的流程。">
+<meta name="twitter:image" content="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/03/21/LYUPrivatePods/Snip20190321_2.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/lvchenqiang.github.io/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"display":"hide","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://lvchenqiang.github.io/2019/03/21/LYUPrivatePods/">
+
+
+
+
+
+  <title>PrivatePods发布流程 | 程序员码头</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/lvchenqiang.github.io/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">程序员码头</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/lvchenqiang.github.io/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/lvchenqiang.github.io/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/lvchenqiang.github.io/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/lvchenqiang.github.io/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/lvchenqiang.github.io/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://lvchenqiang.github.io/lvchenqiang.github.io/2019/03/21/LYUPrivatePods/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micah">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/lvchenqiang.github.io/image/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="程序员码头">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">PrivatePods发布流程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-21T22:38:54+08:00">
+                2019-03-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing">
+                  <a href="/lvchenqiang.github.io/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/lvchenqiang.github.io/2019/03/21/LYUPrivatePods/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/03/21/LYUPrivatePods/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="PrivatePods-制作流程"><a href="#PrivatePods-制作流程" class="headerlink" title="PrivatePods 制作流程"></a>PrivatePods 制作流程</h3><p>日常开发中，我们经常除了会遇到Cocoapods,也会经常在gitlab上使用自己团队封装的pods。接下来就在Github上介绍制作PrivatePods的流程。</p>
+<a id="more"></a>
+<h4 id="创建LYULibrary"><a href="#创建LYULibrary" class="headerlink" title="创建LYULibrary"></a>创建LYULibrary</h4><p>接下来我们将制作一个自己的pod.例如:LYULibrary。</p>
+<h5 id="制作LYULibrary"><a href="#制作LYULibrary" class="headerlink" title="制作LYULibrary"></a>制作LYULibrary</h5><p>首先,我们可以创建一个PrivatePods文件夹用于存放以后我们制作的组件库或者功能库。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">lvchenqiang $: cd /Users/BruceLv/WORK/PrivatePods</span><br><span class="line"></span><br><span class="line">PrivatePods$: pod lib create LYULibrary</span><br></pre></td></tr></table></figure>
+<p><img src="/lvchenqiang.github.io/2019/03/21/LYUPrivatePods/Snip20190321_2.png" alt=""></p>
+<h5 id="调试Example项目工程"><a href="#调试Example项目工程" class="headerlink" title="调试Example项目工程"></a>调试Example项目工程</h5><p><img src="/lvchenqiang.github.io/2019/03/21/LYUPrivatePods/Snip20190321_3.png" alt=""></p>
+<p>双击LYULibrary.xcworkspace运行项目Example工程，验证工程的正确性.</p>
+<p><img src="/lvchenqiang.github.io/2019/03/21/LYUPrivatePods/Snip20190321_5.png" alt=""></p>
+<p>此时可以看到LYULibrary已经成功集成在了Example工程中。</p>
+<h5 id="添加库源码文件"><a href="#添加库源码文件" class="headerlink" title="添加库源码文件"></a>添加库源码文件</h5><p>将源码文件复制到文件夹路径：LYULibrary/LYULibrary/Classes下。</p>
+<p>资源文件放到Assets下。</p>
+<p><img src="/lvchenqiang.github.io/2019/03/21/LYUPrivatePods/Snip20190321_6.png" alt=""></p>
+<p>注:</p>
+<ol>
+<li>如果还没有源码，则可以在Example下直接创建源码文件，实际测试通过后，再按照下面的方式来添加源码文件</li>
+<li>方便起见这里直接将之前使用的源码文件拷贝过来，其他根据实际情况，看官自行添加</li>
+<li>文件路径并不是绝对的，但是建议按指定路径存放，便于整体的后期维护更新</li>
+</ol>
+<h5 id="编辑podspec文件"><a href="#编辑podspec文件" class="headerlink" title="编辑podspec文件"></a>编辑podspec文件</h5><p>双击打开LYULibrary.podspec文件，此处我设置了默认Visual Studio Code打开,可自行配置，但是要注意编辑内容。</p>
+<p><img src="/lvchenqiang.github.io/2019/03/21/LYUPrivatePods/Snip20190321_7.png" alt=""></p>
+<p>这里我们使用的homepage和source并不完整下面就需要我们创建一个git私有库，用于项目工程的存放，获取我们所需要的地址</p>
+<h5 id="创建私有库git地址，并完善-podspec配置文件"><a href="#创建私有库git地址，并完善-podspec配置文件" class="headerlink" title="创建私有库git地址，并完善.podspec配置文件"></a>创建私有库git地址，并完善.podspec配置文件</h5><p><img src="/lvchenqiang.github.io/2019/03/21/LYUPrivatePods/Snip20190321_8.png" alt=""></p>
+<p>source有了，但是我们的homepage怎么办呢？如果有可以访问的高大上的介绍网页页面，建议使用其网址。</p>
+<p>至此，我们的配置文件就结束了。</p>
+<h5 id="重新更新Example项目"><a href="#重新更新Example项目" class="headerlink" title="重新更新Example项目"></a>重新更新Example项目</h5><p><img src="/lvchenqiang.github.io/2019/03/21/LYUPrivatePods/Snip20190321_9.png" alt=""></p>
+<p>我们的源码已经在里面了。<br>这时，可以填写我们的样例代码来进行测试。</p>
+<h4 id="本地pod配置文件验证"><a href="#本地pod配置文件验证" class="headerlink" title="本地pod配置文件验证"></a>本地pod配置文件验证</h4><h5 id="验证-podspec"><a href="#验证-podspec" class="headerlink" title="验证.podspec"></a>验证.podspec</h5><p>为了保证项目的正确性，尤其是pod配置文件的正确性，在正式提交前，我们需要执行以下本地验证。在本地验证正常的情况下，再上传发布还是比较稳妥的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$: pod lib lint</span><br><span class="line"></span><br><span class="line"> 忽略警告的指令：</span><br><span class="line">$: pod lib lint  --allow--warning</span><br><span class="line"></span><br><span class="line">具体的指令信息</span><br><span class="line">$: pod lib lint --verbose</span><br></pre></td></tr></table></figure>
+<p><img src="/lvchenqiang.github.io/2019/03/21/LYUPrivatePods/Snip20190321_10.png" alt=""></p>
+<p>至此，我们的源码已经导入、样例工程已经验证执行、podspec配置文件本地已经验证，那么我们是不是就可以直接在pod里面使用了呢？答案是肯定的，还是不行！目前只是处于本地状态，并没有发布，所以还是不能使用的。</p>
+<h5 id="发布项目工程"><a href="#发布项目工程" class="headerlink" title="发布项目工程"></a>发布项目工程</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$  git remote add origin  git@github.com:lvchenqiang/LYULibrary.git</span><br><span class="line"></span><br><span class="line">$  git add .</span><br><span class="line">$  git commit -a -m &quot;0.1.0&quot;</span><br><span class="line">$  git pull origin master</span><br><span class="line">$  git push origin master</span><br><span class="line">$  git tag 0.1.0</span><br><span class="line">$  git push origin 0.1.0</span><br></pre></td></tr></table></figure>
+<p>相关指令执行结束后，此时我们再去看我们的git项目：</p>
+<p><img src="/lvchenqiang.github.io/2019/03/21/LYUPrivatePods/Snip20190321_11.png" alt=""></p>
+<h4 id="私有库发布"><a href="#私有库发布" class="headerlink" title="私有库发布"></a>私有库发布</h4><p>对于开源框架，podspec文件实在cocoapod的开源管理spec项目上面的，见下图：<br><img src="/lvchenqiang.github.io/2019/03/21/LYUPrivatePods/Snip20190321_12.png" alt=""></p>
+<p>但是我们创建的是私有库，所以我们需要创建自己的Specs管理库。</p>
+<p>例如我们要创建的是LYUSpecs，首先需要再创建一个git私有库，用于管理我们的LYUSpecs。</p>
+<p>创建之后获取到git地址：git@github.com:lvchenqiang/LYUSpecs.git</p>
+<p>在终端执行Specs创建指令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pod repo add LYUSpecs git@github.com:lvchenqiang/LYUSpecs.git</span><br></pre></td></tr></table></figure>
+<p>执行发布命令，直接发布：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pod repo push LYUSpecs LYULibrary.podspec</span><br><span class="line"></span><br><span class="line">忽略警告</span><br><span class="line">pod repo push LYUSpecs LYULibrary.podspec --allow--warnings</span><br></pre></td></tr></table></figure>
+<p>发布成功之后,我们可以看一下我们的LYUSpecs项目:<br><img src="/lvchenqiang.github.io/2019/03/21/LYUPrivatePods/Snip20190322_13.png" alt=""></p>
+<p>至此，我们的私有库创建发布结束。但是我们注意到，LATSpecs的README.md文件是空的，为了后期的维护更新，以及团队小伙伴的使用方便，建议完善一下信息。</p>
+<h5 id="验证一下我们发布的私有库"><a href="#验证一下我们发布的私有库" class="headerlink" title="验证一下我们发布的私有库"></a>验证一下我们发布的私有库</h5><p><img src="/lvchenqiang.github.io/2019/03/21/LYUPrivatePods/Snip20190322_14.png" alt=""></p>
+<h4 id="更新版本"><a href="#更新版本" class="headerlink" title="更新版本"></a>更新版本</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">git add .     //新增的文件 加入仓库 </span><br><span class="line"></span><br><span class="line">git commit -a -m &quot;0.1.2&quot;      &quot;0.1.2&quot; -- tag 号 //  需要提交的文件上传确认</span><br><span class="line"></span><br><span class="line">git pull origin master         //下拉最新资源</span><br><span class="line"></span><br><span class="line">git push origin master         //上传本地最新代码</span><br><span class="line"></span><br><span class="line">git tag 0.1.2      ／／打tag</span><br><span class="line"></span><br><span class="line">git push --tags </span><br><span class="line"></span><br><span class="line">pod lib lint --allow-warnings     ／／验证本地库是否正确    lib  换成 spec 的 话 就是 就是验证远程服务器的 库 是否正确</span><br><span class="line"></span><br><span class="line">pod repo push XXXSpecs XXXLibrary.podspec --allow-warnings</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Micah
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://lvchenqiang.github.io/2019/03/21/LYUPrivatePods/" title="PrivatePods发布流程">https://lvchenqiang.github.io/2019/03/21/LYUPrivatePods/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/lvchenqiang.github.io/tags/工具/" rel="tag"># 工具</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/lvchenqiang.github.io/2019/02/27/ssh_key/" rel="next" title="配置不同ssh key">
+                <i class="fa fa-chevron-left"></i> 配置不同ssh key
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/lvchenqiang.github.io/2019/03/31/汇编简介/" rel="prev" title="汇编入门完全指北">
+                汇编入门完全指北 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/lvchenqiang.github.io/image/avatar.png" alt="Micah">
+            
+              <p class="site-author-name" itemprop="name">Micah</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/lvchenqiang.github.io/archives/">
+              
+                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/lvchenqiang.github.io/categories/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/lvchenqiang.github.io/tags/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/lvchenqiang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://blog.csdn.net/lvchenqiang_" target="_blank" title="CSDN">
+                      
+                        <i class="fa fa-fw fa-csdn"></i>CSDN</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#PrivatePods-制作流程"><span class="nav-number">1.</span> <span class="nav-text">PrivatePods 制作流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建LYULibrary"><span class="nav-number">1.1.</span> <span class="nav-text">创建LYULibrary</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#制作LYULibrary"><span class="nav-number">1.1.1.</span> <span class="nav-text">制作LYULibrary</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#调试Example项目工程"><span class="nav-number">1.1.2.</span> <span class="nav-text">调试Example项目工程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#添加库源码文件"><span class="nav-number">1.1.3.</span> <span class="nav-text">添加库源码文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#编辑podspec文件"><span class="nav-number">1.1.4.</span> <span class="nav-text">编辑podspec文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#创建私有库git地址，并完善-podspec配置文件"><span class="nav-number">1.1.5.</span> <span class="nav-text">创建私有库git地址，并完善.podspec配置文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#重新更新Example项目"><span class="nav-number">1.1.6.</span> <span class="nav-text">重新更新Example项目</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#本地pod配置文件验证"><span class="nav-number">1.2.</span> <span class="nav-text">本地pod配置文件验证</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#验证-podspec"><span class="nav-number">1.2.1.</span> <span class="nav-text">验证.podspec</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#发布项目工程"><span class="nav-number">1.2.2.</span> <span class="nav-text">发布项目工程</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#私有库发布"><span class="nav-number">1.3.</span> <span class="nav-text">私有库发布</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#验证一下我们发布的私有库"><span class="nav-number">1.3.1.</span> <span class="nav-text">验证一下我们发布的私有库</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#更新版本"><span class="nav-number">1.4.</span> <span class="nav-text">更新版本</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Micah</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lvchenqiang.github.io/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/lvchenqiang.github.io/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/lvchenqiang.github.io/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/lvchenqiang.github.io/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/lvchenqiang.github.io/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/lvchenqiang.github.io/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/lvchenqiang.github.io/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/lvchenqiang.github.io/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://Micah.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://lvchenqiang.github.io/2019/03/21/LYUPrivatePods/';
+          this.page.identifier = '2019/03/21/LYUPrivatePods/';
+          this.page.title = 'PrivatePods发布流程';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://Micah.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'ob6xEevaCzifOdzvnfIrxSJ7-gzGzoHsz',
+        appKey: 'ibWrHDRgAsLSxr5UnNH7Tb2n',
+        placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
